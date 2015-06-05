@@ -13,7 +13,6 @@ HelloWorldScene.prototype.init = function() {
 }
 
 HelloWorldScene.prototype.onEnter = function(self) {
-	
 }
 
 HelloWorldScene.prototype.get = function() {
