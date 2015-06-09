@@ -1,14 +1,18 @@
 {
-	"project_type": "javascript",
-
-	"debugMode": 1,
-	"showFPS": true,
-	"frameRate": 60,
-	"id": "gameCanvas",
-	"renderMode": 0,
-	"engineDir": "frameworks/cocos2d-html5",
-
-	"modules": ["cocos2d"],
-
-	"jsList": []
+    "project_type": "javascript",
+    "debugMode" : 1,
+    "showFPS" : true,
+    "frameRate" : 30,
+    "id" : "gameCanvas",
+    "renderMode" : 0,
+    "engineDir":"frameworks/cocos2d-html5",
+    "modules" : ["cocos2d", "cocostudio"],
+    "localMode" : 0,
+    "jsList" : [
+        "source/resource.js",
+        "source/common/Util.js",
+        "source/test/TestBaseScene.js",
+        "source/test/TestMainScene.js",
+        "source/scene/ShopScene.js"
+    ]
 }

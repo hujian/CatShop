@@ -24,6 +24,8 @@
  ****************************************************************************/
 
 (function(){
+    if(!ccui.ProtectedNode.WebGLRenderCmd)
+        return;
     ccui.Layout.WebGLRenderCmd = function(renderable){
         ccui.ProtectedNode.WebGLRenderCmd.call(this, renderable);
         this._needDraw = false;
@@ -170,7 +172,7 @@
             return;
 
         // all the _stencilBits are in use?
-        if (ccui.Layout.WebGLRenderCmd._layer + 1 == cc.stencilBits) {
+        if (ccui.Layout.WebGLRenderCmd._layer + 1 === cc.stencilBits) {
             // warn once
             ccui.Layout.WebGLRenderCmd._visit_once = true;
             if (ccui.Layout.WebGLRenderCmd._visit_once) {
