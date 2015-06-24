@@ -13,7 +13,7 @@ var TestBaseScene = cc.Scene.extend({
         var background = new cc.Sprite("resource/test/test_small_background.png")
         background.setPosition(cc.visibleRect.center)
         Util.spriteTileRepeat(background)
-        background.setTextureRect(cc.rect(0, 0, 1136, 640))
+        background.setTextureRect(cc.rect(0, 0, 800, 480))
         this.addChild(background)
         
         // 测试按钮的初始位置
@@ -66,9 +66,9 @@ var TestBaseScene = cc.Scene.extend({
 
     // 新增测试按钮
     // 如果只有一种操作状态，则title直接传字符串，否则传数组
-    addTestButton:function (title, handler, position, isSpeicalButton) {
+    addTestButton:function (title, handler, position, isSpecialButton) {
     	var button = new ccui.Button()
-    	button.loadTextureNormal('resource/test/test_button.png')
+    	button.loadTextureNormal('resource/test/test_button.png', ccui.Widget.LOCAL_TEXTURE)
         button.setTouchEnabled(true);
         button.setTitleFontName('AlNile-Bold')
         button.setScale9Enabled(true);
@@ -96,7 +96,7 @@ var TestBaseScene = cc.Scene.extend({
     		button.setPosition(position)
     	}
 
-        if (!isSpeicalButton) {
+        if (!isSpecialButton) {
             this.buttons.push(button)
         };
 
@@ -123,5 +123,5 @@ var TestBaseScene = cc.Scene.extend({
             };
             this.setTestButtonTitle(sender)
         };
-    },
+    }
 });

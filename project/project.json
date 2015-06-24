@@ -11,8 +11,10 @@
     "jsList" : [
         "source/resource.js",
         "source/common/Util.js",
+        "source/scene/GameBaseScene.js",
+        "source/scene/ShopScene.js",
         "source/test/TestBaseScene.js",
-        "source/test/TestMainScene.js",
-        "source/scene/ShopScene.js"
+        "source/test/TestShopScene.js",
+        "source/test/TestMainScene.js"
     ]
 }

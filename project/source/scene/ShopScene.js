@@ -9,6 +9,7 @@ var ShopScene = cc.Scene.extend({
         this._super()
         this.init()
     },
+
     init:function () {
     	this._super()
     	cc.log('this is ShopScene')

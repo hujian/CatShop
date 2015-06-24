@@ -29,5 +29,5 @@ var Util = {
 	// 精灵平铺，用到webGL，会有兼容的问题
 	spriteTileRepeat:function (sprite) {
 		sprite.texture.setTexParameters(gl.LINEAR, gl.LINEAR, gl.REPEAT, gl.REPEAT)
-	},
+	}
 };
