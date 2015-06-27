@@ -1,62 +1,45 @@
 /*
-* @brief:  猫相关的业务类
+* @brief:  猫相关的业务类。
+*          是充血的model，除了拥有原始的业务数据外，还绑定其他业务逻辑和view model的逻辑。
 * @author: Hj
 * @date:   2015-06-24
 */
 
-// 猫仔数据类
-var BabyCatSetting = DataModel.extend( {
-    ctor:function () {
-        this._super(game_resource_table.cat_setting)
-    },
+var Cat = Cat || {}
 
-    getInstance: function() {
-        if(CatSetting._instance == null){
-            CatSetting._instance = new BabyCatSetting();
-        }
-        return CatSetting._instance;
-    },
+// 加载数据，因为是配置文件是json，需要异步加载，所以需要在scene加载出来后，手动调用该方法。
+Cat.loadSetting = function () {
+    if (!this.setting || !this.babySetting) {
+        // 猫仔的配置数据
+        this.babySetting = new DataModel()
+        this.babySetting.loadDataFromJson(game_resource_table.baby_cat_setting)
 
-    // id是猫仔的id号，对应cvs里面的id号
-    // 返回一个table
-    settingById: function(id) {
-        var setting = this.data[id - 1]
-
-        // 防止万一表上的数据错了
-        if (setting.id == id) {
-            return setting
-        } else {
-            cc.error("get cat setting error, name: [" + setting.name + "]")
-            return null
-        }
+        // 成猫的配置数据
+        this.setting = new DataModel()
+        this.setting.loadDataFromJson(game_resource_table.cat_setting)
     }
-})
+}
 
-// 成猫数据类
-var CatSetting = DataModel.extend({
-    ctor:function () {
-        this._super(game_resource_table.baby_cat_setting)
-    },
+// 获取所有成猫的数据
+Cat.getAll = function() {
+    return this.setting.jsonData
+}
 
-    getInstance: function() {
-        if(CatSetting._instance == null){
-            CatSetting._instance = new CatSetting();
-        }
-        return CatSetting._instance;
-    },
-
-    // id是猫的id号，对应cvs里面的id号
-    settingById: BabyCatSetting.settingById
-})
-
-
-// 猫类, 包括猫仔和成猫
-var Cat = cc.Class.extend({
-    // 猫德设置参数
-    setting: null,
-
-    ctor:function (setting) {
-        this._super()
-        this.setting = setting
+// 根据猫的id，获取成猫数据
+Cat.getById = function(id) {
+    if (id > 0 && this.setting) {
+        return this.setting.jsonData[id - 1]
     }
-})
+}
+
+// 获取所有猫仔的数据
+Cat.getAllBaby = function() {
+    return this.babySetting.jsonData
+}
+
+// 根据猫的id，获取猫仔数据
+Cat.getBabyById = function (id) {
+    if (id > 0 && this.babySetting) {
+        return this.babySetting.jsonData[id - 1]
+    }
+}

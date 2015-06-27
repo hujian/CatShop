@@ -5,19 +5,18 @@
 */
 
 var DataModel = cc.Class.extend({
-    // 数据类一般来说应该是单例，如果是的话，请使用_instance作为静态变量，并且实现getInstance。
-    _instance: null,
+    ctor: function () {
+    },
 
-    ctor:function (dataFilePath) {
-        this._super()
-
-        if (dataFilePath != null) {
+    // 直接从json文件初始化该模型
+    loadDataFromJson: function(filePath) {
+        if (filePath != null) {
             try {
-                this.data = JSON.parse(game_resource_table.cat_setting);
-                //cc.log(result)
+                this.jsonData = cc.loader.getRes(filePath);
+                cc.log("load json from file [" + filePath + "]")
             }
             catch (e) {
-                cc.error("parse json [" + game_resource_table.cat_setting + "] failed : " + e.toString());
+                cc.error("parse json [" + filePath + "] failed : ");
                 return;
             }
         }

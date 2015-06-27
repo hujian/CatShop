@@ -1,5 +1,6 @@
 /* 
 * @breife: 测试页面基类
+*          左边是交互文字输出区域，上面是页面切换区域，中间是操作选择区域，右边是信息展示区域。
 * @author: hujian
 * @date:   2015-04-01 21:30:04
 */
@@ -17,11 +18,11 @@ var TestBaseScene = cc.Scene.extend({
         this.addChild(background)
         
         // 测试按钮的初始位置
-        this.testButtonInitPosition = cc.p(120, 450)
+        this.testButtonInitPosition = cc.p(250, 350)
         // 测试按钮的当前位置
         this.currentTestButtonPosition = this.testButtonInitPosition
         // 测试按钮的间隔
-        this.testButtonGap = cc.p(100, 60)
+        this.testButtonGap = cc.p(100, 40)
 
         // 所有测试用例按钮
         this.buttons = []
@@ -31,6 +32,7 @@ var TestBaseScene = cc.Scene.extend({
 
         // 是否要切换button按钮，默认需要
         this.needSwitchButton = true;
+
     },
 
     onEnter:function () {
@@ -51,6 +53,21 @@ var TestBaseScene = cc.Scene.extend({
         this.stateLable.setFontSize(22)
         this.stateLable.setPosition(cc.p(cc.visibleRect.center.x, 550))
         this.addChild(this.stateLable)
+
+        // 左侧的消息框
+        this.oldMessageView = new ccui.Text("", 'AlNile-Bold', 6)
+        this.oldMessageView.ignoreContentAdaptWithSize(false);
+        this.oldMessageView.setTextColor(cc.color.BLACK)
+        this.oldMessageView.setPosition(cc.p(100, 140))
+        this.oldMessageView.setContentSize(cc.size(160, 400))
+        this.addChild(this.oldMessageView)
+        this.newMessageView = this.oldMessageView.clone()
+        this.newMessageView.setPosition(cc.p(100, 360))
+        this.newMessageView.setContentSize(cc.size(160, 40))
+        this.newMessageView.setTextColor(cc.color(53, 124, 78))
+        this.addChild(this.newMessageView)
+        // 加个白色渐变的遮罩，增加逐渐往前的效果
+        
     },
 
     // 返回上层菜单
@@ -72,11 +89,11 @@ var TestBaseScene = cc.Scene.extend({
         button.setTouchEnabled(true);
         button.setTitleFontName('AlNile-Bold')
         button.setScale9Enabled(true);
-        button.setTitleFontSize(22)
-        button.setContentSize(cc.size(150, 71))
+        button.setTitleFontSize(14)
+        button.setContentSize(cc.size(100, 36))
     	button.setPosition(this.currentTestButtonPosition)
     	button.addTouchEventListener(this.testCall, this)
-    	button.setCapInsets(cc.Rect(15, 0, 1, 71))
+    	button.setCapInsets(cc.Rect(7, 0, 1, 36))
         button.setScale(0.7)
         button.handler = handler
         button.state = 1
@@ -114,7 +131,7 @@ var TestBaseScene = cc.Scene.extend({
     },
 
     // 包装函数，转一下
-    testCall: function(sender, type) {
+    testCall:function (sender, type) {
         if (type == ccui.Widget.TOUCH_ENDED) {
             sender.handler.call(this, sender, sender.state)
             sender.state++
@@ -123,5 +140,14 @@ var TestBaseScene = cc.Scene.extend({
             };
             this.setTestButtonTitle(sender)
         };
+    },
+
+    printMessage:function (string) {
+        if (this.newMessageView.getString().length > 0) {
+            this.oldMessageView.setString(this.newMessageView.getString() + "\n" + this.oldMessageView.getString())
+        }
+        this.newMessageView.setString(string)
+        this.newMessageView.setOpacity(0)
+        this.newMessageView.runAction(new cc.FadeIn(0.5))
     }
 });
