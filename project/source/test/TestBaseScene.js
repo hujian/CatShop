@@ -11,12 +11,13 @@ var TestBaseScene = cc.Scene.extend({
         this._super();
 
         // 加入背景
-        var background = new cc.Sprite("resource/test/test_small_background.png")
-        background.setPosition(cc.visibleRect.center)
-        Util.spriteTileRepeat(background)
-        background.setTextureRect(cc.rect(0, 0, 800, 480))
+        //var background = new cc.Sprite("resource/test/test_small_background.png")
+        var background = new cc.LayerColor(cc.color.WHITE);
+        //background.setPosition(cc.visibleRect.center)
+        //Util.spriteTileRepeat(background)
+        //background.setTextureRect(cc.rect(0, 0, 800, 480))
         this.addChild(background)
-        
+
         // 测试按钮的初始位置
         this.testButtonInitPosition = cc.p(250, 350)
         // 测试按钮的当前位置
@@ -32,7 +33,6 @@ var TestBaseScene = cc.Scene.extend({
 
         // 是否要切换button按钮，默认需要
         this.needSwitchButton = true;
-
     },
 
     onEnter:function () {
@@ -67,7 +67,9 @@ var TestBaseScene = cc.Scene.extend({
         this.newMessageView.setTextColor(cc.color(53, 124, 78))
         this.addChild(this.newMessageView)
         // 加个白色渐变的遮罩，增加逐渐往前的效果
-        
+        var layer = new cc.LayerGradient(new cc.color(255,255,255,20), new cc.color(255,255,255,255), cc.p(0, -1))
+        layer.setContentSize(cc.size(160, 330))
+        this.addChild(layer)
     },
 
     // 返回上层菜单
