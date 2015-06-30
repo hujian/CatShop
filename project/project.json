@@ -12,11 +12,13 @@
         "source/resource.js",
         "source/common/Util.js",
         "source/Model/DataModel.js",
+        "source/Model/App.js",
         "source/Model/Cat.js",
+        "source/Model/User.js",
         "source/scene/GameBaseScene.js",
         "source/scene/ShopScene.js",
         "source/test/TestBaseScene.js",
-        "source/test/TestShopScene.js",
+        "source/test/TestGameScene.js",
         "source/test/TestMainScene.js"
     ]
 }

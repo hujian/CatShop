@@ -32,6 +32,6 @@ var TestMainScene = TestBaseScene.extend({
     },
 
     goText:function () {
-        cc.director.pushScene(new TestShopScene())
+        cc.director.pushScene(new TestGameScene())
     }
 });

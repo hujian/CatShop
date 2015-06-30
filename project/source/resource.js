@@ -9,6 +9,5 @@ for (var i in game_resource_table) {
 }
 
 if (cc.game.config[cc.game.CONFIG_KEY.debugMode] > 0) {
-    game_resource.push("resource/test/test_small_background.png")
     game_resource.push("resource/test/test_button.png")
 }

@@ -55,6 +55,9 @@ cc.game.onStart = function(){
     cc.view.setDesignResolutionSize(800, 480, cc.ResolutionPolicy.SHOW_ALL);
     cc.view.resizeWithBrowserSize(true);
 
+    App.restore()
+    User.restore()
+
     cc.LoaderScene.preload(game_resource, function () {
         if (cc.game.config[cc.game.CONFIG_KEY.debugMode] > 0) {
             cc.isDebug = true
@@ -62,5 +65,7 @@ cc.game.onStart = function(){
         } else {
         }
     }, this);
+
+    App.flush()
 };
 cc.game.run();
