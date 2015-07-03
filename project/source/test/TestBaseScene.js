@@ -5,6 +5,7 @@
 * @date:   2015-04-01 21:30:04
 */
 
+var TestSceneFontName = 'AlNile-Bold'
 
 var TestBaseScene = cc.Scene.extend({
     ctor:function () {
@@ -29,6 +30,15 @@ var TestBaseScene = cc.Scene.extend({
 
         // 是否要切换button按钮，默认需要
         this.needSwitchButton = true;
+
+        // 当前有几个右侧的状态框
+        this.statusXPosition = 550
+        this.statusYPosition = 380
+        this.statusCellHeight = 20
+        this.statusCellWidth = 140
+        this.statusMaxCellCount = 9.5 // 为了遮掉一点，从而看出是能滚的
+        this.statusCellGap = 5
+        this.statutsLables = {}
     },
 
     onEnter:function () {
@@ -50,8 +60,8 @@ var TestBaseScene = cc.Scene.extend({
         this.stateLable.setPosition(cc.p(cc.visibleRect.center.x, 550))
         this.addChild(this.stateLable)
 
-        // 左侧的消息框
-        this.oldMessageView = new ccui.Text("", 'AlNile-Bold', 6)
+        // 左侧的消息栏
+        this.oldMessageView = new ccui.Text("", TestSceneFontName, 6)
         this.oldMessageView.ignoreContentAdaptWithSize(false);
         this.oldMessageView.setTextColor(cc.color.BLACK)
         this.oldMessageView.setPosition(cc.p(100, 140))
@@ -66,6 +76,9 @@ var TestBaseScene = cc.Scene.extend({
         var layer = new cc.LayerGradient(new cc.color(255,255,255,20), new cc.color(255,255,255,255), cc.p(0, -1))
         layer.setContentSize(cc.size(200, 330))
         this.addChild(layer)
+
+        // 更新右侧状态信息
+        this.schedule(this.updateStatusLabels, 0.5)
     },
 
     // 返回上层菜单
@@ -147,5 +160,57 @@ var TestBaseScene = cc.Scene.extend({
         this.newMessageView.setString(string)
         this.newMessageView.setOpacity(0)
         this.newMessageView.runAction(new cc.FadeIn(0.5))
+    },
+
+    // name是这个状态内容区的名字，content是具体的内容，是个数组。比如:
+    // printStatus('商店', ['资金', '风扇', '药品', '猫粮'])
+    printStatus:function (name, contentNames) {
+        // 背景用的方框
+        var statusBackgroundRect = new cc.DrawNode()
+        this.addChild(statusBackgroundRect)
+        statusBackgroundRect.drawRect(cc.p(this.statusXPosition, this.statusYPosition - Math.min(contentNames.length, this.statusMaxCellCount) * this.statusCellHeight - this.statusCellGap),
+                                      cc.p(this.statusXPosition + this.statusCellWidth + this.statusCellGap * 2, this.statusYPosition), null, 1, cc.color.BLACK)
+
+        // name
+        var label = new ccui.Text(name, TestSceneFontName, 10)
+        label.setAnchorPoint(cc.p(0, 0.5))
+        label.setTextColor(cc.color.BLACK)
+        label.setPosition(cc.p(this.statusXPosition, this.statusYPosition + this.statusCellGap))
+        this.addChild(label)
+
+        // content
+        var listView = new ccui.ListView()
+        listView.setDirection(ccui.ScrollView.DIR_VERTICAL)
+        listView.setBounceEnabled(false)
+        listView.setTouchEnabled(true)
+        listView.setContentSize(cc.size(this.statusCellWidth, Math.min(contentNames.length, this.statusMaxCellCount) * this.statusCellHeight))
+        listView.setAnchorPoint(cc.p(0, 1))
+        listView.setPosition(cc.p(this.statusXPosition + this.statusCellGap, this.statusYPosition - this.statusCellGap))
+        this.addChild(listView)
+
+        for (var i in contentNames) {
+            var customItem = new ccui.Layout();
+            customItem.setContentSize(cc.size(this.statusCellWidth, this.statusCellHeight));
+
+            var nameLabel = new ccui.Text(contentNames[i] + ':', TestSceneFontName, 6)
+            nameLabel.setTextColor(cc.color.BLACK)
+            nameLabel.setAnchorPoint(cc.p(0, 0.5))
+            nameLabel.setPosition(cc.p(0, this.statusCellHeight / 2))
+            customItem.addChild(nameLabel)
+
+            var label = new ccui.Text("", TestSceneFontName, 6)
+            label.setTextColor(cc.color.BLACK)
+            label.setAnchorPoint(cc.p(1, 0.5))
+            label.setPosition(cc.p(this.statusCellWidth, this.statusCellHeight / 2))
+            customItem.addChild(label)
+
+            listView.pushBackCustomItem(customItem)
+            this.statutsLables[contentNames[i]] = label
+        }
+
+        this.statusYPosition = this.statusYPosition - contentNames.length * this.statusCellHeight - 30
+    },
+
+    updateStatusLabels:function() {
     }
 });
