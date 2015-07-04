@@ -5,7 +5,7 @@
 * @date:   2015-04-01 21:30:04
 */
 
-var TestSceneFontName = 'AlNile-Bold'
+var TestSceneFontName = 'Arial Bold'
 
 var TestBaseScene = cc.Scene.extend({
     ctor:function () {
@@ -36,7 +36,7 @@ var TestBaseScene = cc.Scene.extend({
         this.statusYPosition = 380
         this.statusCellHeight = 20
         this.statusCellWidth = 140
-        this.statusMaxCellCount = 9.5 // 为了遮掉一点，从而看出是能滚的
+        this.statusMaxCellCount = 10.5 // 为了遮掉一点，从而看出是能滚的
         this.statusCellGap = 5
         this.statutsLables = {}
     },
@@ -175,7 +175,7 @@ var TestBaseScene = cc.Scene.extend({
         var label = new ccui.Text(name, TestSceneFontName, 10)
         label.setAnchorPoint(cc.p(0, 0.5))
         label.setTextColor(cc.color.BLACK)
-        label.setPosition(cc.p(this.statusXPosition, this.statusYPosition + this.statusCellGap))
+        label.setPosition(cc.p(this.statusXPosition, this.statusYPosition + this.statusCellGap * 2))
         this.addChild(label)
 
         // content

@@ -13,6 +13,7 @@ User.restore = function() {
     // 初期化玩家基本数据
     if (!User.data.loadDataFromLocalStorage(User.dataSavingKey)) {
         User.data.jsonData.money = 1000
+        User.data.jsonData.items = []
         User.data.jsonData.cats = []
         User.flush()
     }
@@ -55,6 +56,22 @@ User.removeCat = function(cat) {
     var index = User.data.jsonData.cats.indexOf(cat)
     if (index > -1) {
         User.data.jsonData.cats.slice(index, 1)
+    }
+}
+
+// 类似上面的cat
+User.addItem = function (id) {
+    var item = new Item(id)
+    User.data.jsonData.items.push(item)
+    User.flush()
+
+    return item
+}
+
+User.removeItem = function (item) {
+    var index = User.data.jsonData.items.indexOf(item)
+    if (index > -1) {
+        User.data.jsonData.items.slice(index, 1)
     }
 }
 

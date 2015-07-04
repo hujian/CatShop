@@ -16,11 +16,16 @@ var TestGameScene = TestBaseScene.extend({
         }
         this.printMessage("欢迎进入商店，请选择你要买的猫仔。")
 
-        CatSetting.load()
         var babies = CatSetting.getAllBaby()
-        for(var i in babies) {
+        for (var i in babies) {
             var b = this.addTestButton(babies[i].name, this.buyCat);
             b.cat = babies[i]
+        }
+        
+        var items = ItemSetting.getAll()
+        for (var i in items) {
+            var b = this.addTestButton(items[i].name, this.buyItem)
+            b.item = items[i]
         }
 
         this.printStatus('商店', ['资金', '风扇', '药品', '猫粮'])
@@ -47,7 +52,13 @@ var TestGameScene = TestBaseScene.extend({
         User.updateMoney(User.getMoney() + 10)
     },
 
+    buyItem: function (button) {
+        var item = button.item
+        if(User.getMoney() >= item.money) {
+        }
+    },
+
     updateStatusLabels:function() {
-        this.statutsLables['资金'].setString(User.getMoney())
+        this.statutsLables['资金'].setString(User.getMoney() + '$')
     }
 })

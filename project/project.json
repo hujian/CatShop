@@ -15,6 +15,7 @@
         "source/Model/App.js",
         "source/Model/Cat.js",
         "source/Model/User.js",
+        "source/Model/Item.js",
         "source/scene/GameBaseScene.js",
         "source/scene/ShopScene.js",
         "source/test/TestBaseScene.js",

@@ -57,6 +57,8 @@ cc.game.onStart = function(){
 
     App.restore()
     User.restore()
+    CatSetting.load()
+    ItemSetting.load()
 
     cc.LoaderScene.preload(game_resource, function () {
         if (cc.game.config[cc.game.CONFIG_KEY.debugMode] > 0) {
