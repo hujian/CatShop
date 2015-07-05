@@ -12,9 +12,11 @@ User.dataSavingKey = "User_Data_Saving_key"
 User.restore = function() {
     // 初期化玩家基本数据
     if (!User.data.loadDataFromLocalStorage(User.dataSavingKey)) {
-        User.data.jsonData.money = 1000
-        User.data.jsonData.items = []
-        User.data.jsonData.cats = []
+        User.data.jsonData.money = 1000            // 初始金钱
+        User.data.jsonData.maxCatCount = 3         // 商店能够养的猫的最大数
+        User.data.jsonData.consumableItems = []    // 非永久性商品
+        User.data.jsonData.nonconsumableItems = [] // 永久性商品
+        User.data.jsonData.cats = []               // 玩家已经购买的猫
         User.flush()
     }
 }
@@ -33,7 +35,6 @@ User.getMoney = function() {
 // 会缓存数据，不要短时间频繁调用
 User.updateMoney = function(money) {
     User.data.jsonData.money = money
-    User.flush()
 }
 
 // 获取所有猫，数组对象是Cat.js中的Cat
@@ -46,7 +47,6 @@ User.addCat = function(id) {
 
     var cat = new Cat(id)
     User.data.jsonData.cats.push(cat)
-    User.flush()
 
     return cat
 }
@@ -59,34 +59,45 @@ User.removeCat = function(cat) {
     }
 }
 
-// 类似上面的cat
+
+// 获取当前能够养的最大猫德数量
+User.getMaxCatCount = function () {
+    return User.data.jsonData.maxCatCount
+}
+
+// 跟新猫的最大数量
+User.updateMaxCatCount = function (count) {
+    User.data.jsonData.maxCatCount = count
+}
+
+// 增加道具
 User.addItem = function (id) {
+    var itemSetting = ItemSetting.getById(id)
+
     var item = new Item(id)
-    User.data.jsonData.items.push(item)
-    User.flush()
+    if (itemSetting.consumable) {
+        User.data.jsonData.consumableItems.push(item)
+    } else {
+        User.data.jsonData.nonconsumableItems.push(item)
+    }
 
     return item
 }
 
+// 删除消耗性道具
 User.removeItem = function (item) {
-    var index = User.data.jsonData.items.indexOf(item)
+    var index = User.data.jsonData.consumableItems.indexOf(item)
     if (index > -1) {
-        User.data.jsonData.items.slice(index, 1)
+        User.data.jsonData.consumableItems.slice(index, 1)
     }
 }
 
-// 购买猫，传入的是猫种类id
-User.buyCat = function (catId) {
-    var catSetting = CatSetting.getById(catId)
-    if (catSetting) {
-        var moneyLeft = User.getMoney() - catSetting.money
-        if (moneyLeft >= 0) {
-            User.updateMoney(moneyLeft)
-            return User.addCat(catId)
-        }
-    }
+// 获取所有购买的消耗性道具
+User.getAllConsumableItems = function () {
+    return User.data.jsonData.consumableItems
 }
 
-// 售出猫
-User.sellCat = function (catId) {
+// 获取所有永久性道具
+User.getAllNonconsumableItems = function () {
+    return User.data.jsonData.nonconsumableItems
 }

@@ -98,10 +98,11 @@ var TestBaseScene = cc.Scene.extend({
     	var button = new ccui.Button()
     	button.loadTextureNormal('resource/test/test_button.png', ccui.Widget.LOCAL_TEXTURE)
         button.setTouchEnabled(true);
-        button.setTitleFontName('AlNile-Bold')
+        button.setTitleFontName(TestSceneFontName)
+        button.setTitleColor(cc.color.BLACK)
         button.setScale9Enabled(true);
         button.setTitleFontSize(14)
-        button.setContentSize(cc.size(100, 36))
+        button.setContentSize(cc.size(130, 36))
     	button.setPosition(this.currentTestButtonPosition)
     	button.addTouchEventListener(this.testCall, this)
     	button.setCapInsets(cc.Rect(7, 0, 1, 36))
@@ -192,7 +193,7 @@ var TestBaseScene = cc.Scene.extend({
             var customItem = new ccui.Layout();
             customItem.setContentSize(cc.size(this.statusCellWidth, this.statusCellHeight));
 
-            var nameLabel = new ccui.Text(contentNames[i] + ':', TestSceneFontName, 6)
+            var nameLabel = new ccui.Text(contentNames[i], TestSceneFontName, 6)
             nameLabel.setTextColor(cc.color.BLACK)
             nameLabel.setAnchorPoint(cc.p(0, 0.5))
             nameLabel.setPosition(cc.p(0, this.statusCellHeight / 2))
