@@ -55,12 +55,15 @@ cc.game.onStart = function(){
     cc.view.setDesignResolutionSize(800, 480, cc.ResolutionPolicy.SHOW_ALL);
     cc.view.resizeWithBrowserSize(true);
 
+    // 从本地缓存获取恢复数据
     App.restore()
     User.restore()
-    CatSetting.load()
-    ItemSetting.load()
 
     cc.LoaderScene.preload(game_resource, function () {
+        // 加载配置文件，需要等待下载完成
+        CatSetting.load()
+        ItemSetting.load()
+
         if (cc.game.config[cc.game.CONFIG_KEY.debugMode] > 0) {
             cc.isDebug = true
             cc.director.runScene(new TestMainScene());

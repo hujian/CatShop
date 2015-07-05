@@ -18,9 +18,9 @@ var TestBaseScene = cc.Scene.extend({
         // 测试按钮的初始位置
         this.testButtonInitPosition = cc.p(250, 350)
         // 测试按钮的当前位置
-        this.currentTestButtonPosition = this.testButtonInitPosition
+        this.currentTestButtonPosition = cc.p(this.testButtonInitPosition)
         // 测试按钮的间隔
-        this.testButtonGap = cc.p(100, 40)
+        this.testButtonGap = cc.p(100, 30)
 
         // 所有测试用例按钮
         this.buttons = []

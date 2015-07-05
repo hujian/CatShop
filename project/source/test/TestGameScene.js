@@ -14,7 +14,7 @@ var TestGameScene = TestBaseScene.extend({
 
         if (App.isFirstLaunch()) {
         }
-        this.printMessage("欢迎进入商店，请选择你要买的猫仔。")
+        this.printMessage("欢迎进入商店，请选择你要买的商品。")
 
         var babies = CatSetting.getAllBaby()
         for (var i in babies) {
