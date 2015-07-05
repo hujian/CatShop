@@ -12,13 +12,11 @@ var DataModel = cc.Class.extend({
     // 直接从json文件初始化该模型
     loadDataFromJson: function(filePath) {
         if (filePath) {
-            try {
-                this.jsonData = cc.loader.getRes(filePath);
+            this.jsonData = cc.loader.getRes(filePath);
+            if (this.jsonData) {
                 cc.log("load json from file [" + filePath + "]")
-            }
-            catch (e) {
+            } else {
                 cc.error("parse json [" + filePath + "] failed : ");
-                return;
             }
         }
     },
@@ -29,14 +27,13 @@ var DataModel = cc.Class.extend({
         if (key) {
             var jsonString = cc.sys.localStorage.getItem(key)
             if (jsonString) {
-                try {
-                    this.jsonData = JSON.parse(jsonString)
-                } catch (e) {
+                this.jsonData = JSON.parse(jsonString)
+                if (this.jsonData) {
+                    cc.log("load data from local storage, key: [" + key + "]")
+                    return true
+                } else {
                     cc.log("load data from local storage failed, key: [" + key + "]")
-                    return false
                 }
-                cc.log("load data from local storage, key: [" + key + "]")
-                return true
             }
         }
         return false

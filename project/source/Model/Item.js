@@ -13,6 +13,7 @@ var ItemSetting = ItemSetting || {}
  清洁设备
  商店扩建
  */
+ItemSetting.type = {}
 ItemSetting.type.vaccine = 1
 ItemSetting.type.medicine = 2
 ItemSetting.type.cleanMachine = 3
@@ -21,7 +22,7 @@ ItemSetting.type.upgradeShop = 4
 ItemSetting.load = function () {
     if (!ItemSetting.data) {
         ItemSetting.data = new DataModel()
-        ItemSetting.data.loadDataFromJson(game_resource.item_setting)
+        ItemSetting.data.loadDataFromJson(game_resource_table.item_setting)
     }
 }
 

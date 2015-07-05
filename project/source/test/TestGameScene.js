@@ -21,7 +21,7 @@ var TestGameScene = TestBaseScene.extend({
             var b = this.addTestButton(babies[i].name, this.buyCat);
             b.cat = babies[i]
         }
-        
+
         var items = ItemSetting.getAll()
         for (var i in items) {
             var b = this.addTestButton(items[i].name, this.buyItem)
