@@ -147,10 +147,12 @@ var TestBaseScene = cc.Scene.extend({
         if (type == ccui.Widget.TOUCH_ENDED) {
             sender.handler.call(this, sender, sender.state)
             sender.state++
-            if (typeof(sender.title) == 'string' || sender.state > sender.title.length) {
-                sender.state = 1
+            if (typeof(sender.title) != 'string') {
+                if (sender.state > sender.title.length) {
+                    sender.state = 1
+                }
+                this.setTestButtonTitle(sender)
             };
-            this.setTestButtonTitle(sender)
         };
     },
 

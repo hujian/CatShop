@@ -22,10 +22,12 @@ var TestGameScene = TestBaseScene.extend({
             b.cat = babies[i]
         }
 
-        var items = ItemSetting.getAll()
+        var items = Shop.getAllItem()
         for (var i in items) {
-            var b = this.addTestButton(items[i].name + " = " +items[i].money + "$", this.buyItem)
-            b.item = items[i]
+            var item = items[i]
+            var b = this.addTestButton(this.getItemDescription(item), this.buyItem)
+            b.item = item
+            b.setEnabled(!item.invalid)
         }
 
         this.printStatus('商店', ['资金', '风扇', '疫苗', '药品', '猫最大数量'])
@@ -40,6 +42,14 @@ var TestGameScene = TestBaseScene.extend({
         this.printStatus('猫', catNames)
     },
 
+    getItemDescription:function (item) {
+        if (item.invalid) {
+            return item.name + " 已购买"
+        } else {
+            return item.name + " = " + item.money + "$"
+        }
+    },
+
     buyCat:function(button) {
         var cat = button.cat
         if (Shop.buyCat(cat.id)) {
@@ -52,9 +62,13 @@ var TestGameScene = TestBaseScene.extend({
     buyItem: function (button) {
         var item = button.item
         if(Shop.buyItem(item.id)) {
-            // 如果是永久性商品就不能继续购买了
-            button.setEnable(item.consumable)
 
+            // 如果是永久性商品就不能继续购买了
+            if (!item.consumable) {
+                button.setEnabled(false)
+                item.invalid = true
+                button.setTitleText(this.getItemDescription(item))
+            }
             this.printMessage("购买了" + item.name)
         } else {
             this.printMessage("资金不足以购买" + item.name)

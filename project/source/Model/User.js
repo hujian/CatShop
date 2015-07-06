@@ -5,6 +5,7 @@
 */
 
 var User = User || {}
+
 User.data = new DataModel()
 User.dataSavingKey = "User_Data_Saving_key"
 
@@ -12,12 +13,12 @@ User.dataSavingKey = "User_Data_Saving_key"
 User.restore = function() {
     // 初期化玩家基本数据
     if (!User.data.loadDataFromLocalStorage(User.dataSavingKey)) {
-        User.data.jsonData.money = 1000            // 初始金钱
+        User.data.jsonData.money = 100000          // 初始金钱
         User.data.jsonData.maxCatCount = 3         // 商店能够养的猫的最大数
-        User.data.jsonData.consumableItems = []    // 非永久性商品
-        User.data.jsonData.nonconsumableItems = [] // 永久性商品
+        User.data.jsonData.items = {}              // 已经购买的商品
         User.data.jsonData.cats = []               // 玩家已经购买的猫
         User.flush()
+    } else {
     }
 }
 
@@ -72,32 +73,31 @@ User.updateMaxCatCount = function (count) {
 
 // 增加道具
 User.addItem = function (id) {
-    var itemSetting = ItemSetting.getById(id)
-
-    var item = new Item(id)
-    if (itemSetting.consumable) {
-        User.data.jsonData.consumableItems.push(item)
+    var items = User.data.jsonData.items
+    if (items[id]) {
+        items[id] += 1
     } else {
-        User.data.jsonData.nonconsumableItems.push(item)
+        items[id] = 1
     }
-
-    return item
 }
 
 // 删除消耗性道具
-User.removeItem = function (item) {
-    var index = User.data.jsonData.consumableItems.indexOf(item)
-    if (index > -1) {
-        User.data.jsonData.consumableItems.slice(index, 1)
+User.removeItem = function (id) {
+    var items = User.data.jsonData.items
+    if (items[id] > 0) {
+        items[id] -= 1
     }
 }
 
 // 获取所有购买的消耗性道具
-User.getAllConsumableItems = function () {
-    return User.data.jsonData.consumableItems
+User.getAllItems = function () {
+    return User.data.jsonData.items
 }
 
-// 获取所有永久性道具
-User.getAllNonconsumableItems = function () {
-    return User.data.jsonData.nonconsumableItems
+// 获取购买的风扇数量
+User.getAllFans = function () {
 }
+
+// 获取购买的疫苗数量
+
+// 获取所有的
