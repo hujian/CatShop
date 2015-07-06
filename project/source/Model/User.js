@@ -94,10 +94,22 @@ User.getAllItems = function () {
     return User.data.jsonData.items
 }
 
-// 获取购买的风扇数量
-User.getAllFans = function () {
+// 获取购买的疫苗数量
+User.getVaccineCount = function () {
+    return User.getAllItems()[ItemSetting.id.vaccine]
 }
 
-// 获取购买的疫苗数量
+// 获取购买的药品数量
+User.getMedicineCount = function () {
+    return User.getAllItems()[ItemSetting.id.medicine]
+}
 
-// 获取所有的
+// 获取购买的风扇数量
+User.getFansCount = function () {
+    return User.getAllItems()[ItemSetting.id.fan]
+}
+
+// 获取购买的猫毛清洁器数量
+User.getHairCleanerCount = function () {
+    return User.getAllItems()[ItemSetting.id.hairCleaner]
+}

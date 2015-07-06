@@ -18,7 +18,7 @@ var TestGameScene = TestBaseScene.extend({
 
         var babies = CatSetting.getAllBaby()
         for (var i in babies) {
-            var b = this.addTestButton(babies[i].name + " = " + babies[i].money + "$", this.buyCat);
+            var b = this.addTestButton(babies[i].name + " = " + babies[i].money, this.buyCat);
             b.cat = babies[i]
         }
 
@@ -30,7 +30,7 @@ var TestGameScene = TestBaseScene.extend({
             b.setEnabled(!item.invalid)
         }
 
-        this.printStatus('商店', ['资金', '风扇', '疫苗', '药品', '猫最大数量'])
+        this.printStatus('商店', ['资金', '疫苗', '药品', '毛团打扫器', '排风扇', '猫最大数量'])
 
         var catNames = []
         var cats = User.getAllCats()
@@ -46,7 +46,7 @@ var TestGameScene = TestBaseScene.extend({
         if (item.invalid) {
             return item.name + " 已购买"
         } else {
-            return item.name + " = " + item.money + "$"
+            return item.name + " = " + item.money
         }
     },
 
@@ -62,7 +62,6 @@ var TestGameScene = TestBaseScene.extend({
     buyItem: function (button) {
         var item = button.item
         if(Shop.buyItem(item.id)) {
-
             // 如果是永久性商品就不能继续购买了
             if (!item.consumable) {
                 button.setEnabled(false)
@@ -76,7 +75,11 @@ var TestGameScene = TestBaseScene.extend({
     },
 
     updateStatusLabels:function() {
-        this.statutsLables['资金'].setString(User.getMoney() + '$')
+        this.statutsLables['资金'].setString(User.getMoney())
         this.statutsLables['猫最大数量'].setString(User.getMaxCatCount())
+        this.statutsLables['疫苗'].setString(User.getVaccineCount().toString())
+        this.statutsLables['药品'].setString(User.getMedicineCount().toString())
+        this.statutsLables['毛团打扫器'].setString(User.getHairCleanerCount().toString())
+        this.statutsLables['排风扇'].setString(User.getFansCount().toString())
     }
 })

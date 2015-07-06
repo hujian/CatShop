@@ -19,6 +19,13 @@ ItemSetting.type.medicine = 2
 ItemSetting.type.cleanMachine = 3
 ItemSetting.type.upgradeShop = 4
 
+// 道具具体的id
+ItemSetting.id = {}
+ItemSetting.id.vaccine = 1
+ItemSetting.id.medicine = 2
+ItemSetting.id.hairCleaner = 3
+ItemSetting.id.fan = 4
+
 ItemSetting.load = function () {
     if (!ItemSetting.data) {
         ItemSetting.data = new DataModel()
