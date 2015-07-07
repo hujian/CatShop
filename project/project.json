@@ -21,6 +21,7 @@
         "source/scene/ShopScene.js",
         "source/test/TestBaseScene.js",
         "source/test/TestGameScene.js",
+        "source/test/TestCatScene.js",
         "source/test/TestMainScene.js"
     ]
 }

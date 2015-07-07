@@ -46,19 +46,13 @@ var TestBaseScene = cc.Scene.extend({
 
     	// 返回按钮
     	if (this.needBackButton) {
-            this.addTestButton('返回', this.back, cc.p(100, 550), true)
+            this.addTestButton('返回', this.back, cc.p(100, 400), true)
     	}
 
         // 切换按钮
         if (this.needSwitchButton) {
-            this.addTestButton(['隐藏按钮', '显示按钮'], this.switchButtons, cc.p(250, 550), true)
+            this.addTestButton(['隐藏按钮', '显示按钮'], this.switchButtons, cc.p(250, 400), true)
         };
-
-        // 动作描述
-        this.stateLable = new ccui.Text()
-        this.stateLable.setFontSize(22)
-        this.stateLable.setPosition(cc.p(cc.visibleRect.center.x, 550))
-        this.addChild(this.stateLable)
 
         // 左侧的消息栏
         this.oldMessageView = new ccui.Text("", TestSceneFontName, 6)
