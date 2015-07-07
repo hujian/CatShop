@@ -7,8 +7,6 @@
 var TestCatScene = TestBaseScene.extend({
     ctor:function () {
         this._super()
-
-        this.needSwitchButton = false
     },
 
     onEnter:function () {

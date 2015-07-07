@@ -8,13 +8,10 @@ var TestGameScene = TestBaseScene.extend({
     ctor:function () {
         this._super()
 
-        this.needBackButton = false
-        this.needSwitchButton = false
+        this.initUI()
     },
 
-    onEnter:function () {
-    	this._super()
-
+    initUI:function () {
         this.printMessage("欢迎进入商店，请选择你要买的商品。")
 
         // 购买猫仔

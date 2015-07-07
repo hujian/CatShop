@@ -11,10 +11,6 @@ var TestBaseScene = cc.Scene.extend({
     ctor:function () {
         this._super();
 
-        // 加入背景
-        var background = new cc.LayerColor(cc.color.WHITE);
-        this.addChild(background)
-
         // 测试按钮的初始位置
         this.testButtonInitPosition = cc.p(250, 350)
         // 测试按钮的当前位置
@@ -29,7 +25,7 @@ var TestBaseScene = cc.Scene.extend({
         this.needBackButton = true;
 
         // 是否要切换button按钮，默认需要
-        this.needSwitchButton = true;
+        this.needSwitchButton = false;
 
         // 当前有几个右侧的状态框
         this.statusXPosition = 550
@@ -39,20 +35,15 @@ var TestBaseScene = cc.Scene.extend({
         this.statusMaxCellCount = 10.5 // 为了遮掉一点，从而看出是能滚的
         this.statusCellGap = 5
         this.statutsLables = {}
+
+        // 初始化UI
+        this.initTestBaseSceneUI()
     },
 
-    onEnter:function () {
-    	this._super()
-
-    	// 返回按钮
-    	if (this.needBackButton) {
-            this.addTestButton('返回', this.back, cc.p(100, 400), true)
-    	}
-
-        // 切换按钮
-        if (this.needSwitchButton) {
-            this.addTestButton(['隐藏按钮', '显示按钮'], this.switchButtons, cc.p(250, 400), true)
-        };
+    initTestBaseSceneUI:function () {
+        // 加入背景
+        var background = new cc.LayerColor(cc.color.WHITE);
+        this.addChild(background)
 
         // 左侧的消息栏
         this.oldMessageView = new ccui.Text("", TestSceneFontName, 6)
@@ -66,13 +57,34 @@ var TestBaseScene = cc.Scene.extend({
         this.newMessageView.setContentSize(cc.size(160, 40))
         this.newMessageView.setTextColor(cc.color(53, 124, 78))
         this.addChild(this.newMessageView)
+
         // 加个白色渐变的遮罩，增加逐渐往前的效果
         var layer = new cc.LayerGradient(new cc.color(255,255,255,20), new cc.color(255,255,255,255), cc.p(0, -1))
         layer.setContentSize(cc.size(200, 330))
         this.addChild(layer)
+    },
+
+    onEnter:function() {
+        this._super()
+
+        // 返回按钮
+        if (this.needBackButton && !this.backButton) {
+            this.backButton = this.addTestButton('返回', this.back, cc.p(100, 400), true)
+        }
+
+        // 切换按钮
+        if (this.needSwitchButton && !this.switchButton) {
+            this.switchButton = this.addTestButton(['隐藏按钮', '显示按钮'], this.switchButtons, cc.p(250, 400), true)
+        };
 
         // 更新右侧状态信息
         this.schedule(this.updateStatusLabels, 0.5)
+    },
+
+    onExit:function() {
+        this.unschedule(this.updateStatusLabels())
+
+        this._super()
     },
 
     // 返回上层菜单
