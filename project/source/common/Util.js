@@ -29,5 +29,14 @@ var Util = {
 	// 精灵平铺，用到webGL，会有兼容的问题
 	spriteTileRepeat:function (sprite) {
 		sprite.texture.setTexParameters(gl.LINEAR, gl.LINEAR, gl.REPEAT, gl.REPEAT)
+	},
+
+	// cc.p 的辅助函数
+	ccpAdd:function (p1, p2) {
+		return cc.p(p1.x + p2.x, + p1.y + p2.y)
+	},
+
+	ccpSub:function (p1, p2) {
+		return cc.p(p1.x - p2.x, p1.y - p2.y)
 	}
 };

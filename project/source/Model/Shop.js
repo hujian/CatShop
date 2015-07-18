@@ -23,8 +23,12 @@ Shop.buyCat = function (catId) {
     return cat
 }
 
-// 售出猫
-Shop.sellCat = function (catId) {
+// 售出猫, 注意必须传进来从User中获取的cat
+Shop.sellCat = function (cat) {
+    var catSetting = CatSetting.getById(cat.id)
+    User.updateMoney(User.getMoney() + catSetting.money)
+    User.removeCat(cat)
+    User.flush()
 }
 
 // 获取所有道具

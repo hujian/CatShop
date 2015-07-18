@@ -14,13 +14,13 @@ var TestMainScene = TestBaseScene.extend({
         // 加入测试用例按钮
         this.addTestButton('正常流程', this.goRoutine)
         this.addTestButton('商店', this.goShop)
-        this.addTestButton('文字模式', this.goText)
+        this.addTestButton('猫屋', this.goCat)
     },
 
     onEnter:function() {
         // temp in developing
         if (cc.isDebug) {
-            this.goText()
+            this.goShop()
         }
     },
 
@@ -28,10 +28,10 @@ var TestMainScene = TestBaseScene.extend({
     },
 
     goShop:function () {
-        cc.director.pushScene(new ShopScene())
+        cc.director.pushScene(new TestGameScene())
     },
 
-    goText:function () {
-        cc.director.pushScene(new TestGameScene())
+    goCat:function () {
+        cc.director.pushScene(new TestCatScene())
     }
 });

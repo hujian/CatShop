@@ -56,7 +56,7 @@ User.addCat = function(id) {
 User.removeCat = function(cat) {
     var index = User.data.jsonData.cats.indexOf(cat)
     if (index > -1) {
-        User.data.jsonData.cats.slice(index, 1)
+        User.data.jsonData.cats.splice(index, 1)
     }
 }
 
