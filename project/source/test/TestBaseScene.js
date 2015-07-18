@@ -82,7 +82,7 @@ var TestBaseScene = cc.Scene.extend({
     },
 
     onExit:function() {
-        this.unschedule(this.updateStatusLabels())
+        this.unscheduleAllCallbacks(this.updateStatusLabels())
 
         this._super()
     },
@@ -160,6 +160,18 @@ var TestBaseScene = cc.Scene.extend({
                 this.setTestButtonTitle(sender)
             };
         };
+    },
+
+    addTestCell:function(description, operations, userData) {
+        // 背景框
+        var drawNode = new cc.DrawNode()
+        drawNode.drawRect(cc.p(0, 0), cc.p(100, 80), null, 1, cc.color.BLACK)
+        this.addChild(drawNode)
+
+        // cell的资料信息
+        //var text = new cc.Text()
+        //text.setString(description)
+        //this.addChild(text)
     },
 
     printMessage:function (string) {

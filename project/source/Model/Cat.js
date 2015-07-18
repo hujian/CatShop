@@ -50,6 +50,8 @@ CatSetting.getBabyById = function (id) {
 
 // 根据id的大小，判断是否是成年猫
 CatSetting.getById = function(id) {
+    if (typeof(id) == 'string') id = parseInt(id)
+
     if (id < AdultCatStartId) {
         return CatSetting.getBabyById(id)
     } else {

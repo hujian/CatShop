@@ -29,7 +29,7 @@ User.flush = function() {
 
 // 玩家金币
 User.getMoney = function() {
-    return User.data.jsonData.money
+    return User.data.jsonData.money || 0
 }
 
 // 设置金币
@@ -40,7 +40,7 @@ User.updateMoney = function(money) {
 
 // 获取所有猫，数组对象是Cat.js中的Cat
 User.getAllCats = function() {
-    return User.data.jsonData.cats
+    return User.data.jsonData.cats || []
 }
 
 // 加猫，这里的id是猫种类id，就是CatSetting的id
@@ -63,7 +63,7 @@ User.removeCat = function(cat) {
 
 // 获取当前能够养的最大猫德数量
 User.getMaxCatCount = function () {
-    return User.data.jsonData.maxCatCount
+    return User.data.jsonData.maxCatCount || 0
 }
 
 // 跟新猫的最大数量
@@ -81,7 +81,7 @@ User.addItem = function (id) {
     }
 }
 
-// 删除消耗性道具
+// 删除道具
 User.removeItem = function (id) {
     var items = User.data.jsonData.items
     if (items[id] > 0) {
@@ -89,27 +89,27 @@ User.removeItem = function (id) {
     }
 }
 
-// 获取所有购买的消耗性道具
+// 获取所有已经购买的道具
 User.getAllItems = function () {
-    return User.data.jsonData.items
+    return User.data.jsonData.items || {}
 }
 
 // 获取购买的疫苗数量
 User.getVaccineCount = function () {
-    return User.getAllItems()[ItemSetting.id.vaccine]
+    return User.getAllItems()[ItemSetting.id.vaccine] || 0
 }
 
 // 获取购买的药品数量
 User.getMedicineCount = function () {
-    return User.getAllItems()[ItemSetting.id.medicine]
+    return User.getAllItems()[ItemSetting.id.medicine] || 0
 }
 
 // 获取购买的风扇数量
 User.getFansCount = function () {
-    return User.getAllItems()[ItemSetting.id.fan]
+    return User.getAllItems()[ItemSetting.id.fan] || 0
 }
 
 // 获取购买的猫毛清洁器数量
 User.getHairCleanerCount = function () {
-    return User.getAllItems()[ItemSetting.id.hairCleaner]
+    return User.getAllItems()[ItemSetting.id.hairCleaner] || 0
 }

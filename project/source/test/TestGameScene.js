@@ -38,13 +38,13 @@ var TestGameScene = TestBaseScene.extend({
         var catNames = []
         var cats = User.getAllCats()
         for (var i in cats) {
-            var setting = CatSetting.getById(parseInt(cats[i].id))
+            var setting = CatSetting.getById(cats[i].id)
             catNames.push(setting.name)
         }
         this.printStatus('猫', catNames)
 
         // 跳转到猫咪养殖页面
-        this.addTestButton('跳转到猫咪育儿', this.goCatScene, cc.p(250, 400), true)
+        this.addTestButton('跳转到猫咪培育室', this.goCatScene, cc.p(250, 400), true)
     },
 
     getItemDescription:function (item) {
