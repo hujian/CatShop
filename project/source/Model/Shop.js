@@ -59,7 +59,6 @@ Shop.buyItem = function (id) {
     if (itemSetting) {
         var moneyLeft = User.getMoney() - itemSetting.money
         if (moneyLeft >= 0) {
-            // 花钱
             User.updateMoney(moneyLeft)
 
             // 如果是商店扩建道具，则直接用掉
@@ -71,8 +70,26 @@ Shop.buyItem = function (id) {
                 }
             }
 
-            // 缓存到本地
             User.addItem(id)
+            User.flush()
+
+            ret = true
+        }
+    }
+
+    return ret
+}
+
+// 购买食物，返回true表示购买成功
+Shop.buyFood = function (id) {
+    var ret = false
+
+    var setting = FoodSetting.getById(id)
+    if (setting) {
+        var moneyLeft = User.getMoney() - setting.money
+        if (moneyLeft >= 0) {
+            User.updateMoney(moneyLeft)
+            User.addFood(id)
             User.flush()
 
             ret = true

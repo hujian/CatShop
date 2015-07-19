@@ -56,7 +56,7 @@ var TestCatScene = TestBaseScene.extend({
                 break
             case this.catOpertaions[4]:
                 Shop.sellCat(cat)
-                this.printMessage("出售一只" + setting.name)
+                this.printMessage("出售一只" + setting.name + ", 获的金钱" + setting.money)
                 this.updateCatStatus()
                 break
         }

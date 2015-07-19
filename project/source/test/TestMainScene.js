@@ -15,6 +15,7 @@ var TestMainScene = TestBaseScene.extend({
         this.addTestButton('正常流程', this.goRoutine)
         this.addTestButton('商店', this.goShop)
         this.addTestButton('猫屋', this.goCat)
+        this.addTestButton('猫食工厂', this.goFood)
     },
 
     onEnter:function() {
@@ -33,5 +34,9 @@ var TestMainScene = TestBaseScene.extend({
 
     goCat:function () {
         cc.director.pushScene(new TestCatScene())
+    },
+
+    goFood:function () {
+        cc.director.pushScene(new TestFoodScene())
     }
 });

@@ -1,7 +1,8 @@
 var game_resource_table = {
     cat_setting: "resource/setting/cat.json",
     baby_cat_setting: "resource/setting/babyCat.json",
-    item_setting: "resource/setting/item.json"
+    item_setting: "resource/setting/item.json",
+    food_setting: "resource/setting/food.json"
 };
 
 var game_resource = [];

@@ -33,18 +33,20 @@ var TestGameScene = TestBaseScene.extend({
         // 当前商店的状况
         this.printStatus('商店', ['资金', '疫苗', '药品', '毛团打扫器', '排风扇', '猫', '猫数量上限'])
 
-
-        // 当前拥有的猫咪
-        var catNames = []
-        var cats = User.getAllCats()
-        for (var i in cats) {
-            var setting = CatSetting.getById(cats[i].id)
-            catNames.push(setting.name)
+        // 当前食物状况
+        var foodName = []
+        var allFood = FoodSetting.getAll()
+        for (var i in allFood) {
+            var name = allFood[i].name
+            foodName.push(name)
         }
-        this.printStatus('猫', catNames)
+        this.printStatus('食物', foodName)
 
         // 跳转到猫咪养殖页面
         this.addTestButton('跳转到猫咪培育室', this.goCatScene, cc.p(250, 400), true)
+
+        // 跳转到猫食工厂页面
+        this.addTestButton('跳转到猫食工厂', this.goFoodScene, cc.p(350, 400), true)
     },
 
     getItemDescription:function (item) {
@@ -80,16 +82,32 @@ var TestGameScene = TestBaseScene.extend({
     },
 
     updateStatusLabels:function() {
+        // 金币
         this.statutsLables['资金'].setString(User.getMoney())
+
+        // 道具
         this.statutsLables['疫苗'].setString(User.getVaccineCount().toString())
         this.statutsLables['药品'].setString(User.getMedicineCount().toString())
         this.statutsLables['毛团打扫器'].setString(User.getHairCleanerCount().toString())
         this.statutsLables['排风扇'].setString(User.getFansCount().toString())
+
+        // 猫
         this.statutsLables['猫'].setString(User.getAllCats().length)
         this.statutsLables['猫数量上限'].setString(User.getMaxCatCount())
+
+        // 食物数据
+        var allFood = FoodSetting.getAll()
+        for (var i in allFood) {
+            var food = allFood[i]
+            this.statutsLables[food.name].setString(User.getFoodCount(food.id))
+        }
     },
 
     goCatScene:function () {
         cc.director.pushScene(new TestCatScene())
+    },
+
+    goFoodScene:function () {
+        cc.director.pushScene(new TestFoodScene())
     }
 })

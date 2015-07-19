@@ -63,6 +63,7 @@ cc.game.onStart = function(){
         // 加载配置文件，需要等待下载完成
         CatSetting.load()
         ItemSetting.load()
+        FoodSetting.load()
 
         if (cc.game.config[cc.game.CONFIG_KEY.debugMode] > 0) {
             cc.isDebug = true

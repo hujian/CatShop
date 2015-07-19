@@ -32,9 +32,9 @@ var TestBaseScene = cc.Scene.extend({
         // 是否要切换button按钮，默认需要
         this.needSwitchButton = false;
 
-        // 当前有几个右侧的状态框
+        // 右侧的状态框
         this.statusXPosition = 550
-        this.statusYPosition = 380
+        this.statusYPosition = 415
         this.statusCellHeight = 20
         this.statusCellWidth = 140
         this.statusMaxCellCount = 10.5 // 为了遮掉一点，从而看出是能滚的
@@ -55,7 +55,7 @@ var TestBaseScene = cc.Scene.extend({
         this.oldMessageView.ignoreContentAdaptWithSize(false);
         this.oldMessageView.setTextColor(cc.color.BLACK)
         this.oldMessageView.setPosition(cc.p(100, 140))
-        this.oldMessageView.setContentSize(cc.size(160, 400))
+        this.oldMessageView.setContentSize(cc.size(160, 420))
         this.addChild(this.oldMessageView)
         this.newMessageView = this.oldMessageView.clone()
         this.newMessageView.setPosition(cc.p(100, 360))

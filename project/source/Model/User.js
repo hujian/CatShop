@@ -17,6 +17,7 @@ User.restore = function() {
         User.data.jsonData.maxCatCount = 3         // 商店能够养的猫的最大数
         User.data.jsonData.items = {}              // 已经购买的商品
         User.data.jsonData.cats = []               // 玩家已经购买的猫
+        User.data.jsonData.food = {}              // 玩家已经购买的食物
         User.flush()
     } else {
     }
@@ -112,4 +113,28 @@ User.getFansCount = function () {
 // 获取购买的猫毛清洁器数量
 User.getHairCleanerCount = function () {
     return User.getAllItems()[ItemSetting.id.hairCleaner] || 0
+}
+
+// 增加食物
+User.addFood = function (id) {
+    var allFood = User.data.jsonData.food
+    if (allFood[id]) {
+        allFood[id] += 1
+    } else {
+        allFood[id] = 1
+    }
+}
+
+// 减少食物
+User.removeFood = function (id, count) {
+    count = count || 1
+    var allFood = User.data.jsonData.food
+    if (allFood[id] > count) {
+        allFood[id] -= count
+    }
+}
+
+// 获取食物的数量
+User.getFoodCount = function (id) {
+    return User.data.jsonData.food[id] || 0
 }
