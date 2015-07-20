@@ -11,6 +11,7 @@
     "jsList" : [
         "src/resource.js",
         "src/common/Util.js",
+        "src/common/Time.js",
         "src/Model/DataModel.js",
         "src/Model/App.js",
         "src/Model/Cat.js",
