@@ -81,7 +81,7 @@ var TestGameScene = TestBaseScene.extend({
         }
     },
 
-    updateStatusLabels:function() {
+    updateStatusLabels:function(interval) {
         // 金币
         this.statutsLables['资金'].setString(User.getMoney())
 
