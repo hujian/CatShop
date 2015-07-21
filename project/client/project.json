@@ -20,11 +20,13 @@
         "src/Model/Food.js",
         "src/Model/Shop.js",
         "src/scene/GameBaseScene.js",
+        "src/scene/LoadingScene.js",
         "src/scene/ShopScene.js",
         "src/test/TestBaseScene.js",
         "src/test/TestGameScene.js",
         "src/test/TestCatScene.js",
         "src/test/TestFoodScene.js",
         "src/test/TestMainScene.js"
-    ]
+    ],
+    "timestampServerURL" : "http://catshop.coding.io/time"
 }

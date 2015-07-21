@@ -58,7 +58,7 @@ cc.game.onStart = function(){
     // 从本地缓存获取恢复数据
     App.restore()
     User.restore()
-    Time.load()
+    Time.load(cc.game.config['timestampServerURL'])
 
     cc.LoaderScene.preload(game_resource, function () {
         // 加载配置文件，需要等待下载完成
