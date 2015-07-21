@@ -16,11 +16,11 @@ CatSetting.load = function () {
     if (!this.adult || !this.baby) {
         // 猫仔的配置数据
         this.baby = new DataModel()
-        this.baby.loadDataFromJson(game_resource_table.baby_cat_setting)
+        this.baby.loadDataFromJson(gameResource.global.baby_cat_setting)
 
         // 成猫的配置数据
         this.adult = new DataModel()
-        this.adult.loadDataFromJson(game_resource_table.cat_setting)
+        this.adult.loadDataFromJson(gameResource.global.cat_setting)
     }
 }
 

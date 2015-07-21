@@ -34,6 +34,7 @@ LoaderScene = GameBaseScene.extend({
             fontSize = 14;
             lblHeight = -logoHeight / 2 - 10;
         }
+
         //loading percent
         var label = self._label = new cc.LabelTTF("Loading... 0%", "Arial", fontSize);
         label.setPosition(cc.pAdd(cc.visibleRect.center, cc.p(0, lblHeight)));

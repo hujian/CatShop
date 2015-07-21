@@ -116,7 +116,7 @@ var TestBaseScene = cc.Scene.extend({
 
     createTestButton:function (title, handler) {
         var button = new ccui.Button()
-        button.loadTextureNormal('res/test/test_button.png', ccui.Widget.LOCAL_TEXTURE)
+        button.loadTextureNormal(gameResource.global.testButton, ccui.Widget.LOCAL_TEXTURE)
         button.setTouchEnabled(true);
         button.setTitleFontName(TestSceneFontName)
         button.setTitleColor(cc.color.BLACK)

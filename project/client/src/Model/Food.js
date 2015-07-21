@@ -9,7 +9,7 @@ var FoodSetting = FoodSetting || {}
 FoodSetting.load = function () {
     if (!FoodSetting.data) {
         FoodSetting.data = new DataModel()
-        FoodSetting.data.loadDataFromJson(game_resource_table.food_setting)
+        FoodSetting.data.loadDataFromJson(gameResource.global.food_setting)
     }
 }
 

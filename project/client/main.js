@@ -60,7 +60,7 @@ cc.game.onStart = function(){
     User.restore()
     Time.load(cc.game.config['timestampServerURL'])
 
-    cc.LoaderScene.preload(game_resource, function () {
+    cc.LoaderScene.preload(gameResource.getGlobal(), function () {
         // 加载配置文件，需要等待下载完成
         CatSetting.load()
         ItemSetting.load()

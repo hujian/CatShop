@@ -29,7 +29,7 @@ ItemSetting.id.fan = 4
 ItemSetting.load = function () {
     if (!ItemSetting.data) {
         ItemSetting.data = new DataModel()
-        ItemSetting.data.loadDataFromJson(game_resource_table.item_setting)
+        ItemSetting.data.loadDataFromJson(gameResource.global.item_setting)
     }
 }
 
