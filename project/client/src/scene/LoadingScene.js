@@ -4,16 +4,13 @@
 * @date:   2015-07-21
 */
 
-LoaderScene = cc.Scene.extend({
+LoaderScene = GameBaseScene.extend({
     _interval : null,
     _label : null,
     _className:"LoaderScene",
     cb: null,
     target: null,
-    /**
-     * Contructor of cc.LoaderScene
-     * @returns {boolean}
-     */
+
     init : function(){
         var self = this;
 

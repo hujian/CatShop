@@ -1,1 +1,1 @@
-{"showFPS": true, "frameRate": 30, "localMode": 0, "project_type": "javascript", "debugMode": 1, "renderMode": 0, "id": "gameCanvas"}
+{"showFPS": true, "timestampServerURL": "http://catshop.coding.io/time", "frameRate": 30, "localMode": 0, "project_type": "javascript", "debugMode": 1, "renderMode": 0, "id": "gameCanvas"}
