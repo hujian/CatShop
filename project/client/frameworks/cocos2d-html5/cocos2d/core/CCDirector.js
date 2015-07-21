@@ -185,6 +185,7 @@ cc.Director = cc.Class.extend(/** @lends cc.Director# */{
             this._nextDeltaTimeZero = false;
         } else {
             this._deltaTime = (now - this._lastUpdate) / 1000;
+            this._deltaTime = Math.max(0, this._deltaTime);
         }
 
         if ((cc.game.config[cc.game.CONFIG_KEY.debugMode] > 0) && (this._deltaTime > 0.2))
