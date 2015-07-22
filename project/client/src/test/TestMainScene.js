@@ -8,29 +8,35 @@
 var TestMainScene = TestBaseScene.extend({
     ctor:function () {
         this._super();
-        this.needBackButton = false
-        this.needSwitchButton = false
 
         // 正常UI测试用例
         this.addTestButton('正常流程', this.goRoutine)
+        this.addTestButton('弹出层', this.goPopup)
 
         // 文字UI测试用例
-        this.addTestButton('测试-主界面', this.goTestShop)
-        this.addTestButton('测试-猫屋', this.goTestCat)
-        this.addTestButton('测试-猫食工厂', this.goTestFood)
+        this.addTestButton('文字-主界面', this.goTestMain)
+        this.addTestButton('文字-猫屋', this.goTestCat)
+        this.addTestButton('文字-猫食工厂', this.goTestFood)
     },
 
     onEnter:function() {
+        this._super()
+
         // temp in developing
-        if (cc.isDebug) {
-            this.goTestShop()
+        if (cc.isDebug && !this.autoRun) {
+            this.autoRun = true
+            this.goPopup()
         }
     },
 
     goRoutine:function () {
     },
 
-    goTestShop:function () {
+    goPopup:function () {
+        cc.director.pushScene(new TestPopupScene())
+    },
+
+    goTestMain:function () {
         cc.director.pushScene(new TestGameScene())
     },
 
@@ -38,7 +44,7 @@ var TestMainScene = TestBaseScene.extend({
         cc.director.pushScene(new TestCatScene())
     },
 
-    goTesetFood:function () {
+    goTestFood:function () {
         cc.director.pushScene(new TestFoodScene())
     }
 });

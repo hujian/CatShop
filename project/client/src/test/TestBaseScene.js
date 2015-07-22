@@ -41,6 +41,13 @@ var TestBaseScene = cc.Scene.extend({
         this.statusCellGap = 5
         this.statutsLables = {}
 
+        // 返回键响应
+        this.backKeyReleasedEvent = new EventHandler();
+        cc.eventManager.addListener({
+            event: cc.EventListener.KEYBOARD,
+            onKeyReleased: this.onKeyReleased.bind(this)
+        }, this);
+
         // 初始化UI
         this.initTestBaseSceneUI()
     },
@@ -72,6 +79,13 @@ var TestBaseScene = cc.Scene.extend({
         this.contentLayer = new cc.Layer()
         this.addChild(this.contentLayer)
         this.clearAllContent() // 必须要先复原一下
+    },
+
+    // 最上层的接受者响应返回键响应
+    onKeyReleased: function (keyCode, event) {
+        if(keyCode == cc.KEY.escape) {
+            this.backKeyReleasedEvent.raiseLastHandler();
+        }
     },
 
     onEnter:function() {

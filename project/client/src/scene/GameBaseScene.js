@@ -12,5 +12,19 @@ var GameBaseScene = cc.Scene.extend({
 
     init:function () {
     	this._super()
+
+        // 返回键响应
+        this.backKeyReleasedEvent = new EventHandler();
+        cc.eventManager.addListener({
+            event: cc.EventListener.KEYBOARD,
+            onKeyReleased: this.onKeyReleased
+        }, this);
+    },
+
+    // 最上层的接受者响应返回键响应
+    onKeyReleased: function (keyCode, event) {
+        if(keyCode == cc.KEY.escape) {
+            this.backKeyReleasedEvent.raiseLastHandler();
+        }
     }
 })
