@@ -13,20 +13,20 @@ var TestPopupScene = TestBaseScene.extend({
     },
 
     popOne:function () {
-        this.createLayer(this.getLayerText())
+        this.createLayer()
     },
 
     popFive:function () {
         for (var i = 0; i<5; i++) {
-            this.createLayer(this.getLayerText())
+            this.createLayer()
         }
     },
 
     getLayerText:function () {
-        return "弹出层" +  (this.backKeyReleasedEvent.size() + 1).toString()
+        return "弹出层" +  this.backKeyReleasedEvent.size().toString()
     },
 
-    createLayer:function (text) {
+    createLayer:function () {
         var layer = new PopupBaseLayer()
         layer.setAnchorPoint(cc.p(0.5, 0.5))
         layer.ignoreAnchorPointForPosition(false)
@@ -38,7 +38,7 @@ var TestPopupScene = TestBaseScene.extend({
         bgLayer.setContentSize(layer.getContentSize())
         layer.addChild(bgLayer, 0);
 
-        var label = new ccui.Text(text, TestSceneFontName, 12)
+        var label = new ccui.Text(this.getLayerText(), TestSceneFontName, 12)
         label.setColor(cc.color.BLACK)
         label.setPosition(cc.p(150, 100))
         layer.addChild(label)
