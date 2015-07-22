@@ -253,13 +253,15 @@
                 <file name="src/resource.js"/>
                 <file name="src/common/Util.js"/>
                 <file name="src/common/Time.js"/>
-                <file name="src/Model/DataModel.js"/>
-                <file name="src/Model/App.js"/>
-                <file name="src/Model/Cat.js"/>
-                <file name="src/Model/User.js"/>
-                <file name="src/Model/Item.js"/>
-                <file name="src/Model/Food.js"/>
-                <file name="src/Model/Shop.js"/>
+                <file name="src/common/EventHandler.js"/>
+                <file name="src/model/DataModel.js"/>
+                <file name="src/model/App.js"/>
+                <file name="src/model/Cat.js"/>
+                <file name="src/model/User.js"/>
+                <file name="src/model/Item.js"/>
+                <file name="src/model/Food.js"/>
+                <file name="src/model/Shop.js"/>
+                <file name="src/widget/PopupBaseLayer.js"/>
                 <file name="src/scene/GameBaseScene.js"/>
                 <file name="src/scene/LoadingScene.js"/>
                 <file name="src/scene/ShopScene.js"/>
@@ -267,6 +269,7 @@
                 <file name="src/test/TestGameScene.js"/>
                 <file name="src/test/TestCatScene.js"/>
                 <file name="src/test/TestFoodScene.js"/>
+                <file name="src/test/TestPopupScene.js"/>
                 <file name="src/test/TestMainScene.js"/>
                 <file name="main.js"/>
 
