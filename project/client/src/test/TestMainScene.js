@@ -11,32 +11,34 @@ var TestMainScene = TestBaseScene.extend({
         this.needBackButton = false
         this.needSwitchButton = false
 
-        // 加入测试用例按钮
+        // 正常UI测试用例
         this.addTestButton('正常流程', this.goRoutine)
-        this.addTestButton('商店', this.goShop)
-        this.addTestButton('猫屋', this.goCat)
-        this.addTestButton('猫食工厂', this.goFood)
+
+        // 文字UI测试用例
+        this.addTestButton('测试-主界面', this.goTestShop)
+        this.addTestButton('测试-猫屋', this.goTestCat)
+        this.addTestButton('测试-猫食工厂', this.goTestFood)
     },
 
     onEnter:function() {
         // temp in developing
         if (cc.isDebug) {
-            this.goShop()
+            this.goTestShop()
         }
     },
 
     goRoutine:function () {
     },
 
-    goShop:function () {
+    goTestShop:function () {
         cc.director.pushScene(new TestGameScene())
     },
 
-    goCat:function () {
+    goTestCat:function () {
         cc.director.pushScene(new TestCatScene())
     },
 
-    goFood:function () {
+    goTesetFood:function () {
         cc.director.pushScene(new TestFoodScene())
     }
 });

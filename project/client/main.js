@@ -61,6 +61,7 @@ cc.game.onStart = function(){
 
     var loadingScene = new LoadingScene()
     loadingScene.preload(Util.getArray(gameResource.global), function () {
+
         // 加载配置文件，需要等待下载完成
         CatSetting.load()
         ItemSetting.load()
@@ -71,6 +72,7 @@ cc.game.onStart = function(){
             cc.director.runScene(new TestMainScene());
         } else {
         }
+
     }, this);
 
     App.flush()
