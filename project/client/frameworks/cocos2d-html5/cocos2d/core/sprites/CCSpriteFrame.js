@@ -359,7 +359,7 @@ cc.SpriteFrame = cc.Class.extend(/** @lends cc.SpriteFrame# */{
                 _y = rect.y + rect.height;
             }
             if(_x > texture.getPixelsWide()){
-                cc.error(cc._LogInfos.RectWidth, texture.url);
+                cc.error(cc._LogInfos.RectWidth + texture.url + ", width: " + texture.getPixelsWide().toString());
             }
             if(_y > texture.getPixelsHigh()){
                 cc.error(cc._LogInfos.RectHeight, texture.url);

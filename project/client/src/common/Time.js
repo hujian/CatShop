@@ -6,25 +6,32 @@
 
 var Time = Time || {}
 
-Time.timestamp = 0
+Time.timestamp = Date.parse(new Date()) / 1000
 
 Time.load = function (timestampServerUrl, callback, target) {
+    var result = false
     var request = cc.loader.getXMLHttpRequest()
     request.open('GET', timestampServerUrl, true)
     request.onreadystatechange = function () {
-        if (request.readyState == 4 && (request.status >= 200 && request.status <= 207)) {
-            Time.timestamp = parseInt(request.responseText)
-            if (Time.timestamp) {
-                if (callback) {
-                    callback.call(target, Time.timestamp)
+        if (request.readyState == 4) {
+            if (request.status >= 200 && request.status <= 207) {
+                Time.timestamp = parseInt(request.responseText)
+                if (Time.timestamp) {
+                    // 开始通过定时器累计时间
+                    cc.director.getScheduler().schedule(Time.update, Time, 1, cc.REPEAT_FOREVER, 0, false, "Time")
+
+                    cc.log("get time stamp from server: " + request.responseText + ", current time: " + new Date(Time.timestamp).toString())
+                    result = true
+
+                } else {
+                    cc.error("服务器返回奇怪的东西：" + request.responseText)
                 }
-
-                // 开始通过定时器累计时间
-                cc.director.getScheduler().schedule(Time.update, Time, 1, cc.REPEAT_FOREVER, 0, false, "Time")
-
-                cc.log("get time stamp from server, " + request.responseText)
             } else {
-                cc.error("服务器返回奇怪的东西：" + request.responseText)
+                cc.error("网络出啥问题了, status code: " + request.status.toString())
+            }
+
+            if (callback) {
+                callback.call(target, result)
             }
         }
     }

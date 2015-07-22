@@ -31,6 +31,17 @@ var Util = {
 		sprite.texture.setTexParameters(gl.LINEAR, gl.LINEAR, gl.REPEAT, gl.REPEAT)
 	},
 
+	// 从字典中，抽出value组成数组
+	getArray:function (obj) {
+		var array = [];
+		for (var key in obj) {
+			if (obj.hasOwnProperty(key)) {
+				array.push(obj[key]);
+			}
+		}
+		return array
+	},
+
 	// cc.p 的辅助函数
 	ccpAdd:function (p1, p2) {
 		return cc.p(p1.x + p2.x, + p1.y + p2.y)
