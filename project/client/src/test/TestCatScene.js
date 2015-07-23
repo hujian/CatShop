@@ -41,9 +41,34 @@ var TestCatScene = TestBaseScene.extend({
         return key + ": " + value.toString() + ", "
     },
 
-    createFeedPopupLayer:function () {
-        var layer = new PopupBaseLayer()
+    createFeedPopupLayer:function (cat) {
+        var layer = new TestPopupLayer()
         layer.present()
+
+        // 列出所有食物
+        var foodSetting = FoodSetting.getAll()
+        for (var i in foodSetting) {
+            var setting = foodSetting[i]
+            var button = layer.addTestButton(setting.name, this.feed, this)
+            button.food = setting
+            button.cat = cat
+        }
+    },
+
+    feed:function(button) {
+        var foodSetting = button.food
+        var cat = button.cat
+        var catSetting = CatSetting.getById(cat.id)
+
+        if (User.getFoodCount(foodSetting.id) > 0) {
+            User.removeFood(foodSetting.id)
+            User.flush()
+            cat.feed(foodSetting.id)
+
+            this.printMessage("成功给[" + catSetting.name + "]喂食了一个[" + foodSetting.name + "], 还剩" + User.getFoodCount(foodSetting.id) + "个[" + foodSetting.name + "]")
+        } else {
+            this.printMessage("[" + foodSetting.name + "]数量不足")
+        }
     },
 
     operate:function(button) {
@@ -52,6 +77,7 @@ var TestCatScene = TestBaseScene.extend({
         var operation = button.operation
         switch(operation) {
             case this.catOpertaions[0]:
+                this.createFeedPopupLayer(cat)
                 break
             case this.catOpertaions[1]:
                 break

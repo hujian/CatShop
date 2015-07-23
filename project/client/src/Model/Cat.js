@@ -61,4 +61,9 @@ CatSetting.getById = function(id) {
 
 var Cat = function(id) {
     this.id = id
+
+    this.feed = function() {}
+}
+
+Cat.prototype.feed = function(foodId, count) {
 }

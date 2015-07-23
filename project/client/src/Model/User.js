@@ -20,6 +20,16 @@ User.restore = function() {
         User.data.jsonData.food = {}              // 玩家已经购买的食物
         User.flush()
     } else {
+        // 需要把恢复出来的数据的prototype挂接到相关的model上去，外面才能调用model的函数
+        this.restoreModel(User.data.jsonData.items, Item)
+        this.restoreModel(User.data.jsonData.cats, Cat)
+        this.restoreModel(User.data.jsonData.food, Food)
+    }
+}
+
+User.restoreModel = function(dataArray, model) {
+    for (var i in dataArray) {
+        dataArray[i].__proto__ = Cat.prototype
     }
 }
 
@@ -127,11 +137,14 @@ User.addFood = function (id) {
 
 // 减少食物
 User.removeFood = function (id, count) {
+    var ret = false
     count = count || 1
     var allFood = User.data.jsonData.food
-    if (allFood[id] > count) {
+    if (allFood[id] >= count) {
         allFood[id] -= count
+        ret = true
     }
+    return ret
 }
 
 // 获取食物的数量

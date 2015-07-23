@@ -5,6 +5,14 @@
 */
 
 
+var a = function () {this.id = 2}
+a.prototype.feed = function () {}
+
+var b = {id:3}
+b.__proto__ = a.prototype
+
+b.feed()
+
 var TestMainScene = TestBaseScene.extend({
     ctor:function () {
         this._super();
@@ -25,7 +33,7 @@ var TestMainScene = TestBaseScene.extend({
         // temp in developing
         if (cc.isDebug && !this.autoRun) {
             this.autoRun = true
-            this.goPopup()
+            this.goTestCat()
         }
     },
 

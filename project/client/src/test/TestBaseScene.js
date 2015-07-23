@@ -61,7 +61,7 @@ var TestBaseScene = cc.Scene.extend({
         this.oldMessageView = new ccui.Text("", TestSceneFontName, 6)
         this.oldMessageView.ignoreContentAdaptWithSize(false);
         this.oldMessageView.setTextColor(cc.color.BLACK)
-        this.oldMessageView.setPosition(cc.p(100, 140))
+        this.oldMessageView.setPosition(cc.p(100, 120))
         this.oldMessageView.setContentSize(cc.size(160, 420))
         this.addChild(this.oldMessageView)
         this.newMessageView = this.oldMessageView.clone()
@@ -243,7 +243,7 @@ var TestBaseScene = cc.Scene.extend({
 
     printMessage:function (string) {
         if (this.newMessageView.getString().length > 0) {
-            this.oldMessageView.setString(this.newMessageView.getString() + "\n" + this.oldMessageView.getString())
+            this.oldMessageView.setString(this.newMessageView.getString() + "\n\n" + this.oldMessageView.getString())
         }
         this.newMessageView.setString(string)
         this.newMessageView.setOpacity(0)
