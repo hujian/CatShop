@@ -5,11 +5,14 @@
 * @date:   2015-06-24
 */
 
-// 猫德配置表，拿到就是两张，为了方便起见，直接把成年猫的id改成从6开始
+// 猫的配置表，拿到就是两张，为了方便起见，直接把成年猫的id改成从6开始
 var AdultCatStartId = 6
 
 // 猫的配置类
 var CatSetting = CatSetting || {}
+
+// 猫状态更新间隔
+CatSetting.updateInterval = 10
 
 // 加载数据，因为是配置文件是json，需要异步加载，所以需要在scene加载出来后，手动调用该方法。
 CatSetting.load = function () {
@@ -61,9 +64,39 @@ CatSetting.getById = function(id) {
 
 var Cat = function(id) {
     this.id = id
+    this.instanceId = User.getNewInstanceId()
 
-    this.feed = function() {}
+    // 饥饿程度，10秒增加1，最大100
+    this.hungry = 0
 }
 
+Cat.prototype.clean = function() {
+    this.stop()
+}
+
+// 喂猫
 Cat.prototype.feed = function(foodId, count) {
+    var foodSetting = FoodSetting.getById(foodId)
+    this.hungry = Math.max(0, this.hungry - foodSetting.effect *count)
+    User.flush()
+}
+
+// cat要进入养育状态，就调用该函数
+Cat.start = function() {
+    cc.director.getScheduler().schedule(Cat.update, Cat, CatSetting.updateInterval, cc.REPEAT_FOREVER, 0, false, "cat")
+}
+
+// 状态更新
+Cat.update = function(interval) {
+    var allCats = User.getAllCats()
+    for (var i in allCats) {
+        var cat = allCats[i]
+        cat.hungry = Math.min(100, cat.hungry + 1)
+    }
+    User.flush()
+}
+
+// 如果要暂停养育，希望cat的所有状态暂时挺住，就掉用该函数
+Cat.stop = function() {
+    cc.director.getScheduler().unschedule(Cat.update, Cat)
 }

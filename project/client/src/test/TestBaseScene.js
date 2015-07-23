@@ -1,4 +1,4 @@
-/* 
+/*
 * @breife: 测试页面基类
 *          左边是交互文字输出区域，上面是页面切换区域，中间是操作选择区域，右边是信息展示区域。
 * @author: hujian
@@ -25,6 +25,7 @@ var TestBaseScene = cc.Scene.extend({
         // 测试操作单元尺寸
         this.testCellSize = cc.size(200, 120)
         this.testCellGap = cc.p(220, 140)
+        this.cells = {}
 
         // 是否需要返回按钮，默认需要
         this.needBackButton = true;
@@ -102,7 +103,7 @@ var TestBaseScene = cc.Scene.extend({
         };
 
         // 更新右侧状态信息
-        this.schedule(this.updateStatusLabels, 0.5)
+        this.schedule(this.updateStatus, 0.5)
     },
 
     // 清空所有testButton(返回这种特殊的除外)，和testCell
@@ -112,7 +113,7 @@ var TestBaseScene = cc.Scene.extend({
     },
 
     onExit:function() {
-        this.unscheduleAllCallbacks(this.updateStatusLabels())
+        this.unscheduleAllCallbacks()
 
         this._super()
     },
@@ -202,6 +203,8 @@ var TestBaseScene = cc.Scene.extend({
     // description: 任意描述，注意不要太长，用\n换行
     // operations : 是一个字符串数据组，生成一组button，title就是这些字符串
     addTestCell:function(name, description, operations, handler, userData) {
+        this.cells[name] = this.cells[name] || {}
+
         // 背景框
         var drawNode = new cc.DrawNode()
         drawNode.drawRect(this.currentTestButtonPosition,
@@ -214,6 +217,7 @@ var TestBaseScene = cc.Scene.extend({
         text.setAnchorPoint(cc.p(0, 1))
         text.setPosition(cc.p(this.currentTestButtonPosition.x + 5, this.currentTestButtonPosition.y + this.testCellSize.height - 5))
         this.contentLayer.addChild(text)
+        this.cells[name].description = text
 
         // cell的资料信息
         var startPosition = cc.p(this.currentTestButtonPosition.x + 5, this.currentTestButtonPosition.y + this.testCellSize.height / 2 - 10)
@@ -235,7 +239,7 @@ var TestBaseScene = cc.Scene.extend({
         }
 
         this.currentTestButtonPosition.y -= this.testCellGap.y
-        if (this.currentTestButtonPosition.y < 50) {
+        if (this.currentTestButtonPosition.y < 20) {
             this.currentTestButtonPosition.y = this.testButtonInitPosition.y
             this.currentTestButtonPosition.x += this.testCellGap.x
         }
@@ -299,6 +303,6 @@ var TestBaseScene = cc.Scene.extend({
         this.statusYPosition = this.statusYPosition - contentNames.length * this.statusCellHeight - 30
     },
 
-    updateStatusLabels:function() {
+    updateStatus:function() {
     }
 });

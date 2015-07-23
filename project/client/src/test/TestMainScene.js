@@ -4,18 +4,11 @@
 * @date:   2015-04-01 21:28:02
 */
 
-
-var a = function () {this.id = 2}
-a.prototype.feed = function () {}
-
-var b = {id:3}
-b.__proto__ = a.prototype
-
-b.feed()
-
 var TestMainScene = TestBaseScene.extend({
     ctor:function () {
         this._super();
+
+        this.needBackButton = false
 
         // 正常UI测试用例
         this.addTestButton('正常流程', this.goRoutine)
@@ -54,5 +47,5 @@ var TestMainScene = TestBaseScene.extend({
 
     goTestFood:function () {
         cc.director.pushScene(new TestFoodScene())
-    }
+    },
 });

@@ -17,7 +17,8 @@ User.restore = function() {
         User.data.jsonData.maxCatCount = 3         // 商店能够养的猫的最大数
         User.data.jsonData.items = {}              // 已经购买的商品
         User.data.jsonData.cats = []               // 玩家已经购买的猫
-        User.data.jsonData.food = {}              // 玩家已经购买的食物
+        User.data.jsonData.food = {}               // 玩家已经购买的食物
+        User.data.jsonData.instanceId = 0          // 玩家数据中用到的实例对象
         User.flush()
     } else {
         // 需要把恢复出来的数据的prototype挂接到相关的model上去，外面才能调用model的函数
@@ -29,13 +30,18 @@ User.restore = function() {
 
 User.restoreModel = function(dataArray, model) {
     for (var i in dataArray) {
-        dataArray[i].__proto__ = Cat.prototype
+        dataArray[i].__proto__ = model.prototype
     }
 }
 
 // 保存到本地缓存
 User.flush = function() {
     User.data.saveDataToLocalStorage(User.dataSavingKey)
+}
+
+// 获取实例id，数据会缓存的，不会重复
+User.getNewInstanceId = function() {
+    return ++User.data.jsonData.instanceId
 }
 
 // 玩家金币
@@ -67,6 +73,7 @@ User.addCat = function(id) {
 User.removeCat = function(cat) {
     var index = User.data.jsonData.cats.indexOf(cat)
     if (index > -1) {
+        cat.clean()
         User.data.jsonData.cats.splice(index, 1)
     }
 }
@@ -151,3 +158,4 @@ User.removeFood = function (id, count) {
 User.getFoodCount = function (id) {
     return User.data.jsonData.food[id] || 0
 }
+
