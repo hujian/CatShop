@@ -24,6 +24,11 @@ var PopupBaseLayer = cc.Layer.extend({
         this.zIndex = PopupBaseLayer.DefualtZOrder;
     },
 
+    present:function (animation) {
+        var runningScene = cc.director.getRunningScene();
+        runningScene.addChild(this)
+    },
+
     onEnter: function(){
         this._super();
 

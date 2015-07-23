@@ -16,10 +16,10 @@ var TestCatScene = TestBaseScene.extend({
     initUI:function () {
         this.printMessage("这里是猫咪生活的场所，请妥善照顾好他们。")
 
-        this.updateCatStatus()
+        this.refreshCatStatusCell()
     },
 
-    updateCatStatus:function () {
+    refreshCatStatusCell:function () {
         this.clearAllContent()
 
         var cats = User.getAllCats()
@@ -41,6 +41,11 @@ var TestCatScene = TestBaseScene.extend({
         return key + ": " + value.toString() + ", "
     },
 
+    createFeedPopupLayer:function () {
+        var layer = new PopupBaseLayer()
+        layer.present()
+    },
+
     operate:function(button) {
         var cat = button.userData
         var setting = CatSetting.getById(cat.id)
@@ -57,7 +62,7 @@ var TestCatScene = TestBaseScene.extend({
             case this.catOpertaions[4]:
                 Shop.sellCat(cat)
                 this.printMessage("出售一只" + setting.name + ", 获的金钱" + setting.money)
-                this.updateCatStatus()
+                this.refreshCatStatusCell()
                 break
         }
     }

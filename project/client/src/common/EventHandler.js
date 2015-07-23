@@ -13,8 +13,15 @@ EventHandler = cc.Class.extend({
     },
 
     size: function () {
-        this.refresh()
-        return this._handlers.length;
+        var validHandlerCount = 0;
+        for(var i = 0; i < this._handlers.length; ++i)
+        {
+            if(!this._handlers[i].isDeleted)
+            {
+                validHandlerCount++;
+            }
+        }
+        return validHandlerCount;
     },
 
     empty: function () {

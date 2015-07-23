@@ -25,6 +25,7 @@
         "src/scene/LoadingScene.js",
         "src/scene/ShopScene.js",
         "src/test/TestBaseScene.js",
+        "src/test/TestPopupLayer.js",
         "src/test/TestGameScene.js",
         "src/test/TestCatScene.js",
         "src/test/TestFoodScene.js",

@@ -13,38 +13,26 @@ var TestPopupScene = TestBaseScene.extend({
     },
 
     popOne:function () {
-        this.createLayer()
+        this.popLayer()
     },
 
     popFive:function () {
         for (var i = 0; i<5; i++) {
-            this.createLayer()
+            this.popLayer()
         }
     },
 
-    getLayerText:function () {
-        return "弹出层" +  this.backKeyReleasedEvent.size().toString()
-    },
+    popLayer:function () {
+        var layer = new TestPopupLayer()
+        layer.present()
 
-    createLayer:function () {
-        var layer = new PopupBaseLayer()
-        layer.setAnchorPoint(cc.p(0.5, 0.5))
-        layer.ignoreAnchorPointForPosition(false)
-        layer.setContentSize(cc.size(300, 200))
-        layer.setPosition(cc.visibleRect.center)
-        this.addChild(layer)
-
-        var bgLayer = new cc.LayerColor(cc.color(52, 113, 143, 255));
-        bgLayer.setContentSize(layer.getContentSize())
-        layer.addChild(bgLayer, 0);
-
-        var label = new ccui.Text(this.getLayerText(), TestSceneFontName, 12)
+        // 显示当前的弹出层是第几个
+        var label = new ccui.Text("弹出层" +  this.backKeyReleasedEvent.size().toString(), TestSceneFontName, 12)
         label.setColor(cc.color.BLACK)
         label.setPosition(cc.p(150, 100))
-        layer.addChild(label)
+        layer.contentLayer.addChild(label)
 
-        var button = this.createTestButton("再弹出一个", this.createLayer)
-        button.setPosition(cc.p(150, 150))
-        layer.addChild(button)
+        // 可以在现在这个弹出层上，再弹出一个
+        layer.addTestButton("再弹出一个", this.popOne, this)
     }
 })
