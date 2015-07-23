@@ -266,6 +266,7 @@
                 <file name="src/scene/LoadingScene.js"/>
                 <file name="src/scene/ShopScene.js"/>
                 <file name="src/test/TestBaseScene.js"/>
+                <file name="src/test/TestPopupLayer.js"/>
                 <file name="src/test/TestGameScene.js"/>
                 <file name="src/test/TestCatScene.js"/>
                 <file name="src/test/TestFoodScene.js"/>
