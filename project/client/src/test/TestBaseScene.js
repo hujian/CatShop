@@ -14,6 +14,7 @@ var TestBaseScene = cc.Scene.extend({
 
         // 测试按钮的初始位置
         this.testButtonInitPosition = cc.p(250, 350)
+        this.currentTestButtonPosition = cc.p(this.testButtonInitPosition)
 
         // 测试按钮的间隔
         this.testButtonGap = cc.p(100, 30)
@@ -21,11 +22,6 @@ var TestBaseScene = cc.Scene.extend({
         this.testButtonSize = cc.size(130, 36)
         // 所有测试用例按钮
         this.buttons = []
-
-        // 测试操作单元尺寸
-        this.testCellSize = cc.size(200, 120)
-        this.testCellGap = cc.p(220, 140)
-        this.cells = {}
 
         // 是否需要返回按钮，默认需要
         this.needBackButton = true;
@@ -75,11 +71,6 @@ var TestBaseScene = cc.Scene.extend({
         var layer = new cc.LayerGradient(new cc.color(255,255,255,20), new cc.color(255,255,255,255), cc.p(0, -1))
         layer.setContentSize(cc.size(200, 330))
         this.addChild(layer)
-
-        // 内容层
-        this.contentLayer = new cc.Layer()
-        this.addChild(this.contentLayer)
-        this.clearAllContent() // 必须要先复原一下
     },
 
     // 最上层的接受者响应返回键响应
@@ -104,12 +95,6 @@ var TestBaseScene = cc.Scene.extend({
 
         // 更新右侧状态信息
         this.schedule(this.updateStatus, 0.5)
-    },
-
-    // 清空所有testButton(返回这种特殊的除外)，和testCell
-    clearAllContent:function() {
-        this.currentTestButtonPosition = cc.p(this.testButtonInitPosition)
-        this.contentLayer.removeAllChildren(true)
     },
 
     onExit:function() {
@@ -168,6 +153,10 @@ var TestBaseScene = cc.Scene.extend({
 
         // 如果是特殊按钮，比如返回按钮，就不要加入按钮组了，方便对测试按钮做整体操作，比如全部隐藏之类。
         if (!isSpecialButton) {
+            if (!this.contentLayer) {
+                this.contentLayer = new cc.Layer()
+                this.addChild(this.contentLayer)
+            }
             this.buttons.push(button)
             this.contentLayer.addChild(button)
         } else {
@@ -197,52 +186,6 @@ var TestBaseScene = cc.Scene.extend({
                 this.setTestButtonTitle(sender)
             };
         };
-    },
-
-    // name       : cell的名称，用于更新数据
-    // description: 任意描述，注意不要太长，用\n换行
-    // operations : 是一个字符串数据组，生成一组button，title就是这些字符串
-    addTestCell:function(name, description, operations, handler, userData) {
-        this.cells[name] = this.cells[name] || {}
-
-        // 背景框
-        var drawNode = new cc.DrawNode()
-        drawNode.drawRect(this.currentTestButtonPosition,
-                          cc.p(this.currentTestButtonPosition.x + this.testCellSize.width, this.currentTestButtonPosition.y + this.testCellSize.height),
-                          null, 1, cc.color.BLACK)
-        this.contentLayer.addChild(drawNode)
-
-        var text = new ccui.Text(description, TestSceneFontName, 6)
-        text.setTextColor(cc.color.BLACK)
-        text.setAnchorPoint(cc.p(0, 1))
-        text.setPosition(cc.p(this.currentTestButtonPosition.x + 5, this.currentTestButtonPosition.y + this.testCellSize.height - 5))
-        this.contentLayer.addChild(text)
-        this.cells[name].description = text
-
-        // cell的资料信息
-        var startPosition = cc.p(this.currentTestButtonPosition.x + 5, this.currentTestButtonPosition.y + this.testCellSize.height / 2 - 10)
-        for (var i in operations) {
-            var title = operations[i]
-            var button = this.createTestButton(title, handler)
-            var buttonWidth = this.testCellSize.width / 3 - 5
-            button.setAnchorPoint(cc.p(0, 0.5))
-            button.setPosition(startPosition)
-            button.setContentSize(cc.size(buttonWidth, this.testButtonSize.height))
-            button.operation = title
-            button.userData = userData
-            startPosition.x += buttonWidth + 5
-            if ((i + 1) % 3 == 0) {
-                startPosition.x = this.currentTestButtonPosition.x + 5
-                startPosition.y -= this.testButtonGap.y
-            }
-            this.contentLayer.addChild(button)
-        }
-
-        this.currentTestButtonPosition.y -= this.testCellGap.y
-        if (this.currentTestButtonPosition.y < 20) {
-            this.currentTestButtonPosition.y = this.testButtonInitPosition.y
-            this.currentTestButtonPosition.x += this.testCellGap.x
-        }
     },
 
     printMessage:function (string) {

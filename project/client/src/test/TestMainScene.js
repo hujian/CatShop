@@ -12,7 +12,7 @@ var TestMainScene = TestBaseScene.extend({
 
         // 正常UI测试用例
         this.addTestButton('正常流程', this.goRoutine)
-        this.addTestButton('弹出层', this.goPopup)
+        this.addTestButton('UI测试', this.goUI)
 
         // 文字UI测试用例
         this.addTestButton('文字-主界面', this.goTestMain)
@@ -33,8 +33,8 @@ var TestMainScene = TestBaseScene.extend({
     goRoutine:function () {
     },
 
-    goPopup:function () {
-        cc.director.pushScene(new TestPopupScene())
+    goUI:function () {
+        cc.director.pushScene(new TestUIScene())
     },
 
     goTestMain:function () {
@@ -47,5 +47,5 @@ var TestMainScene = TestBaseScene.extend({
 
     goTestFood:function () {
         cc.director.pushScene(new TestFoodScene())
-    },
+    }
 });

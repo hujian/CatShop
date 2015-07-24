@@ -8,7 +8,15 @@ var TestCatScene = TestBaseScene.extend({
     ctor:function () {
         this._super()
 
-        this.catOpertaions = ["喂食", "吃药", "安抚", "打疫苗", "出售"]
+        this.catOpertaions = ["喂食", "吃药", "打疫苗", "出售"]
+
+        // 内容区
+        var layer = new TestContentCellLayer()
+        layer.setContentSize(cc.size(600, 400))
+        layer.setPosition(cc.p(180, 20))
+        layer.showBorder(true)
+        this.addChild(layer)
+        this.contentLayer = layer
 
         this.initUI()
     },
@@ -52,24 +60,26 @@ var TestCatScene = TestBaseScene.extend({
         var setting = CatSetting.getById(cat.id)
         var description = setting.name + "\n\n"
         description += this.getDescriptionString("价格", setting.money)
-        description += this.getDescriptionString("成长值", 0) + "\n"
-        description += this.getDescriptionString("健康值", cat.health)
-        description += this.getDescriptionString("饥饿值", cat.hungry)
+        description += this.getDescriptionString("成长", 0)
+        description += this.getDescriptionString("健康", cat.health)
+        description += this.getDescriptionString("疫苗", cat.hasVaccine ? "是" : "否")
+        description += this.getDescriptionString("饥饿", cat.hungry)
         return description
     },
 
     refreshCatStatusCell:function () {
-        this.clearAllContent()
+        this.contentLayer.cellCount = parseInt((User.getAllCats().length + 1) / 2)
+        this.contentLayer.clearAllContent()
 
         var cats = User.getAllCats()
         for (var i in cats) {
             var cat = cats[i]
-            this.addTestCell(cat.instanceId, this.getCatDescription(cat), this.catOpertaions, this.operate, cat)
+            this.contentLayer.addCell(cat.instanceId, this.getCatDescription(cat), this.catOpertaions, this.operate, cat)
         }
     },
 
     getDescriptionString:function (key, value) {
-        return key + ": " + value.toString() + ", "
+        return key + ": " + value.toString() + "\n"
     },
 
     createFeedPopupLayer:function (cat) {
@@ -139,7 +149,7 @@ var TestCatScene = TestBaseScene.extend({
         var cats = User.getAllCats()
         for (var i in cats) {
             var cat = cats[i]
-            this.cells[cat.instanceId].description.setString(this.getCatDescription(cat))
+            this.contentLayer.cells[cat.instanceId].description.setString(this.getCatDescription(cat))
         }
     }
 })
