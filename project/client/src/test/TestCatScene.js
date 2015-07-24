@@ -28,9 +28,9 @@ var TestCatScene = TestBaseScene.extend({
 
     startFeed:function (button, state) {
         if (state == 1) {
-            Cat.start()
+            CatManager.start()
         } else {
-            Cat.stop()
+            CatManager.stop()
         }
     },
 
@@ -88,7 +88,7 @@ var TestCatScene = TestBaseScene.extend({
         if (User.getFoodCount(foodSetting.id) > 0) {
             User.removeFood(foodSetting.id)
             User.flush()
-            cat.feed(foodSetting.id, 1)
+            CatManager.feed(cat, foodSetting.id, 1)
             this.printMessage("成功给[" + catSetting.name + "]喂食了一个[" + foodSetting.name + "], 还剩" + User.getFoodCount(foodSetting.id) + "个[" + foodSetting.name + "]")
         } else {
             this.printMessage("[" + foodSetting.name + "]数量不足")

@@ -20,6 +20,7 @@
         "src/model/Item.js",
         "src/model/Food.js",
         "src/model/Shop.js",
+        "src/model/CatManager.js",
         "src/widget/PopupBaseLayer.js",
         "src/scene/GameBaseScene.js",
         "src/scene/LoadingScene.js",

@@ -69,8 +69,11 @@ var Cat = function(id) {
     // 状态更新剩余的时间
     this.updateStatusTimeLeft = CatSetting.updateInterval
 
-    // 饥饿程度，10秒增加1，最大100
+    // 饥饿程度，0 ~ 100, 初始0
     this.hungry = 0
+
+    // 健康值, 0~100, 初始100
+    this.health = 100
 }
 
 Cat.prototype.clean = function() {
@@ -78,32 +81,9 @@ Cat.prototype.clean = function() {
 }
 
 // 喂猫
-Cat.prototype.feed = function(foodId, count) {
-    var foodSetting = FoodSetting.getById(foodId)
-    this.hungry = Math.max(0, this.hungry - foodSetting.effect *count)
-    User.flush()
+Cat.prototype.feed = function(foodValue) {
+    this.hungry = Math.max(0, this.hungry - foodValue)
 }
 
-// cat要进入养育状态，就调用该函数
-Cat.start = function() {
-    cc.director.getScheduler().schedule(Cat.update, Cat, CatSetting.updateInterval, cc.REPEAT_FOREVER, 0, false, "cat")
-}
-
-// 状态更新
-Cat.update = function(interval) {
-    var allCats = User.getAllCats()
-    for (var i in allCats) {
-        var cat = allCats[i]
-        cat.updateStatusTimeLeft -= interval
-        if (cat.updateStatusTimeLeft <= 0) {
-            cat.hungry = Math.min(100, cat.hungry + 1)
-            cat.updateStatusTimeLeft = CatSetting.updateInterval
-        }
-    }
-    User.flush()
-}
-
-// 如果要暂停养育，希望cat的所有状态暂时挺住，就掉用该函数
-Cat.stop = function() {
-    cc.director.getScheduler().unschedule(Cat.update, Cat)
-}
+// 给猫吃药
+//Cat.prototype.takeMedicine = function()
