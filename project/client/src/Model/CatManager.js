@@ -32,10 +32,34 @@ CatManager.stop = function() {
 
 // 喂食
 CatManager.feed = function(cat, foodId, count) {
+    count = count || 1
     var foodSetting = FoodSetting.getById(foodId)
     cat.feed(foodSetting.value * count)
     User.flush()
 }
 
 // 打药
-//CatManager.takeMedicine = function(cat, )
+CatManager.takeMedicine = function(cat, itemId, count) {
+    count = count || 1
+    var itemSetting = ItemSetting.getById(itemId)
+    cat.takeMedicine(itemSetting.value * count)
+    User.flush()
+}
+
+// 打疫苗
+CatManager.takeVaccine = function(cat) {
+    cat.takeVaccine()
+    User.flush()
+}
+
+// 瘟疫来袭
+CatManager.hasPlague = function() {
+    var allCats = User.getAllCats()
+    for (var i in allCats) {
+        var cat = allCats[i]
+        if (!cat.hasVaccine) {
+            cat.health = Math.max(0, cat.health - 40)
+        }
+    }
+    User.flush()
+}

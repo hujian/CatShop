@@ -74,6 +74,9 @@ var Cat = function(id) {
 
     // 健康值, 0~100, 初始100
     this.health = 100
+
+    // 是否打了疫苗
+    this.hasVaccine = false
 }
 
 Cat.prototype.clean = function() {
@@ -86,4 +89,11 @@ Cat.prototype.feed = function(foodValue) {
 }
 
 // 给猫吃药
-//Cat.prototype.takeMedicine = function()
+Cat.prototype.takeMedicine = function(healthValue) {
+    this.health = Math.min(100, this.health + healthValue)
+}
+
+// 给猫打疫苗
+Cat.prototype.takeVaccine = function() {
+    this.hasVaccine = true
+}

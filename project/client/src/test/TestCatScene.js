@@ -24,6 +24,8 @@ var TestCatScene = TestBaseScene.extend({
         button.setTitleColor(cc.color.ORANGE)
         button = this.addTestButton(['10x加速', '恢复原速'], this.speedUp, cc.p(400, 440))
         button.setTitleColor(cc.color.ORANGE)
+        button = this.addTestButton('瘟疫来袭', this.hasPlague, cc.p(500, 440))
+        button.setTitleColor(cc.color.ORANGE)
     },
 
     startFeed:function (button, state) {
@@ -42,12 +44,16 @@ var TestCatScene = TestBaseScene.extend({
         }
     },
 
+    hasPlague:function (button, state) {
+        CatManager.hasPlague()
+    },
+
     getCatDescription:function (cat) {
         var setting = CatSetting.getById(cat.id)
         var description = setting.name + "\n\n"
         description += this.getDescriptionString("价格", setting.money)
         description += this.getDescriptionString("成长值", 0) + "\n"
-        description += this.getDescriptionString("健康值", 0)
+        description += this.getDescriptionString("健康值", cat.health)
         description += this.getDescriptionString("饥饿值", cat.hungry)
         return description
     },
@@ -104,10 +110,22 @@ var TestCatScene = TestBaseScene.extend({
                 this.createFeedPopupLayer(cat)
                 break
             case this.catOpertaions[1]:
+                if (User.getMedicineCount() > 0) {
+                    CatManager.takeMedicine(cat, ItemSetting.id.medicine, 1)
+                    this.printMessage("给" + setting.name + "打了一剂药")
+                } else {
+                    this.printMessage("药品不足")
+                }
                 break
             case this.catOpertaions[2]:
                 break
             case this.catOpertaions[3]:
+                if (User.getVaccineCount() > 0) {
+                    CatManager.takeVaccine(cat)
+                    this.printMessage("给" + setting.name + "打了一剂疫苗")
+                } else {
+                    this.printMessage("疫苗不足")
+                }
                 break
             case this.catOpertaions[4]:
                 Shop.sellCat(cat)
