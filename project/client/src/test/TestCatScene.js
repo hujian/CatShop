@@ -14,7 +14,6 @@ var TestCatScene = TestBaseScene.extend({
         var layer = new TestContentCellLayer()
         layer.setContentSize(cc.size(600, 400))
         layer.setPosition(cc.p(180, 20))
-        layer.showBorder(true)
         this.addChild(layer)
         this.contentLayer = layer
 
