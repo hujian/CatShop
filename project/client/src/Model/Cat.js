@@ -66,6 +66,9 @@ var Cat = function(id) {
     this.id = id
     this.instanceId = User.getNewInstanceId()
 
+    // 状态更新剩余的时间
+    this.updateStatusTimeLeft = CatSetting.updateInterval
+
     // 饥饿程度，10秒增加1，最大100
     this.hungry = 0
 }
@@ -91,7 +94,11 @@ Cat.update = function(interval) {
     var allCats = User.getAllCats()
     for (var i in allCats) {
         var cat = allCats[i]
-        cat.hungry = Math.min(100, cat.hungry + 1)
+        cat.updateStatusTimeLeft -= interval
+        if (cat.updateStatusTimeLeft <= 0) {
+            cat.hungry = Math.min(100, cat.hungry + 1)
+            cat.updateStatusTimeLeft = CatSetting.updateInterval
+        }
     }
     User.flush()
 }
