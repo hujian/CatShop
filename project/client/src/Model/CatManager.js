@@ -6,23 +6,33 @@
 
 var CatManager = CatManager || {}
 
+// update逻辑更新的频率
+CatManager.updateInterval = 1
+
+// 用户保存到本的时间间隔
+CatManager.savingDataInterval = 10
+CatManager.savingDataLeftTime = CatManager.savingDataInterval
+
 // cat要进入养育状态，就调用该函数
 CatManager.start = function() {
-    cc.director.getScheduler().schedule(CatManager.update, CatManager, CatSetting.updateInterval, cc.REPEAT_FOREVER, 0, false, "cat")
+    cc.director.getScheduler().schedule(CatManager.update, CatManager, CatManager.updateInterval, cc.REPEAT_FOREVER, 0, false, "cat")
 }
 
 // 状态更新
 CatManager.update = function(interval) {
+    // 更新猫的状态
     var allCats = User.getAllCats()
     for (var i in allCats) {
         var cat = allCats[i]
-        cat.updateStatusTimeLeft -= interval
-        if (cat.updateStatusTimeLeft <= 0) {
-            cat.hungry = Math.min(100, cat.hungry + 1)
-            cat.updateStatusTimeLeft = CatSetting.updateInterval
-        }
+        cat.update(interval)
     }
-    User.flush()
+
+    // 保存数据
+    CatManager.savingDataLeftTime -= interval
+    if (CatManager.savingDataLeftTime <= 0) {
+        CatManager.savingDataLeftTime = CatManager.savingDataInterval
+        User.flush()
+    }
 }
 
 // 如果要暂停养育，希望cat的所有状态暂时挺住，就掉用该函数

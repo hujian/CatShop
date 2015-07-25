@@ -11,7 +11,7 @@ var AdultCatStartId = 6
 // 猫的配置类
 var CatSetting = CatSetting || {}
 
-// 猫状态更新间隔
+// 猫状态数据更新时间
 CatSetting.updateInterval = 10
 
 // 加载数据，因为是配置文件是json，需要异步加载，所以需要在scene加载出来后，手动调用该方法。
@@ -80,7 +80,16 @@ var Cat = function(id) {
 }
 
 Cat.prototype.clean = function() {
-    this.stop()
+}
+
+Cat.prototype.update = function(interval) {
+    this.updateStatusTimeLeft -= interval
+
+    // 饥饿值
+    if (this.updateStatusTimeLeft <= 0) {
+        this.hungry = Math.min(100, this.hungry + 1)
+        this.updateStatusTimeLeft = CatSetting.updateInterval
+    }
 }
 
 // 喂猫

@@ -88,7 +88,7 @@ var TestGameScene = TestBaseScene.extend({
         // 道具
         this.statutsLables['疫苗'].setString(User.getVaccineCount().toString())
         this.statutsLables['药品'].setString(User.getMedicineCount().toString())
-        this.statutsLables['毛团打扫器'].setString(User.getHairCleanerCount().toString())
+        this.statutsLables['毛团打扫器'].setString(User.getHairCleanerCount().toString() * ItemSetting.getById(ItemSetting.id.hairCleaner).value + "小时")
         this.statutsLables['排风扇'].setString(User.getFansCount().toString())
 
         // 猫

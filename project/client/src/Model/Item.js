@@ -43,4 +43,7 @@ ItemSetting.getById = function (id) {
 
 var Item = function (id) {
     this.id = id
+
+    // 状态更新剩余的时间
+    this.updateStatusTimeLeft = CatSetting.updateInterval
 }

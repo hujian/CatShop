@@ -27,11 +27,11 @@ var TestCatScene = TestBaseScene.extend({
 
         this.refreshCatStatusCell()
 
-        var button = this.addTestButton(['开始养育', '停止养育'], this.startFeed, cc.p(300, 440))
+        var button = this.addTestButton(['开始养育', '停止养育'], this.startFeed, cc.p(50, 440))
         button.setTitleColor(cc.color.ORANGE)
-        button = this.addTestButton(['10x加速', '恢复原速'], this.speedUp, cc.p(400, 440))
+        button = this.addTestButton(['10x加速', '恢复原速'], this.speedUp, cc.p(150, 440))
         button.setTitleColor(cc.color.ORANGE)
-        button = this.addTestButton('瘟疫来袭', this.hasPlague, cc.p(500, 440))
+        button = this.addTestButton('瘟疫来袭', this.hasPlague, cc.p(250, 440))
         button.setTitleColor(cc.color.ORANGE)
     },
 
@@ -73,7 +73,7 @@ var TestCatScene = TestBaseScene.extend({
         var cats = User.getAllCats()
         for (var i in cats) {
             var cat = cats[i]
-            this.contentLayer.addCell(cat.instanceId, this.getCatDescription(cat), this.catOpertaions, this.operate, cat)
+            this.contentLayer.addCell(cat.instanceId, this.getCatDescription(cat), this.catOpertaions, this.operate, this, cat)
         }
     },
 
@@ -127,8 +127,6 @@ var TestCatScene = TestBaseScene.extend({
                 }
                 break
             case this.catOpertaions[2]:
-                break
-            case this.catOpertaions[3]:
                 if (User.getVaccineCount() > 0) {
                     CatManager.takeVaccine(cat)
                     this.printMessage("给" + setting.name + "打了一剂疫苗")
@@ -136,7 +134,7 @@ var TestCatScene = TestBaseScene.extend({
                     this.printMessage("疫苗不足")
                 }
                 break
-            case this.catOpertaions[4]:
+            case this.catOpertaions[3]:
                 Shop.sellCat(cat)
                 this.printMessage("出售一只" + setting.name + ", 获的金钱" + setting.money)
                 this.refreshCatStatusCell()
