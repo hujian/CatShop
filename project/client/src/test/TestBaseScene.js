@@ -114,7 +114,7 @@ var TestBaseScene = cc.Scene.extend({
         };
     },
 
-    createTestButton:function (title, handler) {
+    createTestButton:function (title, handler, initState) {
         var button = new ccui.Button()
         button.loadTextureNormal(gameResource.global.testButton, ccui.Widget.LOCAL_TEXTURE)
         button.setTouchEnabled(true);
@@ -127,7 +127,7 @@ var TestBaseScene = cc.Scene.extend({
         button.setCapInsets(cc.Rect(7, 0, 1, 36))
         button.setScale(0.7)
         button.handler = handler
-        button.state = 1
+        button.state = initState
         button.title = title
         this.setTestButtonTitle(button)
 
@@ -136,8 +136,9 @@ var TestBaseScene = cc.Scene.extend({
 
     // 新增测试按钮
     // 如果只有一种操作状态，则title直接传字符串，否则传数组
-    addTestButton:function (title, handler, position, isSpecialButton) {
-        var button = this.createTestButton(title, handler)
+    addTestButton:function (title, handler, position, isSpecialButton, initState) {
+        initState = initState || 1
+        var button = this.createTestButton(title, handler, initState)
 
     	button.setPosition(this.currentTestButtonPosition)
         // 移动测试按钮位置

@@ -16,15 +16,14 @@ User.restore = function() {
         User.data.jsonData.money = 100000          // 初始金钱
         User.data.jsonData.maxCatCount = 3         // 商店能够养的猫的最大数
         User.data.jsonData.items = {}              // 已经购买的商品
-        User.data.jsonData.cats = []               // 玩家已经购买的猫
         User.data.jsonData.food = {}               // 玩家已经购买的食物
+        User.data.jsonData.cats = []               // 玩家已经购买的猫
         User.data.jsonData.instanceId = 0          // 玩家数据中用到的实例对象
         User.flush()
     } else {
         // 需要把恢复出来的数据的prototype挂接到相关的model上去，外面才能调用model的函数
-        this.restoreModel(User.data.jsonData.items, Item)
+        // 道具和食物不用挂，因为根本不保存单个实例
         this.restoreModel(User.data.jsonData.cats, Cat)
-        this.restoreModel(User.data.jsonData.food, Food)
     }
 }
 
@@ -91,19 +90,29 @@ User.updateMaxCatCount = function (count) {
 
 // 增加道具
 User.addItem = function (id) {
+    var setting = ItemSetting.getById(id)
     var items = User.data.jsonData.items
+
+    var value = 1
+    // 风扇和猫毛清洁器不需要记录具体的个数，要记录具体的效果数量
+    if (setting.type == ItemSetting.type.cleanMachine) {
+        value = setting.value
+    }
+
     if (items[id]) {
-        items[id] += 1
+        items[id] += value
     } else {
-        items[id] = 1
+        items[id] = value
     }
 }
 
-// 删除道具
-User.removeItem = function (id) {
+// 删除道具, value可以不传或是正数
+User.removeItem = function (id, value) {
+    value = value || 1
+
     var items = User.data.jsonData.items
     if (items[id] > 0) {
-        items[id] -= 1
+        items[id] = Math.max(0, items[id] - value)
     }
 }
 
@@ -122,7 +131,7 @@ User.getMedicineCount = function () {
     return User.getAllItems()[ItemSetting.id.medicine] || 0
 }
 
-// 获取购买的风扇数量
+// 获取购买的风扇剩余的时间，秒数
 User.getFansCount = function () {
     return User.getAllItems()[ItemSetting.id.fan] || 0
 }
@@ -158,4 +167,3 @@ User.removeFood = function (id, count) {
 User.getFoodCount = function (id) {
     return User.data.jsonData.food[id] || 0
 }
-

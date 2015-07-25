@@ -49,5 +49,10 @@ var Util = {
 
 	ccpSub:function (p1, p2) {
 		return cc.p(p1.x - p2.x, p1.y - p2.y)
+	},
+
+	// 获取时间字符串，hh:mm:ss
+	getTimeString:function (seconds) {
+		return parseInt(seconds / 3600).toString() + '小时' + parseInt(seconds % 3600 / 60).toString() + '分' + parseInt(seconds % 60).toString() + '秒'
 	}
 };

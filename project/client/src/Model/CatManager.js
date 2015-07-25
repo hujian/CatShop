@@ -13,9 +13,13 @@ CatManager.updateInterval = 1
 CatManager.savingDataInterval = 10
 CatManager.savingDataLeftTime = CatManager.savingDataInterval
 
+// 是否在养育状态
+CatManager.rasingCat = false
+
 // cat要进入养育状态，就调用该函数
 CatManager.start = function() {
     cc.director.getScheduler().schedule(CatManager.update, CatManager, CatManager.updateInterval, cc.REPEAT_FOREVER, 0, false, "cat")
+    CatManager.rasingCat = true
 }
 
 // 状态更新
@@ -25,6 +29,11 @@ CatManager.update = function(interval) {
     for (var i in allCats) {
         var cat = allCats[i]
         cat.update(interval)
+    }
+
+    // 更新风扇
+    if (User.getFansCount() > 0) {
+        User.removeItem(ItemSetting.id.fan, interval)
     }
 
     // 保存数据
@@ -38,6 +47,7 @@ CatManager.update = function(interval) {
 // 如果要暂停养育，希望cat的所有状态暂时挺住，就掉用该函数
 CatManager.stop = function() {
     cc.director.getScheduler().unschedule(CatManager.update, CatManager)
+    CatManager.rasingCat = false
 }
 
 // 喂食

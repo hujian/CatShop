@@ -23,16 +23,28 @@ var TestCatScene = TestBaseScene.extend({
     initUI:function () {
         this.printMessage("这里是猫咪生活的场所，请妥善照顾好他们。")
 
-        this.testButtonInitPosition.y -= 60
-
         this.refreshCatStatusCell()
 
-        var button = this.addTestButton(['开始养育', '停止养育'], this.startFeed, cc.p(50, 440))
+        // 操作菜单
+        var state = CatManager.rasingCat ? 2 : 1
+        var button = this.addTestButton(['开始养育', '停止养育'], this.startFeed, cc.p(240, 460), true, state)
         button.setTitleColor(cc.color.ORANGE)
-        button = this.addTestButton(['10x加速', '恢复原速'], this.speedUp, cc.p(150, 440))
+
+        state = CatSetting.updateInterval == 1 ? 2 : 1
+        button = this.addTestButton(['10x加速', '恢复原速'], this.speedUp, cc.p(340, 460), true, state)
         button.setTitleColor(cc.color.ORANGE)
-        button = this.addTestButton('瘟疫来袭', this.hasPlague, cc.p(250, 440))
+
+        button = this.addTestButton('瘟疫来袭', this.hasPlague, cc.p(440, 460), true)
         button.setTitleColor(cc.color.ORANGE)
+
+        // 环境变量
+        var label = new ccui.Text("", TestSceneFontName, 12)
+        label.setTextColor(cc.color.BLACK)
+        label.setPosition(cc.p(190, 430))
+        label.setAnchorPoint(cc.p(0, 0.5))
+        label.getTextHorizontalAlignment(cc.TEXT_ALIGNMENT_LEFT)
+        this.addChild(label)
+        this.evironmentLabel = label
     },
 
     startFeed:function (button, state) {
@@ -148,5 +160,6 @@ var TestCatScene = TestBaseScene.extend({
             var cat = cats[i]
             this.contentLayer.cells[cat.instanceId].description.setString(this.getCatDescription(cat))
         }
+        this.evironmentLabel.setString("风扇: " + Util.getTimeString(User.getFansCount()) + ", 毛团清理: " + User.getHairCleanerCount())
     }
 })
