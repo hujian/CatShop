@@ -15,7 +15,7 @@ var CatSetting = CatSetting || {}
 CatSetting.updateInterval = 10
 
 // 掉毛概率
-CatSetting.dropHairprobability = 0.2
+CatSetting.dropHairprobability = 0.05
 
 // 猫相关事件
 CatSetting.dropHairEvent = "cat_drop_hair_event"
@@ -103,6 +103,9 @@ Cat.prototype.update = function(interval) {
             event.setUserData(this);
             cc.eventManager.dispatchEvent(event);
         }
+
+        // 健康值
+        this.health = Math.max(0, Math.min(100, this.health + CatManager.getHealthValue()))
     }
 }
 

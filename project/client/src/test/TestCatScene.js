@@ -192,6 +192,7 @@ var TestCatScene = TestBaseScene.extend({
 
         var string = "风扇: " + Util.getTimeString(User.getFansCount())
         string += (User.getHairCount() > 0 ? ", 猫毛团: " + User.getHairCount() : ", 猫毛清理器: " + User.getHairCleanerCount())
+        string +=  ", 健康值: " + CatManager.getHealthValue().toString()
         this.evironmentLabel.setString(string)
     }
 })

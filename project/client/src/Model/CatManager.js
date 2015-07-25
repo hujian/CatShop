@@ -96,3 +96,10 @@ CatManager.clearHair = function() {
     }
     return User.getHairCount() == 0
 }
+
+// 计算当前猫屋的健康值
+CatManager.getHealthValue = function() {
+    var healthValue = User.getFansCount() > 0 ? 1 : -1
+    healthValue -= (User.getHairCount() > 0 ? parseInt(User.getHairCount() / 5) : -1)
+    return healthValue
+}
