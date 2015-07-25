@@ -45,11 +45,40 @@ var TestCatScene = TestBaseScene.extend({
         label.getTextHorizontalAlignment(cc.TEXT_ALIGNMENT_LEFT)
         this.addChild(label)
         this.evironmentLabel = label
+
+        // 接收掉毛事件
+        this.dropHairListenter = cc.EventListener.create({
+            event: cc.EventListener.CUSTOM,
+            eventName: CatSetting.dropHairEvent,
+            callback: function(event) {
+                User.updateHairCount(User.getHairCount() + 1)
+                var ret = CatManager.clearHair()
+                var catSetting = CatSetting.getById(event.getUserData().id)
+                this.printMessage(catSetting.name + "掉了一团猫毛, " + (ret ? "已被清理" : "请赶快清理，保持环境干净。"))
+            }.bind(this)
+        });
+        cc.eventManager.addListener(this.dropHairListenter, 1);
+    },
+
+    onEnter:function () {
+        this._super()
+    },
+
+    onExit:function () {
+        this._super()
+
+        cc.eventManager.removeListener(this.dropHairListenter)
     },
 
     startFeed:function (button, state) {
         if (state == 1) {
             CatManager.start()
+
+            // 每次进来都要清理
+            if (User.getHairCount() > 0 && User.getHairCleanerCount() > 0) {
+                this.printMessage("清理了" + Math.min(User.getHairCount(), User.getHairCleanerCount()).toString() + "团猫毛")
+                CatManager.clearHair()
+            }
         } else {
             CatManager.stop()
         }
@@ -160,6 +189,9 @@ var TestCatScene = TestBaseScene.extend({
             var cat = cats[i]
             this.contentLayer.cells[cat.instanceId].description.setString(this.getCatDescription(cat))
         }
-        this.evironmentLabel.setString("风扇: " + Util.getTimeString(User.getFansCount()) + ", 毛团清理: " + User.getHairCleanerCount())
+
+        var string = "风扇: " + Util.getTimeString(User.getFansCount())
+        string += (User.getHairCount() > 0 ? ", 猫毛团: " + User.getHairCount() : ", 猫毛清理器: " + User.getHairCleanerCount())
+        this.evironmentLabel.setString(string)
     }
 })

@@ -19,6 +19,7 @@ User.restore = function() {
         User.data.jsonData.food = {}               // 玩家已经购买的食物
         User.data.jsonData.cats = []               // 玩家已经购买的猫
         User.data.jsonData.instanceId = 0          // 玩家数据中用到的实例对象
+        User.data.jsonData.catHairCount = 0        // 猫屋猫毛团的数量
         User.flush()
     } else {
         // 需要把恢复出来的数据的prototype挂接到相关的model上去，外面才能调用model的函数
@@ -166,4 +167,14 @@ User.removeFood = function (id, count) {
 // 获取食物的数量
 User.getFoodCount = function (id) {
     return User.data.jsonData.food[id] || 0
+}
+
+// 获取猫毛团的数量
+User.getHairCount = function () {
+    return User.data.jsonData.catHairCount || 0
+}
+
+// 更新猫毛团的数量
+User.updateHairCount = function (count) {
+    User.data.jsonData.catHairCount = count
 }

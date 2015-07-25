@@ -14,6 +14,13 @@ var CatSetting = CatSetting || {}
 // 猫状态数据更新时间
 CatSetting.updateInterval = 10
 
+// 掉毛概率
+CatSetting.dropHairprobability = 0.2
+
+// 猫相关事件
+CatSetting.dropHairEvent = "cat_drop_hair_event"
+
+
 // 加载数据，因为是配置文件是json，需要异步加载，所以需要在scene加载出来后，手动调用该方法。
 CatSetting.load = function () {
     if (!this.adult || !this.baby) {
@@ -85,10 +92,17 @@ Cat.prototype.clean = function() {
 Cat.prototype.update = function(interval) {
     this.updateStatusTimeLeft -= interval
 
-    // 饥饿值
     if (this.updateStatusTimeLeft <= 0) {
+        // 饥饿值
         this.hungry = Math.min(100, this.hungry + 1)
         this.updateStatusTimeLeft = CatSetting.updateInterval
+
+        // 掉毛
+        if (Math.random() < CatSetting.dropHairprobability) {
+            var event = new cc.EventCustom(CatSetting.dropHairEvent);
+            event.setUserData(this);
+            cc.eventManager.dispatchEvent(event);
+        }
     }
 }
 

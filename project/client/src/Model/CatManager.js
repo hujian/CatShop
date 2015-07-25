@@ -22,6 +22,12 @@ CatManager.start = function() {
     CatManager.rasingCat = true
 }
 
+// 如果要暂停养育，希望cat的所有状态暂时挺住，就掉用该函数
+CatManager.stop = function() {
+    cc.director.getScheduler().unschedule(CatManager.update, CatManager)
+    CatManager.rasingCat = false
+}
+
 // 状态更新
 CatManager.update = function(interval) {
     // 更新猫的状态
@@ -42,12 +48,6 @@ CatManager.update = function(interval) {
         CatManager.savingDataLeftTime = CatManager.savingDataInterval
         User.flush()
     }
-}
-
-// 如果要暂停养育，希望cat的所有状态暂时挺住，就掉用该函数
-CatManager.stop = function() {
-    cc.director.getScheduler().unschedule(CatManager.update, CatManager)
-    CatManager.rasingCat = false
 }
 
 // 喂食
@@ -82,4 +82,17 @@ CatManager.hasPlague = function() {
         }
     }
     User.flush()
+}
+
+// 最大可能的清理猫毛
+// 清理干净了，返回true
+CatManager.clearHair = function() {
+    var hair = User.getHairCount()
+    var cleaner = User.getHairCleanerCount()
+    if (hair > 0 && cleaner > 0) {
+        var count = Math.min(User.get)
+        User.removeItem(ItemSetting.id.hairCleaner, count)
+        User.updateHairCount(hair - count)
+    }
+    return User.getHairCount() == 0
 }
