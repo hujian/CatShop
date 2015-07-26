@@ -126,6 +126,15 @@ var TestContentCellLayer = GameBaseLayer.extend({
             this.scrollView.addChild(button)
         }
 
+        // 状态
+        text = new ccui.Text("", TestSceneFontName, 10)
+        text.setTextColor(cc.color.BLACK)
+        text.setAnchorPoint(cc.p(0, 1))
+        text.setPosition(cc.p(this.currentCellPosition.x + 5, this.currentCellPosition.y - this.cellSize.height + 30))
+        this.scrollView.addChild(text)
+        this.cells[name].status = text
+
+
         this.currentCellPosition.x += this.cellCap.width
         if (this.currentCellPosition.x + this.cellSize.width > this.getContentSize().width) {
             this.currentCellPosition.x = this.margin.width

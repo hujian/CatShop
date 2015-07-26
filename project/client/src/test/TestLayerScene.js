@@ -49,7 +49,9 @@ var TestLayerScene = TestBaseScene.extend({
         this.contentLayer.clearAllContent()
         for (var i = 0; i < this.cellContent.length; i++) {
             var content = this.cellContent[i]
-            this.contentLayer.addCell('猫', content, ['关闭', '删除'], this.contentLayerOperation, this, content)
+            var name = '猫' + i.toString()
+            this.contentLayer.addCell(name, content, ['关闭', '删除'], this.contentLayerOperation, this, content)
+            this.contentLayer.cells[name].status.setString('状态真的好！')
         }
     },
 
