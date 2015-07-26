@@ -20,7 +20,6 @@ CatSetting.dropHairprobability = 0.05
 // 猫相关事件
 CatSetting.dropHairEvent = "cat_drop_hair_event"
 
-
 // 加载数据，因为是配置文件是json，需要异步加载，所以需要在scene加载出来后，手动调用该方法。
 CatSetting.load = function () {
     if (!this.adult || !this.baby) {
@@ -87,13 +86,23 @@ var Cat = function(id) {
 
     // 是否打了疫苗
     this.vaccine = false
+
+    // 某一个状态持续的时间
+    this.stateLastingTime = 0
 }
 
-Cat.prototype.clean = function() {
-}
+// 猫的状态
+Cat.state = {}
+Cat.state.standing = "standing"
+Cat.state.walking = "walking"
+Cat.state.sleeping = "sleeping"
+Cat.state.eating = "eating"
+Cat.state.lastingTime = 5
 
+// 更新猫的状态
 Cat.prototype.update = function(interval) {
     this.updateStatusTimeLeft -= interval
+    this.stateLastingTime = this.getStateLastingTime() + interval
 
     if (this.updateStatusTimeLeft <= 0) {
         // 饥饿值
@@ -112,7 +121,24 @@ Cat.prototype.update = function(interval) {
 
         // 成长值
         this.growth = Math.min(100, this.growth + this.getGrowthSpeed())
+
+        // 核心的猫咪AI
+        var fsm = this.getFSM()
+        if (this.stateLastingTime > Cat.state.lastingTime) {
+            if (fsm.current == Cat.state.standing) {
+                fsm.walk()
+            } else if (fsm.current == Cat.state.walking) {
+                fsm.eat()
+            } else if (fsm.current == Cat.state.eating) {
+                fsm.sleep()
+            } else if (fsm.current == Cat.state.sleeping) {
+                fsm.stand()
+            }
+        }
     }
+}
+
+Cat.prototype.clean = function() {
 }
 
 // 喂猫
@@ -163,4 +189,34 @@ Cat.prototype.getHealth = function() {
 Cat.prototype.getCatGrowth = function() {
     this.growth = this.growth || 0
     return this.growth
+}
+
+Cat.prototype.getStateLastingTime = function() {
+    this.stateLastingTime = this.stateLastingTime || 0
+    return this.stateLastingTime
+}
+
+// 状态机
+Cat.prototype.getFSM = function() {
+    if (!this.fsm) {
+        this.fsm = StateMachine.create({
+            initial: Cat.state.standing,
+            events: [
+                { name: 'walk',  from: Cat.state.standing,  to: Cat.state.walking},
+                { name: 'sleep',  from: [Cat.state.standing, Cat.state.walking, Cat.state.eating], to: Cat.state.sleeping},
+                { name: 'eat',  from: "*", to: Cat.state.eating},
+                { name: 'stand', from: "*", to: Cat.state.standing}
+            ],
+            callbacks: {
+                onstate : function(event, from, to, msg) {
+                    this.stateLastingTime = 0
+                }
+            }
+        });
+    }
+    return this.fsm
+}
+
+Cat.prototype.getState = function() {
+    return this.getFSM().current
 }

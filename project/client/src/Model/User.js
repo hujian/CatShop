@@ -7,6 +7,8 @@
 var User = User || {}
 
 User.data = new DataModel()
+
+// 保存到本地数据的key
 User.dataSavingKey = "User_Data_Saving_key"
 
 // 从本地缓存获取用户数据
@@ -36,7 +38,7 @@ User.restoreModel = function(dataArray, model) {
 
 // 保存到本地缓存
 User.flush = function() {
-    User.data.saveDataToLocalStorage(User.dataSavingKey)
+    User.data.saveDataToLocalStorage(User.dataSavingKey, ['fsm'])
 }
 
 // 获取实例id，数据会缓存的，不会重复

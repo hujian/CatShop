@@ -104,6 +104,7 @@ var TestCatScene = TestBaseScene.extend({
         description += this.getDescriptionString("健康", cat.getHealth())
         description += this.getDescriptionString("疫苗", cat.hasVaccine() ? "是" : "否")
         description += this.getDescriptionString("饥饿", cat.getHungry())
+        description += this.getDescriptionString("状态", cat.getState())
         return description
     },
 
@@ -187,12 +188,12 @@ var TestCatScene = TestBaseScene.extend({
         var cats = User.getAllCats()
         for (var i in cats) {
             var cat = cats[i]
-            this.contentLayer.cells[cat.instanceId].description.setString(this.getCatDescription(cat))
+            this.contentLayer.updateCellDescription(cat.instanceId, this.getCatDescription(cat))
         }
 
-        var string = "风扇: " + Util.getTimeString(User.getFansCount())
+        var string = "风扇: " + (User.getFansCount() > 0 ? Util.getTimeString(User.getFansCount()) : "无")
         string += (User.getHairCount() > 0 ? ", 猫毛团: " + User.getHairCount() : ", 猫毛清理器: " + User.getHairCleanerCount())
-        string +=  ", 健康值: " + CatManager.getHealthValue().toString()
+        string +=  ", 环境健康: " + CatManager.getHealthValue().toString()
         this.evironmentLabel.setString(string)
     }
 })

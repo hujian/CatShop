@@ -40,10 +40,22 @@ var DataModel = cc.Class.extend({
     },
 
     // 保存数据到local storage
-    saveDataToLocalStorage: function(key) {
+    saveDataToLocalStorage: function(key, excludeKeys) {
         if (key) {
             try {
-                cc.sys.localStorage.setItem(key, JSON.stringify(this.jsonData))
+                // 哪些key需要被排除，不需要保存到磁盘
+                if (excludeKeys) {
+                    var excludeFunc = function (key, value) {
+                        var index = excludeKeys.indexOf(key)
+                        if (index > -1) {
+                            return undefined
+                        } else {
+                            return value
+                        }
+                    }
+                }
+
+                cc.sys.localStorage.setItem(key, JSON.stringify(this.jsonData, excludeFunc))
                 cc.log("save data to local storage, key: [" + key + "]")
             } catch (e) {
                 cc.log("save data to local storage failed, key: [" + key + "]")
