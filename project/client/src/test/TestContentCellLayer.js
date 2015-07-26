@@ -140,5 +140,19 @@ var TestContentCellLayer = GameBaseLayer.extend({
             this.currentCellPosition.x = this.margin.width
             this.currentCellPosition.y -= this.cellCap.height
         }
+    },
+
+    updateCellDescription:function(cellName, text) {
+        var cell = this.cells[cellName]
+        if (cell) {
+            cell.description.setString(text)
+        }
+    },
+
+    updateCellStatus:function(cellName,  text) {
+        var cell = this.cells[cellName]
+        if (cell) {
+            cell.status.setString(text)
+        }
     }
 })

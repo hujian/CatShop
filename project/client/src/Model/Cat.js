@@ -82,8 +82,11 @@ var Cat = function(id) {
     // 健康值, 0~100, 初始100
     this.health = 100
 
+    // 成长值，0~100，初始0
+    this.growth = 0
+
     // 是否打了疫苗
-    this.hasVaccine = false
+    this.vaccine = false
 }
 
 Cat.prototype.clean = function() {
@@ -106,6 +109,9 @@ Cat.prototype.update = function(interval) {
 
         // 健康值
         this.health = Math.max(0, Math.min(100, this.health + CatManager.getHealthValue()))
+
+        // 成长值
+        this.growth = Math.min(100, this.growth + this.getGrowthSpeed())
     }
 }
 
@@ -121,5 +127,40 @@ Cat.prototype.takeMedicine = function(healthValue) {
 
 // 给猫打疫苗
 Cat.prototype.takeVaccine = function() {
-    this.hasVaccine = true
+    this.vaccine = true
+}
+
+// 获取猫的成长加速度
+Cat.prototype.getGrowthSpeed = function() {
+    var speed = 0
+
+    var health = this.getHealth()
+    if (health == 100) {
+        speed = 1
+    } else if (health > 80){
+        speed = 0.5
+    }
+
+    return speed
+}
+
+// 属性get方法，注意第一句话，是否为了防止，升级代码时，该属性在上一个版本没有
+Cat.prototype.hasVaccine = function() {
+    this.vaccine = this.vaccine || false
+    return this.vaccine == true
+}
+
+Cat.prototype.getHungry = function() {
+    this.hungry = this.hungry || 0
+    return this.hungry
+}
+
+Cat.prototype.getHealth = function() {
+    this.health = this.health || 0
+    return this.health
+}
+
+Cat.prototype.getCatGrowth = function() {
+    this.growth = this.growth || 0
+    return this.growth
 }

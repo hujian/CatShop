@@ -25,7 +25,7 @@ var TestMainScene = TestBaseScene.extend({
         // temp in developing
         if (cc.isDebug && !this.autoRun) {
             this.autoRun = true
-            this.goUI()
+            this.goTestCat()
         }
     },
 

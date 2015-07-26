@@ -100,10 +100,10 @@ var TestCatScene = TestBaseScene.extend({
         var setting = CatSetting.getById(cat.id)
         var description = setting.name + "\n\n"
         description += this.getDescriptionString("价格", setting.money)
-        description += this.getDescriptionString("成长", 0)
-        description += this.getDescriptionString("健康", cat.health)
-        description += this.getDescriptionString("疫苗", cat.hasVaccine ? "是" : "否")
-        description += this.getDescriptionString("饥饿", cat.hungry)
+        description += this.getDescriptionString("成长", cat.getCatGrowth())
+        description += this.getDescriptionString("健康", cat.getHealth())
+        description += this.getDescriptionString("疫苗", cat.hasVaccine() ? "是" : "否")
+        description += this.getDescriptionString("饥饿", cat.getHungry())
         return description
     },
 

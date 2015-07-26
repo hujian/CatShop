@@ -77,7 +77,7 @@ CatManager.hasPlague = function() {
     var allCats = User.getAllCats()
     for (var i in allCats) {
         var cat = allCats[i]
-        if (!cat.hasVaccine) {
+        if (!cat.hasVaccine()) {
             cat.health = Math.max(0, cat.health - 40)
         }
     }
