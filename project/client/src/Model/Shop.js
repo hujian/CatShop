@@ -15,7 +15,7 @@ Shop.error.tooMuchCat = 2
 Shop.buyCat = function (catId) {
     var cat = null
 
-    if (User.getAllCats().length < User.getMaxCatCount) {
+    if (User.getAllCats().length < User.getMaxCatCount()) {
         var catSetting = CatSetting.getById(catId)
         if (catSetting) {
             var moneyLeft = User.getMoney() - catSetting.money

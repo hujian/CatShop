@@ -53,7 +53,7 @@ var TestGameScene = TestBaseScene.extend({
 
     addItemButtons:function () {
         this.currentTestButtonPosition = cc.p(this.testButtonInitPosition.x + this.testButtonGap.x, this.testButtonInitPosition.y)
-        
+
         var label = new ccui.Text("道具", TestSceneFontName, 12)
         label.setTextColor(cc.color.MAGENTA)
         label.setPosition(cc.p(this.currentTestButtonPosition.x, this.currentTestButtonPosition.y + 30))
