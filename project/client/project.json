@@ -31,7 +31,6 @@
         "src/test/TestPopupLayer.js",
         "src/test/TestGameScene.js",
         "src/test/TestCatScene.js",
-        "src/test/TestFoodScene.js",
         "src/test/TestPopupScene.js",
         "src/test/TestLayerScene.js",
         "src/test/TestUIScene.js",

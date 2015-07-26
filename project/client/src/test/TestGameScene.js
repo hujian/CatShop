@@ -30,6 +30,14 @@ var TestGameScene = TestBaseScene.extend({
             b.setEnabled(!item.invalid)
         }
 
+        // 购买食物
+        var foodSetting = FoodSetting.getAll()
+        for (var i in foodSetting) {
+            var setting = foodSetting[i]
+            var button = this.addTestButton(setting.name + " = " + setting.money, this.buyFood)
+            button.food = setting
+        }
+
         // 当前商店的状况
         this.printStatus('商店', ['资金', '疫苗', '药品', '毛团打扫器', '排风扇', '猫', '猫数量上限'])
 
@@ -43,10 +51,8 @@ var TestGameScene = TestBaseScene.extend({
         this.printStatus('食物', foodName)
 
         // 跳转到猫咪养殖页面
-        this.addTestButton('跳转到猫咪培育室', this.goCatScene, cc.p(250, 400), true)
-
-        // 跳转到猫食工厂页面
-        this.addTestButton('跳转到猫食工厂', this.goFoodScene, cc.p(350, 400), true)
+        var button = this.addTestButton('跳转到猫屋', this.goCatScene, cc.p(250, 400), true)
+        button.setTitleColor(cc.color.ORANGE)
     },
 
     getItemDescription:function (item) {
@@ -78,6 +84,16 @@ var TestGameScene = TestBaseScene.extend({
             this.printMessage("购买了" + item.name)
         } else {
             this.printMessage("资金不足以购买" + item.name)
+        }
+    },
+
+    buyFood: function (button) {
+        var food = button.food
+        if (Shop.buyFood(food.id)) {
+            this.printMessage("开始生产" + food.name)
+            this.printMessage("生产" + food.name + "成功")
+        } else {
+            this.printMessage("金钱不够..")
         }
     },
 
