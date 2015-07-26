@@ -15,28 +15,11 @@ var TestGameScene = TestBaseScene.extend({
         this.printMessage("欢迎进入商店，请选择你要买的商品。")
 
         // 购买猫仔
-        var babies = CatSetting.getAllBaby()
-        for (var i in babies) {
-            var b = this.addTestButton(babies[i].name + " = " + babies[i].money, this.buyCat);
-            b.cat = babies[i]
-        }
-
+        this.addCatButtons()
         // 购买道具
-        var items = Shop.getAllItem()
-        for (var i in items) {
-            var item = items[i]
-            var b = this.addTestButton(this.getItemDescription(item), this.buyItem)
-            b.item = item
-            b.setEnabled(!item.invalid)
-        }
-
+        this.addItemButtons()
         // 购买食物
-        var foodSetting = FoodSetting.getAll()
-        for (var i in foodSetting) {
-            var setting = foodSetting[i]
-            var button = this.addTestButton(setting.name + " = " + setting.money, this.buyFood)
-            button.food = setting
-        }
+        this.addFoodButtons()
 
         // 当前商店的状况
         this.printStatus('商店', ['资金', '疫苗', '药品', '毛团打扫器', '排风扇', '猫', '猫数量上限'])
@@ -48,27 +31,76 @@ var TestGameScene = TestBaseScene.extend({
             var name = allFood[i].name
             foodName.push(name)
         }
-        this.printStatus('食物', foodName)
+        this.printStatus('猫食', foodName)
 
         // 跳转到猫咪养殖页面
         var button = this.addTestButton('跳转到猫屋', this.goCatScene, cc.p(250, 400), true)
         button.setTitleColor(cc.color.ORANGE)
     },
 
+    addCatButtons:function () {
+        var label = new ccui.Text("猫仔", TestSceneFontName, 12)
+        label.setTextColor(cc.color.MAGENTA)
+        label.setPosition(cc.p(this.currentTestButtonPosition.x, this.currentTestButtonPosition.y + 30))
+        this.addChild(label)
+
+        var babies = CatSetting.getAllBaby()
+        for (var i in babies) {
+            var b = this.addTestButton(babies[i].name + "  " + babies[i].money + "$", this.buyCat);
+            b.cat = babies[i]
+        }
+    },
+
+    addItemButtons:function () {
+        this.currentTestButtonPosition = cc.p(this.testButtonInitPosition.x + this.testButtonGap.x, this.testButtonInitPosition.y)
+        
+        var label = new ccui.Text("道具", TestSceneFontName, 12)
+        label.setTextColor(cc.color.MAGENTA)
+        label.setPosition(cc.p(this.currentTestButtonPosition.x, this.currentTestButtonPosition.y + 30))
+        this.addChild(label)
+
+        var items = Shop.getAllItem()
+        for (var i in items) {
+            var item = items[i]
+            var b = this.addTestButton(this.getItemDescription(item), this.buyItem)
+            b.item = item
+            b.setEnabled(!item.invalid)
+        }
+    },
+
+    addFoodButtons:function () {
+        this.currentTestButtonPosition = cc.p(this.testButtonInitPosition.x + this.testButtonGap.x * 2, this.testButtonInitPosition.y)
+
+        var label = new ccui.Text("猫食", TestSceneFontName, 12)
+        label.setTextColor(cc.color.MAGENTA)
+        label.setPosition(cc.p(this.currentTestButtonPosition.x, this.currentTestButtonPosition.y + 30))
+        this.addChild(label)
+
+        var foodSetting = FoodSetting.getAll()
+        for (var i in foodSetting) {
+            var setting = foodSetting[i]
+            var button = this.addTestButton(setting.name + "  " + setting.money + "$", this.buyFood)
+            button.food = setting
+        }
+    },
+
     getItemDescription:function (item) {
         if (item.invalid) {
             return item.name + " 已购买"
         } else {
-            return item.name + " = " + item.money
+            return item.name + "  " + item.money + "$"
         }
     },
 
     buyCat:function(button) {
-        var cat = button.cat
-        if (Shop.buyCat(cat.id)) {
-            this.printMessage("购买了一只" + cat.name)
-        } else {
-            this.printMessage("资金不足以购买一只" + cat.name)
+        var catSetting = button.cat
+        var cat = Shop.buyCat(catSetting.id)
+        if (cat instanceof Cat) {
+            this.printMessage("购买了一只" + catSetting.name)
+        } else if (cat == Shop.error.notEnoughMoney) {
+            this.printMessage("资金不足以购买一只" + catSetting.name)
+        } else if (cat == Shop.error.tooMuchCat) {
+            this.printMessage("已经到达猫屋的上限，请升级猫屋!")
         }
     },
 

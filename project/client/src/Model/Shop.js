@@ -6,18 +6,29 @@
 
 var Shop = Shop || {}
 
+// 买猫可能会有多种原因失败
+Shop.error = {}
+Shop.error.notEnoughMoney = 1
+Shop.error.tooMuchCat = 2
+
 // 购买猫，传入的是猫种类id
 Shop.buyCat = function (catId) {
     var cat = null
 
-    var catSetting = CatSetting.getById(catId)
-    if (catSetting) {
-        var moneyLeft = User.getMoney() - catSetting.money
-        if (moneyLeft >= 0) {
-            User.updateMoney(moneyLeft)
-            cat = User.addCat(catId)
-            User.flush()
+    if (User.getAllCats().length < User.getMaxCatCount) {
+        var catSetting = CatSetting.getById(catId)
+        if (catSetting) {
+            var moneyLeft = User.getMoney() - catSetting.money
+            if (moneyLeft >= 0) {
+                User.updateMoney(moneyLeft)
+                cat = User.addCat(catId)
+                User.flush()
+            } else {
+                cat = Shop.error.notEnoughMoney
+            }
         }
+    } else {
+        cat = Shop.error.tooMuchCat
     }
 
     return cat
