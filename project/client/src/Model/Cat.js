@@ -17,6 +17,18 @@ CatSetting.updateInterval = 10
 // 掉毛概率
 CatSetting.dropHairprobability = 0.05
 
+// 猫进化表
+CatSetting.evelveSetting = {}
+CatSetting.evelveSetting.probablity = {
+    // 进化等级 = 进化概率
+    1 : 1,
+    3 : 0.2,
+    5 : 0.2,
+    7 : 0.2,
+    9 : 0.2,
+    10 : 1
+}
+
 // 猫相关事件
 CatSetting.dropHairEvent = "cat_drop_hair_event"
 
@@ -30,6 +42,16 @@ CatSetting.load = function () {
         // 成猫的配置数据
         this.adult = new DataModel()
         this.adult.loadDataFromJson(gameResource.global.cat_setting)
+
+        // 成猫的进化配置
+        for (var i in this.adult.jsonData) {
+            var setting = this.adult.jsonData[i]
+            var parentId = setting.parentId
+            if (!CatSetting.evelveSetting[parentId]) {
+                CatSetting.evelveSetting[parentId] = []
+            }
+            CatSetting.evelveSetting[parentId].push(setting.id)
+        }
     }
 }
 
@@ -119,8 +141,26 @@ Cat.prototype.update = function(interval) {
         // 健康值
         this.health = Math.max(0, Math.min(100, this.health + CatManager.getHealthValue()))
 
-        // 成长值
+        // 成长
+        var oldGrowthLevel = parseInt(this.growth / 10)
         this.growth = Math.min(100, this.growth + this.getGrowthSpeed())
+        var newGrowthLevel = parseInt(this.growth / 10)
+        // 进化
+        if (newGrowthLevel > oldGrowthLevel) {
+            var setting = CatSetting.evelveSetting
+            if (setting.probablity[newGrowthLevel]) {
+                if (Math.random() < setting.probablity[newGrowthLevel]) { // 是否能够进化
+                    var children = setting[this.id]
+                    if (children) {
+                        if (children.length > 1) {
+                            this.id = children[Util.getRandomInt(0, children.length)]
+                        } else {
+                            this.id = children[0]
+                        }
+                    }
+                }
+            }
+        }
 
         // 核心的猫咪AI
         var fsm = this.getFSM()

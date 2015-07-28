@@ -104,8 +104,21 @@ var TestCatScene = TestBaseScene.extend({
         description += this.getDescriptionString("健康", cat.getHealth())
         description += this.getDescriptionString("疫苗", cat.hasVaccine() ? "是" : "否")
         description += this.getDescriptionString("饥饿", cat.getHungry())
-        description += this.getDescriptionString("状态", cat.getState())
+        description += this.getDescriptionString("状态", this.getCatStateChinese(cat.getState()))
         return description
+    },
+
+    getCatStateChinese:function (state) {
+        switch (state) {
+            case Cat.state.standing :
+                return '站立'
+            case Cat.state.walking :
+                return '散步'
+            case Cat.state.eating :
+                return '吃饭'
+            case Cat.state.sleeping :
+                return '睡觉'
+        }
     },
 
     refreshCatStatusCell:function () {

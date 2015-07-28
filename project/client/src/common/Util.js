@@ -54,5 +54,10 @@ var Util = {
 	// 获取时间字符串，hh:mm:ss
 	getTimeString:function (seconds) {
 		return parseInt(seconds / 3600).toString() + '小时' + parseInt(seconds % 3600 / 60).toString() + '分' + parseInt(seconds % 60).toString() + '秒'
+	},
+
+	// 获取[min, max)的随机整数
+	getRandomInt:function (min, max) {
+		return parseInt(Math.random() * (max - min) + min)
 	}
 };
