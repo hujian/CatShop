@@ -97,13 +97,13 @@ var Cat = function(id) {
     // 状态更新剩余的时间
     this.updateStatusTimeLeft = CatSetting.updateInterval
 
-    // 饥饿程度，0 ~ 100, 初始0
-    this.hungry = 0
+    // 饥饿程度
+    this.hungry = 50
 
-    // 健康值, 0~100, 初始100
-    this.health = 100
+    // 健康值
+    this.health = 50
 
-    // 成长值，0~100，初始0
+    // 成长值
     this.growth = 0
 
     // 是否打了疫苗
@@ -139,7 +139,7 @@ Cat.prototype.update = function(interval) {
         }
 
         // 健康值
-        this.health = Math.max(0, Math.min(100, this.health + CatManager.getHealthValue()))
+        this.health = Math.max(0, Math.min(100, this.health + this.getHealthSpeed()))
 
         // 成长
         var oldGrowthLevel = parseInt(this.growth / 10)
@@ -200,11 +200,36 @@ Cat.prototype.takeVaccine = function() {
 Cat.prototype.getGrowthSpeed = function() {
     var speed = 0
 
+    // 健康加成
     var health = this.getHealth()
-    if (health == 100) {
-        speed = 1
-    } else if (health > 80){
-        speed = 0.5
+    if (health > 80) {
+        speed += 1
+    } else if (health > 60){
+        speed += 0.5
+    }
+
+    // 饥饿影响
+    var hungry = this.getHungry()
+    if (hungry <= 40) {
+        speed += 1
+    } else if (hungry <= 80) {
+        speed += 0.5
+    }
+
+    return speed
+}
+
+// 根据当前环境，计算健康变化量
+Cat.prototype.getHealthSpeed = function() {
+    // 猫屋的环境值
+    var speed = CatManager.getHealthValue()
+
+    // 饥饿影响
+    var hungry = this.getHungry()
+    if (hungry > 60) {
+        speed -= 0.5
+    } else if (hungry <= 20) {
+        speed += 0.5
     }
 
     return speed
