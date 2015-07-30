@@ -25,7 +25,7 @@ var DataModel = cc.Class.extend({
     // 如果local storage已经有数据的话，返回true，否则返回false
     loadDataFromLocalStorage: function (key) {
         if (key) {
-            var jsonString = cc.sys.localStorage.getItem(key)
+            var jsonString = this.getDataStringFromLocalStorage(key)
             if (jsonString) {
                 this.jsonData = JSON.parse(jsonString)
                 if (this.jsonData) {
@@ -37,6 +37,10 @@ var DataModel = cc.Class.extend({
             }
         }
         return false
+    },
+
+    getDataStringFromLocalStorage:function (key) {
+        return cc.sys.localStorage.getItem(key)
     },
 
     // 保存数据到local storage

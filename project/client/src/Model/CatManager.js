@@ -13,6 +13,10 @@ CatManager.updateInterval = 1
 CatManager.savingDataInterval = 10
 CatManager.savingDataLeftTime = CatManager.savingDataInterval
 
+// 测试阶段数据收集频率
+CatManager.collectUserDataInerval = 30
+CatManager.collectUserDataLeftTime = CatManager.collectUserDataInerval
+
 // 是否在养育状态
 CatManager.rasingCat = false
 
@@ -47,6 +51,19 @@ CatManager.update = function(interval) {
     if (CatManager.savingDataLeftTime <= 0) {
         CatManager.savingDataLeftTime = CatManager.savingDataInterval
         User.flush()
+    }
+
+    // 测试开发阶段玩家数据收集
+    if (cc.isDebug) {
+        CatManager.collectUserDataLeftTime -= interval
+        if (CatManager.collectUserDataLeftTime <= 0) {
+            CatManager.collectUserDataLeftTime = CatManager.collectUserDataInerval
+            var request = cc.loader.getXMLHttpRequest()
+            request.open('POST', cc.game.config['userDataCollectServerURL'], true)
+            request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            request.send('jsonString=' + User.getDataJsonString())
+            cc.log('send user report')
+        }
     }
 }
 

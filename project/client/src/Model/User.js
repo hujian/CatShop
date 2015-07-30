@@ -41,6 +41,11 @@ User.flush = function() {
     User.data.saveDataToLocalStorage(User.dataSavingKey, ['fsm'])
 }
 
+// 获取数据的json字符串
+User.getDataJsonString = function() {
+    return User.data.getDataStringFromLocalStorage(User.dataSavingKey)
+}
+
 // 获取实例id，数据会缓存的，不会重复
 User.getNewInstanceId = function() {
     return ++User.data.jsonData.instanceId
