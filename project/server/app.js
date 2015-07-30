@@ -32,7 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // 首页
 app.get('/', function (req, res) {
-  res.send('这个页面没啥哦!');
+  res.redirect('/game');
 });
 
 // 时间戳API
