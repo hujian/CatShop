@@ -17,6 +17,9 @@ var TestMainScene = TestBaseScene.extend({
         // 文字UI测试用例
         this.addTestButton('文字-主界面', this.goTestMain)
         this.addTestButton('文字-猫屋', this.goTestCat)
+
+        // 自动测试
+        this.addTestButton(['自动测试-1', '自动测试-1-进行中'], this.goTest1)
     },
 
     onEnter:function() {
@@ -25,7 +28,7 @@ var TestMainScene = TestBaseScene.extend({
         // temp in developing
         if (cc.isDebug && !this.autoRun) {
             this.autoRun = true
-            this.goTestCat()
+            //this.goTestCat()
         }
     },
 
@@ -42,5 +45,13 @@ var TestMainScene = TestBaseScene.extend({
 
     goTestCat:function () {
         cc.director.pushScene(new TestCatScene())
+    },
+
+    goTest1:function (button, state) {
+        if (state == 1) {
+            TestManager.start(TestManager.testName.one)
+        } else {
+            TestManager.stop()
+        }
     }
 });

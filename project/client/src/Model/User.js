@@ -15,19 +15,24 @@ User.dataSavingKey = "User_Data_Saving_key"
 User.restore = function() {
     // 初期化玩家基本数据
     if (!User.data.loadDataFromLocalStorage(User.dataSavingKey)) {
-        User.data.jsonData.money = 100000          // 初始金钱
-        User.data.jsonData.maxCatCount = 3         // 商店能够养的猫的最大数
-        User.data.jsonData.items = {}              // 已经购买的商品
-        User.data.jsonData.food = {}               // 玩家已经购买的食物
-        User.data.jsonData.cats = []               // 玩家已经购买的猫
-        User.data.jsonData.instanceId = 0          // 玩家数据中用到的实例对象
-        User.data.jsonData.catHairCount = 0        // 猫屋猫毛团的数量
+        User.initUserData()
         User.flush()
     } else {
         // 需要把恢复出来的数据的prototype挂接到相关的model上去，外面才能调用model的函数
         // 道具和食物不用挂，因为根本不保存单个实例
         this.restoreModel(User.data.jsonData.cats, Cat)
     }
+}
+
+// 程序初次进入后，初期化用户数据
+User.initUserData = function () {
+    User.data.jsonData.money = 1000            // 初始金钱
+    User.data.jsonData.maxCatCount = 3         // 商店能够养的猫的最大数
+    User.data.jsonData.items = {}              // 已经购买的商品
+    User.data.jsonData.food = {}               // 玩家已经购买的食物
+    User.data.jsonData.cats = []               // 玩家已经购买的猫
+    User.data.jsonData.instanceId = 0          // 玩家数据中用到的实例对象
+    User.data.jsonData.catHairCount = 0        // 猫屋猫毛团的数量
 }
 
 User.restoreModel = function(dataArray, model) {
@@ -97,7 +102,8 @@ User.updateMaxCatCount = function (count) {
 }
 
 // 增加道具
-User.addItem = function (id) {
+User.addItem = function (id, count) {
+    count = count || 1
     var setting = ItemSetting.getById(id)
     var items = User.data.jsonData.items
 
@@ -108,9 +114,9 @@ User.addItem = function (id) {
     }
 
     if (items[id]) {
-        items[id] += value
+        items[id] += value * count
     } else {
-        items[id] = value
+        items[id] = value * count
     }
 }
 
@@ -150,12 +156,13 @@ User.getHairCleanerCount = function () {
 }
 
 // 增加食物
-User.addFood = function (id) {
+User.addFood = function (id, count) {
+    count = count || 1
     var allFood = User.data.jsonData.food
     if (allFood[id]) {
-        allFood[id] += 1
+        allFood[id] += count
     } else {
-        allFood[id] = 1
+        allFood[id] = count
     }
 }
 

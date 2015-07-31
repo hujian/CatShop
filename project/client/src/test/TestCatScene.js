@@ -86,9 +86,9 @@ var TestCatScene = TestBaseScene.extend({
 
     speedUp:function (button, state) {
         if (state == 1) {
-            cc.director.getScheduler().setTimeScale(10)
+            Util.speedUp(10)
         } else {
-            cc.director.getScheduler().setTimeScale(1)
+            Util.speedUp(1)
         }
     },
 

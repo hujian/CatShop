@@ -35,6 +35,7 @@
         "src/test/TestPopupScene.js",
         "src/test/TestLayerScene.js",
         "src/test/TestUIScene.js",
+        "src/test/TestManager.js",
         "src/test/TestMainScene.js"
     ],
     "timestampServerURL" : "http://catshop.coding.io/time",

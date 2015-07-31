@@ -59,5 +59,10 @@ var Util = {
 	// 获取[min, max)的随机整数
 	getRandomInt:function (min, max) {
 		return parseInt(Math.random() * (max - min) + min)
+	},
+
+	// 全局加速, 注意factor不是乘上原值，设成1恢复原值
+	speedUp:function (factor) {
+		cc.director.getScheduler().setTimeScale(factor)
 	}
 };

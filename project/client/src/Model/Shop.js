@@ -63,12 +63,14 @@ Shop.getAllItem = function () {
 }
 
 // 买道具, 返回true表示购买成功
-Shop.buyItem = function (id) {
+Shop.buyItem = function (id, count) {
     var ret = false
+
+    count = count || 1
 
     var itemSetting = ItemSetting.getById(id)
     if (itemSetting) {
-        var moneyLeft = User.getMoney() - itemSetting.money
+        var moneyLeft = User.getMoney() - itemSetting.money * count
         if (moneyLeft >= 0) {
             User.updateMoney(moneyLeft)
 
@@ -81,7 +83,7 @@ Shop.buyItem = function (id) {
                 }
             }
 
-            User.addItem(id)
+            User.addItem(id, count)
             User.flush()
 
             ret = true
@@ -92,15 +94,17 @@ Shop.buyItem = function (id) {
 }
 
 // 购买食物，返回true表示购买成功
-Shop.buyFood = function (id) {
+Shop.buyFood = function (id, count) {
     var ret = false
+
+    count = count || 1
 
     var setting = FoodSetting.getById(id)
     if (setting) {
-        var moneyLeft = User.getMoney() - setting.money
+        var moneyLeft = User.getMoney() - setting.money * count
         if (moneyLeft >= 0) {
             User.updateMoney(moneyLeft)
-            User.addFood(id)
+            User.addFood(id, count)
             User.flush()
 
             ret = true
