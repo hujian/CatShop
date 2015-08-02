@@ -10,16 +10,24 @@ var TestMainScene = TestBaseScene.extend({
 
         this.needBackButton = false
 
-        // 正常UI测试用例
-        this.addTestButton('正常流程', this.goRoutine)
-        this.addTestButton('UI测试', this.goUI)
+        this.addTestLabel("逻辑测试")
+        this.addLogicTest('主界面', TestGameScene)
+        this.addLogicTest('猫屋', TestCatScene)
 
-        // 文字UI测试用例
-        this.addTestButton('文字-主界面', this.goTestMain)
-        this.addTestButton('文字-猫屋', this.goTestCat)
+        this.nextColumn()
+        this.addTestLabel("UI测试")
+        this.addUITest('正常流程', CatHouseScene)
+        this.addUITest('加载', LoadingScene)
+        this.addUITest('猫屋', CatHouseScene)
+        this.addUITest('食物', FoodScene)
+        this.addUITest('商店', ShopScene)
+        this.addUITest('出售', SellScene)
+        this.addUITest('图鉴', HandbookScene)
+        this.addLogicTest('其他', TestUIScene)
 
-        // 自动测试
-        this.addTestButton(['自动测试-1', '自动测试-1-进行中'], this.goTest1)
+        this.nextColumn()
+        this.addTestLabel("自动化测试")
+        this.addTestButton(['1号测试', '1好号测试进行中'], this.goTest1)
     },
 
     onEnter:function() {
@@ -32,19 +40,31 @@ var TestMainScene = TestBaseScene.extend({
         }
     },
 
-    goRoutine:function () {
+    addLogicTest:function(name, scene) {
+        var button = this.addTestButton(name, this.logicTestCallBack)
+        button.scene = scene
     },
 
-    goUI:function () {
-        cc.director.pushScene(new TestUIScene())
+    logicTestCallBack:function(button) {
+        cc.director.pushScene(new button.scene())
     },
 
-    goTestMain:function () {
-        cc.director.pushScene(new TestGameScene())
+    addUITest:function (name, scene) {
+        var button = this.addTestButton(name, this.uiTestCallBack)
+        button.scene = scene
     },
 
-    goTestCat:function () {
-        cc.director.pushScene(new TestCatScene())
+    uiTestCallBack:function (button) {
+        Util.setReleaseDesignResolution()
+        var scene = new button.scene()
+        var button = this.createTestButton("返回")
+        button.setPosition(cc.pAdd(cc.visibleRect.topLeft, cc.p(50, -50)))
+        button.addTouchEventListener(function () {
+            Util.setDebugDesignResolution()
+            cc.director.popScene()
+        })
+        scene.addChild(button)
+        cc.director.pushScene(scene)
     },
 
     goTest1:function (button, state) {

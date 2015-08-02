@@ -52,8 +52,8 @@ cc.game.onStart = function(){
     }
     
     cc.view.adjustViewPort(true);
-    cc.view.setDesignResolutionSize(800, 480, cc.ResolutionPolicy.SHOW_ALL);
     cc.view.resizeWithBrowserSize(true);
+    Util.setDebugDesignResolution()
 
     // 从本地缓存获取恢复数据
     App.restore()
@@ -61,7 +61,6 @@ cc.game.onStart = function(){
 
     var loadingScene = new LoadingScene()
     loadingScene.preload(Util.getArray(gameResource.global), function () {
-
         // 加载配置文件，需要等待下载完成
         CatSetting.load()
         ItemSetting.load()

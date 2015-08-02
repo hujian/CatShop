@@ -9,8 +9,13 @@ var Time = Time || {}
 Time.timestamp = Date.parse(new Date()) / 1000
 
 Time.load = function (timestampServerUrl, callback, target) {
+    var self = this
+    self._callback = callback
+    self._target = target
+
     var result = false
     var request = cc.loader.getXMLHttpRequest()
+
     request.open('GET', timestampServerUrl, true)
     request.onreadystatechange = function () {
         if (request.readyState == 4) {
@@ -30,8 +35,8 @@ Time.load = function (timestampServerUrl, callback, target) {
                 cc.error("网络出啥问题了, status code: " + request.status.toString())
             }
 
-            if (callback) {
-                callback.call(target, result)
+            if (self._callback && self._target) {
+                self._callback.call(self._target, result)
             }
         }
     }
@@ -46,4 +51,10 @@ Time.update = function (interval) {
 // 获取的是时间戳
 Time.now = function () {
     return Time.timestamp
+}
+
+// 可以避免回调异常
+Time.stopFetchServeTime = function () {
+    this._callback = null
+    this._target = null
 }

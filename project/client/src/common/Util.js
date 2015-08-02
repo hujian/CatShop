@@ -42,15 +42,6 @@ var Util = {
 		return array
 	},
 
-	// cc.p 的辅助函数
-	ccpAdd:function (p1, p2) {
-		return cc.p(p1.x + p2.x, + p1.y + p2.y)
-	},
-
-	ccpSub:function (p1, p2) {
-		return cc.p(p1.x - p2.x, p1.y - p2.y)
-	},
-
 	// 获取时间字符串，hh:mm:ss
 	getTimeString:function (seconds) {
 		return parseInt(seconds / 3600).toString() + '小时' + parseInt(seconds % 3600 / 60).toString() + '分' + parseInt(seconds % 60).toString() + '秒'
@@ -64,5 +55,24 @@ var Util = {
 	// 全局加速, 注意factor不是乘上原值，设成1恢复原值
 	speedUp:function (factor) {
 		cc.director.getScheduler().setTimeScale(factor)
+	},
+
+	setDesignResolution:function() {
+		if (cc.game.config[cc.game.CONFIG_KEY.debugMode] > 0) {
+			this.setDebugDesignResolution()
+		} else {
+			this.setReleaseDesignResolution()
+		}
+	},
+
+	setDebugDesignResolution:function () {
+		cc.view.setDesignResolutionSize(800, 480, cc.ResolutionPolicy.SHOW_ALL);
+	},
+
+	// 改成正式的分辨率
+	setReleaseDesignResolution: function () {
+		var width = cc.game.config.width
+		var height = cc.game.config.height
+		cc.view.setDesignResolutionSize(width, height, cc.ResolutionPolicy.SHOW_ALL);
 	}
 };

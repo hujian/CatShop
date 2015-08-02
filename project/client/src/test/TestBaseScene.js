@@ -13,7 +13,7 @@ var TestBaseScene = cc.Scene.extend({
         this._super();
 
         // 测试按钮的初始位置
-        this.testButtonInitPosition = cc.p(250, 340)
+        this.testButtonInitPosition = cc.p(250, 370)
         this.currentTestButtonPosition = cc.p(this.testButtonInitPosition)
 
         // 测试按钮的间隔
@@ -114,6 +114,23 @@ var TestBaseScene = cc.Scene.extend({
         };
     },
 
+    createTestLabel:function(text) {
+        var label = new ccui.Text(text, TestSceneFontName, 12)
+        label.setTextColor(cc.color.MAGENTA)
+        return label
+    },
+
+    addTestLabel:function(text) {
+        var label = this.createTestLabel(text)
+        this.addChild(label)
+
+        label.setPosition(this.currentTestButtonPosition)
+        this.currentTestButtonPosition.y -= this.testButtonGap.y
+        if (this.currentTestButtonPosition.y < 50) {
+            this.nextColumn()
+        }
+    },
+
     createTestButton:function (title, handler, initState) {
         var button = new ccui.Button()
         button.loadTextureNormal(gameResource.global.testButton, ccui.Widget.LOCAL_TEXTURE)
@@ -134,6 +151,12 @@ var TestBaseScene = cc.Scene.extend({
         return button
     },
 
+    // 调用了该方法，则添加新的测试按钮或label时，位置设置到新的一列
+    nextColumn:function() {
+        this.currentTestButtonPosition.y = this.testButtonInitPosition.y
+        this.currentTestButtonPosition.x += this.testButtonGap.x
+    },
+
     // 新增测试按钮
     // 如果只有一种操作状态，则title直接传字符串，否则传数组
     addTestButton:function (title, handler, position, isSpecialButton, initState) {
@@ -145,8 +168,7 @@ var TestBaseScene = cc.Scene.extend({
     	if (!position) {
 	    	this.currentTestButtonPosition.y -= this.testButtonGap.y
 	    	if (this.currentTestButtonPosition.y < 50) {
-	    		this.currentTestButtonPosition.y = this.testButtonInitPosition.y
-	    		this.currentTestButtonPosition.x += this.testButtonGap.x
+                this.nextColumn()
 	    	}
     	} else {
     		button.setPosition(position)

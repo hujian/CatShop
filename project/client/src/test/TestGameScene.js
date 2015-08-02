@@ -39,10 +39,7 @@ var TestGameScene = TestBaseScene.extend({
     },
 
     addCatButtons:function () {
-        var label = new ccui.Text("猫仔", TestSceneFontName, 12)
-        label.setTextColor(cc.color.MAGENTA)
-        label.setPosition(cc.p(this.currentTestButtonPosition.x, this.currentTestButtonPosition.y + 30))
-        this.addChild(label)
+        this.addTestLabel("猫仔")
 
         var babies = CatSetting.getAllBaby()
         for (var i in babies) {
@@ -52,12 +49,8 @@ var TestGameScene = TestBaseScene.extend({
     },
 
     addItemButtons:function () {
-        this.currentTestButtonPosition = cc.p(this.testButtonInitPosition.x + this.testButtonGap.x, this.testButtonInitPosition.y)
-
-        var label = new ccui.Text("道具", TestSceneFontName, 12)
-        label.setTextColor(cc.color.MAGENTA)
-        label.setPosition(cc.p(this.currentTestButtonPosition.x, this.currentTestButtonPosition.y + 30))
-        this.addChild(label)
+        this.nextColumn()
+        this.addTestLabel("道具")
 
         var items = Shop.getAllItem()
         for (var i in items) {
@@ -69,12 +62,8 @@ var TestGameScene = TestBaseScene.extend({
     },
 
     addFoodButtons:function () {
-        this.currentTestButtonPosition = cc.p(this.testButtonInitPosition.x + this.testButtonGap.x * 2, this.testButtonInitPosition.y)
-
-        var label = new ccui.Text("猫食", TestSceneFontName, 12)
-        label.setTextColor(cc.color.MAGENTA)
-        label.setPosition(cc.p(this.currentTestButtonPosition.x, this.currentTestButtonPosition.y + 30))
-        this.addChild(label)
+        this.nextColumn()
+        this.addTestLabel("猫食")
 
         var foodSetting = FoodSetting.getAll()
         for (var i in foodSetting) {

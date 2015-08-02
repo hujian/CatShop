@@ -5,12 +5,13 @@
 */
 
 LoadingScene = GameBaseScene.extend({
-    _interval : null,
     _label : null,
     _className:"LoadingScene",
+    _logo: null,
     cb: null,
     target: null,
     loadingText: "努力加载中...",
+    needLoadResource:true,
 
     init : function(){
         var self = this;
@@ -19,53 +20,43 @@ LoadingScene = GameBaseScene.extend({
         var bgLayer = self._bgLayer = new cc.LayerColor(cc.color(52, 113, 143, 255));
         self.addChild(bgLayer, 0);
 
-        //logo
-        var logoWidth = 350;
-        var logoHeight = 240;
-        var fontSize = 24, lblHeight =  -logoHeight / 2 + 100;
         if(gameResource.loadingLogoImg){
+            //logo
             cc.loader.loadImg(gameResource.loadingLogoImg, {isCrossOrigin : false }, function(err, img){
-                logoWidth = img.width;
-                logoHeight = img.height;
-                var center = cc.visibleRect.center
-                center.y += 80
-                self._initStage(img, center);
+                var texture2d = self._texture2d = new cc.Texture2D();
+                texture2d.initWithElement(img);
+                texture2d.handleLoadedTexture();
+                self._logo = new cc.Sprite(texture2d);
+                self._logo.setPosition(cc.pAdd(cc.visibleRect.center, cc.p(0, cc.visibleRect.height / 4)))
+                self._bgLayer.addChild(self._logo, 10);
             });
-            fontSize = 14;
-            lblHeight = -logoHeight / 2 - 10;
+
+            //loading percent
+            var label = self._label = new cc.LabelTTF(this.loadingText + " 0%", "Arial", 24);
+            label.setPosition(cc.pSub(cc.visibleRect.center, cc.p(0, cc.visibleRect.height / 3)));
+            label.setColor(cc.color.BLACK);
+            bgLayer.addChild(this._label, 10);
         }
 
-        //loading percent
-        var label = self._label = new cc.LabelTTF(this.loadingText + " 0%", "Arial", fontSize);
-        label.setPosition(cc.pAdd(cc.visibleRect.center, cc.p(0, lblHeight)));
-        label.setColor(cc.color.BLACK);
-        bgLayer.addChild(this._label, 10);
         return true;
-    },
-
-    _initStage: function (img, centerPos) {
-        var self = this;
-        var texture2d = self._texture2d = new cc.Texture2D();
-        texture2d.initWithElement(img);
-        texture2d.handleLoadedTexture();
-        var logo = self._logo = new cc.Sprite(texture2d);
-        logo.setScale(cc.contentScaleFactor());
-        logo.x = centerPos.x;
-        logo.y = centerPos.y;
-        self.logo = logo
-        self._bgLayer.addChild(logo, 10);
     },
 
     onEnter: function () {
         var self = this;
         cc.Node.prototype.onEnter.call(self);
-        self.schedule(self._startLoading, 0.3);
+
+        if (this.needLoadResource) {
+            self.schedule(self._startLoading, 0.3);
+        }
     },
 
     onExit: function () {
         cc.Node.prototype.onExit.call(this);
         var tmpStr = this.loadingText + " 0%";
         this._label.setString(tmpStr);
+
+        this.unschedule(this._startLoading)
+        Time.stopFetchServeTime()
     },
 
     initWithResources: function (resources, cb, target) {
@@ -89,18 +80,20 @@ LoadingScene = GameBaseScene.extend({
             // 获取服务器时间
             Time.load(cc.game.config['timestampServerURL'], function () {
                 // 加载其他资源
-                cc.loader.load(res,
-                    function (result, count, loadedCount) {
-                        // 设置进度
-                        var percent = (loadedCount / count * 100) | 0;
-                        percent = Math.min(percent, 100);
-                        self._label.setString(self.loadingText + percent.toString() + "%");
-                    }, function () {
-                        // 加载完成回调
-                        if (self.cb)
-                            self.cb.call(self.target);
-                    }
-                );
+                if (res && res.length > 0) {
+                    cc.loader.load(res,
+                        function (result, count, loadedCount) {
+                            // 设置进度
+                            var percent = (loadedCount / count * 100) | 0;
+                            percent = Math.min(percent, 100);
+                            self._label.setString(self.loadingText + percent.toString() + "%");
+                        }, function () {
+                            // 加载完成回调
+                            if (self.cb)
+                                self.cb.call(self.target);
+                        }
+                    );
+                }
             }, this)
 
         })
@@ -117,7 +110,7 @@ LoadingScene = GameBaseScene.extend({
         animation.setDelayPerUnit(1 / 20);
         animation.setRestoreOriginalFrame(true);
         var action = cc.animate(animation);
-        this.logo.runAction(cc.repeatForever(action));
+        this._logo.runAction(cc.repeatForever(action));
     },
 
     preload: function(resources, cb, target) {
@@ -125,3 +118,7 @@ LoadingScene = GameBaseScene.extend({
         cc.director.runScene(this);
     }
 });
+
+LoadingScene.create = function () {
+    return new LoadingScene()
+}

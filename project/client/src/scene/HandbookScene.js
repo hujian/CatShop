@@ -1,12 +1,12 @@
-/* 
-* @breife: 商店界面
-* @author: hujian
-* @date:   2015-06-01 21:28:02
+/*
+* @brief:  图鉴场景
+* @author: Hj
+* @date:   2015-08-02
 */
 
-var ShopScene = GameBaseScene.extend({
+var HandbookScene = GameBaseScene.extend({
     init:function () {
-    	this._super()
+        this._super()
 
         this.initUI()
     },
@@ -24,6 +24,6 @@ var ShopScene = GameBaseScene.extend({
     }
 })
 
-ShopScene.create = function () {
-    return new ShopScene
+HandbookScene.create = function () {
+    return new HandbookScene
 }
