@@ -9,10 +9,10 @@ var db = require('mongoose')
 var Report = require('./model/report')
 
 // coding.net 的数据库配置
-var dbConfig = process.env.VCAP_SERVICES
+var dbConfig = process.env.VCAP_SERVICES[0].credentials
 // 链接数据库
 if (dbConfig) {
-  db.connect(dbConfig.credentials.uri)
+  db.connect(dbConfig.uri)
 } else {
   db.connect('mongodb://127.0.0.1:27017/CatShop')
 }
