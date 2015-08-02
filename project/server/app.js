@@ -9,7 +9,10 @@ var db = require('mongoose')
 var Report = require('./model/report')
 
 // coding.net 的数据库配置
-var dbConfig = process.env.VCAP_SERVICES[0].credentials
+var dbConfig = JSON.parse(process.env.VCAP_SERVICES).mongodb[0].credentials;
+
+console.log(process.env.VCAP_SERVICES)
+
 // 链接数据库
 if (dbConfig) {
   db.connect(dbConfig.uri)
