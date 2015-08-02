@@ -267,6 +267,10 @@
                 <file name="src/widget/GameBaseLayer.js"/>
                 <file name="src/scene/GameBaseScene.js"/>
                 <file name="src/scene/LoadingScene.js"/>
+                <file name="src/scene/CatHouseScene.js"/>
+                <file name="src/scene/FoodScene.js"/>
+                <file name="src/scene/HandbookScene.js"/>
+                <file name="src/scene/SellScene.js"/>
                 <file name="src/scene/ShopScene.js"/>
                 <file name="src/test/TestBaseScene.js"/>
                 <file name="src/test/TestContentCellLayer.js"/>
@@ -276,6 +280,7 @@
                 <file name="src/test/TestPopupScene.js"/>
                 <file name="src/test/TestLayerScene.js"/>
                 <file name="src/test/TestUIScene.js"/>
+                <file name="src/test/TestManager.js"/>
                 <file name="src/test/TestMainScene.js"/>
                 <file name="main.js"/>
 
