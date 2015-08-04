@@ -21,6 +21,7 @@ var TestMainScene = TestBaseScene.extend({
         this.addTestCase('TabBar', TestTabBarScene)
         this.addTestCase('PageLayer', TestPageLayerScene)
         this.addTestCase('各种Item', TestItemScene)
+        this.addTestCase('广告', TestItemScene)
 
         this.nextColumn()
         this.addTestLabel("UI测试")
