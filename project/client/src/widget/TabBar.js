@@ -4,7 +4,7 @@
 * @date:   2015-08-04
 */
 
-var TabBar = cc.Layer.extend({
+var TabBar = GameBaseLayer.extend({
     // items 是imagePath数组，注意path不要带文件后缀，默认.png，高亮文件带_on
     ctor:function (items, callback, target, texType) {
         this._super()

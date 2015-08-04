@@ -19,6 +19,8 @@ var TestMainScene = TestBaseScene.extend({
         this.addTestCase('弹出层', TestPopupScene)
         this.addTestCase('内容层', TestLayerScene)
         this.addTestCase('TabBar', TestTabBarScene)
+        this.addTestCase('PageLayer', TestPageLayerScene)
+        this.addTestCase('各种Item', TestItemScene)
 
         this.nextColumn()
         this.addTestLabel("UI测试")
@@ -40,7 +42,7 @@ var TestMainScene = TestBaseScene.extend({
         // temp in developing
         if (cc.isDebug && !this.autoRun) {
             this.autoRun = true
-            //this.goTestCat()
+            cc.director.pushScene(new TestItemScene())
         }
     },
 

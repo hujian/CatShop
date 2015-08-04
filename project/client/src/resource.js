@@ -16,6 +16,8 @@ gameResource.loading = {
 gameResource.global = {
     cat_house_image: "res/image/cat_house.png",
     cat_house_plist: "res/image/cat_house.plist",
+    shop_image: "res/image/shop.png",
+    shop_plist: "res/image/shop.plist",
     cat_setting: "res/setting/cat.json",
     baby_cat_setting: "res/setting/babyCat.json",
     item_setting: "res/setting/item.json",
