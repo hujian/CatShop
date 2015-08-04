@@ -143,7 +143,8 @@ var FoodPageLayer = PageLayer.extend({
         var items = []
         for (var i=0; i<allFood.length; i++) {
             var id = i + 1
-            var item = new FoodStockItem(id, User.getFoodCount(id), ccui.Widget.PLIST_TEXTURE)
+            var setting = FoodSetting.getById(id)
+            var item = new FoodItem(id, setting.money, setting.time, ccui.Widget.PLIST_TEXTURE)
             item.food = allFood[i]
             item.addTouchEventListener(this.selectFood, this)
             items.push(item)

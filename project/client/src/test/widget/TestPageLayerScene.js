@@ -11,8 +11,9 @@ var TestPageLayerScene = TestBaseScene.extend({
         cc.spriteFrameCache.addSpriteFrames(gameResource.global.cat_house_plist, gameResource.global.cat_house_image)
         cc.spriteFrameCache.addSpriteFrames(gameResource.global.shop_plist, gameResource.global.shop_image)
 
-        this.addTestButton("基础控件", this.testBasic)
+        this.addTestButton("基础PageLayer", this.testBasic)
         this.addTestButton("猫屋食物条", this.testCatHouseFood)
+        this.addTestButton("生产食物条", this.testProduceFood)
 
         this.nextColumn()
         this.addTestButton("加一页", this.addPage)
@@ -34,28 +35,25 @@ var TestPageLayerScene = TestBaseScene.extend({
         }
     },
 
-    testBasic:function() {
+    updateLayer:function(layer) {
         if (this.pageLayer) {
             this.pageLayer.removeFromParent()
             this.pageLayer = null
         }
 
-        var layer = new PageLayer("food_bar_btn_left.png", "food_bar_bg.png", ccui.Widget.PLIST_TEXTURE)
         layer.setPosition(cc.p(100, 20))
         this.addChild(layer)
         this.pageLayer = layer
     },
 
-    testCatHouseFood:function() {
-        if (this.pageLayer) {
-            this.pageLayer.removeFromParent()
-            this.pageLayer = null
-        }
+    testBasic:function() {
+        var layer = new PageLayer("food_bar_btn_left.png", "food_bar_bg.png", ccui.Widget.PLIST_TEXTURE)
+        this.updateLayer(layer)
+    },
 
+    testCatHouseFood:function() {
         var layer = new FoodStockPageLayer(this.foodSelect, this)
-        layer.setPosition(cc.p(100, 20))
-        this.addChild(layer)
-        this.pageLayer = layer
+        this.updateLayer(layer)
     },
 
     foodSelect:function(item, foodId) {
@@ -67,6 +65,21 @@ var TestPageLayerScene = TestBaseScene.extend({
             this.printMessage("喂了一个" + setting.name)
         } else {
             this.printMessage("数量不够，请购买")
+        }
+    },
+
+    testProduceFood:function() {
+        var layer = new FoodPageLayer(this.foodProduce, this)
+        this.updateLayer(layer)
+    },
+
+    foodProduce:function(item, foodId) {
+        var name = FoodSetting.getById(foodId).name
+        if (Shop.buyFood(foodId)) {
+            this.printMessage("开始生产" + name)
+            this.printMessage("生产" + name + "成功")
+        } else {
+            this.printMessage("金钱不够..")
         }
     }
 })
