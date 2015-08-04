@@ -11,19 +11,23 @@ var TestMainScene = TestBaseScene.extend({
         this.needBackButton = false
 
         this.addTestLabel("逻辑测试")
-        this.addLogicTest('主界面', TestGameScene)
-        this.addLogicTest('猫屋', TestCatScene)
+        this.addTestCase('主界面', TestGameScene)
+        this.addTestCase('猫屋', TestCatScene)
+
+        this.nextColumn()
+        this.addTestLabel("控件测试")
+        this.addTestCase('弹出层', TestPopupScene)
+        this.addTestCase('内容层', TestLayerScene)
+        this.addTestCase('TabBar', TestTabBarScene)
 
         this.nextColumn()
         this.addTestLabel("UI测试")
-        this.addUITest('正常流程', CatHouseScene)
-        this.addUITest('加载', LoadingScene)
-        this.addUITest('猫屋', CatHouseScene)
-        this.addUITest('食物', FoodScene)
-        this.addUITest('商店', ShopScene)
-        this.addUITest('出售', SellScene)
-        this.addUITest('图鉴', HandbookScene)
-        this.addLogicTest('其他', TestUIScene)
+        this.addUITestCase('加载', LoadingScene)
+        this.addUITestCase('猫屋', CatHouseScene)
+        this.addUITestCase('食物', FoodScene)
+        this.addUITestCase('商店', ShopScene)
+        this.addUITestCase('出售', SellScene)
+        this.addUITestCase('图鉴', HandbookScene)
 
         this.nextColumn()
         this.addTestLabel("自动化测试")
@@ -40,16 +44,16 @@ var TestMainScene = TestBaseScene.extend({
         }
     },
 
-    addLogicTest:function(name, scene) {
-        var button = this.addTestButton(name, this.logicTestCallBack)
+    addTestCase:function(name, scene) {
+        var button = this.addTestButton(name, this.testCaseCallBack)
         button.scene = scene
     },
 
-    logicTestCallBack:function(button) {
+    testCaseCallBack:function(button) {
         cc.director.pushScene(new button.scene())
     },
 
-    addUITest:function (name, scene) {
+    addUITestCase:function (name, scene) {
         var button = this.addTestButton(name, this.uiTestCallBack)
         button.scene = scene
     },

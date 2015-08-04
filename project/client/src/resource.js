@@ -14,6 +14,8 @@ gameResource.loading = {
 
 // 游戏一登陆就需要加载的资源
 gameResource.global = {
+    cat_house_image: "res/image/cat_house.png",
+    cat_house_plist: "res/image/cat_house.plist",
     cat_setting: "res/setting/cat.json",
     baby_cat_setting: "res/setting/babyCat.json",
     item_setting: "res/setting/item.json",
