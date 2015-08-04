@@ -11,8 +11,8 @@ var TestMainScene = TestBaseScene.extend({
         this.needBackButton = false
 
         this.addTestLabel("逻辑测试")
-        this.addTestCase('主界面', TestGameScene)
-        this.addTestCase('猫屋', TestCatScene)
+        this.addTestCase('商店逻辑', TestGameScene)
+        this.addTestCase('猫屋逻辑', TestCatScene)
 
         this.nextColumn()
         this.addTestLabel("控件测试")
@@ -42,7 +42,7 @@ var TestMainScene = TestBaseScene.extend({
         // temp in developing
         if (cc.isDebug && !this.autoRun) {
             this.autoRun = true
-            cc.director.pushScene(new TestItemScene())
+            cc.director.pushScene(new TestPageLayerScene())
         }
     },
 

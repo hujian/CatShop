@@ -17,7 +17,7 @@ var TestItemScene = TestBaseScene.extend({
         var startPosition = cc.p(160, 350)
         for (var i in FoodSetting.getAll()) {
             var food = FoodSetting.getAll()[i]
-            var item = new FoodSelectFeedItem(food.id, 10, ccui.Widget.PLIST_TEXTURE)
+            var item = new FoodStockItem(food.id, 10, ccui.Widget.PLIST_TEXTURE)
             item.food = food
             item.setAnchorPoint(cc.p(0, 0.5))
             item.setPosition(startPosition)
