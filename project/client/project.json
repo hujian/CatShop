@@ -3,7 +3,7 @@
     "debugMode" : 1,
     "width": 640,
     "height": 1136,
-    "showFPS" : true,
+    "showFPS" : false,
     "frameRate" : 30,
     "id" : "gameCanvas",
     "renderMode" : 0,

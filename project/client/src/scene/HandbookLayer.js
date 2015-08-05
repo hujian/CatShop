@@ -5,7 +5,7 @@
 */
 
 var HandbookLayer = GameBaseLayer.extend({
-    init:function () {
+    ctor:function () {
         this._super();
 
         this.initUI();

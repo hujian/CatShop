@@ -21,7 +21,7 @@ var TabBar = GameBaseLayer.extend({
             button.setAnchorPoint(cc.p(0, 0))
             button.addTouchEventListener(this.tabBarSelect, this)
             button.setPosition(width, 0)
-            button.index = i
+            button.index = parseInt(i)
             this.addChild(button)
             height = Math.max(height, button.getContentSize().height)
             width += button.getContentSize().width
