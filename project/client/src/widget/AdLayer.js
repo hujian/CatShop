@@ -18,5 +18,7 @@ var AdLayer = GameBaseLayer.extend({
         label.setTextColor(cc.color.BLACK)
         label.setPosition(cc.p(cc.game.config.width / 2, bg.getContentSize().height/2));
         this.addChild(label);
+
+        this.setContentSize(bg.getContentSize())
     }
 })

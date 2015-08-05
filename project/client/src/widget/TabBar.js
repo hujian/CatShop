@@ -52,7 +52,7 @@ var TabBar = GameBaseLayer.extend({
         }
 
         if (this._callback && this._target) {
-            this._callback.call(this._target, index)
+            this._callback.call(this._target, index, this)
         }
 
         this._lastSelectedButtonIndex = index

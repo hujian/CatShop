@@ -27,11 +27,11 @@ var TestMainScene = TestBaseScene.extend({
         this.addTestLabel("UI测试")
         this.addUITestCase('正常流程', ContainerScene)
         this.addUITestCase('加载', LoadingScene)
-        this.addUITestCase('猫屋', CatHouseLayer)
-        this.addUITestCase('食物', FoodLayer)
-        this.addUITestCase('商店', ShopLayer)
-        this.addUITestCase('出售', SellLayer)
-        this.addUITestCase('图鉴', HandbookLayer)
+        //this.addUITestCase('猫屋', CatHouseLayer)
+        //this.addUITestCase('食物', FoodLayer)
+        //this.addUITestCase('商店', ShopLayer)
+        //this.addUITestCase('出售', SellLayer)
+        //this.addUITestCase('图鉴', HandbookLayer)
 
         this.nextColumn()
         this.addTestLabel("自动化测试")
@@ -45,7 +45,7 @@ var TestMainScene = TestBaseScene.extend({
         if (cc.isDebug && !this.autoRun) {
             this.autoRun = true
             Util.setReleaseDesignResolution()
-            cc.director.pushScene(new ContainerScene())
+            cc.director.pushScene(new ContainerScene(3))
         }
     },
 
