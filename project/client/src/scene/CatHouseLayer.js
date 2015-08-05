@@ -12,7 +12,7 @@ var CatHouseLayer = GameBaseLayer.extend({
     },
 
     initUI:function () {
-        this.showBorder()
+        this.showBorder();
 
         // 天气
         var weather = new cc.Sprite("#cat_house_bg_cloud.png");
@@ -76,9 +76,9 @@ var CatHouseLayer = GameBaseLayer.extend({
         this.addChild(help);
 
         // 食物栏
-        var food = new FoodStockPageLayer(this.foodSelect, this)
-        food.setPosition(cc.p(0, 198))
-        this.addChild(food)
+        var food = new FoodStockPageLayer(this.foodSelect, this);
+        food.setPosition(cc.p(0, 198));
+        this.addChild(food);
     },
 
     onEnter:function () {
@@ -91,7 +91,6 @@ var CatHouseLayer = GameBaseLayer.extend({
 
     showHelp:function(button, type) {
         if (type == ccui.Widget.TOUCH_ENDED) {
-
         }
     }
 });

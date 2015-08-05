@@ -18,7 +18,7 @@ var ContainerScene = GameBaseScene.extend({
     initUI:function() {
         // tab条
         var bar = new TabBar(['tab_btn_cat_house', 'tab_btn_food', 'tab_btn_shop', 'tab_btn_sell', 'tab_btn_handbook'],
-                             this.tabBarCallback, this, ccui.Widget.PLIST_TEXTURE);
+                             this.tabBarCallback, this, ccui.Widget.PLIST_TEXTURE, 1);
         // zOrder必须要高于currentPage，盖在上面
         this.addChild(bar, 2);
         this._tabBar = bar;

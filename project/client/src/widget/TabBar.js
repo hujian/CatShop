@@ -6,12 +6,13 @@
 
 var TabBar = GameBaseLayer.extend({
     // items 是imagePath数组，注意path不要带文件后缀，默认.png，高亮文件带_on
-    ctor:function (items, callback, target, texType) {
+    ctor:function (items, callback, target, texType, index) {
         this._super()
         this._callback = callback
         this._target = target
         this._buttons = []
         this._lastSelectedButtonIndex = -1
+        index = index || 0
 
         var height = 0
         var width = 0
@@ -29,7 +30,7 @@ var TabBar = GameBaseLayer.extend({
         }
         this.setContentSize(width, height)
 
-        this.select(0)
+        this.select(index)
     },
 
     tabBarSelect:function(button, type) {
