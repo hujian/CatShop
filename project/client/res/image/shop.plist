@@ -553,15 +553,15 @@
             <key>sell_cat_btn.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{294,1926},{170,86}}</string>
+                <string>{{1286,1528},{470,85}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{170,86}}</string>
+                <string>{{0,0},{470,85}}</string>
                 <key>sourceSize</key>
-                <string>{170,86}</string>
+                <string>{470,85}</string>
             </dict>
             <key>sell_header.png</key>
             <dict>
@@ -579,15 +579,15 @@
             <key>sell_history_btn.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1286,1528},{470,85}}</string>
+                <string>{{294,1926},{170,86}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{470,85}}</string>
+                <string>{{0,0},{170,86}}</string>
                 <key>sourceSize</key>
-                <string>{470,85}</string>
+                <string>{170,86}</string>
             </dict>
             <key>sell_right_panel.png</key>
             <dict>
@@ -664,7 +664,7 @@
             <key>size</key>
             <string>{1782,2037}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:0a40a089f89c4281a4efac4d3c4d8df1:9448e352d1d7bae075ef5ec994ff8b39:0c3382addd4ddbdf7ff3d469abaa2ba6$</string>
+            <string>$TexturePacker:SmartUpdate:32d1b40d19a3c8c362ba85c8d76088d1:cc79962b84c2358d2cb0305aed8fa327:0c3382addd4ddbdf7ff3d469abaa2ba6$</string>
             <key>textureFileName</key>
             <string>shop.png</string>
         </dict>
