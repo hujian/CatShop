@@ -21,7 +21,7 @@ var TestMainScene = TestBaseScene.extend({
         this.addTestCase('TabBar', TestTabBarScene)
         this.addTestCase('PageLayer', TestPageLayerScene)
         this.addTestCase('各种Item', TestItemScene)
-        this.addTestCase('广告', TestItemScene)
+        this.addTestCase('广告', TestAdScene)
 
         this.nextColumn()
         this.addTestLabel("UI测试")
@@ -43,7 +43,7 @@ var TestMainScene = TestBaseScene.extend({
         // temp in developing
         if (cc.isDebug && !this.autoRun) {
             this.autoRun = true
-            cc.director.pushScene(new TestPageLayerScene())
+            //cc.director.pushScene(new TestPageLayerScene())
         }
     },
 
