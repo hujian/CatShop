@@ -35,10 +35,7 @@ var TabBar = GameBaseLayer.extend({
     tabBarSelect:function(button, type) {
         if (type == ccui.Widget.TOUCH_ENDED) {
             if (button.index != this._lastSelectedButtonIndex) {
-                if (this._callback && this._target) {
-                    this.select(button.index)
-                    this._callback.call(this._target, button.index)
-                }
+                this.select(button.index)
             }
         }
     },
@@ -51,6 +48,10 @@ var TabBar = GameBaseLayer.extend({
         if (index >= 0 && index < this._buttons.length) {
             this._buttons[index].setHighlighted(true)
             this._buttons[index].setEnabled(false)
+        }
+
+        if (this._callback && this._target) {
+            this._callback.call(this._target, index)
         }
 
         this._lastSelectedButtonIndex = index
