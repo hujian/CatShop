@@ -14,6 +14,7 @@ var GameBaseLayer = cc.Layer.extend({
     // show之前，一定要设置contentSize
     showBorder:function (show) {
         if (show) {
+            this.showBorder(false)
             this.border = new cc.DrawNode()
             this.border.drawRect(cc.p(0, 0), cc.p(this.getContentSize().width, this.getContentSize().height), null, 1, this.borderColor)
             this.addChild(this.border)

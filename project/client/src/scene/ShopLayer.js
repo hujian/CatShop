@@ -14,21 +14,21 @@ var ShopLayer = GameBaseLayer.extend({
 
     initUI:function (barHeight) {
         // 头部
-        var headerBg = new cc.Sprite("#shop_header.png")
-        headerBg.setAnchorPoint(cc.p(0, 1))
-        headerBg.setPosition(cc.p(0, cc.visibleRect.height))
-        this.addChild(headerBg)
+        var headerBg = new cc.Sprite("#shop_header.png");
+        headerBg.setAnchorPoint(cc.p(0, 1));
+        headerBg.setPosition(cc.p(0, cc.visibleRect.height));
+        this.addChild(headerBg);
 
-        var text = new ccui.Text("价格越高的猫仔，\n越容易养成稀有的猫哦!", gameResource.defaultFont, 30)
-        text.setTextColor(cc.color.BLACK)
-        text.setAnchorPoint(cc.p(0, 1))
-        text.setPosition(cc.p(185, cc.visibleRect.height - 93))
-        this.addChild(text)
+        var text = new ccui.Text("价格越高的猫仔，\n越容易养成稀有的猫哦!", gameResource.defaultFont, 30);
+        text.setTextColor(cc.color.BLACK);
+        text.setAnchorPoint(cc.p(0, 1));
+        text.setPosition(cc.p(185, cc.visibleRect.height - 93));
+        this.addChild(text);
 
-        var money = new ccui.Text(User.getMoney().toString() + "元", gameResource.defaultFont, 30)
-        money.setAnchorPoint(cc.p(1, 1))
-        money.setPosition(cc.p(cc.visibleRect.width - 100, cc.visibleRect.height - 26))
-        this.addChild(money)
+        var money = new ccui.Text(User.getMoney().toString() + "元", gameResource.defaultFont, 30);
+        money.setAnchorPoint(cc.p(1, 1));
+        money.setPosition(cc.p(cc.visibleRect.width - 100, cc.visibleRect.height - 26));
+        this.addChild(money);
 
         // 商品列表
         var listView = new ccui.ListView();
@@ -69,5 +69,5 @@ var ShopLayer = GameBaseLayer.extend({
 });
 
 ShopLayer.create = function () {
-    return new ShopLayer
+    return new ShopLayer;
 };
