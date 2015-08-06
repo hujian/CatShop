@@ -45,9 +45,9 @@ var TestMainScene = TestBaseScene.extend({
         // temp in developing
         if (cc.isDebug && !this.autoRun) {
             this.autoRun = true;
-            Util.setReleaseDesignResolution()
-            cc.director.pushScene(new ContainerScene(4))
-            //cc.director.pushScene(new TestCatSpriteScene());
+            //Util.setReleaseDesignResolution()
+            //cc.director.pushScene(new ContainerScene(4))
+            cc.director.pushScene(new TestCatSpriteScene());
         }
     },
 
