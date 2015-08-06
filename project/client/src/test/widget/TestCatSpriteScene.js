@@ -11,7 +11,7 @@ var TestCatSpriteScene = TestBaseScene.extend({
         cc.spriteFrameCache.addSpriteFrames(gameResource.global.cat_baby_plist, gameResource.global.cat_baby_image);
         cc.spriteFrameCache.addSpriteFrames(gameResource.global.cat_plist, gameResource.global.cat_image);
 
-        var p = cc.p(220, 350);
+        var p = cc.p(340, 350);
         // 正面
         var cat = new CatSprite(1);
         cat.setPosition(p);
@@ -20,7 +20,7 @@ var TestCatSpriteScene = TestBaseScene.extend({
 
         // 侧面
         cat = new CatSprite(1, true);
-        cat.showProfile()
+        cat.playEat();
         p.x += 100;
         cat.setPosition(p);
         cat.setScale(0.5);
@@ -40,7 +40,7 @@ var TestCatSpriteScene = TestBaseScene.extend({
         cat.setPosition(p);
         cat.setScale(0.5);
         this.addChild(cat);
-        cat.playEat();
+        cat.playSleep();
 
         // 睡觉
         cat = new CatSprite(25, true);
@@ -48,6 +48,16 @@ var TestCatSpriteScene = TestBaseScene.extend({
         cat.setPosition(p);
         cat.setScale(0.5);
         this.addChild(cat);
-        cat.playSleep();
+        cat.playMove();
+
+        this.addTestButton("生气", function() {
+            cat.angry();
+        })
+        this.addTestButton("高兴", function() {
+            cat.happy();
+        })
+        this.addTestButton("生病", function() {
+            cat.ill();
+        })
     }
 });

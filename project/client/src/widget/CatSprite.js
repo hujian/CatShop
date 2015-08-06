@@ -9,6 +9,7 @@ var CatSprite = cc.Sprite.extend({
     ctor:function (id, cat) {
         this._setting = CatSetting.getById(id);
         this._model = cat
+        this._emotion = null
 
         this._super("#" + this.getImageName("eat", 0));
     },
@@ -20,7 +21,7 @@ var CatSprite = cc.Sprite.extend({
 
     // 走路动画
     playMove:function() {
-        this.play("move", 2, 1 / 5);
+        this.play("move", 2, 1 / 2);
     },
 
     // 吃饭动画
@@ -33,13 +34,46 @@ var CatSprite = cc.Sprite.extend({
         this.play("sleep", 1);
 
         // 呼噜动画
-        var sprite = new cc.Sprite("#icon_sleep.png")
-        sprite.setPosition(cc.p(this.width - 20, this.height + 30))
+        var sprite = new cc.Sprite("#icon_sleep.png");
+        sprite.setPosition(cc.p(this.width - 20, this.height + 30));
         sprite.setScale(0.8)
-        this.addChild(sprite)
+        this.addChild(sprite);
 
-        var animate = new cc.MoveBy(2, 10, 10)
-        sprite.runAction(cc.repeatForever(cc.sequence(animate, animate.reverse())))
+        var animate = new cc.MoveBy(2, 10, 10);
+        sprite.runAction(cc.repeatForever(cc.sequence(animate, animate.reverse())));
+    },
+
+    angry:function() {
+        this.playEmotionAnimation("angry");
+    },
+
+    ill:function() {
+        this.playEmotionAnimation("ill");
+    },
+
+    happy:function() {
+        this.playEmotionAnimation("happy");
+    },
+
+    // 播放心情动画
+    playEmotionAnimation:function(type) {
+        var self = this
+
+        if (self._emotion) {
+            self._emotion.removeFromParent()
+            self._emotion = null
+        }
+
+        var sprite = new cc.Sprite("#icon_" + type + ".png");
+        sprite.setPosition(cc.p(this.width - 20, this.height + 30));
+        sprite.setScale(0.8)
+        self.addChild(sprite);
+        self._emotion = sprite
+
+        sprite.runAction(cc.sequence(cc.moveBy(3, 10, 10), cc.fadeOut(0.5), cc.callFunc(function() {
+            self._emotion.removeFromParent()
+            self._emotion = null
+        })));
     },
 
     // 播放动画
