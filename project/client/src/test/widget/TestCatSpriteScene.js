@@ -50,6 +50,23 @@ var TestCatSpriteScene = TestBaseScene.extend({
         this.addChild(cat);
         cat.playMove();
 
+        // 跑动区域
+        var layer = new GameBaseLayer();
+        layer.setPosition(cc.p(320, 20));
+        layer.setContentSize(cc.size(450, 280));
+        layer.showBorder(true);
+        this.addChild(layer);
+
+        // 到处跑
+        cat = new CatSprite(25, true);
+        p.x -= 150
+        p.y -= 200;
+        cat.start(cc.rect(layer.x, layer.y, layer.width, layer.height))
+        cat.setPosition(p);
+        cat.setScale(0.5);
+        this.addChild(cat);
+        cat.playMove();
+
         this.addTestButton("生气", function() {
             cat.angry();
         })

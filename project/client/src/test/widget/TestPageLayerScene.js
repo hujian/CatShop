@@ -89,6 +89,7 @@ var TestPageLayerScene = TestBaseScene.extend({
         var layer = new SelectCatPageLayer(10, function(index) {
             this.printMessage("index:" + (index + 1).toString())
         }, this)
+        layer.setContentSize(cc.size(383, 57));
         this.updateLayer(layer);
     }
 })
