@@ -50,7 +50,7 @@ var TestItemScene = TestBaseScene.extend({
         name.setAnchorPoint(cc.p(0, 0));
         name.setPosition(cc.p(160, 160));
         this.addChild(name);
-        item = new ShopItem(1, ShopItem.type.Item, function(id) {
+        item = new ShopItem(1, ShopItem.type.Cat, function(id) {
             this.printMessage("购买" + CatSetting.getBabyById(id).name);
         }, this);
         item.setScale(0.5);

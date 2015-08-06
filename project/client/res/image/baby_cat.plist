@@ -4,32 +4,6 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>baby0.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{174,2},{78,113}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{78,113}}</string>
-                <key>sourceSize</key>
-                <string>{78,113}</string>
-            </dict>
-            <key>baby1.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{174,117},{78,113}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{78,113}}</string>
-                <key>sourceSize</key>
-                <string>{78,113}</string>
-            </dict>
             <key>baby1_eat0.png</key>
             <dict>
                 <key>frame</key>
@@ -82,7 +56,7 @@
                 <key>sourceSize</key>
                 <string>{141,117}</string>
             </dict>
-            <key>baby1_sleep.png</key>
+            <key>baby1_sleep0.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{145,347},{177,86}}</string>
@@ -147,7 +121,7 @@
                 <key>sourceSize</key>
                 <string>{141,117}</string>
             </dict>
-            <key>baby2_sleep.png</key>
+            <key>baby2_sleep0.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{145,1021},{132,86}}</string>
@@ -159,19 +133,6 @@
                 <string>{{0,0},{132,86}}</string>
                 <key>sourceSize</key>
                 <string>{132,86}</string>
-            </dict>
-            <key>baby3.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{174,232},{78,113}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{78,113}}</string>
-                <key>sourceSize</key>
-                <string>{78,113}</string>
             </dict>
             <key>baby3_eat0.png</key>
             <dict>
@@ -225,7 +186,7 @@
                 <key>sourceSize</key>
                 <string>{170,117}</string>
             </dict>
-            <key>baby3_sleep.png</key>
+            <key>baby3_sleep0.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{145,526},{177,86}}</string>
@@ -237,19 +198,6 @@
                 <string>{{0,0},{177,86}}</string>
                 <key>sourceSize</key>
                 <string>{177,86}</string>
-            </dict>
-            <key>baby4.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{145,1155},{78,113}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{78,113}}</string>
-                <key>sourceSize</key>
-                <string>{78,113}</string>
             </dict>
             <key>baby4_eat0.png</key>
             <dict>
@@ -303,7 +251,7 @@
                 <key>sourceSize</key>
                 <string>{141,117}</string>
             </dict>
-            <key>baby4_sleep.png</key>
+            <key>baby4_sleep0.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{145,705},{177,86}}</string>
@@ -315,19 +263,6 @@
                 <string>{{0,0},{177,86}}</string>
                 <key>sourceSize</key>
                 <string>{177,86}</string>
-            </dict>
-            <key>baby5.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{2,1194},{78,113}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <true/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{78,113}}</string>
-                <key>sourceSize</key>
-                <string>{78,113}</string>
             </dict>
             <key>baby5_eat0.png</key>
             <dict>
@@ -381,7 +316,7 @@
                 <key>sourceSize</key>
                 <string>{141,119}</string>
             </dict>
-            <key>baby5_sleep.png</key>
+            <key>baby5_sleep0.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{145,884},{135,86}}</string>
@@ -404,7 +339,7 @@
             <key>size</key>
             <string>{254,1440}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:cadaf5c98fdb3ac6c1f95e74d042a900:ffac5c7d981d8373a13eb78834237c0a:d1e406cfb7e32a3f5110d99e3d60260f$</string>
+            <string>$TexturePacker:SmartUpdate:61ba6c18ab4668e47695818789ff23f5:1bb1b4a1729f2ef30ab03ffb64b1c0f9:d1e406cfb7e32a3f5110d99e3d60260f$</string>
             <key>textureFileName</key>
             <string>baby_cat.png</string>
         </dict>

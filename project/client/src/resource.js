@@ -18,6 +18,8 @@ gameResource.global = {
     cat_house_plist: "res/image/cat_house.plist",
     cat_baby_image: "res/image/baby_cat.png",
     cat_baby_plist: "res/image/baby_cat.plist",
+    cat_image: "res/image/cat.png",
+    cat_plist: "res/image/cat.plist",
     shop_image: "res/image/shop.png",
     shop_plist: "res/image/shop.plist",
     cat_setting: "res/setting/cat.json",

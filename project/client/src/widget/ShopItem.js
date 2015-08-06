@@ -21,7 +21,7 @@ var ShopItem = ccui.Layout.extend({
         // 图像，如果是猫，是正面吃东西第一张
         var icon = null
         if (type == ShopItem.type.Cat) {
-            icon = new cc.Sprite("#baby" + id.toString() + "_eat0.png");
+            icon = new CatSprite(id)
         } else {
             icon = new cc.Sprite("#item_" + id.toString() + ".png");
         }

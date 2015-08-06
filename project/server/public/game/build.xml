@@ -276,7 +276,7 @@
                 <file name="src/test/TestContentCellLayer.js"/>
                 <file name="src/test/TestPopupLayer.js"/>
                 <file name="src/test/TestGameScene.js"/>
-                <file name="src/test/TestCatScene.js"/>
+                <file name="src/test/TestCatSpriteScene.js"/>
                 <file name="src/test/TestPopupScene.js"/>
                 <file name="src/test/TestLayerScene.js"/>
                 <file name="src/test/TestUIScene.js"/>
