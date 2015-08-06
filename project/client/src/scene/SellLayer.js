@@ -46,6 +46,7 @@ var SellLayer = GameBaseLayer.extend({
         var layer = new SelectCatPageLayer(User.getAllCats().length, function(index) {
 
         }, this);
+        layer.setContentSize(cc.size(383, 57));
         layer.setAnchorPoint(cc.p(0, 0));
         layer.setPosition(cc.p(9, 286));
         this.addChild(layer);

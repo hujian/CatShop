@@ -61,10 +61,17 @@ var TestItemScene = TestBaseScene.extend({
         name.setAnchorPoint(cc.p(0, 0));
         name.setPosition(cc.p(500, 160));
         this.addChild(name);
+
         item = new HandbookItem(1, 1);
         item.setAnchorPoint(cc.p(0, 0));
         item.setScale(0.5);
         item.setPosition(cc.p(500, 10));
+        this.addChild(item);
+
+        item = new HandbookItem(2, -1);
+        item.setAnchorPoint(cc.p(0, 0));
+        item.setScale(0.5);
+        item.setPosition(cc.p(650, 10));
         this.addChild(item);
     },
 

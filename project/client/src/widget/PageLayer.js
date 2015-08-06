@@ -199,17 +199,16 @@ var SelectCatPageLayer = PageLayer.extend({
     },
 
     initUI:function() {
-        this.setContentSize(cc.size(383, 57));
-
         // 生成中间的数字标示
         var bg = new cc.Sprite("#sell_select_btn_center.png")
-        bg.setPosition(cc.p(this.width / 2, this.height / 2))
         this.addChild(bg)
+        this._statusBg = bg
 
         var label = new ccui.Text("0/0", gameResource.defaultFont, 20);
-        label.setPosition(bg.getPosition());
         this.addChild(label);
         this._statusLabel = label;
+
+        this.updateStatusUI()
         this.updateStatusLabel()
     },
 
@@ -239,5 +238,17 @@ var SelectCatPageLayer = PageLayer.extend({
                 this.updateStatusLabel()
             }
         }
+    },
+
+    updateStatusUI:function() {
+        if (this._statusBg) {
+            this._statusBg.setPosition(cc.p(this.width / 2, this.height / 2))
+            this._statusLabel.setPosition(this._statusBg.getPosition());
+        }
+    },
+
+    updateUIPosition:function() {
+        this._super()
+        this.updateStatusUI()
     }
 });
