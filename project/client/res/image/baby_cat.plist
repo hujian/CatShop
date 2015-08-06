@@ -20,7 +20,7 @@
             <key>baby1_eat1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{117,1270},{79,87}}</string>
+                <string>{{92,1450},{79,87}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -85,7 +85,7 @@
             <key>baby2_eat1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,1274},{79,87}}</string>
+                <string>{{2,1454},{79,87}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -150,7 +150,7 @@
             <key>baby3_eat1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{91,1351},{79,87}}</string>
+                <string>{{91,1531},{79,87}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -215,7 +215,7 @@
             <key>baby4_eat1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{172,1351},{79,87}}</string>
+                <string>{{172,1531},{79,87}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -280,7 +280,7 @@
             <key>baby5_eat1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,1355},{79,87}}</string>
+                <string>{{2,1535},{79,87}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -329,6 +329,58 @@
                 <key>sourceSize</key>
                 <string>{177,86}</string>
             </dict>
+            <key>icon_angry.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{117,1270},{88,88}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{1,1},{88,88}}</string>
+                <key>sourceSize</key>
+                <string>{90,90}</string>
+            </dict>
+            <key>icon_happy.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,1274},{88,88}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{1,1},{88,88}}</string>
+                <key>sourceSize</key>
+                <string>{90,90}</string>
+            </dict>
+            <key>icon_ill.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{92,1360},{88,88}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{1,1},{88,88}}</string>
+                <key>sourceSize</key>
+                <string>{90,90}</string>
+            </dict>
+            <key>icon_sleep.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,1364},{88,88}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{1,1},{88,88}}</string>
+                <key>sourceSize</key>
+                <string>{90,90}</string>
+            </dict>
         </dict>
         <key>metadata</key>
         <dict>
@@ -337,9 +389,9 @@
             <key>realTextureFileName</key>
             <string>baby_cat.png</string>
             <key>size</key>
-            <string>{254,1440}</string>
+            <string>{254,1620}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:61ba6c18ab4668e47695818789ff23f5:1bb1b4a1729f2ef30ab03ffb64b1c0f9:d1e406cfb7e32a3f5110d99e3d60260f$</string>
+            <string>$TexturePacker:SmartUpdate:f3259d24e721652062d0698cb8a2ac4a:f6679d5f59a3ed4fcb35492883301fa0:d1e406cfb7e32a3f5110d99e3d60260f$</string>
             <key>textureFileName</key>
             <string>baby_cat.png</string>
         </dict>

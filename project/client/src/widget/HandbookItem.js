@@ -30,7 +30,8 @@ var HandbookItem = GameBaseLayer.extend({
             var catSetting = CatSetting.getById(catId);
             name.setString(catSetting.name);
 
-            var cat = new CatSprite(catId, true);
+            var cat = new CatSprite(catId);
+            cat.showProfile()
             cat.setPosition(cc.p(bg.width / 2, bg.height / 2));
             this.addChild(cat);
 

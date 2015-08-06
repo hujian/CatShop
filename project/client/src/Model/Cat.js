@@ -5,9 +5,6 @@
 * @date:   2015-06-24
 */
 
-// 猫的配置表，拿到就是两张，为了方便起见，直接把成年猫的id改成从6开始
-var AdultCatStartId = 6
-
 // 猫的配置类
 var CatSetting = CatSetting || {}
 
@@ -63,7 +60,7 @@ CatSetting.getAllAdult = function() {
 // 根据猫的id，获取成猫数据
 CatSetting.getAdultById = function(id) {
     if (id > 0 && this.adult) {
-        return this.adult.jsonData[id - 1]
+        return this.adult.jsonData[id - CatSetting.getAllBaby().length - 1]
     }
 }
 
@@ -79,11 +76,15 @@ CatSetting.getBabyById = function (id) {
     }
 }
 
+CatSetting.isBaby = function(id) {
+    return id <= this.baby.jsonData.length
+};
+
 // 根据id的大小，判断是否是成年猫
 CatSetting.getById = function(id) {
     if (typeof(id) == 'string') id = parseInt(id)
 
-    if (id < AdultCatStartId) {
+    if (CatSetting.isBaby(id)) {
         return CatSetting.getBabyById(id)
     } else {
         return CatSetting.getAdultById(id)

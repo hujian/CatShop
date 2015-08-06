@@ -8,6 +8,7 @@ var TestCatSpriteScene = TestBaseScene.extend({
     ctor:function () {
         this._super();
 
+        cc.spriteFrameCache.addSpriteFrames(gameResource.global.cat_baby_plist, gameResource.global.cat_baby_image);
         cc.spriteFrameCache.addSpriteFrames(gameResource.global.cat_plist, gameResource.global.cat_image);
 
         var p = cc.p(220, 350);
@@ -19,6 +20,7 @@ var TestCatSpriteScene = TestBaseScene.extend({
 
         // 侧面
         cat = new CatSprite(1, true);
+        cat.showProfile()
         p.x += 100;
         cat.setPosition(p);
         cat.setScale(0.5);
@@ -41,7 +43,7 @@ var TestCatSpriteScene = TestBaseScene.extend({
         cat.playEat();
 
         // 睡觉
-        cat = new CatSprite(7, true);
+        cat = new CatSprite(25, true);
         p.x += 100;
         cat.setPosition(p);
         cat.setScale(0.5);

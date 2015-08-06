@@ -5,15 +5,17 @@
 */
 
 var CatSprite = cc.Sprite.extend({
-    // isProfile 是指侧面
-    ctor:function (id, isProfile) {
+    // cat是指在CatManager中被管理cat对象
+    ctor:function (id, cat) {
         this._setting = CatSetting.getById(id);
+        this._model = cat
 
-        if (isProfile) {
-            this._super("#" + this.getImageName("move", 0));
-        } else {
-            this._super("#" + this.getImageName("eat", 0));
-        }
+        this._super("#" + this.getImageName("eat", 0));
+    },
+
+    // 显示侧面
+    showProfile:function() {
+        this.setSpriteFrame(cc.spriteFrameCache.getSpriteFrame(this.getImageName("move", 0)));
     },
 
     // 走路动画
@@ -29,6 +31,15 @@ var CatSprite = cc.Sprite.extend({
     // 睡觉
     playSleep:function() {
         this.play("sleep", 1);
+
+        // 呼噜动画
+        var sprite = new cc.Sprite("#icon_sleep.png")
+        sprite.setPosition(cc.p(this.width - 20, this.height + 30))
+        sprite.setScale(0.8)
+        this.addChild(sprite)
+
+        var animate = new cc.MoveBy(2, 10, 10)
+        sprite.runAction(cc.repeatForever(cc.sequence(animate, animate.reverse())))
     },
 
     // 播放动画
@@ -49,12 +60,16 @@ var CatSprite = cc.Sprite.extend({
 
     getPrefix:function() {
         var name = null;
-        if (this._setting.id > CatSetting.getAllBaby.length) {
-            name = "cat";
-        } else {
+        var id = this._setting.id
+        if (CatSetting.isBaby(this._setting.id)) {
             name = "baby";
+        } else {
+            name = "cat";
+
+            // 成猫的图也是从1开始的，所以需要处理下
+            id -= CatSetting.getAllBaby().length
         }
-        return name + this._setting.id.toString();
+        return name + id.toString();
     },
 
 

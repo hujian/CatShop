@@ -74,7 +74,7 @@ var TestMainScene = TestBaseScene.extend({
             Util.setDebugDesignResolution();
             cc.director.popScene();
         })
-        scene.addChild(button);
+        scene.addChild(button, 9);
         cc.director.pushScene(scene);
     },
 
