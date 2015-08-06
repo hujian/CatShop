@@ -48,7 +48,7 @@ var ShopItem = ccui.Layout.extend({
         // 价格
         var money = new ccui.Text(setting.money + "元", gameResource.defaultFont, 20);
         money.setAnchorPoint(cc.p(0.5, 1));
-        money.setPosition(cc.p(cc.visibleRect.width - 130, bg.height - 35));
+        money.setPosition(cc.p(bg.width - 130, bg.height - 35));
         this.addChild(money);
 
         // 购买按钮

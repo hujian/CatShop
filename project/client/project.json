@@ -30,6 +30,7 @@
         "src/widget/PageLayer.js",
         "src/widget/FoodItem.js",
         "src/widget/ShopItem.js",
+        "src/widget/HandbookItem.js",
         "src/widget/AdLayer.js",
         "src/scene/GameBaseScene.js",
         "src/scene/LoadingScene.js",
