@@ -140,6 +140,5 @@ var CatSprite = cc.Sprite.extend({
     nextTargetPosition:function() {
         var rect = this._moveRect;
         this._target = cc.p(rect.x + Math.random() * rect.width, rect.y + Math.random() * rect.height);
-
     }
 });

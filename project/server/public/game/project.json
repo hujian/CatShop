@@ -1,1 +1,1 @@
-{"showFPS": true, "timestampServerURL": "http://catshop.coding.io/time", "frameRate": 30, "height": 1136, "width": 640, "localMode": 0, "project_type": "javascript", "debugMode": 1, "renderMode": 0, "id": "gameCanvas", "userDataCollectServerURL": "http://127.0.0.1:3000/user/2/report"}
+{"showFPS": false, "timestampServerURL": "http://catshop.coding.io/time", "frameRate": 30, "height": 1136, "width": 640, "localMode": 0, "project_type": "javascript", "debugMode": 1, "renderMode": 0, "id": "gameCanvas", "userDataCollectServerURL": "http://127.0.0.1:3000/user/2/report"}
