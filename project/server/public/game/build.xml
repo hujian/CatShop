@@ -253,7 +253,6 @@
                 <file name="src/resource.js"/>
                 <file name="src/common/Util.js"/>
                 <file name="src/common/Time.js"/>
-                <file name="src/common/StateMachine.js"/>
                 <file name="src/common/EventHandler.js"/>
                 <file name="src/model/DataModel.js"/>
                 <file name="src/model/App.js"/>

@@ -182,9 +182,10 @@ var CatSprite = cc.Sprite.extend({
                 var point = cc.pForAngle(radians);
                 var vector = cc.pMult(point, distance);
                 this.setPosition(cc.pAdd(pos, vector));
-                this.setLocalZOrder(cc.visibleRect.height - parseInt(pos.y))
             }
         }
+
+        this.setLocalZOrder(cc.visibleRect.height - parseInt(this.y))
     },
 
     nextTargetPosition:function() {

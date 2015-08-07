@@ -15,9 +15,9 @@ console.log(process.env.VCAP_SERVICES)
 
 // 链接数据库
 if (dbConfig) {
-  db.connect(dbConfig.uri)
+  //db.connect(dbConfig.uri)
 } else {
-  db.connect('mongodb://127.0.0.1:27017/CatShop')
+  //db.connect('mongodb://127.0.0.1:27017/CatShop')
 }
 
 var app = express();
