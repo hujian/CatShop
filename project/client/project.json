@@ -14,7 +14,6 @@
         "src/resource.js",
         "src/common/Util.js",
         "src/common/Time.js",
-        "src/common/StateMachine.js",
         "src/common/EventHandler.js",
         "src/model/DataModel.js",
         "src/model/App.js",

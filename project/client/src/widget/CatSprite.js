@@ -5,13 +5,15 @@
 */
 
 var CatSprite = cc.Sprite.extend({
-    // cat是指在CatManager中被管理cat对象
-    ctor:function (id, cat) {
+    ctor:function (id) {
         this._setting = CatSetting.getById(id);
-        this._model = cat;
         this._emotion = null;
-
         this._super("#" + this.getImageName("eat", 0));
+    },
+
+    // 显示正面
+    showFront:function() {
+        this.setSpriteFrame(cc.spriteFrameCache.getSpriteFrame(this.getImageName("eat", 0)));
     },
 
     // 显示侧面
@@ -29,7 +31,7 @@ var CatSprite = cc.Sprite.extend({
         this.play("eat", 2, 1 / 2);
     },
 
-    // 睡觉
+    // 睡觉动画
     playSleep:function() {
         this.play("sleep", 1);
 
@@ -38,6 +40,7 @@ var CatSprite = cc.Sprite.extend({
         sprite.setPosition(cc.p(this.width - 20, this.height + 30));
         sprite.setScale(0.8);
         this.addChild(sprite);
+        this._sleepSprite = sprite
 
         var animate = new cc.MoveBy(2, 10, 10);
         sprite.runAction(cc.repeatForever(cc.sequence(animate, animate.reverse())));
@@ -78,6 +81,8 @@ var CatSprite = cc.Sprite.extend({
 
     // 播放动画
     play:function(type, count, delay) {
+        this.stopAllActions()
+
         if (count > 1) {
             var animation = new cc.Animation();
             for (var i=0; i<count; i++) {
@@ -111,34 +116,83 @@ var CatSprite = cc.Sprite.extend({
         return this.getPrefix() + "_" + type + index.toString() + '.png';
     },
 
-    start:function(rect) {
+    // cat是指在CatManager中被管理cat对象
+    start:function(cat, rect) {
+        this._cat = cat
         this._moveRect = rect;
-
-        this.playMove()
-        this.nextTargetPosition();
+        this._state = undefined
         this.scheduleUpdate();
     },
 
+    stop:function() {
+        this.unscheduleUpdate();
+    },
+
     update:function(interval) {
-        if (cc.pFuzzyEqual(this.getPosition(), this._target, 1)) {
-            this.nextTargetPosition();
-        } else {
-            var pos = this.getPosition();
-            var distance = interval * 30;
-            var radians = cc.pToAngle(cc.pSub(this._target, this.getPosition()));
-            if (radians < cc.PI / 2 && radians > -(cc.PI / 2)) {
-                this.setFlippedX(true)
-            } else {
-                this.setFlippedX(false)
+        var state = this._cat.getState();
+        var stateChanged = state != this._state
+
+        if (stateChanged) {
+            switch (state) {
+                case cs.walk: {
+                    this.playMove()
+                    this.nextTargetPosition();
+                    break;
+                }
+                case cs.sleep: {
+                    this.playSleep()
+                    break;
+                }
+                case cs.stand: {
+                    this.showFront()
+                    break;
+                }
+                case cs.eat: {
+                    this.playEat()
+                    break;
+                }
             }
-            var point = cc.pForAngle(radians);
-            var vector = cc.pMult(point, distance);
-            this.setPosition(cc.pAdd(pos, vector));
+
+            if (this._state == cs.sleep && this._sleepSprite) {
+                this._sleepSprite.removeFromParent()
+                this._sleepSprite = undefined
+            }
+
+            this._state = state
+        }
+
+        if (state === cs.walk) {
+            // 处理运动逻辑
+            var position = this.getPosition()
+            if (cc.pFuzzyEqual(position, this._targetPosition, 1)) {
+                this.nextTargetPosition();
+            } else {
+                var pos = this.getPosition();
+                var distance = interval * 30;
+                var radians = cc.pToAngle(cc.pSub(this._targetPosition, this.getPosition()));
+                if (radians < cc.PI / 2 && radians > -(cc.PI / 2)) {
+                    this.setFlippedX(true)
+                } else {
+                    this.setFlippedX(false)
+                }
+                var point = cc.pForAngle(radians);
+                var vector = cc.pMult(point, distance);
+                this.setPosition(cc.pAdd(pos, vector));
+            }
         }
     },
 
     nextTargetPosition:function() {
         var rect = this._moveRect;
-        this._target = cc.p(rect.x + Math.random() * rect.width, rect.y + Math.random() * rect.height);
+        this._targetPosition = cc.p(rect.x + Math.random() * rect.width, rect.y + Math.random() * rect.height);
+    },
+
+    move:function() {
+    },
+
+    stand:function() {
+    },
+
+    sleep:function() {
     }
 });
