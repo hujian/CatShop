@@ -110,14 +110,16 @@ var TestCatScene = TestBaseScene.extend({
 
     getCatStateChinese:function (state) {
         switch (state) {
-            case Cat.state.standing :
+            case cs.stand :
                 return '站立'
-            case Cat.state.walking :
+            case cs.walk :
                 return '散步'
-            case Cat.state.eating :
+            case cs.eat :
                 return '吃饭'
-            case Cat.state.sleeping :
+            case cs.sleep :
                 return '睡觉'
+            default :
+                '未知状态'
         }
     },
 

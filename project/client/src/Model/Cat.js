@@ -278,5 +278,5 @@ Cat.prototype.getStateLastingTime = function() {
 };
 
 Cat.prototype.getState = function() {
-    return this.state
+    return this.state || cs.stand
 };

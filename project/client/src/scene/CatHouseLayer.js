@@ -49,21 +49,21 @@ var CatHouseLayer = GameBaseLayer.extend({
 
         var seconds = User.getFansCount()
         // 小时
-        label = new ccui.Text((seconds / 3600).toString(), gameResource.defaultFont, 16);
+        label = new ccui.Text(parseInt(seconds / 3600).toString(), gameResource.defaultFont, 16);
         label.setAnchorPoint(cc.p(0.5, 1));
         label.setPosition(cc.p(470, this._catNumberLabel.y));
         this.addChild(label)
         this._hourLabel = label
 
         // 分
-        label = new ccui.Text((seconds / 3600 % 60).toString(), gameResource.defaultFont, 16);
+        label = new ccui.Text(parseInt(seconds / 3600 % 60).toString(), gameResource.defaultFont, 16);
         label.setAnchorPoint(cc.p(0, 1));
         label.setPosition(cc.p(this._hourLabel.x + 60, this._catNumberLabel.y));
         this.addChild(label)
         this._minLabel = label
 
         // 秒
-        label = new ccui.Text((seconds % 60).toString(), gameResource.defaultFont, 16);
+        label = new ccui.Text(parseInt(seconds % 60).toString(), gameResource.defaultFont, 16);
         label.setAnchorPoint(cc.p(0, 1));
         label.setPosition(cc.p(this._minLabel.x + 54, this._catNumberLabel.y));
         this.addChild(label)
@@ -79,13 +79,35 @@ var CatHouseLayer = GameBaseLayer.extend({
         var food = new FoodStockPageLayer(this.foodSelect, this);
         food.setPosition(cc.p(0, 198));
         this.addChild(food);
+
+        // 加入猫
+        this.initCats();
+    },
+
+    initCats:function() {
+        var rect = cc.rect(39, 332, 660, 490);
+        var cats = User.getAllCats()
+        for (var i=0; i<cats.length; i++) {
+            var cat = cats[i];
+            var catSprite = new CatSprite(cat.id);
+            var randomX = rect.x + Util.getRandomInt(rect.width / 4, rect.width * 3 / 4);
+            var randomY = rect.y + Util.getRandomInt(rect.height / 4, rect.height * 3 / 4);
+            catSprite.setPosition(cc.p(randomX, randomY));
+            catSprite.start(cat, rect);
+            this.addChild(catSprite);
+        }
     },
 
     onEnter:function () {
         this._super();
+
+        // 开始养猫
+        CatManager.start();
     },
 
     onExit:function () {
+        CatManager.stop();
+
         this._super();
     },
 
