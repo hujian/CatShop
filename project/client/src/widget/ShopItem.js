@@ -8,6 +8,8 @@ var ShopItem = ccui.Layout.extend({
     ctor:function (id, type, callBack, target) {
         this._super();
 
+        this._id = id
+        this._type = type
         this._callback = callBack;
         this._target = target;
 
@@ -55,7 +57,6 @@ var ShopItem = ccui.Layout.extend({
         var buyButton = new ccui.Button("buy_button.png", null, null, ccui.Widget.PLIST_TEXTURE);
         buyButton.setAnchorPoint(cc.p(1, 0));
         buyButton.setPosition(cc.p(bg.width - 27, 12));
-        buyButton.id = id;
         buyButton.addTouchEventListener(this.buyItem, this);
         this.addChild(buyButton);
 
@@ -65,7 +66,7 @@ var ShopItem = ccui.Layout.extend({
     buyItem:function(button, type) {
         if (type == ccui.Widget.TOUCH_ENDED) {
             if (this._target && this._callback) {
-                this._callback.call(this._target, button.id);
+                this._callback.call(this._target, this._id, this._type);
             }
         }
     }

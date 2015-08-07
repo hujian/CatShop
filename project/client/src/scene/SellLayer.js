@@ -35,26 +35,31 @@ var SellLayer = GameBaseLayer.extend({
         text.setPosition(cc.p(185, cc.visibleRect.height - 93));
         this.addChild(text);
 
-        var money = new ccui.Text(User.getMoney().toString() + "元", gameResource.defaultFont, 30);
+        var money = new ccui.Text(User.getMoneyString(), gameResource.defaultFont, 30);
         money.setAnchorPoint(cc.p(1, 1));
         money.setPosition(cc.p(cc.visibleRect.width - 100, cc.visibleRect.height - 26));
         this.addChild(money);
+        this._moneyLabel = money;
 
         // 当前猫咪
+        this.updateCat(0);
 
+        var cats = User.getAllCats();
         // 选择工具栏
-        var layer = new SelectCatPageLayer(User.getAllCats().length, function(index) {
-
+        var layer = new SelectCatPageLayer(cats.length, function(index) {
+            this.updateCat(index);
         }, this);
         layer.setContentSize(cc.size(383, 57));
         layer.setAnchorPoint(cc.p(0, 0));
         layer.setPosition(cc.p(9, 286));
         this.addChild(layer);
+        this._selectlayer = layer;
 
         // 出售按钮
         var sellButton = new ccui.Button("sell_cat_btn.png", null, null, ccui.Widget.PLIST_TEXTURE);
         sellButton.setAnchorPoint(cc.p(0, 0));
         sellButton.setPosition(cc.p(0, height));
+        sellButton.addTouchEventListener(this.sellCat, this);
         this.addChild(sellButton);
 
         var sellHistoryButton = new ccui.Button("sell_history_btn.png", null, null, ccui.Widget.PLIST_TEXTURE);
@@ -69,9 +74,38 @@ var SellLayer = GameBaseLayer.extend({
 
     onExit:function () {
         this._super();
+    },
+
+    updateCat:function(index) {
+        if (this._catSprite) {
+            this._catSprite.removeFromParent();
+            this._catSprite = null
+        }
+
+        var cats = User.getAllCats();
+        if (cats.length > index) {
+            var cat = cats[index]
+            var catSprite = new CatSprite(cat.id);
+            catSprite.model = cat;
+            catSprite.setPosition(cc.p(183, 450));
+            catSprite.setScale(1.2)
+            this.addChild(catSprite);
+            this._catSprite = catSprite;
+        }
+    },
+
+    sellCat:function(button, type) {
+        if (type == ccui.Widget.TOUCH_ENDED) {
+            if (this._catSprite) {
+                Shop.sellCat(this._catSprite.model);
+                this.updateCat(Math.max(this._selectlayer.getCurrentPageIndex() - 1, 0));
+                this._moneyLabel.setString(User.getMoneyString());
+                this._selectlayer.decreaseCount()
+            }
+        }
     }
-})
+});
 
 SellLayer.create = function () {
     return new SellLayer;
-}
+};

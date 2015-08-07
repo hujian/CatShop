@@ -25,10 +25,11 @@ var ShopLayer = GameBaseLayer.extend({
         text.setPosition(cc.p(185, cc.visibleRect.height - 93));
         this.addChild(text);
 
-        var money = new ccui.Text(User.getMoney().toString() + "元", gameResource.defaultFont, 30);
+        var money = new ccui.Text(User.getMoneyString(), gameResource.defaultFont, 30);
         money.setAnchorPoint(cc.p(1, 1));
         money.setPosition(cc.p(cc.visibleRect.width - 100, cc.visibleRect.height - 26));
         this.addChild(money);
+        this._moneyLabel = money;
 
         // 商品列表
         var listView = new ccui.ListView();
@@ -63,8 +64,17 @@ var ShopLayer = GameBaseLayer.extend({
         this._super();
     },
 
-    buyItem:function(id) {
+    buyItem:function(id, type) {
+        var result = false
+        if (type == ShopItem.type.Item) {
+            result = Shop.buyItem(id);
+        } else {
+            result = Shop.buyCat(id);
+        }
 
+        if (result) {
+            this._moneyLabel.setString(User.getMoneyString());
+        }
     }
 });
 

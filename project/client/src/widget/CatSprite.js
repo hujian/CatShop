@@ -11,6 +11,10 @@ var CatSprite = cc.Sprite.extend({
         this._super("#" + this.getImageName("eat", 0));
     },
 
+    getId:function() {
+        return this._setting.id;
+    },
+
     // 显示正面
     showFront:function() {
         this.setSpriteFrame(cc.spriteFrameCache.getSpriteFrame(this.getImageName("eat", 0)));

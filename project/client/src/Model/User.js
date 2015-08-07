@@ -61,6 +61,11 @@ User.getMoney = function() {
     return User.data.jsonData.money || 0
 }
 
+// 获取玩家金币描述字符串
+User.getMoneyString = function() {
+    return User.getMoney().toString() + "元"
+}
+
 // 设置金币
 // 会缓存数据，不要短时间频繁调用
 User.updateMoney = function(money) {
