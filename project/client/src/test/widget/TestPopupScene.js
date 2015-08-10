@@ -6,33 +6,49 @@
 
 var TestPopupScene = TestBaseScene.extend({
     ctor:function () {
-        this._super()
+        this._super();
 
-        this.addTestButton("弹出一个", this.popOne)
-        this.addTestButton("弹出5个", this.popFive)
+        cc.spriteFrameCache.addSpriteFrames(gameResource.global.shop_plist, gameResource.global.shop_image);
+
+        this.addTestButton("弹出一个", this.popOne);
+        this.addTestButton("弹出5个", this.popFive);
+        this.addTestButton("食物确认框", this.foodCheckDialog);
     },
 
     popOne:function () {
-        this.popLayer()
+        this.popLayer();
     },
 
     popFive:function () {
         for (var i = 0; i<5; i++) {
-            this.popLayer()
+            this.popLayer();
         }
     },
 
     popLayer:function () {
-        var layer = new TestPopupLayer()
-        layer.present()
+        var layer = new TestPopupLayer();
+        layer.present();
 
         // 显示当前的弹出层是第几个
-        var label = new ccui.Text("弹出层" +  this.backKeyReleasedEvent.size().toString(), TestSceneFontName, 12)
-        label.setColor(cc.color.BLACK)
-        label.setPosition(cc.p(150, 100))
-        layer.contentLayer.addChild(label)
+        var label = new ccui.Text("弹出层" +  this.backKeyReleasedEvent.size().toString(), TestSceneFontName, 12);
+        label.setColor(cc.color.BLACK);
+        label.setPosition(cc.p(150, 100));
+        layer.contentLayer.addChild(label);
 
         // 可以在现在这个弹出层上，再弹出一个
-        layer.addTestButton("再弹出一个", this.popOne, this)
+        layer.addTestButton("再弹出一个", this.popOne, this);
+    },
+
+    foodCheckDialog:function() {
+        var dialog = new CheckDialog("需要花费100元和30秒钟，购买10个牛奶吗？", this.foodYes, this.foodNo, this);
+        dialog.present();
+    },
+
+    foodYes:function() {
+        this.printMessage("确认生产牛奶。。。");
+    },
+
+    foodNo:function() {
+        this.printMessage("取消生产牛奶。。。");
     }
 })

@@ -5,13 +5,13 @@
 */
 
 var FoodLayer = GameBaseLayer.extend({
-    ctor:function () {
+    ctor:function() {
         this._super();
 
         this.initUI();
     },
 
-    initUI:function () {
+    initUI:function() {
         // 背景
         var bg = new cc.Sprite("#food_bg.png");
         bg.setAnchorPoint(cc.p(0, 0));
@@ -23,22 +23,26 @@ var FoodLayer = GameBaseLayer.extend({
         this.addChild(food);
 
         // 玩家金钱
-        bg = new cc.Sprite("#food_user_money_bg.png")
-        bg.setAnchorPoint(cc.p(1, 0))
-        bg.setPosition(cc.p(cc.visibleRect.width - 28, 338))
-        this.addChild(bg)
+        bg = new cc.Sprite("#food_user_money_bg.png");
+        bg.setAnchorPoint(cc.p(1, 0));
+        bg.setPosition(cc.p(cc.visibleRect.width - 28, 338));
+        this.addChild(bg);
 
-        var label = new ccui.Text(User.getMoney().toString(), gameResource.defaultFont, 30)
-        label.setPosition(cc.p(bg.width / 2, bg.height / 2))
-        bg.addChild(label)
+        var label = new ccui.Text(User.getMoney().toString(), gameResource.defaultFont, 30);
+        label.setPosition(cc.p(bg.width / 2, bg.height / 2));
+        bg.addChild(label);
     },
 
-    onEnter:function () {
+    onEnter:function() {
         this._super();
     },
 
-    onExit:function () {
+    onExit:function() {
         this._super();
+    },
+
+    foodSelect:function(button, foodId) {
+        
     }
 });
 
