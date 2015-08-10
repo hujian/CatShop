@@ -95,6 +95,19 @@
                 <key>sourceSize</key>
                 <string>{640,1136}</string>
             </dict>
+            <key>food_icon_clock.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1824,1051},{41,39}}</string>
+                <key>offset</key>
+                <string>{-1,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{5,0},{41,39}}</string>
+                <key>sourceSize</key>
+                <string>{53,39}</string>
+            </dict>
             <key>food_img_1.png</key>
             <dict>
                 <key>frame</key>
@@ -716,7 +729,7 @@
             <key>size</key>
             <string>{1903,2046}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:4325f7ce1dd1364b5fff7b1a20da4724:bfc3af66e9002d567669889616f0373d:0c3382addd4ddbdf7ff3d469abaa2ba6$</string>
+            <string>$TexturePacker:SmartUpdate:beb8d4a1691af66d267ea0f67270df8c:461c4ad468c6c1eba896e1d0ac6c5320:0c3382addd4ddbdf7ff3d469abaa2ba6$</string>
             <key>textureFileName</key>
             <string>shop.png</string>
         </dict>
