@@ -33,6 +33,7 @@
         "src/widget/AdLayer.js",
         "src/widget/CatSprite.js",
         "src/widget/CheckDialog.js",
+        "src/widget/MessageDialog.js",
         "src/scene/GameBaseScene.js",
         "src/scene/LoadingScene.js",
         "src/scene/ContainerScene.js",

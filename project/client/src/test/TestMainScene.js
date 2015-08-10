@@ -17,7 +17,7 @@ var TestMainScene = TestBaseScene.extend({
         this.nextColumn();
         this.addTestLabel("控件测试");
         this.addTestCase('弹出层', TestPopupScene);
-        this.addTestCase('内容层', TestLayerScene);
+        this.addTestCase('测试用控件', TestLayerScene);
         this.addTestCase('TabBar', TestTabBarScene);
         this.addTestCase('PageLayer', TestPageLayerScene);
         this.addTestCase('各种Item', TestItemScene);

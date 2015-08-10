@@ -13,6 +13,7 @@ var TestPopupScene = TestBaseScene.extend({
         this.addTestButton("弹出一个", this.popOne);
         this.addTestButton("弹出5个", this.popFive);
         this.addTestButton("食物确认框", this.foodCheckDialog);
+        this.addTestButton("食物通知框", this.foodMessageDialog);
     },
 
     popOne:function () {
@@ -41,6 +42,7 @@ var TestPopupScene = TestBaseScene.extend({
 
     foodCheckDialog:function() {
         var dialog = new CheckDialog("需要花费100元和30秒钟，购买10个牛奶吗？", this.foodYes, this.foodNo, this);
+        dialog.setScale(0.6);
         dialog.present();
     },
 
@@ -50,5 +52,15 @@ var TestPopupScene = TestBaseScene.extend({
 
     foodNo:function() {
         this.printMessage("取消生产牛奶。。。");
+    },
+
+    foodMessageDialog:function() {
+        var dialog = new MessageDialog("当前食物栏已满，无法继续生产，请稍等。", this.messageCheck, this);
+        dialog.setScale(0.6);
+        dialog.present();
+    },
+
+    messageCheck:function() {
+        this.printMessage("确认消息框");
     }
 })
