@@ -26,19 +26,23 @@ var FoodProduceProgressBar = GameBaseLayer.extend({
     },
 
     start:function(time, count, callback, target) {
+        this.stop();
+        this.setVisible(true);
+
         this._count = count;
         this._countLeft = count
         this._callback = callback;
         this._target = target;
         this._time = time;
-        this._timeLeft = 0.5;
+        this._timeLeft = 0.3;
+        this._loadingBar.setPercent(0)
 
         // 先播放一个一秒的动画，从0到100
         this.scheduleUpdate();
     },
 
     stop:function() {
-        this.unscheduleAll();
+        this.unscheduleAllCallbacks();
     },
 
     update:function(interval) {
@@ -49,6 +53,7 @@ var FoodProduceProgressBar = GameBaseLayer.extend({
             var clock = new cc.Sprite("#food_icon_clock.png");
             clock.setPosition(cc.p(this.width / 2, this.height / 2));
             this.addChild(clock);
+
             //var scale = cc.scaleTo(1, 1);
             //var restore = cc.callFunc(function(){
             //    clock.setScale(0);
@@ -66,11 +71,11 @@ var FoodProduceProgressBar = GameBaseLayer.extend({
             this._countLeft--;
             this._loadingBar.setPercent(this._countLeft / this._count * 100);
             if (this._callback) {
-                this._callback.call(this._target, this._count - this._countLeft);
+                this._callback.call(this._target, this._count - this._countLeft - 1);
             }
 
             if (this._countLeft <= 0) {
-                this.removeFromParent();
+                this.setVisible(false);
             }
         }
     }

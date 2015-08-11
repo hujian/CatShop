@@ -21,7 +21,8 @@ var TestMainScene = TestBaseScene.extend({
         this.addTestCase('TabBar', TestTabBarScene);
         this.addTestCase('翻页控件', TestPageLayerScene);
         this.addTestCase('进度条', TestProgressBar);
-        this.addTestCase('各种Item', TestProgressBar);
+        this.addTestCase('各种Item', TestItemScene);
+        this.addTestCase('各种Item2', TestItem2Scene);
         this.addTestCase('猫', TestCatSpriteScene);
         this.addTestCase('广告', TestAdScene);
 
@@ -49,7 +50,7 @@ var TestMainScene = TestBaseScene.extend({
             //Util.setReleaseDesignResolution()
             //cc.director.pushScene(new ContainerScene(1))
 
-            cc.director.pushScene(new TestProgressBar());
+            cc.director.pushScene(new TestItem2Scene());
         }
     },
 

@@ -74,5 +74,25 @@ var Util = {
 		var width = cc.game.config.width
 		var height = cc.game.config.height
 		cc.view.setDesignResolutionSize(width, height, cc.ResolutionPolicy.SHOW_ALL);
+	},
+
+	// 打乱数组
+	shuffle:function(array) {
+		var counter = array.length, temp, index;
+
+		// While there are elements in the array
+		while (counter > 0) {
+			// Pick a random index
+			index = Math.floor(Math.random() * counter);
+
+			// Decrease counter by 1
+			counter--;
+
+			// And swap the last element with it
+			temp = array[counter];
+			array[counter] = array[index];
+			array[index] = temp;
+		}
+		return array;
 	}
 };

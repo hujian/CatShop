@@ -8,6 +8,12 @@ var FoodLayer = GameBaseLayer.extend({
     ctor:function() {
         this._super();
 
+        this.foodContainerPositions = [];
+        this.foodContainerPositions.push(cc.p(176, 975));
+        this.foodContainerPositions.push(cc.p(176, 975));
+        this.foodContainerPositions.push(cc.p(176, 975));
+        this.foodContainerPositions.push(cc.p(176, 975));
+
         this.initUI();
     },
 
@@ -42,7 +48,6 @@ var FoodLayer = GameBaseLayer.extend({
     },
 
     foodSelect:function(button, foodId) {
-        
     }
 });
 
