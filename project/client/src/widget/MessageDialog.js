@@ -25,8 +25,11 @@ var MessageDialog = PopupBaseLayer.extend({
         var button = new ccui.Button("btn_close.png", null, null, ccui.Widget.PLIST_TEXTURE);
         button.addTouchEventListener(function(button, type) {
             if (type == ccui.Widget.TOUCH_ENDED) {
-                callback.call(target);
                 this.removeFromParent();
+
+                if (callback) {
+                    callback.call(target);
+                }
             }
         }, this);
         button.setPosition(cc.p(bg.width / 2, 61));

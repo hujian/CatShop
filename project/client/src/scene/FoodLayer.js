@@ -8,12 +8,6 @@ var FoodLayer = GameBaseLayer.extend({
     ctor:function() {
         this._super();
 
-        this.foodContainerPositions = [];
-        this.foodContainerPositions.push(cc.p(176, 975));
-        this.foodContainerPositions.push(cc.p(176, 975));
-        this.foodContainerPositions.push(cc.p(176, 975));
-        this.foodContainerPositions.push(cc.p(176, 975));
-
         this.initUI();
     },
 
@@ -37,6 +31,16 @@ var FoodLayer = GameBaseLayer.extend({
         var label = new ccui.Text(User.getMoney().toString(), gameResource.defaultFont, 30);
         label.setPosition(cc.p(bg.width / 2, bg.height / 2));
         bg.addChild(label);
+
+        // 生产容器
+        this._containers = []
+        for (var i=0; i<4; i++) {
+            var container = new FoodProduceContainer();
+            container.setContentSize(cc.size(306, 270));
+            container.setPosition(cc.p(18 + (i % 2 != 0 ? container.width : 0), 846 - (i > 1 ? container.height : 0)));
+            this.addChild(container);
+            this._containers.push(container);
+        }
     },
 
     onEnter:function() {
@@ -48,6 +52,20 @@ var FoodLayer = GameBaseLayer.extend({
     },
 
     foodSelect:function(button, foodId) {
+        var setting = FoodSetting.getById(foodId);
+        if (User.getMoney() < setting.money) {
+            var dialog = new MessageDialog("资金不足，请加油赚钱哦！");
+            dialog.present();
+        } else {
+            for (var i=0; i<4; i++) {
+                var container = this._containers[i];
+                if (container.isDone()) {
+                    container.produceFood(foodId);
+                    Shop.buyFood(foodId);
+                    return;
+                }
+            }
+        }
     }
 });
 
