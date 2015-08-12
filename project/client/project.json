@@ -32,6 +32,7 @@
         "src/widget/HandbookItem.js",
         "src/widget/AdLayer.js",
         "src/widget/CatSprite.js",
+        "src/widget/FoodSprite.js",
         "src/widget/CheckDialog.js",
         "src/widget/MessageDialog.js",
         "src/widget/ProgressBar.js",

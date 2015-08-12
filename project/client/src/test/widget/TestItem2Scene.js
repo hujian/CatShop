@@ -18,5 +18,13 @@ var TestItem2Scene = TestBaseScene.extend({
         this.addTestButton("生产食物", function() {
             container.produceFood(1);
         });
+
+        this.addTestButton("移动食物", function() {
+            var food = new FoodSprite(1);
+            food.setPosition(cc.visibleRect.center);
+            this.addChild(food);
+            food.setScale(0.6)
+            food.startMoving();
+        });
     }
 });
