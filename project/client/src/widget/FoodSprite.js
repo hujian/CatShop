@@ -13,16 +13,21 @@ var FoodSprite = cc.Sprite.extend({
 
         var listener = cc.EventListener.create({
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
+            swallowTouches:true,
             onTouchBegan:function(touch, event) {
-                if (!self._moving) {
-                    self.startMoving();
+                var ret = Util.touchInNode(touch, self);
+                if (ret) {
+                    if (!self._moving) {
+                        self.startMoving();
+                    }
                 }
-                return Util.touchInNode(touch, self);
+                return ret;
             },
             onTouchMoved:function(touch, event) {
                 var delta = touch.getDelta();
                 self.x += delta.x;
                 self.y += delta.y;
+                self.setLocalZOrder(cc.visibleRect.height - self.y);
             },
             onTouchEnded:function(touch, event) {
                 self.stopMoving();

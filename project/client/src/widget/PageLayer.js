@@ -143,17 +143,16 @@ var FoodStockPageLayer = PageLayer.extend({
         for (var i=0; i<allFood.length; i++) {
             var id = i + 1;
             var item = new FoodStockItem(id, User.getFoodCount(id), ccui.Widget.PLIST_TEXTURE);
-            item.food = allFood[i];
             item.addTouchEventListener(this.selectFood, this);
             items.push(item);
         }
         this.addItems(items, 4, 15, 22);
     },
 
-    selectFood:function(button, type) {
+    selectFood:function(item, type) {
         if (type == ccui.Widget.TOUCH_ENDED) {
             if (this.callback) {
-                this.callback.call(this.target, button, button.food.id);
+                this.callback.call(this.target, item);
             }
         }
     }
@@ -171,17 +170,16 @@ var FoodPageLayer = PageLayer.extend({
             var id = i + 1;
             var setting = FoodSetting.getById(id);
             var item = new FoodItem(id, setting.money, setting.time, ccui.Widget.PLIST_TEXTURE);
-            item.food = allFood[i];
             item.addTouchEventListener(this.selectFood, this);
             items.push(item);
         }
         this.addItems(items, 4, 15, 22);
     },
 
-    selectFood:function(button, type) {
+    selectFood:function(item, type) {
         if (type == ccui.Widget.TOUCH_ENDED) {
             if (this.callback) {
-                this.callback.call(this.target, button, button.food.id);
+                this.callback.call(this.target, item);
             }
         }
     }

@@ -10,6 +10,7 @@ var FoodItem = ccui.Button.extend({
         // 背景
         var imagePath = "food_select_icon_" + id.toString() + ".png";
         this._super(imagePath, null, null, type);
+        this._id = id;
 
         // 食物生产需要的时间
         this.setTitleText(time.toString() + "秒");
@@ -23,6 +24,10 @@ var FoodItem = ccui.Button.extend({
         this.addChild(label);
     },
 
+    getId:function() {
+        return this._id;
+    },
+
     // 需要调整title的位置，直接覆盖父类的方法
     _updateTitleLocation: function(){
         this._titleRenderer.setPosition(this._contentSize.width * 0.5, 15);
@@ -34,6 +39,7 @@ var FoodStockItem = ccui.Button.extend({
         // 背景
         var imagePath = "cat_house_food_icon_" + id.toString() + ".png";
         this._super(imagePath, null, null, type);
+        this._id = id;
 
         // 食物剩余的数量
         this.setTitleText(count.toString());
@@ -43,6 +49,10 @@ var FoodStockItem = ccui.Button.extend({
 
     updateStock:function(count) {
         this.setTitleText(count.toString());
+    },
+
+    getId:function() {
+        return this._id;
     },
 
     // 需要调整title的位置，直接覆盖父类的方法

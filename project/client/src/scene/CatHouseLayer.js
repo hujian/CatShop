@@ -114,6 +114,14 @@ var CatHouseLayer = GameBaseLayer.extend({
     showHelp:function(button, type) {
         if (type == ccui.Widget.TOUCH_ENDED) {
         }
+    },
+
+    foodSelect:function(foodItem) {
+        var foodId = foodItem.getId();
+        var foodSprite = new FoodSprite(foodId);
+        foodSprite.setPosition(cc.p(this.width / 2, 689));
+        foodSprite.startMoving();
+        this.addChild(foodSprite);
     }
 });
 

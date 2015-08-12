@@ -51,7 +51,8 @@ var FoodLayer = GameBaseLayer.extend({
         this._super();
     },
 
-    foodSelect:function(button, foodId) {
+    foodSelect:function(foodItem) {
+        var foodId = foodItem.getId();
         var setting = FoodSetting.getById(foodId);
         if (User.getMoney() < setting.money) {
             var dialog = new MessageDialog("资金不足，请加油赚钱哦！");

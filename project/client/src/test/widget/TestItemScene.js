@@ -75,9 +75,9 @@ var TestItemScene = TestBaseScene.extend({
         this.addChild(item);
     },
 
-    selectFood:function(button, type) {
+    selectFood:function(foodItem, type) {
         if (type == ccui.Widget.TOUCH_ENDED) {
-            this.printMessage("选择食物" + button.food.name);
+            this.printMessage("选择食物" + FoodSetting.getById(foodItem.getId()).name);
         }
     }
 });
