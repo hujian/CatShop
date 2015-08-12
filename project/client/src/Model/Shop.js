@@ -94,19 +94,19 @@ Shop.buyItem = function (id, count) {
 }
 
 // 购买食物，返回true表示购买成功
-Shop.buyFood = function (id, count) {
+// 注意食物有个生产过程，所以这里不是一定直接加上食物的
+Shop.buyFood = function (id, count, addFood) {
     var ret = false
-
     count = count || 1
-
     var setting = FoodSetting.getById(id)
     if (setting) {
         var moneyLeft = User.getMoney() - setting.money * count
         if (moneyLeft >= 0) {
             User.updateMoney(moneyLeft)
-            User.addFood(id, count)
-            User.flush()
-
+            if (addFood) {
+                User.addFood(id, count)
+                User.flush()
+            }
             ret = true
         }
     }

@@ -94,5 +94,21 @@ var Util = {
 			array[index] = temp;
 		}
 		return array;
+	},
+
+	// 判断某个touch事件是否在某个node内部
+	touchInNode:function(touch, node) {
+		var locationInNode = node.convertToNodeSpace(touch.getLocation());
+		var s = node.getContentSize();
+		var rect = cc.rect(0, 0, s.width, s.height);
+		if (cc.rectContainsPoint(rect, locationInNode)) {
+			return true;
+		}
+		return false;
+	},
+
+	// 获取cc.Point的描述字符串，debug用
+	pointToString:function(point) {
+		return "x: " + point.x.toString() + ", y: " + point.y.toString();
 	}
 };
