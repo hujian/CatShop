@@ -43,7 +43,7 @@ User.restoreModel = function(dataArray, model) {
 
 // 保存到本地缓存
 User.flush = function() {
-    User.data.saveDataToLocalStorage(User.dataSavingKey, ['fsm'])
+    User.data.saveDataToLocalStorage(User.dataSavingKey, ['unsavingData'])
 }
 
 // 获取数据的json字符串

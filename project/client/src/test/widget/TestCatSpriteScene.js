@@ -57,8 +57,6 @@ var TestCatSpriteScene = TestBaseScene.extend({
         layer.showBorder(true);
         this.addChild(layer);
 
-        CatManager.start()
-
         // 到处跑
         var catModel = User.addCat(25);
         cat = new CatSprite(25);
@@ -66,8 +64,10 @@ var TestCatSpriteScene = TestBaseScene.extend({
         p.y -= 200;
         cat.setPosition(p);
         cat.setScale(0.5);
-        cat.start(catModel, cc.rect(layer.x, layer.y, layer.width, layer.height))
+        cat.start(catModel)
         this.addChild(cat);
+        CatManager.start(cc.rect(layer.x, layer.y, layer.width, layer.height));
+        cat.setPosition(catModel.getPosition());
 
         this.addTestButton("生气", function() {
             cat.angry();

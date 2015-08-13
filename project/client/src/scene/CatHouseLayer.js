@@ -117,7 +117,9 @@ var CatHouseLayer = GameBaseLayer.extend({
         var foodSprite = new FoodSprite(foodId);
         foodSprite.setPosition(cc.p(this.width / 2, 689));
         foodSprite.startMoving();
+        foodSprite.setScale(0.8);
         this.addChild(foodSprite);
+        CatManager.addFood(foodSprite);
     }
 });
 

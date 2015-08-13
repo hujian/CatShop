@@ -8,6 +8,8 @@ var FoodSprite = cc.Sprite.extend({
     ctor:function (id) {
         this._setting = FoodSetting.getById(id);
         this._super("#food_img_" + id.toString() + ".png");
+        this.canMove = true;
+        this.canEat = false;
 
         var self = this;
 
@@ -17,7 +19,7 @@ var FoodSprite = cc.Sprite.extend({
             onTouchBegan:function(touch, event) {
                 var ret = Util.touchInNode(touch, self);
                 if (ret) {
-                    if (!self._moving) {
+                    if (!self._moving && this.canMove) {
                         self.startMoving();
                     }
                 }
@@ -30,6 +32,9 @@ var FoodSprite = cc.Sprite.extend({
                 self.setLocalZOrder(cc.visibleRect.height - self.y);
             },
             onTouchEnded:function(touch, event) {
+                // 食物刚放上去的时候，不能吃，一旦移动过一次，就可以吃了
+                self.canEat = true;
+
                 self.stopMoving();
             }
         });
@@ -54,5 +59,17 @@ var FoodSprite = cc.Sprite.extend({
 
     getId:function() {
         return this._setting.id;
+    },
+
+    // 被猫吃掉了
+    ate:function() {
+        this.removeFromParent();
+        User.removeFood(this.getId(), 1);
+        return this._setting.value;
+    },
+
+    // 食物有大小，吃得时候，需要一个固定的位置
+    getEatingPosition:function() {
+        return cc.pAdd(this.getPosition(), cc.p(0, 30));
     }
 });

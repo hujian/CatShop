@@ -138,5 +138,17 @@ CatManager.addFood = function(food) {
 };
 
 // 查询当前的食物，传入true，就直接扣除该食物，返回的是上层的食物精灵
-CatManager.findFood = function(cat, needRemove) {
+// 传入cat，用以查找合适的食物
+CatManager.findFood = function(cat) {
+    var foods = CatManager.food;
+    if (foods.length > 0) {
+        for (var i=foods.length-1; i>=0; i--) {
+            var food = foods[i];
+            if (food.canEat) {
+                foods.splice(i, 1);
+                return food;
+            }
+        }
+    }
+    return null;
 };

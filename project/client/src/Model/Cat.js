@@ -127,6 +127,9 @@ var Cat = function(id) {
     // 位置
     this.position = cc.p(0, 0);
     this.targetPosition = cc.p(0, 0);
+
+    // 无需保存到本地的数据
+    this.unsavingData = {}
 };
 
 // 更新猫的状态
@@ -178,7 +181,7 @@ Cat.prototype.update = function(interval) {
             this.nextTargetPosition();
         } else {
             var pos = this.getPosition();
-            var distance = interval * 30;
+            var distance = interval * 60;
             var radians = cc.pToAngle(cc.pSub(this.targetPosition, this.getPosition()));
             var point = cc.pForAngle(radians);
             var vector = cc.pMult(point, distance);
@@ -186,11 +189,15 @@ Cat.prototype.update = function(interval) {
         }
     }
 
+    // 处理找食物逻辑
+    if (this.state != cs.eat && this.state != cs.sleep) {
+        if (this.timeToEat()) {
+            this.findFood();
+        }
+    }
+
     // 动作状态迁移
     if (this.stateLastingTime <= 0) {
-        if (this.state != cs.eat) {
-        }
-
         switch (this.state) {
             case cs.stand: {
                 if (Util.randomInPercentage(0.3)) {
@@ -201,10 +208,12 @@ Cat.prototype.update = function(interval) {
                 break;
             }
             case cs.walk: {
-                if (Util.randomInPercentage(0.2)) {
-                    this.sleep();
-                } else {
-                    this.stand();
+                if (!this.getUnsavingData().chasingFood) {
+                    if (Util.randomInPercentage(0.2)) {
+                        this.sleep();
+                    } else {
+                        this.stand();
+                    }
                 }
                 break;
             }
@@ -217,6 +226,14 @@ Cat.prototype.update = function(interval) {
                     } else {
                         this.walk();
                     }
+                }
+
+                // 吃完处理食物
+                var food = this.getUnsavingData().chasingFood;
+                if (food) {
+                    var foodValue = food.ate();
+                    this.feed(foodValue);
+                    this.getUnsavingData().chasingFood = null;
                 }
                 break;
             }
@@ -245,12 +262,12 @@ Cat.prototype.stand = function () {
 
 Cat.prototype.eat = function () {
     this.state = cs.eat;
-    this.stateLastingTime = Util.getRandomInt(5, 10)
+    this.stateLastingTime = Util.getRandomInt(5, 7)
 };
 
 Cat.prototype.sleep = function () {
     this.state = cs.sleep;
-    this.stateLastingTime = Util.getRandomInt(5, 20)
+    this.stateLastingTime = Util.getRandomInt(5, 10)
 };
 
 Cat.prototype.timeToEat = function() {
@@ -258,6 +275,22 @@ Cat.prototype.timeToEat = function() {
 };
 
 Cat.prototype.findFood = function() {
+    var chasingFood = this.getUnsavingData().chasingFood
+
+    if (chasingFood) {
+        this.targetPosition = chasingFood.getEatingPosition();
+        if (cc.pFuzzyEqual(this.position, this.targetPosition, 1)) {
+            chasingFood.canMove = false;
+            this.eat();
+        }
+    } else {
+        var food = CatManager.findFood(this);
+        if (food) {
+            this.targetPosition = food.getEatingPosition();
+            this.walk();
+            this.getUnsavingData().chasingFood = food;
+        }
+    }
 };
 
 Cat.prototype.clean = function() {
@@ -344,7 +377,12 @@ Cat.prototype.getStateLastingTime = function() {
 };
 
 Cat.prototype.getState = function() {
-    return this.state || cs.stand
+    return this.state || cs.stand;
+};
+
+Cat.prototype.getUnsavingData = function() {
+    this.unsavingData = this.unsavingData || {};
+    return this.unsavingData;
 };
 
 Cat.prototype.setPosition = function(position) {
