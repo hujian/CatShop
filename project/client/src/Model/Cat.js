@@ -231,8 +231,16 @@ Cat.prototype.update = function(interval) {
                 // 吃完处理食物
                 var food = this.getUnsavingData().chasingFood;
                 if (food) {
+                    // 删除精灵
                     var foodValue = food.ate();
+
+                    //  从本地缓存减去食物数量
+                    User.removeFood(food.getId(), 1);
+                    User.flush();
+
+                    // 喂食，降低饥饿值
                     this.feed(foodValue);
+
                     this.getUnsavingData().chasingFood = null;
                 }
                 break;

@@ -51,6 +51,10 @@ var FoodStockItem = ccui.Button.extend({
         this.setTitleText(count.toString());
     },
 
+    getStockCount:function() {
+        return User.getFoodCount(this._id);
+    },
+
     getId:function() {
         return this._id;
     },

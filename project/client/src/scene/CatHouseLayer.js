@@ -113,13 +113,25 @@ var CatHouseLayer = GameBaseLayer.extend({
     },
 
     foodSelect:function(foodItem) {
-        var foodId = foodItem.getId();
-        var foodSprite = new FoodSprite(foodId);
-        foodSprite.setPosition(cc.p(this.width / 2, 689));
-        foodSprite.startMoving();
-        foodSprite.setScale(0.8);
-        this.addChild(foodSprite);
-        CatManager.addFood(foodSprite);
+        var count = foodItem.getStockCount()
+        if (count > 0) {
+            // 加入食物精灵
+            var foodId = foodItem.getId();
+            var foodSprite = new FoodSprite(foodId);
+            foodSprite.setPosition(cc.p(this.width / 2, 689));
+            foodSprite.startMoving();
+            foodSprite.setScale(0.8);
+            this.addChild(foodSprite);
+
+            // 将食物加入猫屋逻辑
+            CatManager.addFood(foodSprite);
+
+            // 更新UI上食物数量
+            foodItem.updateStock(count - 1);
+        } else {
+            var message = new MessageDialog("食物不够，请先去购买足够的食物哦！");
+            message.present();
+        }
     }
 });
 

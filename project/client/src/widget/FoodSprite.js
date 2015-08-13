@@ -64,7 +64,6 @@ var FoodSprite = cc.Sprite.extend({
     // 被猫吃掉了
     ate:function() {
         this.removeFromParent();
-        User.removeFood(this.getId(), 1);
         return this._setting.value;
     },
 
