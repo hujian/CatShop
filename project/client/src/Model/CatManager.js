@@ -7,7 +7,7 @@
 var CatManager = CatManager || {};
 
 // update逻辑更新的频率
-CatManager.updateInterval = 1;
+CatManager.updateInterval = 1 / 30;
 
 // 用户保存到本的时间间隔
 CatManager.savingDataInterval = 10;
@@ -21,9 +21,19 @@ CatManager.collectUserDataLeftTime = CatManager.collectUserDataInerval;
 CatManager.rasingCat = false;
 
 // cat要进入养育状态，就调用该函数
-CatManager.start = function() {
+CatManager.start = function(rect) {
     cc.director.getScheduler().schedule(CatManager.update, CatManager, CatManager.updateInterval, cc.REPEAT_FOREVER, 0, false, "cat");
+
     CatManager.rasingCat = true;
+    CatManager.moveRect = rect;
+
+    var cats = User.getAllCats()
+    for (var i=0; i<cats.length; i++) {
+        var cat = cats[i];
+        var randomX = rect.x + Util.getRandomInt(rect.width / 4, rect.width * 3 / 4);
+        var randomY = rect.y + Util.getRandomInt(rect.height / 4, rect.height * 3 / 4);
+        cat.setPosition(cc.p(randomX, randomY));
+    }
 };
 
 // 如果要暂停养育，希望cat的所有状态暂时挺住，就掉用该函数
@@ -118,4 +128,15 @@ CatManager.getHealthValue = function() {
     var healthValue = User.getFansCount() > 0 ? 1 : -1;
     healthValue -= (User.getHairCount() > 0 ? parseInt(User.getHairCount() / 5) : -1);
     return healthValue
+};
+
+CatManager.food = [];
+
+// 加入食物
+CatManager.addFood = function(food) {
+    CatManager.food.push(food);
+};
+
+// 查询当前的食物，传入true，就直接扣除该食物，返回的是上层的食物精灵
+CatManager.findFood = function(cat, needRemove) {
 };

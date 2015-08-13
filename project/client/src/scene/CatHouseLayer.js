@@ -80,20 +80,20 @@ var CatHouseLayer = GameBaseLayer.extend({
         food.setPosition(cc.p(0, 198));
         this.addChild(food);
 
-        // 加入猫
+
+        // 开始养猫
+        var rect = cc.rect(39, 332, 660, 490);
+        CatManager.start(rect);
         this.initCats();
     },
 
     initCats:function() {
-        var rect = cc.rect(39, 332, 660, 490);
         var cats = User.getAllCats()
         for (var i=0; i<cats.length; i++) {
             var cat = cats[i];
             var catSprite = new CatSprite(cat.id);
-            var randomX = rect.x + Util.getRandomInt(rect.width / 4, rect.width * 3 / 4);
-            var randomY = rect.y + Util.getRandomInt(rect.height / 4, rect.height * 3 / 4);
-            catSprite.setPosition(cc.p(randomX, randomY));
-            catSprite.start(cat, rect);
+            catSprite.start(cat);
+            catSprite.setPosition(cat.getPosition());
             this.addChild(catSprite);
         }
     },
@@ -101,13 +101,9 @@ var CatHouseLayer = GameBaseLayer.extend({
     onEnter:function () {
         this._super();
 
-        // 开始养猫
-        CatManager.start();
     },
 
     onExit:function () {
-        CatManager.stop();
-
         this._super();
     },
 

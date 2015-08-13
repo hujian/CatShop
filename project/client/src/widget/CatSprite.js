@@ -17,11 +17,15 @@ var CatSprite = cc.Sprite.extend({
 
     // 显示正面
     showFront:function() {
+        this.stopAllActions();
+
         this.setSpriteFrame(cc.spriteFrameCache.getSpriteFrame(this.getImageName("eat", 0)));
     },
 
     // 显示侧面
     showProfile:function() {
+        this.stopAllActions();
+
         this.setSpriteFrame(cc.spriteFrameCache.getSpriteFrame(this.getImageName("move", 0)));
     },
 
@@ -44,7 +48,7 @@ var CatSprite = cc.Sprite.extend({
         sprite.setPosition(cc.p(this.width - 20, this.height + 30));
         sprite.setScale(0.8);
         this.addChild(sprite);
-        this._sleepSprite = sprite
+        this._sleepSprite = sprite;
 
         var animate = new cc.MoveBy(2, 10, 10);
         sprite.runAction(cc.repeatForever(cc.sequence(animate, animate.reverse())));
@@ -85,7 +89,7 @@ var CatSprite = cc.Sprite.extend({
 
     // 播放动画
     play:function(type, count, delay) {
-        this.stopAllActions()
+        this.stopAllActions();
 
         if (count > 1) {
             var animation = new cc.Animation();
@@ -121,10 +125,9 @@ var CatSprite = cc.Sprite.extend({
     },
 
     // cat是指在CatManager中被管理cat对象
-    start:function(cat, rect) {
-        this._cat = cat
-        this._moveRect = rect;
-        this._state = undefined
+    start:function(cat) {
+        this._cat = cat;
+        this._state = undefined;
         this.scheduleUpdate();
     },
 
@@ -132,73 +135,50 @@ var CatSprite = cc.Sprite.extend({
         this.unscheduleUpdate();
     },
 
-    update:function(interval) {
+    update:function() {
         var state = this._cat.getState();
-        var stateChanged = state != this._state
+        var stateChanged = state != this._state;
 
         if (stateChanged) {
             switch (state) {
                 case cs.walk: {
-                    this.playMove()
-                    this.nextTargetPosition();
+                    this.playMove();
                     break;
                 }
                 case cs.sleep: {
-                    this.playSleep()
+                    this.playSleep();
                     break;
                 }
                 case cs.stand: {
-                    this.showFront()
+                    this.showFront();
                     break;
                 }
                 case cs.eat: {
-                    this.playEat()
+                    this.playEat();
                     break;
                 }
             }
 
+            // 去除那个睡觉的“z”字动画
             if (this._state == cs.sleep && this._sleepSprite) {
-                this._sleepSprite.removeFromParent()
-                this._sleepSprite = undefined
+                this._sleepSprite.removeFromParent();
+                this._sleepSprite = undefined;
             }
 
-            this._state = state
+            this._state = state;
         }
 
+        // 设置位置，注意移动的具体逻辑在Cat这个model里面
         if (state === cs.walk) {
-            // 处理运动逻辑
-            var position = this.getPosition()
-            if (cc.pFuzzyEqual(position, this._targetPosition, 1)) {
-                this.nextTargetPosition();
+            this.setPosition(this._cat.getPosition());
+
+            if (this._cat.getTargetPosition().x > this._cat.getPosition().x) {
+                this.setFlippedX(true);
             } else {
-                var pos = this.getPosition();
-                var distance = interval * 30;
-                var radians = cc.pToAngle(cc.pSub(this._targetPosition, this.getPosition()));
-                if (radians < cc.PI / 2 && radians > -(cc.PI / 2)) {
-                    this.setFlippedX(true)
-                } else {
-                    this.setFlippedX(false)
-                }
-                var point = cc.pForAngle(radians);
-                var vector = cc.pMult(point, distance);
-                this.setPosition(cc.pAdd(pos, vector));
+                this.setFlippedX(false);
             }
         }
 
-        this.setLocalZOrder(cc.visibleRect.height - parseInt(this.y))
-    },
-
-    nextTargetPosition:function() {
-        var rect = this._moveRect;
-        this._targetPosition = cc.p(rect.x + Math.random() * rect.width, rect.y + Math.random() * rect.height);
-    },
-
-    move:function() {
-    },
-
-    stand:function() {
-    },
-
-    sleep:function() {
+        this.setLocalZOrder(cc.visibleRect.height - parseInt(this.y));
     }
 });

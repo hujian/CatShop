@@ -122,7 +122,11 @@ var Cat = function(id) {
     this.state = cs.stand;
 
     // 某一个状态持续的时间, 第一个状态是站立，不要超过1
-    this.stateLastingTime = 1;
+    this.stateLastingTime = 0.3;
+
+    // 位置
+    this.position = cc.p(0, 0);
+    this.targetPosition = cc.p(0, 0);
 };
 
 // 更新猫的状态
@@ -167,31 +171,93 @@ Cat.prototype.update = function(interval) {
         }
     }
 
-    // 动作
+    // 处理移动逻辑
+    if (this.state === cs.walk) {
+        var position = this.getPosition();
+        if (cc.pFuzzyEqual(position, this.targetPosition, 1)) {
+            this.nextTargetPosition();
+        } else {
+            var pos = this.getPosition();
+            var distance = interval * 30;
+            var radians = cc.pToAngle(cc.pSub(this.targetPosition, this.getPosition()));
+            var point = cc.pForAngle(radians);
+            var vector = cc.pMult(point, distance);
+            this.setPosition(cc.pAdd(pos, vector));
+        }
+    }
+
+    // 动作状态迁移
     if (this.stateLastingTime <= 0) {
+        if (this.state != cs.eat) {
+        }
+
         switch (this.state) {
             case cs.stand: {
-                this.state = cs.walk;
-                this.stateLastingTime = Util.getRandomInt(2, 10)
+                if (Util.randomInPercentage(0.3)) {
+                    this.sleep();
+                } else {
+                    this.walk();
+                }
                 break;
             }
             case cs.walk: {
-                this.state = cs.eat;
-                this.stateLastingTime = Util.getRandomInt(5, 10)
+                if (Util.randomInPercentage(0.2)) {
+                    this.sleep();
+                } else {
+                    this.stand();
+                }
                 break;
             }
             case cs.eat: {
-                this.state = cs.sleep;
-                this.stateLastingTime = Util.getRandomInt(5, 20)
+                if (Util.randomInPercentage(0.6)) {
+                    this.sleep();
+                } else {
+                    if (Util.randomInPercentage(0.7)) {
+                        this.stand();
+                    } else {
+                        this.walk();
+                    }
+                }
                 break;
             }
             case cs.sleep: {
-                this.state = cs.stand;
-                this.stateLastingTime = Util.getRandomInt(1, 2)
+                if (Util.randomInPercentage(0.6)) {
+                    this.walk();
+                } else {
+                    this.stand();
+                }
                 break;
             }
         }
     }
+};
+
+Cat.prototype.walk = function () {
+    this.state = cs.walk;
+    this.stateLastingTime = Util.getRandomInt(2, 10);
+    this.nextTargetPosition();
+};
+
+Cat.prototype.stand = function () {
+    this.state = cs.stand;
+    this.stateLastingTime = Util.getRandomInt(1, 3)
+};
+
+Cat.prototype.eat = function () {
+    this.state = cs.eat;
+    this.stateLastingTime = Util.getRandomInt(5, 10)
+};
+
+Cat.prototype.sleep = function () {
+    this.state = cs.sleep;
+    this.stateLastingTime = Util.getRandomInt(5, 20)
+};
+
+Cat.prototype.timeToEat = function() {
+    return this.getHungry() > 70;
+};
+
+Cat.prototype.findFood = function() {
 };
 
 Cat.prototype.clean = function() {
@@ -279,4 +345,25 @@ Cat.prototype.getStateLastingTime = function() {
 
 Cat.prototype.getState = function() {
     return this.state || cs.stand
+};
+
+Cat.prototype.setPosition = function(position) {
+    this.position = cc.p(position);
+};
+
+Cat.prototype.getPosition = function() {
+    return this.position;
+};
+
+Cat.prototype.nextTargetPosition = function() {
+    var rect = CatManager.moveRect;
+    this.targetPosition = cc.p(rect.x + Math.random() * rect.width, rect.y + Math.random() * rect.height);
+};
+
+Cat.prototype.setTargetPosition = function(position) {
+    this.targetPosition = cc.p(position);
+};
+
+Cat.prototype.getTargetPosition = function() {
+    return this.targetPosition;
 };

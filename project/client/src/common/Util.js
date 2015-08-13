@@ -52,6 +52,11 @@ var Util = {
 		return parseInt(Math.random() * (max - min) + min)
 	},
 
+	// 传入 [0, 1]
+	randomInPercentage:function(percentage) {
+		return Math.random() >= 1 - percentage;
+	},
+
 	// 全局加速, 注意factor不是乘上原值，设成1恢复原值
 	speedUp:function (factor) {
 		cc.director.getScheduler().setTimeScale(factor)
