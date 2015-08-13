@@ -109,6 +109,8 @@ var CatHouseLayer = GameBaseLayer.extend({
 
     showHelp:function(button, type) {
         if (type == ccui.Widget.TOUCH_ENDED) {
+            var layer = new HelpLayer()
+            layer.present();
         }
     },
 

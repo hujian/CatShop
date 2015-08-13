@@ -17,7 +17,7 @@ var GameBaseScene = cc.Scene.extend({
         this.backKeyReleasedEvent = new EventHandler();
         cc.eventManager.addListener({
             event: cc.EventListener.KEYBOARD,
-            onKeyReleased: this.onKeyReleased
+            onKeyReleased: this.onKeyReleased.bind(this)
         }, this);
     },
 
