@@ -28,11 +28,26 @@ CatManager.start = function(rect) {
     CatManager.moveRect = rect;
 
     var cats = User.getAllCats()
+    var count = cats.length;
+
+    // 计算位置
+    var unitWidth = rect.width / cats.length;
+    var unitHeight = rect.height / cats.length;
+    var positions = []
+    for (var i=0; i<count; i++) {
+        for (var j=0; j<count; j++) {
+            var random = Util.getRandomArbitrary(-0.1, 0.1);
+            var x = parseInt((i + 0.5 + random) * unitWidth);
+            random = Util.getRandomArbitrary(-0.2, 0.2);
+            var y = parseInt((j + 0.5 + random) * unitHeight);
+            positions.push(cc.p(rect.x + x, rect.y + y));
+        }
+    }
+    Util.shuffle(positions);
+
     for (var i=0; i<cats.length; i++) {
         var cat = cats[i];
-        var randomX = rect.x + Util.getRandomInt(rect.width / 4, rect.width * 3 / 4);
-        var randomY = rect.y + Util.getRandomInt(rect.height / 4, rect.height * 3 / 4);
-        cat.setPosition(cc.p(randomX, randomY));
+        cat.setPosition(positions[i]);
     }
 };
 

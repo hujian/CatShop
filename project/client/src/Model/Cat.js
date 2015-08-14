@@ -181,10 +181,12 @@ Cat.prototype.update = function(interval) {
             this.nextTargetPosition();
         } else {
             var pos = this.getPosition();
-            var distance = interval * 60;
+            var distance = interval * 40;
             var radians = cc.pToAngle(cc.pSub(this.targetPosition, this.getPosition()));
             var point = cc.pForAngle(radians);
             var vector = cc.pMult(point, distance);
+            //vector.x = parseInt(vector.x);
+            //vector.y = parseInt(vector.y);
             this.setPosition(cc.pAdd(pos, vector));
         }
     }
@@ -403,7 +405,7 @@ Cat.prototype.getPosition = function() {
 
 Cat.prototype.nextTargetPosition = function() {
     var rect = CatManager.moveRect;
-    this.targetPosition = cc.p(rect.x + Math.random() * rect.width, rect.y + Math.random() * rect.height);
+    this.targetPosition = cc.p(Util.getRandomInt(rect.x, rect.x + rect.width), Util.getRandomInt(rect.y, rect.y + rect.height));
 };
 
 Cat.prototype.setTargetPosition = function(position) {

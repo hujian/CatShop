@@ -82,7 +82,7 @@ var CatHouseLayer = GameBaseLayer.extend({
 
 
         // 开始养猫
-        var rect = cc.rect(39, 332, 660, 490);
+        var rect = cc.rect(80, 400, 480, 390);
         CatManager.start(rect);
         this.initCats();
     },

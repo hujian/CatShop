@@ -47,9 +47,13 @@ var Util = {
 		return parseInt(seconds / 3600).toString() + '小时' + parseInt(seconds % 3600 / 60).toString() + '分' + parseInt(seconds % 60).toString() + '秒'
 	},
 
+	getRandomArbitrary:function(min, max) {
+        return Math.random() * (max - min) + min;
+    },
+
 	// 获取[min, max)的随机整数
 	getRandomInt:function (min, max) {
-		return parseInt(Math.random() * (max - min) + min)
+		return Math.floor(Math.random() * (max - min)) + min;
 	},
 
 	// 传入 [0, 1]

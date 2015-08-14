@@ -172,7 +172,7 @@ var CatSprite = cc.Sprite.extend({
         if (state === cs.walk) {
             this.setPosition(this._cat.getPosition());
 
-            if (this._cat.getTargetPosition().x > this._cat.getPosition().x) {
+            if (this._cat.getTargetPosition().x > this._cat.getPosition().x + 5) {
                 this.setFlippedX(true);
             } else {
                 this.setFlippedX(false);
