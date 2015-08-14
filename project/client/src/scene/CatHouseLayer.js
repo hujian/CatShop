@@ -32,38 +32,35 @@ var CatHouseLayer = GameBaseLayer.extend({
         this.addChild(headerBg);
 
         // 猫数量，格式：当前数量/最大数量
-        var text = User.getAllCats().length.toString() + '/' + User.getMaxCatCount().toString();
-        var label = new ccui.Text(text, gameResource.defaultFont, 16);
+        var label = new ccui.Text("", gameResource.defaultFont, 16);
         label.setAnchorPoint(cc.p(0, 1));
         label.setPosition(cc.p(85, cc.visibleRect.height - 20));
         this.addChild(label);
         this._catNumberLabel = label;
 
         // 清扫器数量
-        text = User.getHairCleanerCount().toString();
-        label = new ccui.Text(text, gameResource.defaultFont, 16);
+        label = new ccui.Text("", gameResource.defaultFont, 16);
         label.setAnchorPoint(cc.p(0.5, 1));
         label.setPosition(cc.p(304, this._catNumberLabel.y));
         this.addChild(label);
         this._fanNumberLabel = label;
 
-        var seconds = User.getFansCount()
         // 小时
-        label = new ccui.Text(parseInt(seconds / 3600).toString(), gameResource.defaultFont, 16);
+        label = new ccui.Text("", gameResource.defaultFont, 16);
         label.setAnchorPoint(cc.p(0.5, 1));
         label.setPosition(cc.p(470, this._catNumberLabel.y));
         this.addChild(label)
         this._hourLabel = label
 
         // 分
-        label = new ccui.Text(parseInt(seconds / 3600 % 60).toString(), gameResource.defaultFont, 16);
+        label = new ccui.Text("", gameResource.defaultFont, 16);
         label.setAnchorPoint(cc.p(0, 1));
         label.setPosition(cc.p(this._hourLabel.x + 60, this._catNumberLabel.y));
         this.addChild(label)
         this._minLabel = label
 
         // 秒
-        label = new ccui.Text(parseInt(seconds % 60).toString(), gameResource.defaultFont, 16);
+        label = new ccui.Text("", gameResource.defaultFont, 16);
         label.setAnchorPoint(cc.p(0, 1));
         label.setPosition(cc.p(this._minLabel.x + 54, this._catNumberLabel.y));
         this.addChild(label)
@@ -80,11 +77,12 @@ var CatHouseLayer = GameBaseLayer.extend({
         food.setPosition(cc.p(0, 198));
         this.addChild(food);
 
-
         // 开始养猫
         var rect = cc.rect(80, 400, 480, 390);
         CatManager.start(rect);
         this.initCats();
+
+        this.updateStatus();
     },
 
     initCats:function() {
@@ -101,10 +99,30 @@ var CatHouseLayer = GameBaseLayer.extend({
     onEnter:function () {
         this._super();
 
+        this.schedule(this.update, 0.5);
     },
 
     onExit:function () {
+        this.unscheduleUpdate();
+
         this._super();
+    },
+
+    update:function() {
+        this.updateStatus();
+    },
+
+    updateStatus:function() {
+        var text = User.getAllCats().length.toString() + '/' + User.getMaxCatCount().toString();
+        this._catNumberLabel.setString(text);
+
+        text = User.getHairCleanerCount().toString();
+        this._fanNumberLabel.setString(text);
+
+        var seconds = User.getFansCount()
+        this._hourLabel.setString(parseInt(seconds / 3600).toString());
+        this._minLabel.setString(parseInt(seconds / 3600 % 60).toString());
+        this._secondsLabel.setString(parseInt(seconds % 60).toString());
     },
 
     showHelp:function(button, type) {
