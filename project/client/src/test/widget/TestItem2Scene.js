@@ -9,6 +9,7 @@ var TestItem2Scene = TestBaseScene.extend({
         this._super();
 
         cc.spriteFrameCache.addSpriteFrames(gameResource.global.shop_plist, gameResource.global.shop_image);
+        cc.spriteFrameCache.addSpriteFrames(gameResource.global.food_plist, gameResource.global.food_image);
 
         var container = new FoodProduceContainer();
         container.setContentSize(cc.size(306, 270));

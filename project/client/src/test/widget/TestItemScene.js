@@ -11,6 +11,7 @@ var TestItemScene = TestBaseScene.extend({
         cc.spriteFrameCache.addSpriteFrames(gameResource.global.cat_house_plist, gameResource.global.cat_house_image);
         cc.spriteFrameCache.addSpriteFrames(gameResource.global.cat_baby_plist, gameResource.global.cat_baby_image);
         cc.spriteFrameCache.addSpriteFrames(gameResource.global.shop_plist, gameResource.global.shop_image);
+        cc.spriteFrameCache.addSpriteFrames(gameResource.global.food_plist, gameResource.global.food_image);
 
         var name = this.createTestLabel("猫屋食物储量item");
         name.setAnchorPoint(cc.p(0, 0));

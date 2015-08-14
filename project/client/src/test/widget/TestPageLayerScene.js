@@ -10,6 +10,7 @@ var TestPageLayerScene = TestBaseScene.extend({
 
         cc.spriteFrameCache.addSpriteFrames(gameResource.global.cat_house_plist, gameResource.global.cat_house_image);
         cc.spriteFrameCache.addSpriteFrames(gameResource.global.shop_plist, gameResource.global.shop_image);
+        cc.spriteFrameCache.addSpriteFrames(gameResource.global.food_plist, gameResource.global.food_image);
 
         this.addTestButton("基础PageLayer", this.testBasic);
         this.addTestButton("猫屋食物条", this.testCatHouseFood);

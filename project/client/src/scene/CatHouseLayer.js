@@ -66,6 +66,7 @@ var CatHouseLayer = GameBaseLayer.extend({
         this.addChild(label)
         this._secondsLabel = label
 
+
         // 帮助按钮
         var help = new ccui.Button("btn_help.png", null, null, ccui.Widget.PLIST_TEXTURE);
         help.setPosition(cc.p(cc.visibleRect.width - 53, cc.visibleRect.height - 100));
@@ -113,11 +114,37 @@ var CatHouseLayer = GameBaseLayer.extend({
     },
 
     updateStatus:function() {
+        // 猫数量
         var text = User.getAllCats().length.toString() + '/' + User.getMaxCatCount().toString();
         this._catNumberLabel.setString(text);
 
-        text = User.getHairCleanerCount().toString();
+        // 清洁器
+        var cleanerCount = User.getHairCleanerCount()
+        text = cleanerCount.toString();
         this._fanNumberLabel.setString(text);
+
+        // 风扇
+        if (cleanerCount > 0) {
+            if (!this._fanSprite) {
+                var fan = new cc.Sprite("#cat_house_fan_0.png");
+                var animation = new cc.Animation();
+                for (var i=0; i<2; i++) {
+                    animation.addSpriteFrame(cc.spriteFrameCache.getSpriteFrame("cat_house_fan_" + i.toString() + ".png"));
+                }
+                animation.setDelayPerUnit(1 / 10);
+                animation.setRestoreOriginalFrame(true);
+                var action = cc.animate(animation);
+                fan.runAction(cc.repeatForever(action));
+                fan.setPosition(cc.p(cc.visibleRect.width / 2, 964));
+                this.addChild(fan);
+                this._fanSprite = fan;
+            }
+            this._fanSprite.setVisible(true);
+        } else {
+            if (this._fanSprite) {
+                this._fanSprite.setVisible(false);
+            }
+        }
 
         var seconds = User.getFansCount()
         this._hourLabel.setString(parseInt(seconds / 3600).toString());

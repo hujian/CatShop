@@ -9,6 +9,7 @@ var TestPopupScene = TestBaseScene.extend({
         this._super();
 
         cc.spriteFrameCache.addSpriteFrames(gameResource.global.shop_plist, gameResource.global.shop_image);
+        cc.spriteFrameCache.addSpriteFrames(gameResource.global.food_plist, gameResource.global.food_image);
 
         this.addTestButton("弹出一个", this.popOne);
         this.addTestButton("弹出5个", this.popFive);

@@ -9,6 +9,7 @@ var TestProgressBar = TestBaseScene.extend({
         this._super();
 
         cc.spriteFrameCache.addSpriteFrames(gameResource.global.shop_plist, gameResource.global.shop_image);
+        cc.spriteFrameCache.addSpriteFrames(gameResource.global.food_plist, gameResource.global.food_image);
 
         var bar = new FoodProduceProgressBar();
         var count = 8;

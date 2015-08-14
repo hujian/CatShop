@@ -13,6 +13,7 @@ var ContainerScene = GameBaseScene.extend({
         cc.spriteFrameCache.addSpriteFrames(gameResource.global.cat_baby_plist, gameResource.global.cat_baby_image);
         cc.spriteFrameCache.addSpriteFrames(gameResource.global.cat_plist, gameResource.global.cat_image);
         cc.spriteFrameCache.addSpriteFrames(gameResource.global.shop_plist, gameResource.global.shop_image);
+        cc.spriteFrameCache.addSpriteFrames(gameResource.global.food_plist, gameResource.global.food_image);
         cc.spriteFrameCache.addSpriteFrames(gameResource.global.help_plist, gameResource.global.help_image);
 
         this.initUI(index);
