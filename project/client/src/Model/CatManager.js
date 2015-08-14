@@ -27,13 +27,13 @@ CatManager.start = function(rect) {
     CatManager.rasingCat = true;
     CatManager.moveRect = rect;
 
-    var cats = User.getAllCats()
+    var cats = User.getAllCats();
     var count = cats.length;
 
     // 计算猫的初始位置
     var unitWidth = rect.width / cats.length;
     var unitHeight = rect.height / cats.length;
-    var positions = []
+    var positions = [];
     for (var i=0; i<count; i++) {
         for (var j=0; j<count; j++) {
             var random = Util.getRandomArbitrary(-0.1, 0.1);
@@ -57,7 +57,7 @@ CatManager.getRandomPositionInMovingRect = function() {
     var x = Util.getRandomInt(this.moveRect.x, this.moveRect.x + this.moveRect.width);
     var y = Util.getRandomInt(this.moveRect.y, this.moveRect.y + this.moveRect.height);
     return cc.p(x, y);
-},
+};
 
 // 如果要暂停养育，希望cat的所有状态暂时挺住，就掉用该函数
 CatManager.stop = function() {
@@ -153,6 +153,7 @@ CatManager.getHealthValue = function() {
     return healthValue
 };
 
+// 食物
 CatManager.food = [];
 
 // 加入食物

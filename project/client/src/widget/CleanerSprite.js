@@ -19,8 +19,37 @@ var CleanerSprite = cc.Sprite.extend({
     },
 
     move:function(rect) {
-        this._moveRect = rect;
+        var self = this;
 
-        // 上边清理，从左往右出
+        var gap = 50;
+        var leftX = cc.visibleRect.topLeft.x - this.width - gap;
+        var rightX = cc.visibleRect.topRight.x + this.width + gap;
+        var topY = rect.y + rect.height;
+        var bottomY = rect.y + this.height / 2;
+        var movingTime = 10;
+
+        this.setPosition(cc.p(leftX, topY));
+        this.updateZOrder();
+
+        var moveFromLeftToRight = new cc.moveTo(movingTime, rightX, topY);
+        var moveFromTopToBottom = new cc.moveTo(1, rightX, bottomY);
+        var moveFromRightToLeft = new cc.moveTo(movingTime, leftX, bottomY);
+        var moveFromBottomToTop = new cc.moveTo(1, leftX, topY);
+
+        var rightToLeftPrepare = new cc.callFunc(function() {
+            self.setFlippedX(true);
+            self.updateZOrder();
+        });
+        var leftToRightPrepare = new cc.callFunc(function() {
+            self.setFlippedX(false);
+            self.updateZOrder();
+        })
+
+        this.runAction(cc.repeatForever(cc.sequence(moveFromLeftToRight, moveFromTopToBottom, rightToLeftPrepare,
+                                                    moveFromRightToLeft, moveFromBottomToTop, leftToRightPrepare)));
+    },
+
+    updateZOrder:function() {
+        this.setLocalZOrder(cc.visibleRect.height - this.y + this.height / 2);
     }
 });

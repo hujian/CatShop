@@ -83,6 +83,7 @@ var CatHouseLayer = GameBaseLayer.extend({
         this.initCats();
 
         // 猫掉毛
+        this.hairs = [];
         this.initCatHair();
 
         // 更新猫屋状态信息
@@ -123,6 +124,7 @@ var CatHouseLayer = GameBaseLayer.extend({
         hair.setPosition(cc.p(position.x + Util.getRandomInt(-20, 20), position.y + Util.getRandomInt(-30, 30)));
         hair.setLocalZOrder(cc.visibleRect.height - hair.y);
         this.addChild(hair);
+        this.hairs.push(hair);
     },
 
     onEnter:function () {
@@ -141,18 +143,42 @@ var CatHouseLayer = GameBaseLayer.extend({
         this.updateStatus();
     },
 
-    updateStatus:function() {
-        // 猫数量
-        var text = User.getAllCats().length.toString() + '/' + User.getMaxCatCount().toString();
-        this._catNumberLabel.setString(text);
-
-        // 清洁器
+    updateCleaner:function() {
         var cleanerCount = User.getHairCleanerCount();
-        text = cleanerCount.toString();
+        var hairCount = User.getHairCount();
+        var text = cleanerCount.toString();
         this._fanNumberLabel.setString(text);
 
-        // 风扇
         if (cleanerCount > 0) {
+            if (!this._cleaner) {
+                this._cleaner = new CleanerSprite();
+                this.addChild(this._cleaner);
+                this._cleaner.move(CatManager.moveRect);
+            }
+
+            var position = this._cleaner.getPosition();
+            var moveRect = CatManager.moveRect;
+            var cleanerRect = new cc.rect(position.x - this._cleaner.width / 2, position.y - this._cleaner.height / 2,
+                                      this._cleaner.width, moveRect.height / 2);
+            for (var i=0; i<hairCount; i++) {
+                var hair = this.hairs[i];
+                if (cc.rectContainsPoint(cleanerRect, hair.getPosition())) {
+                    hair.playCleanAnimation();
+                }
+            }
+
+        } else {
+            if (this._cleaner) {
+                this._cleaner.removeFromParent();
+                this._cleaner = null;
+            }
+        }
+    },
+
+    updateFan:function() {
+        var seconds = User.getFansCount();
+
+        if (seconds > 0) {
             if (!this._fanSprite) {
                 var fan = new cc.Sprite("#cat_house_fan_0.png");
                 var animation = new cc.Animation();
@@ -167,17 +193,28 @@ var CatHouseLayer = GameBaseLayer.extend({
                 this.addChild(fan);
                 this._fanSprite = fan;
             }
-            this._fanSprite.setVisible(true);
         } else {
             if (this._fanSprite) {
-                this._fanSprite.setVisible(false);
+                this._fanSprite.removeFromParent();
+                this._fanSprite = null;
             }
         }
 
-        var seconds = User.getFansCount();
         this._hourLabel.setString(parseInt(seconds / 3600).toString());
         this._minLabel.setString(parseInt(seconds / 3600 % 60).toString());
         this._secondsLabel.setString(parseInt(seconds % 60).toString());
+    },
+
+    updateStatus:function() {
+        // 猫数量
+        var text = User.getAllCats().length.toString() + '/' + User.getMaxCatCount().toString();
+        this._catNumberLabel.setString(text);
+
+        // 清洁器
+        this.updateCleaner();
+
+        // 风扇
+        this.updateFan();
     },
 
     showHelp:function(button, type) {
