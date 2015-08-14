@@ -190,7 +190,7 @@ Cat.prototype.update = function(interval) {
             this.nextTargetPosition();
         } else {
             var pos = this.getPosition();
-            var distance = interval * 40;
+            var distance = interval * this.getMovingSpeed();
             var radians = cc.pToAngle(cc.pSub(this.targetPosition, this.getPosition()));
             var point = cc.pForAngle(radians);
             var vector = cc.pMult(point, distance);
@@ -404,6 +404,10 @@ Cat.prototype.getUnsavingData = function() {
     return this.unsavingData;
 };
 
+Cat.prototype.getChasingFood = function() {
+    return this.getUnsavingData().chasingFood;
+};
+
 Cat.prototype.setPosition = function(position) {
     this.position = cc.p(position);
 };
@@ -424,3 +428,7 @@ Cat.prototype.setTargetPosition = function(position) {
 Cat.prototype.getTargetPosition = function() {
     return this.targetPosition;
 };
+
+Cat.prototype.getMovingSpeed = function() {
+    return this.getChasingFood() ? 100 : 20;
+}

@@ -179,6 +179,6 @@ var CatSprite = cc.Sprite.extend({
             }
         }
 
-        this.setLocalZOrder(cc.visibleRect.height - parseInt(this.y));
+        this.setLocalZOrder(cc.visibleRect.height - this.y + this.height / 2);
     }
 });

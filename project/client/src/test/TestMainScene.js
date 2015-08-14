@@ -48,8 +48,8 @@ var TestMainScene = TestBaseScene.extend({
         if (cc.isDebug && !this.autoRun) {
             this.autoRun = true;
 
-            Util.setReleaseDesignResolution()
-            cc.director.pushScene(new ContainerScene(0))
+            //util.setreleasedesignresolution()
+            //cc.director.pushScene(new ContainerScene(0))
 
             //cc.director.pushScene(new TestCatSpriteScene());
         }

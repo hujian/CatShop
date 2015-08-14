@@ -66,7 +66,6 @@ var CatHouseLayer = GameBaseLayer.extend({
         this.addChild(label);
         this._secondsLabel = label;
 
-
         // 帮助按钮
         var help = new ccui.Button("btn_help.png", null, null, ccui.Widget.PLIST_TEXTURE);
         help.setPosition(cc.p(cc.visibleRect.width - 53, cc.visibleRect.height - 100));
@@ -120,8 +119,7 @@ var CatHouseLayer = GameBaseLayer.extend({
     },
 
     addCatHair:function(position) {
-        var hair = new cc.Sprite("#cat_house_cat_hair.png");
-        hair.setScale(0.8);
+        var hair = new HairSprite();
         hair.setPosition(cc.p(position.x + Util.getRandomInt(-20, 20), position.y + Util.getRandomInt(-30, 30)));
         hair.setLocalZOrder(cc.visibleRect.height - hair.y);
         this.addChild(hair);

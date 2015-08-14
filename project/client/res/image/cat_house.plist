@@ -7,7 +7,7 @@
             <key>btn_help.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,1837},{60,60}}</string>
+                <string>{{1704,1908},{60,60}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -20,7 +20,7 @@
             <key>buy_button.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{639,1782},{150,120}}</string>
+                <string>{{1622,1786},{150,120}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -37,7 +37,7 @@
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{640,1136}}</string>
                 <key>sourceSize</key>
@@ -46,7 +46,7 @@
             <key>cat_house_bg_2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{644,2},{640,1136}}</string>
+                <string>{{1140,2},{640,1136}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -59,7 +59,7 @@
             <key>cat_house_bg_3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,1140},{640,1136}}</string>
+                <string>{{2,644},{640,1136}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -72,11 +72,11 @@
             <key>cat_house_bg_4.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1286,2},{640,1136}}</string>
+                <string>{{2,1286},{640,1136}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{640,1136}}</string>
                 <key>sourceSize</key>
@@ -124,11 +124,11 @@
             <key>cat_house_cat_hair.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1762,1826},{90,80}}</string>
+                <string>{{1622,1908},{90,80}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
                 <string>{{0,5},{90,80}}</string>
                 <key>sourceSize</key>
@@ -137,11 +137,11 @@
             <key>cat_house_cleaner_0.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1860,1140},{246,174}}</string>
+                <string>{{1140,1824},{246,174}}</string>
                 <key>offset</key>
                 <string>{-1,1}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
                 <string>{{1,2},{246,174}}</string>
                 <key>sourceSize</key>
@@ -150,11 +150,11 @@
             <key>cat_house_cleaner_1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1860,1388},{232,174}}</string>
+                <string>{{1388,1824},{232,174}}</string>
                 <key>offset</key>
                 <string>{-8,0}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
                 <string>{{1,3},{232,174}}</string>
                 <key>sourceSize</key>
@@ -163,11 +163,11 @@
             <key>cat_house_fan_0.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1782,1140},{450,76}}</string>
+                <string>{{454,1928},{450,76}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
                 <string>{{3,2},{450,76}}</string>
                 <key>sourceSize</key>
@@ -176,11 +176,11 @@
             <key>cat_house_fan_1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1928,2},{450,78}}</string>
+                <string>{{2,1928},{450,78}}</string>
                 <key>offset</key>
                 <string>{0,1}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
                 <string>{{3,0},{450,78}}</string>
                 <key>sourceSize</key>
@@ -189,7 +189,7 @@
             <key>cat_house_food_icon_1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{791,1782},{113,126}}</string>
+                <string>{{1782,1022},{113,126}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -202,7 +202,7 @@
             <key>cat_house_food_icon_2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{919,1782},{113,126}}</string>
+                <string>{{1782,1137},{113,126}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -215,7 +215,7 @@
             <key>cat_house_food_icon_3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1047,1782},{113,126}}</string>
+                <string>{{1782,1252},{113,126}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -228,11 +228,11 @@
             <key>cat_house_food_icon_4.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1175,1731},{113,126}}</string>
+                <string>{{1782,1367},{113,126}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{113,126}}</string>
                 <key>sourceSize</key>
@@ -241,24 +241,24 @@
             <key>cat_house_food_icon_5.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1782,1140},{450,76}}</string>
+                <string>{{1782,1482},{112,126}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <true/>
                 <key>sourceColorRect</key>
-                <string>{{3,2},{450,76}}</string>
+                <string>{{0,0},{112,126}}</string>
                 <key>sourceSize</key>
-                <string>{456,80}</string>
+                <string>{112,126}</string>
             </dict>
             <key>cat_house_food_icon_6.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1290,1731},{112,125}}</string>
+                <string>{{1782,1596},{112,125}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{112,125}}</string>
                 <key>sourceSize</key>
@@ -267,11 +267,11 @@
             <key>cat_house_food_icon_7.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1404,1731},{112,125}}</string>
+                <string>{{1782,1710},{112,125}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{112,125}}</string>
                 <key>sourceSize</key>
@@ -280,11 +280,11 @@
             <key>cat_house_food_icon_8.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1518,1731},{112,125}}</string>
+                <string>{{1774,1824},{112,125}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{112,125}}</string>
                 <key>sourceSize</key>
@@ -293,7 +293,7 @@
             <key>cat_house_header_bg.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,1782},{635,53}}</string>
+                <string>{{1140,1731},{635,53}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -306,11 +306,11 @@
             <key>tab_btn_cat_house.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1928,454},{128,100}}</string>
+                <string>{{1782,2},{128,100}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{128,100}}</string>
                 <key>sourceSize</key>
@@ -319,11 +319,11 @@
             <key>tab_btn_cat_house_on.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1928,584},{128,100}}</string>
+                <string>{{1782,104},{128,100}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{128,100}}</string>
                 <key>sourceSize</key>
@@ -332,11 +332,11 @@
             <key>tab_btn_food.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1928,714},{128,100}}</string>
+                <string>{{1782,206},{128,100}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{128,100}}</string>
                 <key>sourceSize</key>
@@ -345,11 +345,11 @@
             <key>tab_btn_food_on.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1928,844},{128,100}}</string>
+                <string>{{1782,308},{128,100}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{128,100}}</string>
                 <key>sourceSize</key>
@@ -358,11 +358,11 @@
             <key>tab_btn_handbook.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1928,974},{128,100}}</string>
+                <string>{{1782,410},{128,100}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{128,100}}</string>
                 <key>sourceSize</key>
@@ -371,7 +371,7 @@
             <key>tab_btn_handbook_on.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1632,1731},{128,100}}</string>
+                <string>{{1782,512},{128,100}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -384,7 +384,7 @@
             <key>tab_btn_sell.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1782,1622},{128,100}}</string>
+                <string>{{1782,614},{128,100}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -397,11 +397,11 @@
             <key>tab_btn_sell_on.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1912,1622},{128,100}}</string>
+                <string>{{1782,716},{128,100}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{128,100}}</string>
                 <key>sourceSize</key>
@@ -410,7 +410,7 @@
             <key>tab_btn_shop.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1782,1724},{128,100}}</string>
+                <string>{{1782,818},{128,100}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -423,11 +423,11 @@
             <key>tab_btn_shop_on.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1912,1752},{128,100}}</string>
+                <string>{{1782,920},{128,100}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{128,100}}</string>
                 <key>sourceSize</key>
@@ -441,9 +441,9 @@
             <key>realTextureFileName</key>
             <string>cat_house.png</string>
             <key>size</key>
-            <string>{2036,1908}</string>
+            <string>{1912,2008}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:9a757299a7347bc6019b4e9c06e2c429:7e3c91c226d3a1a246fd7891fc04cb69:a918f658d1d31352b8adf2283bb36b32$</string>
+            <string>$TexturePacker:SmartUpdate:435c19adad7eb70a2883ce92d4823520:3245227688d88840808779280ccb4a92:a918f658d1d31352b8adf2283bb36b32$</string>
             <key>textureFileName</key>
             <string>cat_house.png</string>
         </dict>

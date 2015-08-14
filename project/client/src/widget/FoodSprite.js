@@ -29,7 +29,7 @@ var FoodSprite = cc.Sprite.extend({
                 var delta = touch.getDelta();
                 self.x += delta.x;
                 self.y += delta.y;
-                self.setLocalZOrder(cc.visibleRect.height - self.y);
+                self.setLocalZOrder(cc.visibleRect.height - self.y + self.height / 2);
             },
             onTouchEnded:function(touch, event) {
                 // 食物刚放上去的时候，不能吃，一旦移动过一次，就可以吃了
@@ -69,6 +69,6 @@ var FoodSprite = cc.Sprite.extend({
 
     // 食物有大小，吃得时候，需要一个固定的位置
     getEatingPosition:function() {
-        return cc.pAdd(this.getPosition(), cc.p(0, 30));
+        return cc.pAdd(this.getPosition(), cc.p(0, 50));
     }
 });
