@@ -49,22 +49,22 @@ var CatHouseLayer = GameBaseLayer.extend({
         label = new ccui.Text("", gameResource.defaultFont, 16);
         label.setAnchorPoint(cc.p(0.5, 1));
         label.setPosition(cc.p(470, this._catNumberLabel.y));
-        this.addChild(label)
-        this._hourLabel = label
+        this.addChild(label);
+        this._hourLabel = label;
 
         // 分
         label = new ccui.Text("", gameResource.defaultFont, 16);
         label.setAnchorPoint(cc.p(0, 1));
         label.setPosition(cc.p(this._hourLabel.x + 60, this._catNumberLabel.y));
-        this.addChild(label)
-        this._minLabel = label
+        this.addChild(label);
+        this._minLabel = label;
 
         // 秒
         label = new ccui.Text("", gameResource.defaultFont, 16);
         label.setAnchorPoint(cc.p(0, 1));
         label.setPosition(cc.p(this._minLabel.x + 54, this._catNumberLabel.y));
-        this.addChild(label)
-        this._secondsLabel = label
+        this.addChild(label);
+        this._secondsLabel = label;
 
 
         // 帮助按钮
@@ -83,11 +83,15 @@ var CatHouseLayer = GameBaseLayer.extend({
         CatManager.start(rect);
         this.initCats();
 
+        // 猫掉毛
+        this.initCatHair();
+
+        // 更新猫屋状态信息
         this.updateStatus();
     },
 
     initCats:function() {
-        var cats = User.getAllCats()
+        var cats = User.getAllCats();
         for (var i=0; i<cats.length; i++) {
             var cat = cats[i];
             var catSprite = new CatSprite(cat.id);
@@ -95,6 +99,32 @@ var CatHouseLayer = GameBaseLayer.extend({
             catSprite.setPosition(cat.getPosition());
             this.addChild(catSprite);
         }
+    },
+
+    initCatHair:function() {
+        var count = User.getHairCount();
+        for (var i=0; i<count; i++) {
+            this.addCatHair(CatManager.getRandomPositionInMovingRect());
+        }
+
+        this.dropHairListenter = cc.EventListener.create({
+            event: cc.EventListener.CUSTOM,
+            eventName: CatSetting.dropHairEvent,
+            callback: function(event) {
+                var cat = event.getUserData();
+                var position = cat.getPosition();
+                this.addCatHair(position);
+            }.bind(this)
+        });
+        cc.eventManager.addListener(this.dropHairListenter, 1);
+    },
+
+    addCatHair:function(position) {
+        var hair = new cc.Sprite("#cat_house_cat_hair.png");
+        hair.setScale(0.8);
+        hair.setPosition(cc.p(position.x + Util.getRandomInt(-20, 20), position.y + Util.getRandomInt(-30, 30)));
+        hair.setLocalZOrder(cc.visibleRect.height - hair.y);
+        this.addChild(hair);
     },
 
     onEnter:function () {
@@ -119,7 +149,7 @@ var CatHouseLayer = GameBaseLayer.extend({
         this._catNumberLabel.setString(text);
 
         // 清洁器
-        var cleanerCount = User.getHairCleanerCount()
+        var cleanerCount = User.getHairCleanerCount();
         text = cleanerCount.toString();
         this._fanNumberLabel.setString(text);
 
@@ -146,7 +176,7 @@ var CatHouseLayer = GameBaseLayer.extend({
             }
         }
 
-        var seconds = User.getFansCount()
+        var seconds = User.getFansCount();
         this._hourLabel.setString(parseInt(seconds / 3600).toString());
         this._minLabel.setString(parseInt(seconds / 3600 % 60).toString());
         this._secondsLabel.setString(parseInt(seconds % 60).toString());
@@ -154,13 +184,13 @@ var CatHouseLayer = GameBaseLayer.extend({
 
     showHelp:function(button, type) {
         if (type == ccui.Widget.TOUCH_ENDED) {
-            var layer = new HelpLayer()
+            var layer = new HelpLayer();
             layer.present();
         }
     },
 
     foodSelect:function(foodItem) {
-        var count = foodItem.getStockCount()
+        var count = foodItem.getStockCount();
         if (count > 0) {
             // 加入食物精灵
             var foodId = foodItem.getId();

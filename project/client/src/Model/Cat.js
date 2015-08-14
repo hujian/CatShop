@@ -132,6 +132,17 @@ var Cat = function(id) {
     this.unsavingData = {}
 };
 
+Cat.prototype.dropHair = function() {
+    // 保存数据
+    User.updateHairCount(User.getHairCount() + 1);
+    User.flush();
+
+    // 发送消息
+    var event = new cc.EventCustom(CatSetting.dropHairEvent);
+    event.setUserData(this);
+    cc.eventManager.dispatchEvent(event);
+}
+
 // 更新猫的状态
 Cat.prototype.update = function(interval) {
     this.updateStatusTimeLeft -= interval;
@@ -144,9 +155,7 @@ Cat.prototype.update = function(interval) {
 
         // 掉毛
         if (Math.random() < CatSetting.dropHairprobability) {
-            var event = new cc.EventCustom(CatSetting.dropHairEvent);
-            event.setUserData(this);
-            cc.eventManager.dispatchEvent(event);
+            this.dropHair();
         }
 
         // 健康值

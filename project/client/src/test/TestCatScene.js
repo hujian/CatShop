@@ -51,7 +51,6 @@ var TestCatScene = TestBaseScene.extend({
             event: cc.EventListener.CUSTOM,
             eventName: CatSetting.dropHairEvent,
             callback: function(event) {
-                User.updateHairCount(User.getHairCount() + 1)
                 var ret = CatManager.clearHair()
                 var catSetting = CatSetting.getById(event.getUserData().id)
                 this.printMessage(catSetting.name + "掉了一团猫毛, " + (ret ? "已被清理" : "请赶快清理，保持环境干净。"))

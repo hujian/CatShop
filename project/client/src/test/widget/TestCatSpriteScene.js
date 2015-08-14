@@ -10,6 +10,7 @@ var TestCatSpriteScene = TestBaseScene.extend({
 
         cc.spriteFrameCache.addSpriteFrames(gameResource.global.cat_baby_plist, gameResource.global.cat_baby_image);
         cc.spriteFrameCache.addSpriteFrames(gameResource.global.cat_plist, gameResource.global.cat_image);
+        cc.spriteFrameCache.addSpriteFrames(gameResource.global.cat_house_plist, gameResource.global.cat_house_image);
 
         var p = cc.p(340, 350);
         // 正面
@@ -60,24 +61,41 @@ var TestCatSpriteScene = TestBaseScene.extend({
         // 到处跑
         var catModel = User.addCat(25);
         cat = new CatSprite(25);
-        p.x -= 150
+        p.x -= 150;
         p.y -= 200;
         cat.setPosition(p);
         cat.setScale(0.5);
-        cat.start(catModel)
+        cat.start(catModel);
         this.addChild(cat);
         CatManager.start(cc.rect(layer.x, layer.y, layer.width, layer.height));
         cat.setPosition(catModel.getPosition());
 
         this.addTestButton("生气", function() {
             cat.angry();
-        })
+        });
         this.addTestButton("高兴", function() {
             cat.happy();
-        })
+        });
         this.addTestButton("生病", function() {
             cat.ill();
-        })
+        });
+        this.addTestButton("掉毛", function() {
+            catModel.dropHair();
+        });
 
+        // 加入毛
+        this.dropHairListenter = cc.EventListener.create({
+            event: cc.EventListener.CUSTOM,
+            eventName: CatSetting.dropHairEvent,
+            callback: function(event) {
+                var cat = event.getUserData();
+                var position = cat.getPosition();
+                var hair = new cc.Sprite("#cat_house_cat_hair.png");
+                hair.setScale(0.5);
+                hair.setPosition(cc.p(position.x + Util.getRandomInt(-20, 20), position.y + Util.getRandomInt(-30, 30)));
+                this.addChild(hair);
+            }.bind(this)
+        });
+        cc.eventManager.addListener(this.dropHairListenter, 1);
     }
 });
