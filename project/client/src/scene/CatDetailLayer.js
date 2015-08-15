@@ -11,6 +11,9 @@ var CatDetailLayer = PopupBaseLayer.extend({
         this._cat = cat;
         var setting = CatSetting.getById(cat.id);
 
+        // 加入半透明背景
+        this.addTransparentMaskBackground();
+
         // 背景
         var bg = new cc.Sprite("#cat_detail_bg.png");
         bg.setPosition(cc.visibleRect.center);

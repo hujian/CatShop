@@ -271,6 +271,14 @@
                 <file name="src/widget/HandbookItem.js"/>
                 <file name="src/widget/AdLayer.js"/>
                 <file name="src/widget/CatSprite.js"/>
+                <file name="src/widget/FoodSprite.js"/>
+                <file name="src/widget/HairSprite.js"/>
+                <file name="src/widget/CleanerSprite.js"/>
+                <file name="src/widget/CheckDialog.js"/>
+                <file name="src/widget/MessageDialog.js"/>
+                <file name="src/widget/ProgressBar.js"/>
+                <file name="src/widget/FoodProduceContainer.js"/>
+                <file name="src/widget/CatHungryWidget.js"/>
                 <file name="src/scene/GameBaseScene.js"/>
                 <file name="src/scene/LoadingScene.js"/>
                 <file name="src/scene/ContainerScene.js"/>
@@ -279,6 +287,8 @@
                 <file name="src/scene/HandbookLayer.js"/>
                 <file name="src/scene/SellLayer.js"/>
                 <file name="src/scene/ShopLayer.js"/>
+                <file name="src/scene/HelpLayer.js"/>
+                <file name="src/scene/CatDetailLayer.js"/>
                 <file name="src/test/TestBaseScene.js"/>
                 <file name="src/test/widget/TestContentCellLayer.js"/>
                 <file name="src/test/widget/TestPopupLayer.js"/>
@@ -287,8 +297,10 @@
                 <file name="src/test/widget/TestTabBarScene.js"/>
                 <file name="src/test/widget/TestPageLayerScene.js"/>
                 <file name="src/test/widget/TestItemScene.js"/>
+                <file name="src/test/widget/TestItem2Scene.js"/>
                 <file name="src/test/widget/TestAdScene.js"/>
                 <file name="src/test/widget/TestCatSpriteScene.js"/>
+                <file name="src/test/widget/TestProgressbar.js"/>
                 <file name="src/test/TestGameScene.js"/>
                 <file name="src/test/TestCatScene.js"/>
                 <file name="src/test/TestManager.js"/>

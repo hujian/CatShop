@@ -61,7 +61,15 @@ var PopupBaseLayer = cc.Layer.extend({
 
     onBackKeyPressed: function(){
         this.removeFromParent(true);
+    },
+
+    // 加入半透明遮罩
+    addTransparentMaskBackground:function() {
+        var bg = new cc.LayerColor(cc.color(0, 0, 0, 120));
+        bg.setContentSize(cc.size(cc.visibleRect.width, cc.visibleRect.height));
+        this.addChild(bg);
     }
+
 });
 
 PopupBaseLayer.DefualtZOrder = 10000;
