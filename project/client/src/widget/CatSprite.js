@@ -8,7 +8,24 @@ var CatSprite = cc.Sprite.extend({
     ctor:function (id) {
         this._setting = CatSetting.getById(id);
         this._emotion = null;
+
         this._super("#" + this.getImageName("eat", 0));
+
+
+        var self = this;
+        // 点击弹出猫的详细页，必须要有cat对象
+        var listener = cc.EventListener.create({
+            event: cc.EventListener.TOUCH_ONE_BY_ONE,
+            swallowTouches:true,
+            onTouchBegan:function(touch, event) {
+                return Util.touchInNode(touch, self) && self._cat;
+            },
+            onTouchEnded:function(touch, event) {
+                var detailLayer = new CatDetailLayer(self._cat);
+                detailLayer.present();
+            }
+        });
+        cc.eventManager.addListener(listener, this);
     },
 
     getId:function() {

@@ -121,7 +121,7 @@ var CatDetailLayer = PopupBaseLayer.extend({
         this.addChild(closeButton);
         closeButton.addTouchEventListener(function(button, type) {
             if (type == ccui.Widget.TOUCH_ENDED) {
-                this.removeFromParent();
+                this.dismiss();
             }
         }, this);
 

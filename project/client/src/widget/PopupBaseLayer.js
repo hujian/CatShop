@@ -29,6 +29,10 @@ var PopupBaseLayer = cc.Layer.extend({
         runningScene.addChild(this)
     },
 
+    dismiss:function() {
+        this.removeFromParent();
+    },
+
     onEnter: function(){
         this._super();
 
