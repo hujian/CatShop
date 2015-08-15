@@ -156,17 +156,14 @@ var CatHouseLayer = GameBaseLayer.extend({
                 this._cleaner.move(CatManager.moveRect);
             }
 
-            var position = this._cleaner.getPosition();
-            var moveRect = CatManager.moveRect;
-            var cleanerRect = new cc.rect(position.x - this._cleaner.width / 2, position.y - this._cleaner.height / 2,
-                                      this._cleaner.width, moveRect.height / 2);
-            for (var i=0; i<hairCount; i++) {
+            // 清洁器和猫团的碰撞检测
+            for (var i=hairCount-1; i>=0; i--) {
                 var hair = this.hairs[i];
-                if (cc.rectContainsPoint(cleanerRect, hair.getPosition())) {
+                if (this._cleaner.containerPoint(hair.getPosition())) {
                     hair.playCleanAnimation();
+                    this.hairs.splice(i, 1);
                 }
             }
-
         } else {
             if (this._cleaner) {
                 this._cleaner.removeFromParent();

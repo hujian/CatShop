@@ -20,6 +20,7 @@ var CleanerSprite = cc.Sprite.extend({
 
     move:function(rect) {
         var self = this;
+        this._moveRect = rect;
 
         var gap = 50;
         var leftX = cc.visibleRect.topLeft.x - this.width - gap;
@@ -51,5 +52,12 @@ var CleanerSprite = cc.Sprite.extend({
 
     updateZOrder:function() {
         this.setLocalZOrder(cc.visibleRect.height - this.y + this.height / 2);
+    },
+
+    containerPoint:function(point) {
+        var localPoint = this.convertToNodeSpace(point);
+        var inX = localPoint.x <= this.width && localPoint.x >= 0;
+        var inY = localPoint.y <= this.height && localPoint.y >= -(Math.abs(this._moveRect.height / 2 - this.height));
+        return inX && inY;
     }
 });
