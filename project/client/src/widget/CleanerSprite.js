@@ -57,7 +57,8 @@ var CleanerSprite = cc.Sprite.extend({
     containerPoint:function(point) {
         var localPoint = this.convertToNodeSpace(point);
         var inX = localPoint.x <= this.width && localPoint.x >= 0;
-        var inY = localPoint.y <= this.height && localPoint.y >= -(Math.abs(this._moveRect.height / 2 - this.height));
+        var distance = 100;
+        var inY = localPoint.y <= (this.height + distance) && localPoint.y >= -distance;
         return inX && inY;
     }
 });

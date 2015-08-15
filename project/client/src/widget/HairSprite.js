@@ -19,23 +19,26 @@ var HairSprite = cc.Sprite.extend({
                 return ret;
             },
             onTouchEnded:function(touch, event) {
-                self.playCleanAnimation();
+                self.playCleanAnimation(true);
             }
         });
         cc.eventManager.addListener(listener, this);
     },
 
     // 被清理掉时，播放的压扁动画
-    playCleanAnimation:function() {
+    playCleanAnimation:function(needSaving) {
         var scale = cc.scaleTo(0.2, 0.8, 0.3);
         var delay = cc.delayTime(0.2);
-        var callback = cc.callFunc(this.cleaned, this);
+        var callback = cc.callFunc(this.cleaned, this, needSaving);
         this.runAction(cc.sequence(scale, delay, callback));
     },
 
-    cleaned:function() {
+    cleaned:function(needSaving) {
         this.removeFromParent();
         User.updateHairCount(User.getHairCount() - 1);
-        User.flush();
+
+        if (needSaving) {
+            User.flush();
+        }
     }
 });

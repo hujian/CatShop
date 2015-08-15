@@ -37,6 +37,9 @@ var TestCatScene = TestBaseScene.extend({
         button = this.addTestButton('瘟疫来袭', this.hasPlague, cc.p(440, 460), true);
         button.setTitleColor(cc.color.ORANGE);
 
+        button = this.addTestButton(['自动清洁', '手动清洁'], this.clean, cc.p(540, 460), true);
+        button.setTitleColor(cc.color.ORANGE);
+
         // 环境变量
         var label = new ccui.Text("", TestSceneFontName, 12);
         label.setTextColor(cc.color.BLACK);
@@ -51,7 +54,10 @@ var TestCatScene = TestBaseScene.extend({
             event: cc.EventListener.CUSTOM,
             eventName: CatSetting.dropHairEvent,
             callback: function(event) {
-                var ret = CatManager.clearHair();
+                var ret = undefined;
+                if (this.autoClean) {
+                    ret = CatManager.clearHair();
+                }
                 var catSetting = CatSetting.getById(event.getUserData().id);
                 this.printMessage(catSetting.name + "掉了一团猫毛, " + (ret ? "已被清理" : "请赶快清理，保持环境干净。"));
             }.bind(this)
@@ -75,7 +81,7 @@ var TestCatScene = TestBaseScene.extend({
             CatManager.start(rect);
 
             // 每次进来都要清理
-            if (User.getHairCount() > 0 && User.getHairCleanerCount() > 0) {
+            if (User.getHairCount() > 0 && User.getHairCleanerCount() > 0 && this.autoClean) {
                 this.printMessage("清理了" + Math.min(User.getHairCount(), User.getHairCleanerCount()).toString() + "团猫毛");
                 CatManager.clearHair();
             }
@@ -94,6 +100,14 @@ var TestCatScene = TestBaseScene.extend({
 
     hasPlague:function (button, state) {
         CatManager.hasPlague();
+    },
+
+    clean:function (button, state) {
+        if (state == 1) {
+            this.autoClean = true;
+        } else {
+            this.autoClean = false;
+        }
     },
 
     getCatDescription:function (cat) {

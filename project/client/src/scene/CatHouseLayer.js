@@ -145,7 +145,6 @@ var CatHouseLayer = GameBaseLayer.extend({
 
     updateCleaner:function() {
         var cleanerCount = User.getHairCleanerCount();
-        var hairCount = User.getHairCount();
         var text = cleanerCount.toString();
         this._fanNumberLabel.setString(text);
 
@@ -157,12 +156,23 @@ var CatHouseLayer = GameBaseLayer.extend({
             }
 
             // 清洁器和猫团的碰撞检测
-            for (var i=hairCount-1; i>=0; i--) {
+            var count = 0;
+            for (var i=this.hairs.length-1; i>=0 && cleanerCount > 0; i--) {
                 var hair = this.hairs[i];
                 if (this._cleaner.containerPoint(hair.getPosition())) {
-                    hair.playCleanAnimation();
+                    // 这里没有保存数据到本地，下面统一flush
+                    hair.playCleanAnimation(false);
+
                     this.hairs.splice(i, 1);
+                    count++;
+                    cleanerCount--;
                 }
+            }
+
+            // 减去用掉的清洁器
+            if (count > 0) {
+                User.removeItem(ItemSetting.id.hairCleaner, count);
+                User.flush();
             }
         } else {
             if (this._cleaner) {
