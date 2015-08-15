@@ -49,6 +49,7 @@
         "src/scene/SellLayer.js",
         "src/scene/ShopLayer.js",
         "src/scene/HelpLayer.js",
+        "src/scene/CatDetailLayer.js",
         "src/test/TestBaseScene.js",
         "src/test/widget/TestContentCellLayer.js",
         "src/test/widget/TestPopupLayer.js",

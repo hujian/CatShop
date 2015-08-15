@@ -10,11 +10,21 @@ var TestPopupScene = TestBaseScene.extend({
 
         cc.spriteFrameCache.addSpriteFrames(gameResource.global.shop_plist, gameResource.global.shop_image);
         cc.spriteFrameCache.addSpriteFrames(gameResource.global.food_plist, gameResource.global.food_image);
+        cc.spriteFrameCache.addSpriteFrames(gameResource.global.other_plist, gameResource.global.other_image);
+        cc.spriteFrameCache.addSpriteFrames(gameResource.global.cat_baby_plist, gameResource.global.cat_baby_image);
+        cc.spriteFrameCache.addSpriteFrames(gameResource.global.cat_plist, gameResource.global.cat_image);
 
         this.addTestButton("弹出一个", this.popOne);
         this.addTestButton("弹出5个", this.popFive);
         this.addTestButton("食物确认框", this.foodCheckDialog);
         this.addTestButton("食物通知框", this.foodMessageDialog);
+        this.addTestButton("猫详细页", this.catDetail);
+    },
+
+    onEnter:function() {
+        this._super()
+
+        this.catDetail();
     },
 
     popOne:function () {
@@ -63,5 +73,14 @@ var TestPopupScene = TestBaseScene.extend({
 
     messageCheck:function() {
         this.printMessage("确认消息框");
+    },
+
+    catDetail:function() {
+        var cat = new Cat(30);
+        cat.ill = true;
+
+        var catLayer = new CatDetailLayer(cat);
+        catLayer.setScale(0.5);
+        catLayer.present();
     }
 })

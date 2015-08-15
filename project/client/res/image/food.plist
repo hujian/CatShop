@@ -56,6 +56,19 @@
                 <key>sourceSize</key>
                 <string>{53,39}</string>
             </dict>
+            <key>food_img_0.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{604,1634},{38,36}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{16,1},{38,36}}</string>
+                <key>sourceSize</key>
+                <string>{70,38}</string>
+            </dict>
             <key>food_img_1.png</key>
             <dict>
                 <key>frame</key>
@@ -339,7 +352,7 @@
             <key>size</key>
             <string>{644,1846}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:9f2558445ae361f84885eadcce17fd39:4095b1972d12cbc72071a6efb00e053b:84eb4e928e95102d68337e2ff99b2490$</string>
+            <string>$TexturePacker:SmartUpdate:1d72a6f340aa549d941210c39192a4bc:de652116158676851ec22c001674f869:84eb4e928e95102d68337e2ff99b2490$</string>
             <key>textureFileName</key>
             <string>food.png</string>
         </dict>

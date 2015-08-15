@@ -112,6 +112,9 @@ var Cat = function(id) {
     // 健康值
     this.health = 50;
 
+    // 是否生病
+    this.ill = false;
+
     // 成长值
     this.growth = 0;
 
@@ -159,7 +162,7 @@ Cat.prototype.update = function(interval) {
         }
 
         // 健康值
-        this.health = Math.max(0, Math.min(100, this.health + this.getHealthSpeed()));
+        this.updateHealth();
 
         // 成长
         var oldGrowthLevel = parseInt(this.growth / 10);
@@ -264,6 +267,27 @@ Cat.prototype.update = function(interval) {
                 }
                 break;
             }
+        }
+    }
+};
+
+// 更新健康状况
+Cat.prototype.updateHealth = function() {
+    this.health = Math.max(0, Math.min(100, this.health + this.getHealthSpeed()));
+
+    if (this.health < 30 && !this.ill) {
+        var percentage = 0.05;
+
+        if (this.health < 10 && this.health > 0) {
+            percentage = 0.1;
+        }
+
+        if (this.health == 0) {
+            percentage = 1;
+        }
+
+        if (Util.randomInPercentage(percentage)) {
+            this.ill = true;
         }
     }
 };
@@ -384,6 +408,10 @@ Cat.prototype.getHealth = function() {
     this.health = this.health || 0;
     return this.health
 };
+
+Cat.prototype.getIll = function() {
+    return this.ill;
+}
 
 Cat.prototype.getCatGrowth = function() {
     this.growth = this.growth || 0;
