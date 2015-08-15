@@ -114,6 +114,17 @@ var CatDetailLayer = PopupBaseLayer.extend({
         var weight = new ccui.Text("5KG", gameResource.defaultFont, 18);
         weight.setPosition(cc.p(200, 46));
         bg.addChild(weight);
+
+        // 关闭按钮
+        var closeButton = new ccui.Button("btn_close.png", null, null, ccui.Widget.PLIST_TEXTURE);
+        closeButton.setPosition(cc.p(bg.x, bg.y - bg.height / 2 - 40));
+        this.addChild(closeButton);
+        closeButton.addTouchEventListener(function(button, type) {
+            if (type == ccui.Widget.TOUCH_ENDED) {
+                this.removeFromParent();
+            }
+        }, this);
+
     }
 
 });
