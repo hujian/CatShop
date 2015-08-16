@@ -11,6 +11,8 @@ var TestItem2Scene = TestBaseScene.extend({
         cc.spriteFrameCache.addSpriteFrames(gameResource.global.shop_plist, gameResource.global.shop_image);
         cc.spriteFrameCache.addSpriteFrames(gameResource.global.food_plist, gameResource.global.food_image);
         cc.spriteFrameCache.addSpriteFrames(gameResource.global.other_plist, gameResource.global.other_image);
+        cc.spriteFrameCache.addSpriteFrames(gameResource.global.cat_plist, gameResource.global.cat_image);
+
 
         var container = new FoodProduceContainer();
         container.setContentSize(cc.size(306, 270));
@@ -44,5 +46,12 @@ var TestItem2Scene = TestBaseScene.extend({
                 this._hungry.updateHungry(100)
             }
         });
+
+        // 出售历史的item
+        var cat = new Cat(30);
+        var item = new SellingHistoryItem(cat);
+        item.setScale(0.5);
+        item.setPosition(cc.p(200, 100));
+        this.addChild(item);
     }
 });

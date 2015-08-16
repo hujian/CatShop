@@ -9,6 +9,10 @@ var Time = Time || {}
 Time.timestamp = Date.parse(new Date()) / 1000
 
 Time.load = function (timestampServerUrl, callback, target) {
+    // 测试中，暂时先去掉时间检测
+    callback.call(target, true);
+    return;
+
     var self = this
     self._callback = callback
     self._target = target

@@ -34,7 +34,9 @@ var TestMainScene = TestBaseScene.extend({
         //this.addUITestCase('食物', FoodLayer)
         //this.addUITestCase('商店', ShopLayer)
         //this.addUITestCase('出售', SellLayer)
+        this.addUITestCase('出售历史', SellingHistoryScene);
         //this.addUITestCase('图鉴', HandbookLayer)
+        this.addTestCase('动画', LoadingScene);
 
         this.nextColumn();
         this.addTestLabel("自动化测试");
@@ -48,10 +50,10 @@ var TestMainScene = TestBaseScene.extend({
         if (cc.isDebug && !this.autoRun) {
             this.autoRun = true;
 
-            //util.setreleasedesignresolution()
-            //cc.director.pushScene(new ContainerScene(0))
+            //Util.setReleaseDesignResolution();
+            //cc.director.pushScene(new SellingHistoryScene());
 
-            //cc.director.pushScene(new TestPopupScene());
+            cc.director.pushScene(new TestItem2Scene());
         }
     },
 
