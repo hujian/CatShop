@@ -51,9 +51,9 @@ var TestMainScene = TestBaseScene.extend({
             this.autoRun = true;
 
             //Util.setReleaseDesignResolution();
-            //cc.director.pushScene(new SellingHistoryScene());
+            //cc.director.pushScene(new ContainerScene(0));
 
-            cc.director.pushScene(new TestItem2Scene());
+            //cc.director.pushScene(new TestItem2Scene());
         }
     },
 

@@ -31,6 +31,7 @@ User.initUserData = function () {
     User.data.jsonData.items = {};             // 已经购买的商品
     User.data.jsonData.food = {};              // 玩家已经购买的食物
     User.data.jsonData.cats = [];              // 玩家已经购买的猫
+    User.data.jsonData.soldCats = [];          // 玩家已经出售的猫
     User.data.jsonData.instanceId = 0;         // 玩家数据中用到的实例对象
     User.data.jsonData.catHairCount = 0;       // 猫屋猫毛团的数量
 };
@@ -77,6 +78,10 @@ User.getAllCats = function() {
     return User.data.jsonData.cats || [];
 };
 
+User.getAllSoldCats = function() {
+    return User.data.jsonData.soldCats || [];
+}
+
 // 加猫，这里的id是猫种类id，就是CatSetting的id
 User.addCat = function(id) {
 
@@ -92,6 +97,7 @@ User.removeCat = function(cat) {
     if (index > -1) {
         cat.clean();
         User.data.jsonData.cats.splice(index, 1);
+        User.data.jsonData.soldCats.push(cat);
     }
 };
 

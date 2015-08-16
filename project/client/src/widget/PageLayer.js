@@ -198,6 +198,7 @@ var SelectCatPageLayer = PageLayer.extend({
 
     decreaseCount:function() {
         this._count -= 1;
+        this._currentPageIndex = Math.max(this._currentPageIndex - 1, 0);
         this.updateStatusLabel();
     },
 

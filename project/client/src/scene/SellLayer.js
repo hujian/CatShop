@@ -20,7 +20,7 @@ var SellLayer = GameBaseLayer.extend({
         // 右边栏
         var leftPanel = new cc.Sprite("#sell_right_panel.png");
         leftPanel.setAnchorPoint(cc.p(1, 0));
-        leftPanel.setPosition(cc.p(cc.visibleRect.width, 0))
+        leftPanel.setPosition(cc.p(cc.visibleRect.width, 0));
         this.addChild(leftPanel);
 
         // 头部
@@ -65,6 +65,12 @@ var SellLayer = GameBaseLayer.extend({
         var sellHistoryButton = new ccui.Button("sell_history_btn.png", null, null, ccui.Widget.PLIST_TEXTURE);
         sellHistoryButton.setAnchorPoint(cc.p(1, 0));
         sellHistoryButton.setPosition(cc.p(cc.visibleRect.width, height));
+        sellHistoryButton.addTouchEventListener(function(button, type) {
+            if (type == ccui.Widget.TOUCH_ENDED) {
+                var scene = new SellingHistoryScene();
+                cc.director.pushScene(scene);
+            }
+        }, this);
         this.addChild(sellHistoryButton);
     },
 
@@ -84,11 +90,11 @@ var SellLayer = GameBaseLayer.extend({
 
         var cats = User.getAllCats();
         if (cats.length > index) {
-            var cat = cats[index]
+            var cat = cats[index];
             var catSprite = new CatSprite(cat.id);
             catSprite.model = cat;
             catSprite.setPosition(cc.p(183, 450));
-            catSprite.setScale(1.2)
+            catSprite.setScale(1.2);
             this.addChild(catSprite);
             this._catSprite = catSprite;
         }
@@ -97,10 +103,15 @@ var SellLayer = GameBaseLayer.extend({
     sellCat:function(button, type) {
         if (type == ccui.Widget.TOUCH_ENDED) {
             if (this._catSprite) {
-                Shop.sellCat(this._catSprite.model);
-                this.updateCat(Math.max(this._selectlayer.getCurrentPageIndex() - 1, 0));
-                this._moneyLabel.setString(User.getMoneyString());
-                this._selectlayer.decreaseCount()
+                if (CatSetting.isBaby(this._catSprite.getId())) {
+                    var dialog = new MessageDialog("幼崽是没法出售的哦！请再培养一阵子看看！");
+                    dialog.present();
+                } else {
+                    Shop.sellCat(this._catSprite.model);
+                    this.updateCat(Math.max(this._selectlayer.getCurrentPageIndex() - 1, 0));
+                    this._moneyLabel.setString(User.getMoneyString());
+                    this._selectlayer.decreaseCount();
+                }
             }
         }
     }
