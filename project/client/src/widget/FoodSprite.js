@@ -17,11 +17,9 @@ var FoodSprite = cc.Sprite.extend({
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
             swallowTouches:true,
             onTouchBegan:function(touch, event) {
-                var ret = Util.touchInNode(touch, self);
+                var ret = Util.touchInNode(touch, self) && self.canMove;
                 if (ret) {
-                    if (!self._moving && this.canMove) {
-                        self.startMoving();
-                    }
+                    self.startMoving();
                 }
                 return ret;
             },
@@ -34,11 +32,10 @@ var FoodSprite = cc.Sprite.extend({
             onTouchEnded:function(touch, event) {
                 // 食物刚放上去的时候，不能吃，一旦移动过一次，就可以吃了
                 self.canEat = true;
-
                 self.stopMoving();
             }
         });
-        cc.eventManager.addListener(listener, this);
+        cc.eventManager.addListener(listener, -1);
     },
 
     startMoving:function() {
@@ -48,13 +45,13 @@ var FoodSprite = cc.Sprite.extend({
             this._move.setScale(0.8);
             this.addChild(this._move);
         }
-        this._moving = true;
     },
 
     stopMoving:function() {
-        this._moving = false;
-        this._move.removeFromParent();
-        this._move = null;
+        if (this._move) {
+            this._move.removeFromParent();
+            this._move = null;
+        }
     },
 
     getId:function() {

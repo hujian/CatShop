@@ -144,7 +144,7 @@ Cat.prototype.dropHair = function() {
     var event = new cc.EventCustom(CatSetting.dropHairEvent);
     event.setUserData(this);
     cc.eventManager.dispatchEvent(event);
-}
+};
 
 // 更新猫的状态
 Cat.prototype.update = function(interval) {
@@ -323,12 +323,12 @@ Cat.prototype.findFood = function() {
     if (chasingFood) {
         this.targetPosition = chasingFood.getEatingPosition();
         if (cc.pFuzzyEqual(this.position, this.targetPosition, 1)) {
-            chasingFood.canMove = false;
             this.eat();
         }
     } else {
         var food = CatManager.findFood(this);
         if (food) {
+            food.canMove = false;
             this.targetPosition = food.getEatingPosition();
             this.walk();
             this.getUnsavingData().chasingFood = food;
@@ -406,12 +406,12 @@ Cat.prototype.getHungry = function() {
 
 Cat.prototype.getHealth = function() {
     this.health = this.health || 0;
-    return this.health
+    return this.health;
 };
 
 Cat.prototype.getIll = function() {
     return this.ill;
-}
+};
 
 Cat.prototype.getCatGrowth = function() {
     this.growth = this.growth || 0;
@@ -459,4 +459,4 @@ Cat.prototype.getTargetPosition = function() {
 
 Cat.prototype.getMovingSpeed = function() {
     return this.getChasingFood() ? 100 : 20;
-}
+};

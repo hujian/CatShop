@@ -28,7 +28,6 @@ var TestItem2Scene = TestBaseScene.extend({
             food.setPosition(cc.visibleRect.center);
             this.addChild(food);
             food.setScale(0.6)
-            food.startMoving();
         });
 
         this.addTestButton(["猫的饥饿0", "猫的饥饿65", "猫的饥饿100"], function(button, state) {
