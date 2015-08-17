@@ -180,6 +180,10 @@ Cat.prototype.update = function(interval) {
                         } else {
                             this.id = children[0];
                         }
+                        // 更新猫的解锁状态
+                        if (User.updateNewCat(this.id)) {
+                            User.flush();
+                        }
                     }
                 }
             }

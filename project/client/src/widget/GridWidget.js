@@ -19,13 +19,23 @@ var GridWidget = GameBaseLayer.extend({
 
         var height = this.height - topGap;
         for (var i=0; i<row; i++) {
-            height -= (items[i * column].height + rowGap);
+            if (i * column < items.length) {
+                height -= (items[i * column].height + rowGap);
+            } else {
+                return ;
+            }
+
             var width = leftGap;
             for (var j=0; j<column; j++) {
-                var item = items[i * column + j];
-                item.setPosition(cc.p(width, height));
-                width += (item.width + columnGap);
-                this.addChild(item);
+                var index = i * column + j;
+                if (index < items.length) {
+                    var item = items[index];
+                    item.setPosition(cc.p(width, height));
+                    width += (item.width + columnGap);
+                    this.addChild(item);
+                } else {
+                    return;
+                }
             }
         }
     }

@@ -23,7 +23,8 @@ var HandbookLayer = GameBaseLayer.extend({
         progressBg.setAnchorPoint(cc.p(0, 1));
         this.addChild(progressBg);
 
-        var label = new ccui.Text("1%", gameResource.defaultFont, 30);
+        var catPercentage = parseInt(User.getAllUnlockCats().length / CatSetting.getAllAdult().length * 100);
+        var label = new ccui.Text(catPercentage.toString() + "%", gameResource.defaultFont, 30);
         label.setPosition(cc.p(241, bg.height - 46));
         this.addChild(label);
 
@@ -38,8 +39,11 @@ var HandbookLayer = GameBaseLayer.extend({
         this.addChild(label);
 
         // 内容
-        this._contentLayer = new cc.Layer();
-        this.addChild(this._contentLayer);
+        var contentLayer = new GridWidget();
+        contentLayer.setContentSize(cc.size(640, 676));
+        contentLayer.setPosition(cc.p(0, 360));
+        this.addChild(contentLayer);
+        this._contentLayer = contentLayer;
 
         var cats = CatSetting.getAllAdult();
         var layer = new SelectCatPageLayer(parseInt((cats.length - 1) / 4) + 1, function(index) {
@@ -59,23 +63,27 @@ var HandbookLayer = GameBaseLayer.extend({
     },
 
     updateCell:function(index) {
-        this._contentLayer.removeAllChildren();
-
         // 加入item
         var pageCount = 4;
         var cats = CatSetting.getAllAdult();
-        var count = cats.length();
+        var count = cats.length;
         var start = index * pageCount;
         var end = start + Math.min(count - start, pageCount);
-        for (var i=start; i<end; i++) {
-            var cell = new HandbookItem(i+1, i+1);
-            cell.setAnchorPoint(cc.p(0.5, 0.5));
-            cell.ignoreAnchorPointForPosition(false);
-            cell.setPosition(cc.p(152 + (i % 2 == 1 ? 332 : 0), 886 - (i > 1  ? 375 : 0)));
-            this._contentLayer.addChild(cell);
-        }
-    }
 
+        var cells = [];
+        for (var i=start; i<end; i++) {
+            var catId = i + 1 + CatSetting.getAllBaby().length;
+
+            // 如果是还没有解锁的猫，就显示 ？号
+            if (User.isNewCat(catId)) {
+                catId = -1;
+            }
+            var cell = new HandbookItem(i + 1, catId);
+            cells.push(cell);
+        }
+
+        this._contentLayer.update(cells, 2, 2, 10, 20, 20, 20);
+    }
 });
 
 HandbookLayer.create = function () {

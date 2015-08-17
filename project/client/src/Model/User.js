@@ -34,6 +34,7 @@ User.initUserData = function () {
     User.data.jsonData.soldCats = [];          // 玩家已经出售的猫
     User.data.jsonData.instanceId = 0;         // 玩家数据中用到的实例对象
     User.data.jsonData.catHairCount = 0;       // 猫屋猫毛团的数量
+    User.data.jsonData.unlockCats = [];        // 解锁过的猫id数组
 };
 
 User.restoreModel = function(dataArray, model) {
@@ -203,3 +204,22 @@ User.getHairCount = function () {
 User.updateHairCount = function (count) {
     User.data.jsonData.catHairCount = count;
 };
+
+// 所有解锁的猫
+User.getAllUnlockCats = function() {
+    return User.data.jsonData.unlockCats;
+};
+
+// 如果有种猫刚进化，就直接调用该方法，新的猫会记录下来，并返回true，老的品种返回false
+User.updateNewCat = function(catId) {
+    if (User.isNewCat(catId)) {
+        User.data.jsonData.unlockCats.push(catId);
+        return true
+    }
+    return false;
+};
+
+// 判断当前的猫是否已经出现过了
+User.isNewCat = function(catId) {
+    return User.data.jsonData.unlockCats.indexOf(catId) < 0;
+}
