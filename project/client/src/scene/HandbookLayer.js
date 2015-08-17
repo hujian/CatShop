@@ -37,17 +37,13 @@ var HandbookLayer = GameBaseLayer.extend({
         label.setPosition(cc.p(bg.width - 78, bg.height - 46));
         this.addChild(label);
 
-        for (var i=0; i<4; i++) {
-            var cell = new HandbookItem(i+1, i+1);
-            cell.setAnchorPoint(cc.p(0.5, 0.5));
-            cell.ignoreAnchorPointForPosition(false);
-            cell.setPosition(cc.p(152 + (i % 2 == 1 ? 332 : 0), 886 - (i > 1  ? 375 : 0)));
-            this.addChild(cell);
-        }
+        // 内容
+        this._contentLayer = new cc.Layer();
+        this.addChild(this._contentLayer);
 
-        // 选择工具栏
-        var layer = new SelectCatPageLayer((User.getAllCats().length - 1) / 4 + 1, function(index) {
-
+        var cats = CatSetting.getAllAdult();
+        var layer = new SelectCatPageLayer(parseInt((cats.length - 1) / 4) + 1, function(index) {
+            this.updateCell(index);
         }, this);
         layer.setContentSize(cc.size(574, 57));
         layer.setPosition(cc.p((bg.width - layer.width) / 2, 279));
@@ -60,7 +56,26 @@ var HandbookLayer = GameBaseLayer.extend({
 
     onExit:function () {
         this._super();
+    },
+
+    updateCell:function(index) {
+        this._contentLayer.removeAllChildren();
+
+        // 加入item
+        var pageCount = 4;
+        var cats = CatSetting.getAllAdult();
+        var count = cats.length();
+        var start = index * pageCount;
+        var end = start + Math.min(count - start, pageCount);
+        for (var i=start; i<end; i++) {
+            var cell = new HandbookItem(i+1, i+1);
+            cell.setAnchorPoint(cc.p(0.5, 0.5));
+            cell.ignoreAnchorPointForPosition(false);
+            cell.setPosition(cc.p(152 + (i % 2 == 1 ? 332 : 0), 886 - (i > 1  ? 375 : 0)));
+            this._contentLayer.addChild(cell);
+        }
     }
+
 });
 
 HandbookLayer.create = function () {

@@ -57,6 +57,8 @@ var SellingHistoryScene = GameBaseScene.extend({
         var cats = User.getAllSoldCats();
         var count = cats.length;
         var pageCount = 6;
+        var row = 2;
+        var column = 3;
 
         if (count / pageCount >= index) {
             // 清理老的的信息
@@ -72,8 +74,8 @@ var SellingHistoryScene = GameBaseScene.extend({
             for (var i=start; i<end; i++) {
                 var cat = cats[i];
                 var item = new SellingHistoryItem(cat);
-                var x = i % 6 % 3 * item.width + 5;
-                var y = (i % 6) > 2 ? 282 : 676;
+                var x = i % pageCount % column * item.width + 5;
+                var y = (i % pageCount) > row ? 282 : 676;
                 item.setPosition(cc.p(x, y));
                 this.addChild(item);
                 this._catItems.push(item);

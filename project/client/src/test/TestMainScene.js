@@ -21,12 +21,12 @@ var TestMainScene = TestBaseScene.extend({
         this.addTestCase('TabBar', TestTabBarScene);
         this.addTestCase('翻页控件', TestPageLayerScene);
         this.addTestCase('进度条', TestProgressBar);
+        this.addTestCase('grid控件', TestGridScene);
         this.addTestCase('各种Item', TestItemScene);
         this.addTestCase('各种Item2', TestItem2Scene);
         this.addTestCase('猫', TestCatSpriteScene);
         this.addTestCase('广告', TestAdScene);
 
-        this.nextColumn();
         this.addTestLabel("UI测试");
         this.addUITestCase('正常流程', ContainerScene);
         this.addUITestCase('加载', LoadingScene);
@@ -53,7 +53,7 @@ var TestMainScene = TestBaseScene.extend({
             //Util.setReleaseDesignResolution();
             //cc.director.pushScene(new ContainerScene(0));
 
-            //cc.director.pushScene(new TestItem2Scene());
+            cc.director.pushScene(new TestGridScene());
         }
     },
 
