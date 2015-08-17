@@ -28,16 +28,6 @@ var HandbookLayer = GameBaseLayer.extend({
         label.setPosition(cc.p(241, bg.height - 46));
         this.addChild(label);
 
-        // 食物进度
-        progressBg = new cc.Sprite("#handbook_food_status.png");
-        progressBg.setPosition(cc.p(bg.width - 10, bg.height - 16));
-        progressBg.setAnchorPoint(cc.p(1, 1));
-        this.addChild(progressBg);
-
-        label = new ccui.Text("20%", gameResource.defaultFont, 30);
-        label.setPosition(cc.p(bg.width - 78, bg.height - 46));
-        this.addChild(label);
-
         // 内容
         var contentLayer = new GridWidget();
         contentLayer.setContentSize(cc.size(640, 676));
