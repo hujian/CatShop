@@ -49,9 +49,9 @@ var ShopLayer = GameBaseLayer.extend({
         }
 
         // 道具
-        for (var i in ItemSetting.getAll()) {
-            var setting = ItemSetting.getAll()[i];
-            var customItem = new ShopItem(setting.id, ShopItem.type.Item, this.buyItem, this);
+        var items = ItemSetting.getAll();
+        for (var i=0; i<items.length; i++) {
+            var customItem = new ShopItem(i+1, ShopItem.type.Item, this.buyItem, this);
             listView.pushBackCustomItem(customItem);
         }
     },

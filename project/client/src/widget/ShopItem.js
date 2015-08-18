@@ -8,8 +8,8 @@ var ShopItem = ccui.Layout.extend({
     ctor:function (id, type, callBack, target) {
         this._super();
 
-        this._id = id
-        this._type = type
+        this._id = id;
+        this._type = type;
         this._callback = callBack;
         this._target = target;
 
@@ -60,6 +60,15 @@ var ShopItem = ccui.Layout.extend({
         buyButton.addTouchEventListener(this.buyItem, this);
         this.addChild(buyButton);
 
+        // item的数量信息
+        if (type == ShopItem.type.Item && setting.type != ItemSetting.type.upgradeShop) {
+            this._statusLabel = new ccui.Text("", gameResource.defaultFont, 16);
+            this._statusLabel.setPosition(cc.p(icon.x, icon.y - icon.height / 2 + 14));
+            this.addChild(this._statusLabel);
+        }
+
+        this.updateStatus();
+
         this.setContentSize(bg.getContentSize())
     },
 
@@ -67,7 +76,34 @@ var ShopItem = ccui.Layout.extend({
         if (type == ccui.Widget.TOUCH_ENDED) {
             if (this._target && this._callback) {
                 this._callback.call(this._target, this._id, this._type);
+                this.updateStatus();
             }
+        }
+    },
+
+    updateStatus:function() {
+        var text = "";
+        if (this._statusLabel) {
+            switch (this._id) {
+                case ItemSetting.id.fan: {
+                    var seconds = User.getFansCount()
+                    text = Util.getTimeString(seconds);
+                    break;
+                }
+                case ItemSetting.id.hairCleaner: {
+                    text = User.getHairCleanerCount().toString();
+                    break;
+                }
+                case ItemSetting.id.vaccine: {
+                    text = User.getVaccineCount().toString();
+                    break;
+                }
+                case ItemSetting.id.medicine: {
+                    text = User.getMedicineCount().toString();
+                    break;
+                }
+            }
+            this._statusLabel.setString(text);
         }
     }
 });

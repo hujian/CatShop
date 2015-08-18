@@ -51,7 +51,7 @@ var TestMainScene = TestBaseScene.extend({
             this.autoRun = true;
 
             Util.setReleaseDesignResolution();
-            cc.director.pushScene(new ContainerScene(1));
+            cc.director.pushScene(new ContainerScene(2));
 
             //cc.director.pushScene(new TestGridScene());
         }

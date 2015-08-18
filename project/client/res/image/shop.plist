@@ -137,19 +137,6 @@
             <key>item_1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{856,1510},{132,132}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{132,132}}</string>
-                <key>sourceSize</key>
-                <string>{132,132}</string>
-            </dict>
-            <key>item_2.png</key>
-            <dict>
-                <key>frame</key>
                 <string>{{1285,1408},{130,130}}</string>
                 <key>offset</key>
                 <string>{0,-1}</string>
@@ -160,7 +147,7 @@
                 <key>sourceSize</key>
                 <string>{132,132}</string>
             </dict>
-            <key>item_3.png</key>
+            <key>item_2.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{1285,1540},{130,130}}</string>
@@ -173,18 +160,31 @@
                 <key>sourceSize</key>
                 <string>{132,132}</string>
             </dict>
+            <key>item_3.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{856,1510},{132,132}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{132,132}}</string>
+                <key>sourceSize</key>
+                <string>{132,132}</string>
+            </dict>
             <key>item_4.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{1297,1140},{130,130}}</string>
                 <key>offset</key>
-                <string>{0,-1}</string>
+                <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{1,2},{130,130}}</string>
+                <string>{{0,0},{130,130}}</string>
                 <key>sourceSize</key>
-                <string>{132,132}</string>
+                <string>{130,130}</string>
             </dict>
             <key>item_5.png</key>
             <dict>
@@ -456,7 +456,7 @@
             <key>size</key>
             <string>{1528,1934}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:5342cb2a6d80236a80ec2cc3ba6afbf7:cd83898dcbb434519ac980b3b3a6eeab:0c3382addd4ddbdf7ff3d469abaa2ba6$</string>
+            <string>$TexturePacker:SmartUpdate:03491848def74344733c20576e297456:7af0eeecd6c1a5f14f183bfa2f4df8ec:0c3382addd4ddbdf7ff3d469abaa2ba6$</string>
             <key>textureFileName</key>
             <string>shop.png</string>
         </dict>
