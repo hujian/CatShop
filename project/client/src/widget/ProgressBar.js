@@ -19,10 +19,9 @@ var FoodProduceProgressBar = GameBaseLayer.extend({
         var loadingBar = new ccui.LoadingBar();
         loadingBar.loadTexture("food_progress_bar_front.png", ccui.Widget.PLIST_TEXTURE);
         loadingBar.setAnchorPoint(cc.p(0, 0));
+        loadingBar.setPercent(0);
         this.addChild(loadingBar);
         this._loadingBar = loadingBar;
-
-        this.showBorder(true);
     },
 
     start:function(time, count, callback, target) {
@@ -72,10 +71,6 @@ var FoodProduceProgressBar = GameBaseLayer.extend({
             this._loadingBar.setPercent(this._countLeft / this._count * 100);
             if (this._callback) {
                 this._callback.call(this._target, this._count - this._countLeft - 1);
-            }
-
-            if (this._countLeft <= 0) {
-                this.setVisible(false);
             }
         }
     }

@@ -33,21 +33,29 @@ var FoodProduceContainer = GameBaseLayer.extend({
         });
 
         cc.eventManager.addListener(listener, this);
+
+        this._loadingBar = new FoodProduceProgressBar();
+        this.addChild(this._loadingBar);
     },
 
     produceFood:function(id) {
+        if (this._foodSprites.length > 0) {
+            var message = new MessageDialog("这种食物正在生产中，需要等待完成哦！");
+            message.present();
+        } else {
+        }
+
         this._foodPositions = Util.shuffle(FoodProduceContainerPositions.slice());
-        this.removeAllChildren();
-        this._loadingBar = null;
-
-        this._loadingBar = new FoodProduceProgressBar();
-        this._loadingBar.setPosition(cc.p((this.width - this._loadingBar.width)/ 2, this.height /2));
-        this.addChild(this._loadingBar);
-
         var setting = FoodSetting.getById(id);
         this._foodId= id;
         this._amount = setting.amount;
         this._loadingBar.start(setting.time, setting.amount, this.doneOneFood, this);
+    },
+
+    setContentSize:function(size) {
+        this._super(size);
+
+        this._loadingBar.setPosition(cc.p((this.width - this._loadingBar.width)/ 2, this.height /2));
     },
 
     doneOneFood:function(index) {
@@ -64,6 +72,10 @@ var FoodProduceContainer = GameBaseLayer.extend({
 
     isDone:function() {
         return this._amount <= 0;
+    },
+
+    isFoodProducing:function(foodId) {
+        return this._foodId == foodId && this._foodSprites.length > 0;
     },
 
     selectFood:function(positon) {

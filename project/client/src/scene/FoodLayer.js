@@ -33,7 +33,7 @@ var FoodLayer = GameBaseLayer.extend({
         bg.addChild(label);
 
         // 生产容器
-        this._containers = []
+        this._containers = [];
         for (var i=0; i<4; i++) {
             var container = new FoodProduceContainer();
             container.setContentSize(cc.size(306, 270));
@@ -58,13 +58,27 @@ var FoodLayer = GameBaseLayer.extend({
             var dialog = new MessageDialog("资金不足，请加油赚钱哦！");
             dialog.present();
         } else {
+            var validContainer = null;
             for (var i=0; i<4; i++) {
                 var container = this._containers[i];
-                if (container.isDone()) {
-                    container.produceFood(foodId);
-                    Shop.buyFood(foodId);
+
+                if (container.isFoodProducing(foodId)) {
+                    var message = new MessageDialog("这种食物正在生产中，需要等待完成哦！");
+                    message.present();
                     return;
                 }
+
+                if (container.isDone() && !validContainer) {
+                    validContainer = container;
+                }
+            }
+
+            if (validContainer) {
+                validContainer.produceFood(foodId);
+                Shop.buyFood(foodId);
+            } else {
+                var message = new MessageDialog("没有空闲的生产栏哦，请稍等!");
+                message.present();
             }
         }
     }
