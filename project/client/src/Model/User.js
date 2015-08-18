@@ -142,6 +142,11 @@ User.removeItem = function (id, value) {
     }
 };
 
+// 该种道具是否已经买过了
+User.itemAlreadyGot = function(itemId) {
+    return User.getAllItems()[itemId] > 0;
+};
+
 // 获取所有已经购买的道具
 User.getAllItems = function () {
     return User.data.jsonData.items || {};

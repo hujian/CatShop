@@ -25,6 +25,9 @@ ItemSetting.id.vaccine = 1;
 ItemSetting.id.medicine = 2;
 ItemSetting.id.hairCleaner = 3;
 ItemSetting.id.fan = 4;
+ItemSetting.id.upgradeLevel1 = 5;
+ItemSetting.id.upgradeLevel2 = 6;
+ItemSetting.id.upgradeLevel3 = 7;
 
 ItemSetting.load = function () {
     if (!ItemSetting.data) {

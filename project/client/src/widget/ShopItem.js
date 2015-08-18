@@ -14,6 +14,7 @@ var ShopItem = ccui.Layout.extend({
         this._target = target;
 
         var setting = type == ShopItem.type.Cat ? CatSetting.getBabyById(id) : ItemSetting.getById(id) ;
+        this._setting = setting;
 
         // 背景
         var bg = new cc.Sprite("#shop_list_bg.png");
@@ -59,6 +60,7 @@ var ShopItem = ccui.Layout.extend({
         buyButton.setPosition(cc.p(bg.width - 27, 12));
         buyButton.addTouchEventListener(this.buyItem, this);
         this.addChild(buyButton);
+        this._buyButton = buyButton;
 
         // item的数量信息
         if (type == ShopItem.type.Item && setting.type != ItemSetting.type.upgradeShop) {
@@ -74,10 +76,17 @@ var ShopItem = ccui.Layout.extend({
 
     buyItem:function(button, type) {
         if (type == ccui.Widget.TOUCH_ENDED) {
+            if (this._id > ItemSetting.id.upgradeLevel1 && !User.itemAlreadyGot(this._id - 1)) {
+                var message = new MessageDialog("请先升级上一级扩建工程，再购买哦！")
+                message.present();
+                return;
+            }
+
             if (this._target && this._callback) {
                 this._callback.call(this._target, this._id, this._type);
-                this.updateStatus();
             }
+
+            this.updateStatus();
         }
     },
 
@@ -104,6 +113,13 @@ var ShopItem = ccui.Layout.extend({
                 }
             }
             this._statusLabel.setString(text);
+        }
+
+        if (this._type == ShopItem.type.Item && this._setting.type == ItemSetting.type.upgradeShop) {
+            if (User.itemAlreadyGot(this._id)) {
+                this._buyButton.setEnabled(false);
+                this._buyButton.setOpacity(140);
+            }
         }
     }
 });

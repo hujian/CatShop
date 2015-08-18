@@ -74,6 +74,9 @@ var ShopLayer = GameBaseLayer.extend({
 
         if (result) {
             this._moneyLabel.setString(User.getMoneyString());
+        } else {
+            var message = new MessageDialog("金币不够哦！请努力多赚点钱。");
+            message.present();
         }
     }
 });

@@ -72,21 +72,22 @@ Shop.buyItem = function (id, count) {
     if (itemSetting) {
         var moneyLeft = User.getMoney() - itemSetting.money * count;
         if (moneyLeft >= 0) {
-            User.updateMoney(moneyLeft);
 
             // 如果是商店扩建道具，则直接用掉
             if (itemSetting.type == ItemSetting.type.upgradeShop) {
-                if (itemSetting.value > User.getMaxCatCount()) {
+                if (!User.itemAlreadyGot(id)) {
                     User.updateMaxCatCount(itemSetting.value);
                 } else {
-                    cc.error("something wrong when buy upgrade shop item.");
+                    count = 0;
                 }
             }
 
-            User.addItem(id, count);
-            User.flush();
-
-            ret = true;
+            if (count > 0) {
+                User.updateMoney(moneyLeft);
+                User.addItem(id, count);
+                User.flush();
+                ret = true;
+            }
         }
     }
 
