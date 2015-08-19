@@ -4,9 +4,9 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var db = require('mongoose')
+//var db = require('mongoose')
 
-var Report = require('./model/report')
+//var Report = require('./model/report')
 
 // coding.net 的数据库配置
 var dbConfig = JSON.parse(process.env.VCAP_SERVICES).mongodb[0].credentials;
