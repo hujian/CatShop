@@ -13,10 +13,11 @@ var FoodProduceContainerPositions = [
 var FoodProduceContainer = GameBaseLayer.extend({
     ctor:function (callback, target) {
         this._super();
-        this._amount = 0;
+        this._isProducing = false; // 是否在生产食物中
         this._callback = callback;
         this._target = target;
         this._foodSprites = [];
+
 
         var self = this;
 
@@ -39,16 +40,10 @@ var FoodProduceContainer = GameBaseLayer.extend({
     },
 
     produceFood:function(id) {
-        if (this._foodSprites.length > 0) {
-            var message = new MessageDialog("这种食物正在生产中，需要等待完成哦！");
-            message.present();
-        } else {
-        }
-
+        this._isProducing = true;
         this._foodPositions = Util.shuffle(FoodProduceContainerPositions.slice());
         var setting = FoodSetting.getById(id);
         this._foodId= id;
-        this._amount = setting.amount;
         this._loadingBar.start(setting.time, setting.amount, this.doneOneFood, this);
     },
 
@@ -58,24 +53,34 @@ var FoodProduceContainer = GameBaseLayer.extend({
         this._loadingBar.setPosition(cc.p((this.width - this._loadingBar.width)/ 2, this.height /2));
     },
 
-    doneOneFood:function(index) {
+    doneOneFood:function(leftCount) {
         var imageName = "#food_img_" + this._foodId.toString() + ".png";
         var sprite = new cc.Sprite(imageName);
-        var position = this._foodPositions[Math.min(index, FoodProduceContainerPositions.length - 1)];
+        var position = this._foodPositions[Math.min(leftCount, FoodProduceContainerPositions.length - 1)];
         sprite.setPosition(cc.p(position[0], position[1]));
         //sprite.setScale(0);
         //sprite.runAction(cc.sequence(cc.scaleBy(1, 0.8), cc.scaleBy(1, 1.25)));
         //sprite.runAction(cc.sequence(cc.scaleTo(1, 0.5), cc.scaleTo(1, 1)));
         this.addChild(sprite);
         this._foodSprites.push(sprite);
+
+        if (leftCount == 0) {
+            this._isProducing = false;
+        }
     },
 
-    isDone:function() {
-        return this._amount <= 0;
+    // 当前这个食物栏，是否可以生产新的食物，要求不能在生产中，并且，所有已经生产出来的食物被选走了。
+    isValid:function() {
+        return !this._isProducing && this._foodSprites.length == 0;
     },
 
+    // 这个食物是否在本栏中生产
     isFoodProducing:function(foodId) {
-        return this._foodId == foodId && this._foodSprites.length > 0;
+        if (foodId) {
+            return this._isProducing && this._foodId == foodId;
+        } else {
+            return this._isProducing;
+        }
     },
 
     selectFood:function(positon) {

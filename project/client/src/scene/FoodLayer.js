@@ -68,7 +68,7 @@ var FoodLayer = GameBaseLayer.extend({
                     return;
                 }
 
-                if (container.isDone() && !validContainer) {
+                if (container.isValid() && !validContainer) {
                     validContainer = container;
                 }
             }

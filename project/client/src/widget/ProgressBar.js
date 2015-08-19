@@ -22,56 +22,66 @@ var FoodProduceProgressBar = GameBaseLayer.extend({
         loadingBar.setPercent(0);
         this.addChild(loadingBar);
         this._loadingBar = loadingBar;
+
+        // 开始动画的时间
+        this._startAnimationDuration = 0.3;
+
+        // 倒计时的时间单位
+        this._countDownTimeUnit = 1;
     },
 
+    // time: 生产总的时间
+    // count: 生产食物的个数
     start:function(time, count, callback, target) {
         this.stop();
         this.setVisible(true);
 
+        this._time = time;
         this._count = count;
-        this._countLeft = count
         this._callback = callback;
         this._target = target;
-        this._time = time;
-        this._timeLeft = 0.3;
-        this._loadingBar.setPercent(0)
 
-        // 先播放一个一秒的动画，从0到100
-        this.scheduleUpdate();
+        // 先播放一个一秒的动画，从0到80
+        this._loadingBar.setPercent(0)
+        this._startAnimationLeftTime = this._startAnimationDuration;
+        this.schedule(this.updateStartAnimation, 0);
     },
 
     stop:function() {
         this.unscheduleAllCallbacks();
     },
 
-    update:function(interval) {
-        if (this._timeLeft > 0) {
-            this._timeLeft -= interval;
-            this._loadingBar.setPercent(100 - 100 * this._timeLeft / 0.5);
-        } else {
+    getCountDownCount:function() {
+        return parseInt((this._time - 1)  / this._countDownTimeUnit) + 1;
+    },
+
+    updateStartAnimation:function(interval) {
+        this._startAnimationLeftTime -= interval;
+        if (this._loadingBar.getPercent() >= 100) {
+            this.unschedule(this.updateStartAnimation);
+            this.schedule(this.updateCountDown, this._countDownTimeUnit, this.getCountDownCount() - 1);
+            this.schedule(this.updateProducingFood, this._time / this._count, this._count - 1);
+
             var clock = new cc.Sprite("#food_icon_clock.png");
             clock.setPosition(cc.p(this.width / 2, this.height / 2));
             this.addChild(clock);
-
-            //var scale = cc.scaleTo(1, 1);
-            //var restore = cc.callFunc(function(){
-            //    clock.setScale(0);
-            //})
-            //clock.runAction(cc.repeatForever(cc.sequence(scale, restore)));
-            //this._clock = clock;
-
-            this.unscheduleUpdate();
-            this.schedule(this.updateOnce, this._time / this._count, this._count - 1);
+        } else {
+            this._loadingBar.setPercent(100 - 100 * this._startAnimationLeftTime / this._startAnimationDuration);
         }
     },
 
-    updateOnce:function() {
-        if (this._countLeft > 0) {
-            this._countLeft--;
-            this._loadingBar.setPercent(this._countLeft / this._count * 100);
-            if (this._callback) {
-                this._callback.call(this._target, this._count - this._countLeft - 1);
-            }
+    updateCountDown:function() {
+        this._loadingBar.setPercent(this._loadingBar.getPercent() - 100 / this.getCountDownCount());
+    },
+
+    updateProducingFood:function() {
+        this._count--;
+        if (this._callback) {
+            this._callback.call(this._target, this._count);
         }
+    },
+
+    getPercent:function() {
+        return this._loadingBar.getPercent();
     }
 });

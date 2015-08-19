@@ -14,8 +14,8 @@ var TestProgressBar = TestBaseScene.extend({
         var bar = new FoodProduceProgressBar();
         var count = 8;
         var time = 5;
-        bar.start(time, count, function(index) {
-            this.printMessage("percentage: " + (index * 100 / count).toString() + "%")
+        bar.start(time, count, function(leftCount) {
+            this.printMessage("生产食物1个，还剩" + leftCount.toString() + "个")
         }, this)
         bar.setPosition(cc.visibleRect.center);
         this.addChild(bar);
