@@ -53,7 +53,7 @@ var TestMainScene = TestBaseScene.extend({
             Util.setReleaseDesignResolution();
             cc.director.pushScene(new ContainerScene(2));
 
-            //cc.director.pushScene(new TestGridScene());
+            //cc.director.pushScene(new TestPopupScene());
         }
     },
 

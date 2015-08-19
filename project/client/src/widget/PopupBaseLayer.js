@@ -73,3 +73,6 @@ var PopupBaseLayer = cc.Layer.extend({
 });
 
 PopupBaseLayer.DefualtZOrder = 10000;
+PopupBaseLayer.animation = {
+    slideDown: 1
+};

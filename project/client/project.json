@@ -53,6 +53,7 @@
         "src/scene/SellingHistoryScene.js",
         "src/scene/HelpLayer.js",
         "src/scene/CatDetailLayer.js",
+        "src/scene/CatSellingResultLayer.js",
         "src/test/TestBaseScene.js",
         "src/test/widget/TestContentCellLayer.js",
         "src/test/widget/TestPopupLayer.js",

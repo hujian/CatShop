@@ -76,8 +76,18 @@ CatSetting.getBabyById = function (id) {
     }
 };
 
+// 判断当前id是否猫仔的数据
 CatSetting.isBaby = function(id) {
     return id <= this.baby.jsonData.length;
+};
+
+// 获取id在自己分类中的index，用来获取显示或是获取图片名称。index从1开始
+CatSetting.getIndexById = function(catId) {
+    if (CatSetting.isBaby(catId)) {
+        return catId;
+    } else {
+        return catId - this.baby.jsonData.length;
+    }
 };
 
 // 根据id的大小，判断是否是成年猫

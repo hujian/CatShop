@@ -119,5 +119,10 @@ var Util = {
 	// 获取cc.Point的描述字符串，debug用
 	pointToString:function(point) {
 		return "x: " + point.x.toString() + ", y: " + point.y.toString();
-	}
+	},
+
+	// 输出固定位数的正数，不足位数，前面补0
+	formatInteger:function(num, length) {
+        return (num / Math.pow(10, length)).toFixed(length).substr(2);
+    }
 };
