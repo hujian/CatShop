@@ -141,6 +141,14 @@ var CatSprite = cc.Sprite.extend({
         return this.getPrefix() + "_" + type + index.toString() + '.png';
     },
 
+    getCat:function() {
+        return this._cat;
+    },
+
+    setCat:function(cat) {
+        this._cat = cat;
+    },
+
     // cat是指在CatManager中被管理cat对象
     start:function(cat) {
         this._cat = cat;

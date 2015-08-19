@@ -127,7 +127,6 @@ var CatDetailLayer = PopupBaseLayer.extend({
                 this.dismiss();
             }
         }, this);
-
     }
 
 });

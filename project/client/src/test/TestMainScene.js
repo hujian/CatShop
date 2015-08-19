@@ -50,8 +50,8 @@ var TestMainScene = TestBaseScene.extend({
         if (cc.isDebug && !this.autoRun) {
             this.autoRun = true;
 
-            Util.setReleaseDesignResolution();
-            cc.director.pushScene(new ContainerScene(2));
+            //Util.setReleaseDesignResolution();
+            //cc.director.pushScene(new ContainerScene(2));
 
             //cc.director.pushScene(new TestPopupScene());
         }

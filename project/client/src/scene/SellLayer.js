@@ -92,7 +92,7 @@ var SellLayer = GameBaseLayer.extend({
         if (cats.length > index) {
             var cat = cats[index];
             var catSprite = new CatSprite(cat.id);
-            catSprite.model = cat;
+            catSprite.setCat(cat);
             catSprite.setPosition(cc.p(183, 450));
             catSprite.setScale(1.2);
             this.addChild(catSprite);
@@ -107,7 +107,12 @@ var SellLayer = GameBaseLayer.extend({
                     var dialog = new MessageDialog("幼崽是没法出售的哦！请再培养一阵子看看！");
                     dialog.present();
                 } else {
-                    Shop.sellCat(this._catSprite.model);
+                    var message = new CatSellingResultLayer(this._catSprite.getCat());
+                    message.present();
+
+                    Shop.sellCat(this._catSprite.getCat());
+
+                    // 注意这个要放到后面, 会更新this._catSprite
                     this.updateCat(Math.max(this._selectlayer.getCurrentPageIndex() - 1, 0));
                     this._moneyLabel.setString(User.getMoneyString());
                     this._selectlayer.decreaseCount();

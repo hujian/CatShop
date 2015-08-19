@@ -16,7 +16,7 @@ var CatSellingResultLayer = PopupBaseLayer.extend({
 
         // 背景
         var bg = new cc.Sprite("#sell_result_message_bg.png")
-        bg.setAnchorPoint(cc.p(0, 0));
+        bg.setPosition(cc.visibleRect.center);
         this.addChild(bg);
 
         // 序号
@@ -56,6 +56,16 @@ var CatSellingResultLayer = PopupBaseLayer.extend({
             if (type == ccui.Widget.TOUCH_ENDED) {
             }
         }, this);
-        this.addChild(shareBtn);
+        bg.addChild(shareBtn);
+
+        // 关闭
+        var closeBtn = new ccui.Button("btn_close.png", null, null, ccui.Widget.PLIST_TEXTURE);
+        closeBtn.setPosition(cc.p(bg.width / 2, 220));
+        closeBtn.addTouchEventListener(function(btn, type) {
+            if (type == ccui.Widget.TOUCH_ENDED) {
+                this.dismiss();
+            }
+        }, this);
+        this.addChild(closeBtn);
     }
 });
