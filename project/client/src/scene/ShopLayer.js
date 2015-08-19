@@ -72,10 +72,16 @@ var ShopLayer = GameBaseLayer.extend({
             result = Shop.buyCat(id);
         }
 
-        if (result) {
+        if (!result) {
             this._moneyLabel.setString(User.getMoneyString());
-        } else {
+        } else if (result == Shop.error.notEnoughMoney) {
             var message = new MessageDialog("金币不够哦！请努力多赚点钱。");
+            message.present();
+        } else if (result == Shop.error.tooMuchCat) {
+            var message = new MessageDialog("猫的养育数量达到上限，请先升级猫屋!");
+            message.present();
+        } else {
+            var message = new MessageDialog("该道具无法购买！");
             message.present();
         }
     }

@@ -7,13 +7,15 @@
 var Shop = Shop || {};
 
 // 买猫可能会有多种原因失败
-Shop.error = {};
-Shop.error.notEnoughMoney = 1;
-Shop.error.tooMuchCat = 2;
+Shop.error = {
+    notEnoughMoney : 1,
+    tooMuchCat : 2,
+    alreadyGot : 3
+};
 
 // 购买猫，传入的是猫种类id
 Shop.buyCat = function (catId) {
-    var cat = null;
+    var ret = null;
 
     if (User.getAllCats().length < User.getMaxCatCount()) {
         var catSetting = CatSetting.getById(catId);
@@ -21,17 +23,17 @@ Shop.buyCat = function (catId) {
             var moneyLeft = User.getMoney() - catSetting.money;
             if (moneyLeft >= 0) {
                 User.updateMoney(moneyLeft);
-                cat = User.addCat(catId);
+                User.addCat(catId);
                 User.flush();
             } else {
-                cat = Shop.error.notEnoughMoney;
+                ret = Shop.error.notEnoughMoney;
             }
         }
     } else {
-        cat = Shop.error.tooMuchCat;
+        ret = Shop.error.tooMuchCat;
     }
 
-    return cat;
+    return ret;
 };
 
 // 售出猫, 注意必须传进来从User中获取的cat
@@ -62,9 +64,9 @@ Shop.getAllItem = function () {
     return items;
 };
 
-// 买道具, 返回true表示购买成功
+// 买道具
 Shop.buyItem = function (id, count) {
-    var ret = false;
+    var ret = null;
 
     count = count || 1;
 
@@ -72,13 +74,13 @@ Shop.buyItem = function (id, count) {
     if (itemSetting) {
         var moneyLeft = User.getMoney() - itemSetting.money * count;
         if (moneyLeft >= 0) {
-
             // 如果是商店扩建道具，则直接用掉
             if (itemSetting.type == ItemSetting.type.upgradeShop) {
                 if (!User.itemAlreadyGot(id)) {
                     User.updateMaxCatCount(itemSetting.value);
                 } else {
                     count = 0;
+                    ret = Shop.error.alreadyGot;
                 }
             }
 
@@ -86,8 +88,9 @@ Shop.buyItem = function (id, count) {
                 User.updateMoney(moneyLeft);
                 User.addItem(id, count);
                 User.flush();
-                ret = true;
             }
+        } else {
+            ret = Shop.error.notEnoughMoney;
         }
     }
 
