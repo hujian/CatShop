@@ -43,8 +43,21 @@ var Util = {
 	},
 
 	// 获取时间字符串，hh:mm:ss
-	getTimeString:function (seconds) {
-		return parseInt(seconds / 3600).toString() + '小时' + parseInt(seconds % 3600 / 60).toString() + '分' + parseInt(seconds % 60).toString() + '秒'
+	getTimeString:function (seconds, format) {
+		format = format || "hh:mm:ss";
+
+		var ret = ""
+		if (format.indexOf("hh") > -1) {
+			ret += parseInt(seconds / 3600).toString() + '小时';
+		}
+		if (format.indexOf("mm") > -1) {
+			ret += parseInt(seconds % 3600 / 60).toString() + '分';
+		}
+		if (format.indexOf("ss") > -1) {
+			ret += + parseInt(seconds % 60).toString() + '秒';
+		}
+
+		return ret;
 	},
 
 	getRandomArbitrary:function(min, max) {

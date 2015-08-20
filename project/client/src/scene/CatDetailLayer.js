@@ -109,8 +109,8 @@ var CatDetailLayer = PopupBaseLayer.extend({
         bg.addChild(hungryLayer);
 
         // 猫养育的时间
-        var time = new ccui.Text("0小时0分", gameResource.defaultFont, 16);
-        time.setPosition(cc.p(174, 90));
+        var time = new ccui.Text(Util.getTimeString(cat.getFeedingTime(), "hh:mm"), gameResource.defaultFont, 20);
+        time.setPosition(cc.p(174, 94));
         bg.addChild(time);
 
         // 猫的体重

@@ -51,6 +51,9 @@ CatManager.start = function(rect) {
         var cat = cats[i];
         cat.setPosition(positions[i]);
     }
+
+    // 开始启动内部的计时器
+    Time.start();
 };
 
 CatManager.getRandomPositionInMovingRect = function() {
@@ -63,6 +66,9 @@ CatManager.getRandomPositionInMovingRect = function() {
 CatManager.stop = function() {
     cc.director.getScheduler().unschedule(CatManager.update, CatManager);
     CatManager.rasingCat = false;
+
+    // 停止计时
+    Time.stop();
 };
 
 // 状态更新

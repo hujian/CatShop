@@ -142,7 +142,10 @@ var Cat = function(id) {
     this.targetPosition = cc.p(0, 0);
 
     // 无需保存到本地的数据
-    this.unsavingData = {}
+    this.unsavingData = {};
+
+    // 生产时间
+    this.createTime = Time.now();
 };
 
 Cat.prototype.dropHair = function() {
@@ -407,6 +410,11 @@ Cat.prototype.getHealthSpeed = function() {
     return speed
 };
 
+// 获取培养的时间（秒数）
+Cat.prototype.getFeedingTime = function() {
+    return Time.now() - this.getCreateTime();
+};
+
 // 属性get方法，注意第一句话，是否为了防止，升级代码时，该属性在上一个版本没有
 Cat.prototype.hasVaccine = function() {
     this.vaccine = this.vaccine || false;
@@ -473,4 +481,9 @@ Cat.prototype.getTargetPosition = function() {
 
 Cat.prototype.getMovingSpeed = function() {
     return this.getChasingFood() ? 100 : 20;
+};
+
+Cat.prototype.getCreateTime = function() {
+    this.createTime = this.createTime || Time.now();
+    return this.createTime;
 };
