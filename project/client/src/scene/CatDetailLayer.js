@@ -114,7 +114,7 @@ var CatDetailLayer = PopupBaseLayer.extend({
         bg.addChild(time);
 
         // 猫的体重
-        var weight = new ccui.Text("5KG", gameResource.defaultFont, 18);
+        var weight = new ccui.Text(Util.getWeightString(cat.getWeight()), gameResource.defaultFont, 18);
         weight.setPosition(cc.p(200, 46));
         bg.addChild(weight);
 

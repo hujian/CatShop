@@ -146,6 +146,9 @@ var Cat = function(id) {
 
     // 生产时间
     this.createTime = Time.now();
+
+    // 体重
+    this.weight = CatSetting.getById(id).weight;
 };
 
 Cat.prototype.dropHair = function() {
@@ -197,6 +200,8 @@ Cat.prototype.update = function(interval) {
                         if (User.updateNewCat(this.id)) {
                             User.flush();
                         }
+                        // 增加新的体重
+                        this.weight = this.getWeight() + CatSetting.getById(this.id).weight;
                     }
                 }
             }
@@ -486,4 +491,9 @@ Cat.prototype.getMovingSpeed = function() {
 Cat.prototype.getCreateTime = function() {
     this.createTime = this.createTime || Time.now();
     return this.createTime;
+};
+
+Cat.prototype.getWeight = function() {
+    this.weight = this.weight || CatSetting.getById(this.id).weight;
+    return this.weight;
 };

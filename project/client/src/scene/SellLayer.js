@@ -23,7 +23,53 @@ var SellLayer = GameBaseLayer.extend({
         leftPanel.setPosition(cc.p(cc.visibleRect.width, 0));
         this.addChild(leftPanel);
 
-        // 头部
+        // 养育时间
+        var feedTimeName = new ccui.Text("经过时间", gameResource.defaultFont, 30);
+        feedTimeName.setPosition(cc.p(522, 930));
+        this.addChild(feedTimeName);
+
+        var feedTimeLabel = new ccui.Text("", gameResource, 24);
+        feedTimeLabel.setPosition(cc.p(feedTimeName.x, 886));
+        this.addChild(feedTimeLabel);
+        this._feedTimeLabel = feedTimeLabel;
+
+        // 体重
+        var valueLabel = new ccui.Text("体重:", gameResource.defaultFont, 24);
+        valueLabel.setPosition(cc.p(449, 770));
+        this.addChild(valueLabel);
+
+        valueLabel = new ccui.Text("", gameResource.defaultFont, 24);
+        valueLabel.setPosition(cc.p(518, 770));
+        valueLabel.setTextHorizontalAlignment(cc.TEXT_ALIGNMENT_LEFT);
+        valueLabel.setAnchorPoint(cc.p(0, 0.5));
+        this.addChild(valueLabel);
+        this._weightLabel = valueLabel;
+
+        // 亲密度
+        valueLabel = new ccui.Text("亲密:", gameResource.defaultFont, 24);
+        valueLabel.setPosition(cc.p(449, 735));
+        this.addChild(valueLabel);
+
+        valueLabel = new ccui.Text("", gameResource.defaultFont, 24);
+        valueLabel.setPosition(cc.p(518, 735));
+        valueLabel.setTextHorizontalAlignment(cc.TEXT_ALIGNMENT_LEFT);
+        valueLabel.setAnchorPoint(cc.p(0, 0.5));
+        this.addChild(valueLabel);
+        this._intimateLabel = valueLabel;
+
+        // 训练
+        valueLabel = new ccui.Text("训练:", gameResource.defaultFont, 24);
+        valueLabel.setPosition(cc.p(449, 700));
+        this.addChild(valueLabel);
+
+        valueLabel = new ccui.Text("", gameResource.defaultFont, 24);
+        valueLabel.setPosition(cc.p(518, 700));
+        valueLabel.setTextHorizontalAlignment(cc.TEXT_ALIGNMENT_LEFT);
+        valueLabel.setAnchorPoint(cc.p(0, 0.5));
+        this.addChild(valueLabel);
+        this._trainLabel = valueLabel;
+
+       // 头部
         var headerBg = new cc.Sprite("#sell_header.png");
         headerBg.setAnchorPoint(cc.p(0, 1));
         headerBg.setPosition(cc.p(0, cc.visibleRect.height));
@@ -91,12 +137,20 @@ var SellLayer = GameBaseLayer.extend({
         var cats = User.getAllCats();
         if (cats.length > index) {
             var cat = cats[index];
+
+            // 图标
             var catSprite = new CatSprite(cat.id);
             catSprite.setCat(cat);
             catSprite.setPosition(cc.p(183, 450));
             catSprite.setScale(1.2);
             this.addChild(catSprite);
             this._catSprite = catSprite;
+
+            // 养育时间
+            this._feedTimeLabel.setString(Util.getTimeString(cat.getFeedingTime()));
+
+            // 体重
+            this._weightLabel.setString(Util.getWeightString(cat.getWeight()));
         }
     },
 

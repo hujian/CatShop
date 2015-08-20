@@ -60,6 +60,11 @@ var Util = {
 		return ret;
 	},
 
+	// 获取体重字符串
+	getWeightString:function(weight) {
+		return weight.toFixed(1) + "公斤";
+	},
+
 	getRandomArbitrary:function(min, max) {
         return Math.random() * (max - min) + min;
     },
