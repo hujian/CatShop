@@ -21,7 +21,7 @@ var TestBaseScene = cc.Scene.extend({
         // 测试按钮大小
         this.testButtonSize = cc.size(130, 36)
         // 所有测试用例按钮
-        this.buttons = []
+        this.buttons = [];
 
         // 是否需要返回按钮，默认需要
         this.needBackButton = true;
@@ -30,13 +30,13 @@ var TestBaseScene = cc.Scene.extend({
         this.needSwitchButton = false;
 
         // 右侧的状态框
-        this.statusXPosition = 550
-        this.statusYPosition = 415
-        this.statusCellHeight = 20
-        this.statusCellWidth = 140
-        this.statusMaxCellCount = 10.5 // 为了遮掉一点，从而看出是能滚的
-        this.statusCellGap = 5
-        this.statutsLables = {}
+        this.statusXPosition = 550;
+        this.statusYPosition = 415;
+        this.statusCellHeight = 20;
+        this.statusCellWidth = 140;
+        this.statusMaxCellCount = 10.5; // 为了遮掉一点，从而看出是能滚的
+        this.statusCellGap = 5;
+        this.statutsLables = {};
 
         // 返回键响应
         this.backKeyReleasedEvent = new EventHandler();

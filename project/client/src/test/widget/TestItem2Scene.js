@@ -13,13 +13,11 @@ var TestItem2Scene = TestBaseScene.extend({
         cc.spriteFrameCache.addSpriteFrames(gameResource.global.other_plist, gameResource.global.other_image);
         cc.spriteFrameCache.addSpriteFrames(gameResource.global.cat_plist, gameResource.global.cat_image);
 
-
-        var container = new FoodProduceContainer();
-        container.setContentSize(cc.size(306, 270));
-        container.setPosition(cc.p(376, 175));
-        this.addChild(container);
-
         this.addTestButton("生产食物", function() {
+            var container = new FoodProduceContainer();
+            container.setContentSize(cc.size(306, 270));
+            container.setPosition(cc.p(376, 175));
+            this.addChild(container);
             container.produceFood(1);
         });
 
@@ -46,11 +44,19 @@ var TestItem2Scene = TestBaseScene.extend({
             }
         });
 
-        // 出售历史的item
-        var cat = new Cat(30);
-        var item = new SellingHistoryItem(cat);
-        item.setScale(0.5);
-        item.setPosition(cc.p(200, 100));
-        this.addChild(item);
+        this.addTestButton("出售历史", function() {
+            var cat = new Cat(30);
+            var item = new SellingHistoryItem(cat);
+            item.setScale(0.5);
+            item.setPosition(cc.p(200, 100));
+            this.addChild(item);
+        });
+
+        this.addTestButton("猫评级", function() {
+            var rank = new CatRankWidget(4);
+            rank.setScale(0.5);
+            rank.setPosition(cc.p(200, 100));
+            this.addChild(rank);
+        });
     }
 });

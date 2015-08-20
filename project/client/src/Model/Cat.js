@@ -306,7 +306,7 @@ Cat.prototype.update = function(interval) {
 Cat.prototype.updateHealth = function() {
     this.health = Math.max(0, Math.min(100, this.health + this.getHealthSpeed()));
 
-    if (this.health < 30 && !this.ill) {
+    if (!this.hasVaccine() && this.health < 30 && !this.ill) {
         var percentage = 0.05;
 
         if (this.health < 10 && this.health > 0) {
@@ -316,6 +316,8 @@ Cat.prototype.updateHealth = function() {
         if (this.health == 0) {
             percentage = 1;
         }
+
+        percentage = percentage / CatSetting.getById(this.id).ill;
 
         if (Util.randomInPercentage(percentage)) {
             this.ill = true;

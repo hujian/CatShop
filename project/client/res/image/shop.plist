@@ -342,6 +342,19 @@
                 <key>sourceSize</key>
                 <string>{470,85}</string>
             </dict>
+            <key>sell_cat_rank_star.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1460,1760},{25,25}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{25,25}}</string>
+                <key>sourceSize</key>
+                <string>{25,25}</string>
+            </dict>
             <key>sell_header.png</key>
             <dict>
                 <key>frame</key>
@@ -456,7 +469,7 @@
             <key>size</key>
             <string>{1528,1934}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:819756bf492b964bbccff008a3df3f98:e97d135d620761e34286005e793a11b7:0c3382addd4ddbdf7ff3d469abaa2ba6$</string>
+            <string>$TexturePacker:SmartUpdate:de1967fa754c9c258d0fffb93dc8beb0:b402344d8627edbcd5b6517f585a55c8:0c3382addd4ddbdf7ff3d469abaa2ba6$</string>
             <key>textureFileName</key>
             <string>shop.png</string>
         </dict>
