@@ -33,6 +33,12 @@ var SellLayer = GameBaseLayer.extend({
         this.addChild(feedTimeLabel);
         this._feedTimeLabel = feedTimeLabel;
 
+        // 评级
+        var rank = new CatRankWidget(1);
+        rank.setPosition(cc.p(feedTimeLabel.x, 812));
+        this.addChild(rank);
+        this._rank = rank;
+
         // 体重
         var valueLabel = new ccui.Text("体重:", gameResource.defaultFont, 24);
         valueLabel.setPosition(cc.p(449, 770));
@@ -148,6 +154,9 @@ var SellLayer = GameBaseLayer.extend({
 
             // 养育时间
             this._feedTimeLabel.setString(Util.getTimeString(cat.getFeedingTime()));
+
+            // 评级
+            this._rank.updateRank(CatSetting.getById(cat.id).rank);
 
             // 体重
             this._weightLabel.setString(Util.getWeightString(cat.getWeight()));
