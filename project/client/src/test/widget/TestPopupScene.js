@@ -91,4 +91,4 @@ var TestPopupScene = TestBaseScene.extend({
         layer.setScale(0.5);
         layer.present();
     }
-})
+});

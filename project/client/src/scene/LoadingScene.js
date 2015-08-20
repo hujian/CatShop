@@ -27,7 +27,7 @@ LoadingScene = GameBaseScene.extend({
                 texture2d.initWithElement(img);
                 texture2d.handleLoadedTexture();
                 self._logo = new cc.Sprite(texture2d);
-                self._logo.setPosition(cc.pAdd(cc.visibleRect.center, cc.p(0, cc.visibleRect.height / 4)))
+                self._logo.setPosition(cc.pAdd(cc.visibleRect.center, cc.p(0, cc.visibleRect.height / 4)));
                 self._bgLayer.addChild(self._logo, 10);
             });
 
@@ -75,7 +75,7 @@ LoadingScene = GameBaseScene.extend({
         // 加载loading界面自己的资源
         cc.loader.load(Util.getArray(gameResource.loading), function () {}, function () {
             // 播放动画
-            self.playLogoAnimation()
+            self.playLogoAnimation();
 
             // 获取服务器时间
             Time.load(cc.game.config['timestampServerURL'], function () {
@@ -94,7 +94,7 @@ LoadingScene = GameBaseScene.extend({
                         }
                     );
                 }
-            }, this)
+            }, this);
 
         })
     },
@@ -120,5 +120,5 @@ LoadingScene = GameBaseScene.extend({
 });
 
 LoadingScene.create = function () {
-    return new LoadingScene()
-}
+    return new LoadingScene();
+};

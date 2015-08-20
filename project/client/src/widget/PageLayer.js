@@ -249,13 +249,13 @@ var SelectCatPageLayer = PageLayer.extend({
 
     updateStatusUI:function() {
         if (this._statusBg) {
-            this._statusBg.setPosition(cc.p(this.width / 2, this.height / 2))
+            this._statusBg.setPosition(cc.p(this.width / 2, this.height / 2));
             this._statusLabel.setPosition(this._statusBg.getPosition());
         }
     },
 
     updateUIPosition:function() {
-        this._super()
-        this.updateStatusUI()
+        this._super();
+        this.updateStatusUI();
     }
 });

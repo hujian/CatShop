@@ -239,6 +239,7 @@ var CatHouseLayer = GameBaseLayer.extend({
             var foodSprite = new FoodSprite(foodId);
             foodSprite.setPosition(cc.p(this.width / 2, 689));
             foodSprite.setScale(0.8);
+            foodSprite.startMoving();
             this.addChild(foodSprite);
 
             // 将食物加入猫屋逻辑

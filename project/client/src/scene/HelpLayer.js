@@ -11,9 +11,9 @@ var HelpLayer = PopupBaseLayer.extend({
         // 背景滚动层
         var scrollView = new ccui.ScrollView()
         scrollView.setDirection(ccui.ScrollView.DIR_VERTICAL)
-        scrollView.setBounceEnabled(false)
-        scrollView.setTouchEnabled(true)
-        this.addChild(scrollView)
+        scrollView.setBounceEnabled(false);
+        scrollView.setTouchEnabled(true);
+        this.addChild(scrollView);
 
         // 游戏介绍，共三张
         var images = [];

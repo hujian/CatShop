@@ -127,4 +127,4 @@ var ShopItem = ccui.Layout.extend({
 ShopItem.type = {
     Cat: "cat",
     Item: "item"
-}
+};

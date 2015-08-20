@@ -6,7 +6,7 @@
 
 var DataModel = cc.Class.extend({
     ctor: function () {
-        this.jsonData = {}
+        this.jsonData = {};
     },
 
     // 直接从json文件初始化该模型
@@ -14,7 +14,7 @@ var DataModel = cc.Class.extend({
         if (filePath) {
             this.jsonData = cc.loader.getRes(filePath);
             if (this.jsonData) {
-                cc.log("load json from file [" + filePath + "]")
+                cc.log("load json from file [" + filePath + "]");
             } else {
                 cc.error("parse json [" + filePath + "] failed : ");
             }
@@ -25,14 +25,14 @@ var DataModel = cc.Class.extend({
     // 如果local storage已经有数据的话，返回true，否则返回false
     loadDataFromLocalStorage: function (key) {
         if (key) {
-            var jsonString = this.getDataStringFromLocalStorage(key)
+            var jsonString = this.getDataStringFromLocalStorage(key);
             if (jsonString) {
-                this.jsonData = JSON.parse(jsonString)
+                this.jsonData = JSON.parse(jsonString);
                 if (this.jsonData) {
-                    cc.log("load data from local storage, key: [" + key + "]")
+                    cc.log("load data from local storage, key: [" + key + "]");
                     return true
                 } else {
-                    cc.log("load data from local storage failed, key: [" + key + "]")
+                    cc.log("load data from local storage failed, key: [" + key + "]");
                 }
             }
         }
@@ -40,7 +40,7 @@ var DataModel = cc.Class.extend({
     },
 
     getDataStringFromLocalStorage:function (key) {
-        return cc.sys.localStorage.getItem(key)
+        return cc.sys.localStorage.getItem(key);
     },
 
     // 保存数据到local storage
@@ -50,19 +50,19 @@ var DataModel = cc.Class.extend({
                 // 哪些key需要被排除，不需要保存到磁盘
                 if (excludeKeys) {
                     var excludeFunc = function (key, value) {
-                        var index = excludeKeys.indexOf(key)
+                        var index = excludeKeys.indexOf(key);
                         if (index > -1) {
-                            return undefined
+                            return undefined;
                         } else {
-                            return value
+                            return value;
                         }
                     }
                 }
 
-                cc.sys.localStorage.setItem(key, JSON.stringify(this.jsonData, excludeFunc))
-                cc.log("save data to local storage, key: [" + key + "]")
+                cc.sys.localStorage.setItem(key, JSON.stringify(this.jsonData, excludeFunc));
+                cc.log("save data to local storage, key: [" + key + "]");
             } catch (e) {
-                cc.log("save data to local storage failed, key: [" + key + "]")
+                cc.log("save data to local storage failed, key: [" + key + "]");
             }
         }
     }

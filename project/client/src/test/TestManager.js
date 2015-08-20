@@ -4,34 +4,34 @@
 * @date:   2015-07-31
 */
 
-var TestManager = TestManager || {}
+var TestManager = TestManager || {};
 
 // 测试项目的名称
-TestManager.testName = {}
-TestManager.testName.one = "one"
+TestManager.testName = {};
+TestManager.testName.one = "one";
 
 // 开始某项自动测试
 TestManager.start = function (name) {
-    this.currentTestName = name
+    this.currentTestName = name;
 
     switch (name) {
         case TestManager.testName.one:
-            User.initUserData()
-            User.flush()
+            User.initUserData();
+            User.flush();
 
-            Shop.buyItem(ItemSetting.id.fan, 2)
-            Shop.buyItem(ItemSetting.id.hairCleaner, 20)
-            Shop.buyFood()
+            Shop.buyItem(ItemSetting.id.fan, 2);
+            Shop.buyItem(ItemSetting.id.hairCleaner, 20);
+            Shop.buyFood();
 
-            CatManager.start()
-            Util.speedUp(10)
+            CatManager.start();
+            Util.speedUp(10);
 
             break
     }
-}
+};
 
 // 停止测试
 TestManager.stop = function () {
-    CatManager.stop()
-    Util.speedUp(1)
-}
+    CatManager.stop();
+    Util.speedUp(1);
+};

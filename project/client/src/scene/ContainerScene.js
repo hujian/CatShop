@@ -7,7 +7,7 @@
 var ContainerScene = GameBaseScene.extend({
     ctor:function (index) {
         this._super();
-        this._currentPage = null
+        this._currentPage = null;
 
         cc.spriteFrameCache.addSpriteFrames(gameResource.global.cat_house_plist, gameResource.global.cat_house_image);
         cc.spriteFrameCache.addSpriteFrames(gameResource.global.cat_baby_plist, gameResource.global.cat_baby_image);
@@ -43,7 +43,7 @@ var ContainerScene = GameBaseScene.extend({
             this._currentPage = null;
         }
 
-        var barHeight = tabBar.height + this._adLayer.height
+        var barHeight = tabBar.height + this._adLayer.height;
 
         switch (index) {
             case 0: {
@@ -71,6 +71,6 @@ var ContainerScene = GameBaseScene.extend({
             }
         }
 
-        this.addChild(this._currentPage)
+        this.addChild(this._currentPage);
     }
 });

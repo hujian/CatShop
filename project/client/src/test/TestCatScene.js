@@ -189,7 +189,7 @@ var TestCatScene = TestBaseScene.extend({
         switch(operation) {
             case this.catOpertaions[0]:
                 this.createFeedPopupLayer(cat);
-                break
+                break;
             case this.catOpertaions[1]:
                 if (User.getMedicineCount() > 0) {
                     CatManager.takeMedicine(cat, ItemSetting.id.medicine, 1);
@@ -197,7 +197,7 @@ var TestCatScene = TestBaseScene.extend({
                 } else {
                     this.printMessage("药品不足");
                 }
-                break
+                break;
             case this.catOpertaions[2]:
                 if (User.getVaccineCount() > 0) {
                     CatManager.takeVaccine(cat);
@@ -205,12 +205,12 @@ var TestCatScene = TestBaseScene.extend({
                 } else {
                     this.printMessage("疫苗不足");
                 }
-                break
+                break;
             case this.catOpertaions[3]:
                 Shop.sellCat(cat);
                 this.printMessage("出售一只" + setting.name + ", 获的金钱" + setting.money);
                 this.refreshCatStatusCell();
-                break
+                break;
         }
     },
 
@@ -226,4 +226,4 @@ var TestCatScene = TestBaseScene.extend({
         string +=  ", 环境健康: " + CatManager.getHealthValue().toString();
         this.evironmentLabel.setString(string);
     }
-})
+});
