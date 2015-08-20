@@ -46,3 +46,7 @@ gameResource.loadingLogoImg = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAV4
 
 // 默认字体
 gameResource.defaultFont = "";
+if((cc.sys.os == cc.sys.OS_WP8 || cc.sys.os == cc.sys.OS_WINRT))
+{
+    gameResource.defaultFont = 'Dengxian';
+}

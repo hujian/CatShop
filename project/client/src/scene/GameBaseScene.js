@@ -22,9 +22,10 @@ var GameBaseScene = cc.Scene.extend({
     },
 
     // 最上层的接受者响应返回键响应
-    onKeyReleased: function (keyCode) {
+    onKeyReleased: function (keyCode, event) {
         if(keyCode == cc.KEY.escape) {
             this.backKeyReleasedEvent.raiseLastHandler();
+            event.stopPropagation();
         }
     }
 });

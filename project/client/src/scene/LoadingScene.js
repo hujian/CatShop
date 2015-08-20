@@ -20,23 +20,30 @@ LoadingScene = GameBaseScene.extend({
         var bgLayer = self._bgLayer = new cc.LayerColor(cc.color(52, 113, 143, 255));
         self.addChild(bgLayer, 0);
 
-        if(gameResource.loadingLogoImg){
-            //logo
-            cc.loader.loadImg(gameResource.loadingLogoImg, {isCrossOrigin : false }, function(err, img){
-                var texture2d = self._texture2d = new cc.Texture2D();
-                texture2d.initWithElement(img);
-                texture2d.handleLoadedTexture();
-                self._logo = new cc.Sprite(texture2d);
-                self._logo.setPosition(cc.pAdd(cc.visibleRect.center, cc.p(0, cc.visibleRect.height / 4)));
-                self._bgLayer.addChild(self._logo, 10);
-            });
-
-            //loading percent
-            var label = self._label = new cc.LabelTTF(this.loadingText + " 0%", "Arial", 24);
-            label.setPosition(cc.pSub(cc.visibleRect.center, cc.p(0, cc.visibleRect.height / 3)));
-            label.setColor(cc.color.BLACK);
-            bgLayer.addChild(this._label, 10);
+        if(!cc.sys.isNative){
+            if(gameResource.loadingLogoImg){
+                //logo
+                cc.loader.loadImg(gameResource.loadingLogoImg, {isCrossOrigin : false }, function(err, img){
+                    var texture2d = self._texture2d = new cc.Texture2D();
+                    texture2d.initWithElement(img);
+                    texture2d.handleLoadedTexture();
+                    self._logo = new cc.Sprite(texture2d);
+                    self._logo.setPosition(cc.pAdd(cc.visibleRect.center, cc.p(0, cc.visibleRect.height / 4)));
+                    self._bgLayer.addChild(self._logo, 10);
+                });
+            }
         }
+        else{
+            self._logo = new cc.Sprite(gameResource.loading.loading_logo_img);
+            self._logo.setPosition(cc.pAdd(cc.visibleRect.center, cc.p(0, cc.visibleRect.height / 4)))
+            self._bgLayer.addChild(self._logo, 10)
+        }
+
+        //loading percent
+        var label = self._label = new cc.LabelTTF(this.loadingText + " 0%", "Arial", 24);
+        label.setPosition(cc.pSub(cc.visibleRect.center, cc.p(0, cc.visibleRect.height / 3)));
+        label.setColor(cc.color.BLACK);
+        bgLayer.addChild(this._label, 10);
 
         return true;
     },

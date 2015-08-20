@@ -20,14 +20,14 @@ var PageLayer = GameBaseLayer.extend({
         }
 
         if (arrow) {
-            var leftArrow = new ccui.Button(arrow, null, null, texType);
+            var leftArrow = new ccui.Button(arrow, "", "", texType);
 
             leftArrow.addTouchEventListener(this.leftArrowTouch, this);
             leftArrow.setAnchorPoint(cc.p(0, 0.5));
             this.addChild(leftArrow);
             this._leftArrow = leftArrow;
 
-            var rightArrow = new ccui.Button(arrow, null, null, texType);
+            var rightArrow = new ccui.Button(arrow, "", "", texType);
             rightArrow.addTouchEventListener(this.rightArrowTouch, this);
             rightArrow.setFlippedX(true);
             rightArrow.setAnchorPoint(cc.p(0, 0.5));

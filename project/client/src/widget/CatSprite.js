@@ -18,7 +18,7 @@ var CatSprite = cc.Sprite.extend({
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
             swallowTouches:true,
             onTouchBegan:function(touch, event) {
-                return Util.touchInNode(touch, self) && self._cat;
+                return Util.touchInNode(touch, self) && self._cat !== null;
             },
             onTouchEnded:function(touch, event) {
                 var detailLayer = new CatDetailLayer(self._cat);

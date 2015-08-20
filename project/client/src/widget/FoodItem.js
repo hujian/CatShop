@@ -9,7 +9,7 @@ var FoodItem = ccui.Button.extend({
     ctor:function (id, money, time, type) {
         // 背景
         var imagePath = "food_select_icon_" + id.toString() + ".png";
-        this._super(imagePath, null, null, type);
+        this._super(imagePath, "", "", type);
         this._id = id;
 
         // 食物生产需要的时间
@@ -38,7 +38,7 @@ var FoodStockItem = ccui.Button.extend({
     ctor:function (id, count, type) {
         // 背景
         var imagePath = "cat_house_food_icon_" + id.toString() + ".png";
-        this._super(imagePath, null, null, type);
+        this._super(imagePath, "", "", type);
         this._id = id;
 
         // 食物剩余的数量

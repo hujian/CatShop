@@ -23,7 +23,7 @@ var SellingHistoryScene = GameBaseScene.extend({
         navBarBg.setPosition(cc.visibleRect.topLeft);
         this.addChild(navBarBg);
 
-        var backButton = new ccui.Button("btn_back.png", null, null, ccui.Widget.PLIST_TEXTURE);
+        var backButton = new ccui.Button("btn_back.png", "", "", ccui.Widget.PLIST_TEXTURE);
         backButton.addTouchEventListener(function(button, type) {
             if (type == ccui.Widget.TOUCH_ENDED) {
                 cc.director.popScene();

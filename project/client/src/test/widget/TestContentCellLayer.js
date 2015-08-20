@@ -46,7 +46,7 @@ var TestContentCellLayer = GameBaseLayer.extend({
         button.setTitleFontSize(14);
         button.setContentSize(this.testButtonSize);
         button.addTouchEventListener(this.testCall, this);
-        button.setCapInsets(cc.Rect(7, 0, 1, 36));
+        button.setCapInsets(cc.rect(7, 0, 1, 36));
         button.setScale(0.7);
         button.handler = selector;
         button.target = target;

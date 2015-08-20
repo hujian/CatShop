@@ -6,6 +6,10 @@
 */
 
 var TestSceneFontName = 'Arial Bold';
+if((cc.sys.os == cc.sys.OS_WP8 || cc.sys.os == cc.sys.OS_WINRT))
+{
+    TestSceneFontName = 'Dengxian';
+}
 
 var TestBaseScene = cc.Scene.extend({
 
@@ -77,6 +81,7 @@ var TestBaseScene = cc.Scene.extend({
     onKeyReleased: function (keyCode, event) {
         if(keyCode == cc.KEY.escape) {
             this.backKeyReleasedEvent.raiseLastHandler();
+            event.stopPropagation();
         }
     },
 
@@ -141,7 +146,7 @@ var TestBaseScene = cc.Scene.extend({
         button.setTitleFontSize(14);
         button.setContentSize(this.testButtonSize);
         button.addTouchEventListener(this.testCall, this);
-        button.setCapInsets(cc.Rect(7, 0, 1, 36));
+        button.setCapInsets(cc.rect(7, 0, 1, 36));
         button.setScale(0.7);
         button.handler = handler;
         button.state = initState;

@@ -46,7 +46,7 @@ var CatDetailLayer = PopupBaseLayer.extend({
         var button = null;
         // 吃药按钮
         if (cat.getIll()) {
-            button = new ccui.Button("btn_take_medicine.png", null, null, ccui.Widget.PLIST_TEXTURE);
+            button = new ccui.Button("btn_take_medicine.png", "", "", ccui.Widget.PLIST_TEXTURE);
             countLabel.setString(User.getMedicineCount().toString());
             button.addTouchEventListener(function(button, type) {
                 if (type == ccui.Widget.TOUCH_ENDED) {
@@ -61,10 +61,10 @@ var CatDetailLayer = PopupBaseLayer.extend({
         } else {
             // 疫苗按钮
             if (cat.hasVaccine()) {
-                button = new ccui.Button("btn_take_vaccine_done.png", null, null, ccui.Widget.PLIST_TEXTURE);
+                button = new ccui.Button("btn_take_vaccine_done.png", "", "", ccui.Widget.PLIST_TEXTURE);
                 countLabel.setVisible(false);
             } else {
-                button = new ccui.Button("btn_take_vaccine.png", null, null, ccui.Widget.PLIST_TEXTURE);
+                button = new ccui.Button("btn_take_vaccine.png", "", "", ccui.Widget.PLIST_TEXTURE);
                 countLabel.setString(User.getVaccineCount());
                 button.addTouchEventListener(function(button, type) {
                     if (type == ccui.Widget.TOUCH_ENDED) {
@@ -119,7 +119,7 @@ var CatDetailLayer = PopupBaseLayer.extend({
         bg.addChild(weight);
 
         // 关闭按钮
-        var closeButton = new ccui.Button("btn_close.png", null, null, ccui.Widget.PLIST_TEXTURE);
+        var closeButton = new ccui.Button("btn_close.png", "", "", ccui.Widget.PLIST_TEXTURE);
         closeButton.setPosition(cc.p(bg.x, bg.y - bg.height / 2 - 40));
         this.addChild(closeButton);
         closeButton.addTouchEventListener(function(button, type) {

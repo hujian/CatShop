@@ -67,7 +67,7 @@ var CatHouseLayer = GameBaseLayer.extend({
         this._secondsLabel = label;
 
         // 帮助按钮
-        var help = new ccui.Button("btn_help.png", null, null, ccui.Widget.PLIST_TEXTURE);
+        var help = new ccui.Button("btn_help.png", "", "", ccui.Widget.PLIST_TEXTURE);
         help.setPosition(cc.p(cc.visibleRect.width - 53, cc.visibleRect.height - 100));
         help.addTouchEventListener(this.showHelp, this);
         this.addChild(help);

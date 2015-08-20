@@ -22,7 +22,7 @@ var CheckDialog = PopupBaseLayer.extend({
         this.addChild(text);
 
         // 按钮
-        var noButton = new ccui.Button("btn_no.png", null, null, ccui.Widget.PLIST_TEXTURE);
+        var noButton = new ccui.Button("btn_no.png", "", "", ccui.Widget.PLIST_TEXTURE);
         noButton.addTouchEventListener(function(button, type) {
             if (type == ccui.Widget.TOUCH_ENDED) {
                 noCallback.call(target);
@@ -32,7 +32,7 @@ var CheckDialog = PopupBaseLayer.extend({
         noButton.setPosition(cc.p(139, 61));
         this.addChild(noButton);
 
-        var yesButton = new ccui.Button("btn_yes.png", null, null, ccui.Widget.PLIST_TEXTURE);
+        var yesButton = new ccui.Button("btn_yes.png", "", "", ccui.Widget.PLIST_TEXTURE);
         yesButton.addTouchEventListener(function(button, type) {
             if (type == ccui.Widget.TOUCH_ENDED) {
                 yesCallback.call(target);
