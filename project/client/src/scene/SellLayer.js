@@ -45,8 +45,8 @@ var SellLayer = GameBaseLayer.extend({
         this.addChild(valueLabel);
         this._weightLabel = valueLabel;
 
-        // 亲密度
-        valueLabel = new ccui.Text("亲密:", gameResource.defaultFont, 24);
+        // 可爱
+        valueLabel = new ccui.Text("可爱:", gameResource.defaultFont, 24);
         valueLabel.setPosition(cc.p(449, 735));
         this.addChild(valueLabel);
 
@@ -55,10 +55,10 @@ var SellLayer = GameBaseLayer.extend({
         valueLabel.setTextHorizontalAlignment(cc.TEXT_ALIGNMENT_LEFT);
         valueLabel.setAnchorPoint(cc.p(0, 0.5));
         this.addChild(valueLabel);
-        this._intimateLabel = valueLabel;
+        this._cuteLabel = valueLabel;
 
-        // 训练
-        valueLabel = new ccui.Text("训练:", gameResource.defaultFont, 24);
+        // 成熟
+        valueLabel = new ccui.Text("成熟:", gameResource.defaultFont, 24);
         valueLabel.setPosition(cc.p(449, 700));
         this.addChild(valueLabel);
 
@@ -67,7 +67,7 @@ var SellLayer = GameBaseLayer.extend({
         valueLabel.setTextHorizontalAlignment(cc.TEXT_ALIGNMENT_LEFT);
         valueLabel.setAnchorPoint(cc.p(0, 0.5));
         this.addChild(valueLabel);
-        this._trainLabel = valueLabel;
+        this._matureLabel = valueLabel;
 
        // 头部
         var headerBg = new cc.Sprite("#sell_header.png");
@@ -151,6 +151,12 @@ var SellLayer = GameBaseLayer.extend({
 
             // 体重
             this._weightLabel.setString(Util.getWeightString(cat.getWeight()));
+
+            // 可爱
+            this._cuteLabel.setString(cat.getCute().toString() + "点");
+
+            // 成熟
+            this._matureLabel.setString(cat.getMature().toString());
         }
     },
 

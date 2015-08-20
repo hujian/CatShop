@@ -149,6 +149,12 @@ var Cat = function(id) {
 
     // 体重
     this.weight = CatSetting.getById(id).weight;
+
+    // 可爱
+    this.cute = CatSetting.getById(id).cute;
+
+    // 成熟
+    this.mature = CatSetting.getById(id).mature;
 };
 
 Cat.prototype.dropHair = function() {
@@ -200,8 +206,11 @@ Cat.prototype.update = function(interval) {
                         if (User.updateNewCat(this.id)) {
                             User.flush();
                         }
-                        // 增加新的体重
-                        this.weight = this.getWeight() + CatSetting.getById(this.id).weight;
+                        setting = CatSetting.getById(this.id);
+                        // 更新猫属性
+                        this.weight = this.getWeight() + setting.weight;
+                        this.cute = this.getCute() + setting.cute;
+                        this.mature = this.getMature() + setting.mature;
                     }
                 }
             }
@@ -495,5 +504,15 @@ Cat.prototype.getCreateTime = function() {
 
 Cat.prototype.getWeight = function() {
     this.weight = this.weight || CatSetting.getById(this.id).weight;
+    return this.weight;
+};
+
+Cat.prototype.getCute = function() {
+    this.weight = this.cute || CatSetting.getById(this.id).cute;
+    return this.weight;
+};
+
+Cat.prototype.getMature = function() {
+    this.weight = this.mature || CatSetting.getById(this.id).mature;
     return this.weight;
 };
