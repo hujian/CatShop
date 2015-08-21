@@ -104,17 +104,17 @@ User.removeCat = function(cat) {
 
 
 // 获取当前能够养的最大猫德数量
-User.getMaxCatCount = function () {
+User.getMaxCatCount = function() {
     return User.data.jsonData.maxCatCount || 0;
 };
 
 // 跟新猫的最大数量
-User.updateMaxCatCount = function (count) {
+User.updateMaxCatCount = function(count) {
     User.data.jsonData.maxCatCount = count;
 };
 
 // 增加道具
-User.addItem = function (id, count) {
+User.addItem = function(id, count) {
     count = count || 1;
     var setting = ItemSetting.getById(id);
     var items = User.data.jsonData.items;
@@ -133,7 +133,7 @@ User.addItem = function (id, count) {
 };
 
 // 删除道具, value可以不传或是正数
-User.removeItem = function (id, value) {
+User.removeItem = function(id, value) {
     value = value || 1;
 
     var items = User.data.jsonData.items;
@@ -148,17 +148,29 @@ User.itemAlreadyGot = function(itemId) {
 };
 
 // 获取所有已经购买的道具
-User.getAllItems = function () {
+User.getAllItems = function() {
     return User.data.jsonData.items || {};
 };
 
+// 获取当前猫屋的级数
+User.getCatHouseLevel = function() {
+    var level = 1;
+    var items = User.getAllItems();
+    for (var i=ItemSetting.id.upgradeLevel1; i<ItemSetting.id.upgradeLevel3+1; i++) {
+        if (items[i] > 0) {
+            level++;
+        }
+    }
+    return level;
+};
+
 // 获取购买的疫苗数量
-User.getVaccineCount = function () {
+User.getVaccineCount = function() {
     return User.getAllItems()[ItemSetting.id.vaccine] || 0;
 };
 
 // 获取购买的药品数量
-User.getMedicineCount = function () {
+User.getMedicineCount = function() {
     return User.getAllItems()[ItemSetting.id.medicine] || 0;
 };
 
@@ -227,4 +239,4 @@ User.updateNewCat = function(catId) {
 // 判断当前的猫是否已经出现过了
 User.isNewCat = function(catId) {
     return User.data.jsonData.unlockCats.indexOf(catId) < 0;
-}
+};

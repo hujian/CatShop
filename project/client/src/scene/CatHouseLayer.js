@@ -21,7 +21,8 @@ var CatHouseLayer = GameBaseLayer.extend({
         this.addChild(weather);
 
         // 背景
-        var bg = new cc.Sprite("#cat_house_bg_1.png");
+        var level = User.getCatHouseLevel();
+        var bg = new cc.Sprite("#cat_house_bg_" + level.toString() + ".png");
         bg.setAnchorPoint(cc.p(0, 0));
         this.addChild(bg);
 
