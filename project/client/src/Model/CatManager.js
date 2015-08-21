@@ -20,40 +20,47 @@ CatManager.collectUserDataLeftTime = CatManager.collectUserDataInerval;
 // 是否在养育状态
 CatManager.rasingCat = false;
 
+// 猫在猫屋出现的位置
+CatManager.initPositions = [];
+
 // cat要进入养育状态，就调用该函数
 CatManager.start = function(rect) {
-    cc.director.getScheduler().schedule(CatManager.update, CatManager, CatManager.updateInterval, cc.REPEAT_FOREVER, 0, false, "cat");
+    if (!CatManager.rasingCat) {
+        CatManager.rasingCat = true;
 
-    CatManager.rasingCat = true;
-    CatManager.moveRect = rect;
+        cc.director.getScheduler().schedule(CatManager.update, CatManager, CatManager.updateInterval, cc.REPEAT_FOREVER, 0, false, "cat");
+        CatManager.moveRect = rect;
 
-    var cats = User.getAllCats();
-    var count = cats.length;
+        var cats = User.getAllCats();
+        var count = cats.length;
 
-    // 计算猫的初始位置
-    var unitWidth = rect.width / cats.length;
-    var unitHeight = rect.height / cats.length;
-    var positions = [];
-    for (var i=0; i<count; i++) {
-        for (var j=0; j<count; j++) {
-            var random = Util.getRandomArbitrary(-0.1, 0.1);
-            var x = parseInt((i + 0.5 + random) * unitWidth);
-            random = Util.getRandomArbitrary(-0.2, 0.2);
-            var y = parseInt((j + 0.5 + random) * unitHeight);
-            positions.push(cc.p(rect.x + x, rect.y + y));
+        // 计算猫的初始位置
+        var unitWidth = rect.width / cats.length;
+        var unitHeight = rect.height / cats.length;
+        var positions = [];
+        for (var i=0; i<count; i++) {
+            for (var j=0; j<count; j++) {
+                var random = Util.getRandomArbitrary(-0.1, 0.1);
+                var x = parseInt((i + 0.5 + random) * unitWidth);
+                random = Util.getRandomArbitrary(-0.2, 0.2);
+                var y = parseInt((j + 0.5 + random) * unitHeight);
+                positions.push(cc.p(rect.x + x, rect.y + y));
+            }
         }
+
+        // 打乱随机
+        Util.shuffle(positions);
+
+        CatManager.initPositions = positions;
+
+        for (var i=0; i<cats.length; i++) {
+            var cat = cats[i];
+            cat.setPosition(positions[i]);
+        }
+
+        // 开始启动内部的计时器
+        Time.start();
     }
-
-    // 打乱随机
-    Util.shuffle(positions);
-
-    for (var i=0; i<cats.length; i++) {
-        var cat = cats[i];
-        cat.setPosition(positions[i]);
-    }
-
-    // 开始启动内部的计时器
-    Time.start();
 };
 
 CatManager.getRandomPositionInMovingRect = function() {
@@ -64,11 +71,11 @@ CatManager.getRandomPositionInMovingRect = function() {
 
 // 如果要暂停养育，希望cat的所有状态暂时挺住，就掉用该函数
 CatManager.stop = function() {
-    cc.director.getScheduler().unschedule(CatManager.update, CatManager);
-    CatManager.rasingCat = false;
-
-    // 停止计时
-    Time.stop();
+    if (CatManager.rasingCat) {
+        CatManager.rasingCat = false;
+        cc.director.getScheduler().unschedule(CatManager.update, CatManager);
+        Time.stop();
+    }
 };
 
 // 状态更新
@@ -103,6 +110,13 @@ CatManager.update = function(interval) {
     //        cc.log('send user report')
     //    }
     //}
+};
+
+CatManager.addCat = function(cat) {
+    var positions = CatManager.initPositions;
+    if (positions.length > 0) {
+        cat.setPosition(positions[Util.getRandomInt(0, positions.length)]);
+    }
 };
 
 // 喂食

@@ -23,8 +23,11 @@ Shop.buyCat = function (catId) {
             var moneyLeft = User.getMoney() - catSetting.money;
             if (moneyLeft >= 0) {
                 User.updateMoney(moneyLeft);
-                User.addCat(catId);
+                var cat =User.addCat(catId);
                 User.flush();
+
+                // 把cat加入manager管理，配置基础属性
+                CatManager.addCat(cat);
             } else {
                 ret = Shop.error.notEnoughMoney;
             }

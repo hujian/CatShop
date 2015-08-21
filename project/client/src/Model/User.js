@@ -81,7 +81,7 @@ User.getAllCats = function() {
 
 User.getAllSoldCats = function() {
     return User.data.jsonData.soldCats || [];
-}
+};
 
 // 加猫，这里的id是猫种类id，就是CatSetting的id
 User.addCat = function(id) {
