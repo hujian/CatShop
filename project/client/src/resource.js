@@ -44,7 +44,6 @@ gameResource.global = {
     audio_effect_cat_sold_fall: "res/audio/effect_cat_sold_fall.mp3", // 猫被卖完成后，弹出掉到底的声音
     audio_effect_food_producing: "res/audio/effect_food_producing.mp3", // 食物生成
     audio_effect_food_select: "res/audio/effect_food_selected.mp3", // 食物被选择
-    audio_effect_cat_menu_popup: "res/audio/effect_cat_menu_popup.mp3", // 猫菜单弹出
     audio_effect_cat_take_medicine: "res/audio/effect_cat_take_medicine.mp3", // 猫打药
     audio_effect_cat_happy: "res/audio/effect_cat_happy.mp3", // 猫开心
     audio_effect_cat_eat: "res/audio/effect_cat_eat.mp3", // 猫吃饭
@@ -56,6 +55,7 @@ gameResource.global = {
     audio_effect_cat_sound_5: "res/audio/effect_cat_sound_5.mp3", // 猫叫
     audio_effect_cat_sound_6: "res/audio/effect_cat_sound_6.mp3", // 猫叫
     audio_effect_coin: "res/audio/effect_coin.mp3", // 金币
+    audio_effect_button_click: "res/audio/effect_btn_touch.mp3", // 按钮点击
     audio_effect_cat_hair: "res/audio/effect_cat_hair.mp3" // 猫毛清理
 };
 

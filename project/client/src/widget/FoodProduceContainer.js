@@ -64,6 +64,8 @@ var FoodProduceContainer = GameBaseLayer.extend({
         this.addChild(sprite);
         this._foodSprites.push(sprite);
 
+        Audio.playAudioEffect(gameResource.global.audio_effect_food_producing);
+
         if (leftCount == 0) {
             this._isProducing = false;
         }
@@ -88,6 +90,7 @@ var FoodProduceContainer = GameBaseLayer.extend({
         var rectLength = 200;
         var rect = cc.rect(positon.x - rectLength / 2, positon.y - rectLength / 100, rectLength, rectLength);
         var targetPosition = this.convertToNodeSpace(cc.p(Util.getRandomInt(500, 540), Util.getRandomInt(460, 480)));
+        var count = 0;
         for (var i=this._foodSprites.length-1; i>=0; i--) {
             var sprite = this._foodSprites[i];
             if (cc.rectContainsPoint(rect, sprite.getPosition())) {
@@ -99,7 +102,11 @@ var FoodProduceContainer = GameBaseLayer.extend({
                 }, this, sprite);
                 sprite.runAction(cc.sequence(cc.moveTo(1, targetPosition), callback));
                 this._foodSprites.splice(i, 1)
+                count++;
             }
+        }
+        if (count > 0) {
+            Audio.playAudioEffect(gameResource.global.audio_effect_food_select);
         }
     }
 });

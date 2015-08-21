@@ -185,6 +185,8 @@ var SellLayer = GameBaseLayer.extend({
                     this.updateCat(Math.max(this._selectlayer.getCurrentPageIndex() - 1, 0));
                     this._moneyLabel.setString(User.getMoneyString());
                     this._selectlayer.decreaseCount();
+
+                    Audio.playAudioEffect(gameResource.global.audio_effect_cat_sold);
                 }
             }
         }

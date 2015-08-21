@@ -18,10 +18,8 @@ var TestMainScene = TestBaseScene.extend({
         });
         this.addTestButton("清除用户数据", function() {
             CatManager.stop();
-
             App.initData();
             App.flush();
-
             User.initUserData();
             User.flush();
         });

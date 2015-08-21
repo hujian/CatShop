@@ -31,6 +31,8 @@ var HairSprite = cc.Sprite.extend({
         var delay = cc.delayTime(0.2);
         var callback = cc.callFunc(this.cleaned, this, needSaving);
         this.runAction(cc.sequence(scale, delay, callback));
+
+        Audio.playAudioEffect(gameResource.global.audio_effect_cat_hair);
     },
 
     cleaned:function(needSaving) {

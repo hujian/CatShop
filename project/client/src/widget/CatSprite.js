@@ -23,6 +23,10 @@ var CatSprite = cc.Sprite.extend({
             onTouchEnded:function(touch, event) {
                 var detailLayer = new CatDetailLayer(self._cat);
                 detailLayer.present();
+
+                var index = Util.getRandomInt(1, 7);
+                var name = "audio_effect_cat_sound_" + index.toString();
+                Audio.playAudioEffect(gameResource.global[name]);
             }
         });
         cc.eventManager.addListener(listener, this);
@@ -54,6 +58,8 @@ var CatSprite = cc.Sprite.extend({
     // 吃饭动画
     playEat:function() {
         this.play("eat", 2, 1 / 2);
+
+        Audio.playEffect(gameResource.global.audio_effect_cat_eat, true);
     },
 
     // 睡觉动画
@@ -81,6 +87,8 @@ var CatSprite = cc.Sprite.extend({
 
     happy:function() {
         this.playEmotionAnimation("happy");
+
+        Audio.playAudioEffect(gameResource.global.audio_effect_cat_happy);
     },
 
     // 播放心情动画
@@ -188,6 +196,12 @@ var CatSprite = cc.Sprite.extend({
             if (this._state == cs.sleep && this._sleepSprite) {
                 this._sleepSprite.removeFromParent();
                 this._sleepSprite = undefined;
+            }
+
+            // 吃完的时候要改变声音
+            if (this._state == cs.eat) {
+                Audio.stopPlayAudioEffect(gameResource.global.audio_effect_cat_eat);
+                Audio.playAudioEffect(gameResource.global.audio_effect_cat_eat_done);
             }
 
             this._state = state;

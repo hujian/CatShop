@@ -55,6 +55,8 @@ var CatDetailLayer = PopupBaseLayer.extend({
                         this._cat.takeMedicine();
                         User.removeItem(ItemSetting.id.medicine, 1);
                         User.flush();
+
+                        Audio.playAudioEffect(gameResource.global.audio_effect_cat_take_medicine);
                     }
                 }
             }, this)
@@ -77,6 +79,8 @@ var CatDetailLayer = PopupBaseLayer.extend({
                             this._cat.takeVaccine();
                             User.removeItem(ItemSetting.id.vaccine, 1);
                             User.flush();
+
+                            Audio.playAudioEffect(gameResource.global.audio_effect_cat_take_medicine);
                         }
                     }
                 }, this)

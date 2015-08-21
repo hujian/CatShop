@@ -74,6 +74,7 @@ var ShopLayer = GameBaseLayer.extend({
 
         if (!result) {
             this._moneyLabel.setString(User.getMoneyString());
+            Audio.playAudioEffect(gameResource.global.audio_effect_coin);
         } else if (result == Shop.error.notEnoughMoney) {
             var message = new MessageDialog("金币不够哦！请努力多赚点钱。");
             message.present();
