@@ -204,17 +204,17 @@ var SelectCatPageLayer = PageLayer.extend({
 
     initUI:function() {
         // 生成中间的数字标示
-        var bg = new cc.Sprite("#sell_select_btn_center.png")
-        this.addChild(bg)
-        this._statusBg = bg
+        var bg = new cc.Sprite("#sell_select_btn_center.png");
+        this.addChild(bg);
+        this._statusBg = bg;
 
         var label = new ccui.Text("", gameResource.defaultFont, 20);
         this.addChild(label);
         this._statusLabel = label;
         this.updateStatusLabel();
 
-        this.updateStatusUI()
-        this.updateStatusLabel()
+        this.updateStatusUI();
+        this.updateStatusLabel();
     },
 
     updateStatusLabel:function() {
