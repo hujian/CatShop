@@ -14,6 +14,7 @@ gameResource.loading = {
 
 // 游戏一登陆就需要加载的资源
 gameResource.global = {
+    // 图片
     cat_house_image: "res/image/cat_house.png",
     cat_house_plist: "res/image/cat_house.plist",
     cat_baby_image: "res/image/baby_cat.png",
@@ -32,8 +33,30 @@ gameResource.global = {
     other_plist: "res/image/other.plist",
     cat_setting: "res/setting/cat.json",
     baby_cat_setting: "res/setting/babyCat.json",
+
+    // 配置文件
     item_setting: "res/setting/item.json",
-    food_setting: "res/setting/food.json"
+    food_setting: "res/setting/food.json",
+
+    // 声音
+    audio_bgm_main: "res/audio/bgm_main.mp3",  // 主场景背景音
+    audio_effect_cat_sold: "res/audio/effect_cat_sold.mp3", // 猫被卖
+    audio_effect_cat_sold_fall: "res/audio/effect_cat_sold_fall.mp3", // 猫被卖完成后，弹出掉到底的声音
+    audio_effect_food_producing: "res/audio/effect_food_producing.mp3", // 食物生成
+    audio_effect_food_select: "res/audio/effect_food_selected.mp3", // 食物被选择
+    audio_effect_cat_menu_popup: "res/audio/effect_cat_menu_popup.mp3", // 猫菜单弹出
+    audio_effect_cat_take_medicine: "res/audio/effect_cat_take_medicine.mp3", // 猫打药
+    audio_effect_cat_happy: "res/audio/effect_cat_happy.mp3", // 猫开心
+    audio_effect_cat_eat: "res/audio/effect_cat_eat.mp3", // 猫吃饭
+    audio_effect_cat_eat_done: "res/audio/effect_cat_eat_done.mp3", // 猫吃完
+    audio_effect_cat_sound_1: "res/audio/effect_cat_sound_1.mp3", // 猫叫
+    audio_effect_cat_sound_2: "res/audio/effect_cat_sound_2.mp3", // 猫叫
+    audio_effect_cat_sound_3: "res/audio/effect_cat_sound_3.mp3", // 猫叫
+    audio_effect_cat_sound_4: "res/audio/effect_cat_sound_4.mp3", // 猫叫
+    audio_effect_cat_sound_5: "res/audio/effect_cat_sound_5.mp3", // 猫叫
+    audio_effect_cat_sound_6: "res/audio/effect_cat_sound_6.mp3", // 猫叫
+    audio_effect_coin: "res/audio/effect_coin.mp3", // 金币
+    audio_effect_cat_hair: "res/audio/effect_cat_hair.mp3" // 猫毛清理
 };
 
 // 测试用的资源

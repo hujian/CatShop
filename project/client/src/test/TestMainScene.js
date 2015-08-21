@@ -18,6 +18,10 @@ var TestMainScene = TestBaseScene.extend({
         });
         this.addTestButton("清除用户数据", function() {
             CatManager.stop();
+
+            App.initData();
+            App.flush();
+
             User.initUserData();
             User.flush();
         });
@@ -27,7 +31,7 @@ var TestMainScene = TestBaseScene.extend({
         this.addTestCase('商店逻辑', TestGameScene);
         this.addTestCase('猫屋逻辑', TestCatScene);
         this.addTestCase('时间相关', TestCatScene);
-        this.addTestCase('游戏音效', TestCatScene);
+        this.addTestCase('游戏音效', TestAudioScene);
 
         this.nextColumn();
         this.addTestLabel("基础控件测试");
