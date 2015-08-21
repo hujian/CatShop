@@ -15,7 +15,8 @@ var CatHouseLayer = GameBaseLayer.extend({
         this.showBorder();
 
         // 天气
-        var weather = new cc.Sprite("#cat_house_bg_cloud.png");
+        var index = Util.getRandomInt(1, 4);
+        var weather = new cc.Sprite("#cat_house_bg_weather_" + index.toString() + ".png");
         weather.setAnchorPoint(cc.p(0, 1));
         weather.setPosition(cc.p(0, cc.visibleRect.height));
         this.addChild(weather);
