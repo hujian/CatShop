@@ -10,26 +10,41 @@ var TestMainScene = TestBaseScene.extend({
 
         this.needBackButton = false;
 
+        this.addTestLabel("快捷功能");
+        this.addUITestCase('正常流程', ContainerScene);
+        this.addTestButton("加1w钱", function() {
+            User.updateMoney(User.getMoney() + 10000);
+            User.flush();
+        });
+        this.addTestButton("清除用户数据", function() {
+            CatManager.stop();
+            User.initUserData();
+            User.flush();
+        });
+
+        this.nextColumn();
         this.addTestLabel("逻辑测试");
         this.addTestCase('商店逻辑', TestGameScene);
         this.addTestCase('猫屋逻辑', TestCatScene);
+        this.addTestCase('时间相关', TestCatScene);
+        this.addTestCase('游戏音效', TestCatScene);
 
         this.nextColumn();
-        this.addTestLabel("控件测试");
-        this.addTestCase('弹出层', TestPopupScene);
-        this.addTestCase('测试用控件', TestLayerScene);
+        this.addTestLabel("基础控件测试");
         this.addTestCase('TabBar', TestTabBarScene);
         this.addTestCase('翻页控件', TestPageLayerScene);
-        this.addTestCase('进度条', TestProgressBar);
         this.addTestCase('grid控件', TestGridScene);
         this.addTestCase('各种Item', TestItemScene);
         this.addTestCase('各种Item2', TestItem2Scene);
-        this.addTestCase('猫', TestCatSpriteScene);
-        this.addTestCase('广告', TestAdScene);
+        this.addTestCase('广告控件', TestAdScene);
+        this.addTestCase('测试用控件', TestLayerScene);
 
+        this.nextColumn();
         this.addTestLabel("UI测试");
-        this.addUITestCase('正常流程', ContainerScene);
         this.addUITestCase('加载', LoadingScene);
+        this.addTestCase('弹出层', TestPopupScene);
+        this.addTestCase('猫精灵', TestCatSpriteScene);
+        this.addTestCase('食物进度条', TestProgressBar);
         //this.addUITestCase('猫屋', CatHouseLayer)
         //this.addUITestCase('食物', FoodLayer)
         //this.addUITestCase('商店', ShopLayer)
@@ -50,8 +65,8 @@ var TestMainScene = TestBaseScene.extend({
         if (cc.isDebug && !this.autoRun) {
             this.autoRun = true;
 
-            Util.setReleaseDesignResolution();
-            cc.director.pushScene(new ContainerScene(3));
+            //Util.setReleaseDesignResolution();
+            //cc.director.pushScene(new ContainerScene(3));
 
             //cc.director.pushScene(new TestItem2Scene());
         }

@@ -15,13 +15,15 @@ var CatHouseLayer = GameBaseLayer.extend({
         this.showBorder();
 
         // 天气
-        var weather = new cc.Sprite("#cat_house_bg_cloud.png");
+        var index = Util.getRandomInt(1, 4);
+        var weather = new cc.Sprite("#cat_house_bg_weather_" + index.toString() + ".png");
         weather.setAnchorPoint(cc.p(0, 1));
         weather.setPosition(cc.p(0, cc.visibleRect.height));
         this.addChild(weather);
 
         // 背景
-        var bg = new cc.Sprite("#cat_house_bg_1.png");
+        var level = User.getCatHouseLevel();
+        var bg = new cc.Sprite("#cat_house_bg_" + level.toString() + ".png");
         bg.setAnchorPoint(cc.p(0, 0));
         this.addChild(bg);
 
@@ -78,7 +80,7 @@ var CatHouseLayer = GameBaseLayer.extend({
         this.addChild(food);
 
         // 开始养猫
-        var rect = cc.rect(80, 400, 480, 390);
+        var rect = cc.rect(20, 350, 580, 470);
         CatManager.start(rect);
         this.initCats();
 
@@ -234,19 +236,24 @@ var CatHouseLayer = GameBaseLayer.extend({
     foodSelect:function(foodItem) {
         var count = foodItem.getStockCount();
         if (count > 0) {
-            // 加入食物精灵
-            var foodId = foodItem.getId();
-            var foodSprite = new FoodSprite(foodId);
-            foodSprite.setPosition(cc.p(this.width / 2, 689));
-            foodSprite.setScale(0.8);
-            foodSprite.startMoving();
-            this.addChild(foodSprite);
+            if (CatManager.getFoodCount() < 6) {
+                // 加入食物精灵
+                var foodId = foodItem.getId();
+                var foodSprite = new FoodSprite(foodId);
+                foodSprite.setPosition(cc.p(this.width / 2, 689));
+                foodSprite.setScale(0.8);
+                foodSprite.startMoving();
+                this.addChild(foodSprite);
 
-            // 将食物加入猫屋逻辑
-            CatManager.addFood(foodSprite);
+                // 将食物加入猫屋逻辑
+                CatManager.addFood(foodSprite);
 
-            // 更新UI上食物数量
-            foodItem.updateStock(count - 1);
+                // 更新UI上食物数量
+                foodItem.updateStock(count - 1);
+            } else {
+                var message = new MessageDialog("食物数量不可以太多哦，请稍后再放置。")
+                message.present();
+            }
         } else {
             var message = new MessageDialog("食物不够，请先去购买足够的食物哦！");
             message.present();
