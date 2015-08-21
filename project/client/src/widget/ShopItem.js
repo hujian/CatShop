@@ -55,7 +55,7 @@ var ShopItem = ccui.Layout.extend({
         this.addChild(money);
 
         // 购买按钮
-        var buyButton = new ccui.Button("buy_button.png", "", "", ccui.Widget.PLIST_TEXTURE);
+        var buyButton = new CommonButton("buy_button.png", "", "", ccui.Widget.PLIST_TEXTURE);
         buyButton.setAnchorPoint(cc.p(1, 0));
         buyButton.setPosition(cc.p(bg.width - 27, 12));
         buyButton.addTouchEventListener(this.buyItem, this);

@@ -108,13 +108,13 @@ var SellLayer = GameBaseLayer.extend({
         this._selectlayer = layer;
 
         // 出售按钮
-        var sellButton = new ccui.Button("sell_cat_btn.png", "", "", ccui.Widget.PLIST_TEXTURE);
+        var sellButton = new CommonButton("sell_cat_btn.png", "", "", ccui.Widget.PLIST_TEXTURE);
         sellButton.setAnchorPoint(cc.p(0, 0));
         sellButton.setPosition(cc.p(0, height));
         sellButton.addTouchEventListener(this.sellCat, this);
         this.addChild(sellButton);
 
-        var sellHistoryButton = new ccui.Button("sell_history_btn.png", "", "", ccui.Widget.PLIST_TEXTURE);
+        var sellHistoryButton = new CommonButton("sell_history_btn.png", "", "", ccui.Widget.PLIST_TEXTURE);
         sellHistoryButton.setAnchorPoint(cc.p(1, 0));
         sellHistoryButton.setPosition(cc.p(cc.visibleRect.width, height));
         sellHistoryButton.addTouchEventListener(function(button, type) {

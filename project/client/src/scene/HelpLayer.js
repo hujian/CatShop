@@ -31,7 +31,7 @@ var HelpLayer = PopupBaseLayer.extend({
         }
 
         // 关闭按钮
-        var button = new ccui.Button("btn_close.png", "", "", ccui.Widget.PLIST_TEXTURE);
+        var button = new CommonButton("btn_close.png", "", "", ccui.Widget.PLIST_TEXTURE);
         button.addTouchEventListener(function(button, type) {
             if (type == ccui.Widget.TOUCH_ENDED) {
                 this.removeFromParent();

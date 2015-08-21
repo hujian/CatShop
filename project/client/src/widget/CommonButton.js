@@ -5,8 +5,8 @@
 */
 
 var CommonButton = ccui.Button.extend({
-    ctor:function () {
-        this._super();
+    ctor:function (normalImage, selectedImage, disableImage, texType) {
+        this._super(normalImage, selectedImage, disableImage, texType);
 
         this.addClickEventListener(this.click, this);
     },

@@ -18,7 +18,7 @@ var TabBar = GameBaseLayer.extend({
         var width = 0;
         for (var i in items) {
             var imagePath = items[i];
-            var button = new ccui.Button(imagePath + '.png', imagePath + '_on.png', null, texType);
+            var button = new CommonButton(imagePath + '.png', imagePath + '_on.png', null, texType);
             button.setAnchorPoint(cc.p(0, 0));
             button.addTouchEventListener(this.tabBarSelect, this);
             button.setPosition(width, 0);

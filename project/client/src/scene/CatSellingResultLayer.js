@@ -50,7 +50,7 @@ var CatSellingResultLayer = PopupBaseLayer.extend({
         bg.addChild(buyerDescriptionLabel);
 
         // 分享
-        var shareBtn = new ccui.Button("sell_result_share.png", "", "", ccui.Widget.PLIST_TEXTURE);
+        var shareBtn = new CommonButton("sell_result_share.png", "", "", ccui.Widget.PLIST_TEXTURE);
         shareBtn.setPosition(cc.p(bg.width / 2, 102));
         shareBtn.addTouchEventListener(function(btn, type) {
             if (type == ccui.Widget.TOUCH_ENDED) {
@@ -59,7 +59,7 @@ var CatSellingResultLayer = PopupBaseLayer.extend({
         bg.addChild(shareBtn);
 
         // 关闭
-        var closeBtn = new ccui.Button("btn_close.png", "", "", ccui.Widget.PLIST_TEXTURE);
+        var closeBtn = new CommonButton("btn_close.png", "", "", ccui.Widget.PLIST_TEXTURE);
         closeBtn.setPosition(cc.p(bg.width / 2, 220));
         closeBtn.addTouchEventListener(function(btn, type) {
             if (type == ccui.Widget.TOUCH_ENDED) {
