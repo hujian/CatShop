@@ -32,11 +32,11 @@ CatManager.start = function(rect) {
         CatManager.moveRect = rect;
 
         var cats = User.getAllCats();
-        var count = cats.length;
+        var count = ItemSetting.getById(ItemSetting.id.upgradeLevel3).value;
 
         // 计算猫的初始位置
-        var unitWidth = rect.width / cats.length;
-        var unitHeight = rect.height / cats.length;
+        var unitWidth = rect.width / count;
+        var unitHeight = rect.height / count;
         var positions = [];
         for (var i=0; i<count; i++) {
             for (var j=0; j<count; j++) {
@@ -55,7 +55,8 @@ CatManager.start = function(rect) {
 
         for (var i=0; i<cats.length; i++) {
             var cat = cats[i];
-            cat.setPosition(positions[i]);
+            var position = positions[i];
+            cat.setPosition(position);
         }
 
         // 开始启动内部的计时器

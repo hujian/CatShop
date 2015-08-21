@@ -11,12 +11,11 @@ var TestMainScene = TestBaseScene.extend({
         this.needBackButton = false;
 
         this.addTestLabel("快捷功能");
-        this.addTestButton("加1w钱", function(btn, type) {
-            if (type == ccui.Widget.TOUCH_ENDED) {
-                User.updateMoney(User.getMoney() + 10000);
-            }
+        this.addTestButton("加1w钱", function() {
+            User.updateMoney(User.getMoney() + 10000);
+            User.flush();
         });
-        this.addTestButton("清除用户数据", function(btn, type) {
+        this.addTestButton("清除用户数据", function() {
             CatManager.stop();
             User.initUserData();
             User.flush();

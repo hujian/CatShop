@@ -80,7 +80,7 @@ var CatHouseLayer = GameBaseLayer.extend({
         this.addChild(food);
 
         // 开始养猫
-        var rect = cc.rect(80, 400, 480, 390);
+        var rect = cc.rect(20, 350, 580, 470);
         CatManager.start(rect);
         this.initCats();
 
