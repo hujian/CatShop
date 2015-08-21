@@ -182,6 +182,11 @@ CatManager.addFood = function(food) {
     CatManager.food.push(food);
 };
 
+// 还没猫吃得食物数量
+CatManager.getFoodCount = function() {
+    return CatManager.food.length;
+};
+
 // 查询当前的食物，传入true，就直接扣除该食物，返回的是上层的食物精灵
 // 传入cat，用以查找合适的食物
 CatManager.findFood = function(cat) {

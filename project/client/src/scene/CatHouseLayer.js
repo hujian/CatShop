@@ -236,19 +236,24 @@ var CatHouseLayer = GameBaseLayer.extend({
     foodSelect:function(foodItem) {
         var count = foodItem.getStockCount();
         if (count > 0) {
-            // 加入食物精灵
-            var foodId = foodItem.getId();
-            var foodSprite = new FoodSprite(foodId);
-            foodSprite.setPosition(cc.p(this.width / 2, 689));
-            foodSprite.setScale(0.8);
-            foodSprite.startMoving();
-            this.addChild(foodSprite);
+            if (CatManager.getFoodCount() < 6) {
+                // 加入食物精灵
+                var foodId = foodItem.getId();
+                var foodSprite = new FoodSprite(foodId);
+                foodSprite.setPosition(cc.p(this.width / 2, 689));
+                foodSprite.setScale(0.8);
+                foodSprite.startMoving();
+                this.addChild(foodSprite);
 
-            // 将食物加入猫屋逻辑
-            CatManager.addFood(foodSprite);
+                // 将食物加入猫屋逻辑
+                CatManager.addFood(foodSprite);
 
-            // 更新UI上食物数量
-            foodItem.updateStock(count - 1);
+                // 更新UI上食物数量
+                foodItem.updateStock(count - 1);
+            } else {
+                var message = new MessageDialog("食物数量不可以太多哦，请稍后再放置。")
+                message.present();
+            }
         } else {
             var message = new MessageDialog("食物不够，请先去购买足够的食物哦！");
             message.present();
