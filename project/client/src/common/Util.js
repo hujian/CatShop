@@ -39,14 +39,14 @@ var Util = {
 				array.push(obj[key]);
 			}
 		}
-		return array
+		return array;
 	},
 
 	// 获取时间字符串，hh:mm:ss
 	getTimeString:function (seconds, format) {
 		format = format || "hh:mm:ss";
 
-		var ret = ""
+		var ret = "";
 		if (format.indexOf("hh") > -1) {
 			ret += parseInt(seconds / 3600).toString() + '小时';
 		}
@@ -98,8 +98,8 @@ var Util = {
 
 	// 改成正式的分辨率
 	setReleaseDesignResolution: function () {
-		var width = cc.game.config.width
-		var height = cc.game.config.height
+		var width = cc.game.config.width;
+		var height = cc.game.config.height;
 		cc.view.setDesignResolutionSize(width, height, cc.ResolutionPolicy.SHOW_ALL);
 	},
 

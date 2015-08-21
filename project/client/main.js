@@ -53,27 +53,31 @@ cc.game.onStart = function(){
     
     cc.view.adjustViewPort(true);
     cc.view.resizeWithBrowserSize(true);
-    Util.setDebugDesignResolution()
+    Util.setReleaseDesignResolution();
 
     // 从本地缓存获取恢复数据
-    App.restore()
-    User.restore()
+    App.restore();
+    User.restore();
 
-    var loadingScene = new LoadingScene()
+    var loadingScene = new LoadingScene();
     loadingScene.preload(Util.getArray(gameResource.global), function () {
         // 加载配置文件，需要等待下载完成
-        CatSetting.load()
-        ItemSetting.load()
-        FoodSetting.load()
+        CatSetting.load();
+        ItemSetting.load();
+        FoodSetting.load();
 
         if (cc.game.config[cc.game.CONFIG_KEY.debugMode] > 0) {
-            cc.isDebug = true
+            Util.setDebugDesignResolution();
+            cc.isDebug = true;
             cc.director.runScene(new TestMainScene());
         } else {
+            Util.setReleaseDesignResolution();
+            cc.director.runScene(new ContainerScene());
         }
 
     }, this);
 
+    // 这里必须要保持一次，记录app加载次数
     App.flush()
 };
 cc.game.run();

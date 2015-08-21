@@ -7,11 +7,11 @@
             <key>btn_sell.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{484,2},{420,80}}</string>
+                <string>{{633,484},{420,80}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{420,80}}</string>
                 <key>sourceSize</key>
@@ -20,7 +20,7 @@
             <key>btn_take_medicine.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{566,2},{214,60}}</string>
+                <string>{{1218,2},{214,60}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -33,7 +33,7 @@
             <key>btn_take_vaccine.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{578,218},{214,60}}</string>
+                <string>{{1218,218},{214,60}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -46,7 +46,7 @@
             <key>btn_take_vaccine_done.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{628,2},{214,60}}</string>
+                <string>{{1280,2},{214,60}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -59,7 +59,7 @@
             <key>cat_detail_bg.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,2},{480,480}}</string>
+                <string>{{633,2},{480,480}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -72,11 +72,11 @@
             <key>cat_detail_hungry_full.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{484,424},{43,45}}</string>
+                <string>{{1055,484},{43,45}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{43,45}}</string>
                 <key>sourceSize</key>
@@ -85,7 +85,7 @@
             <key>cat_detail_hungry_half_full.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{531,424},{43,45}}</string>
+                <string>{{1055,531},{43,45}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -98,15 +98,41 @@
             <key>cat_detail_hungry_no_full.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{578,434},{43,45}}</string>
+                <string>{{1218,434},{43,45}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{43,45}}</string>
+                <key>sourceSize</key>
+                <string>{43,45}</string>
+            </dict>
+            <key>sell_result_message_bg.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,2},{629,574}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{629,574}}</string>
+                <key>sourceSize</key>
+                <string>{629,574}</string>
+            </dict>
+            <key>sell_result_share.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1115,2},{550,101}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <true/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{43,45}}</string>
+                <string>{{0,0},{550,101}}</string>
                 <key>sourceSize</key>
-                <string>{43,45}</string>
+                <string>{550,101}</string>
             </dict>
         </dict>
         <key>metadata</key>
@@ -116,9 +142,9 @@
             <key>realTextureFileName</key>
             <string>other.png</string>
             <key>size</key>
-            <string>{690,484}</string>
+            <string>{1342,578}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:dfd2ceb6f3717cce9a811607c237419e:7f93f186e473c7b98986c9bc16a48cec:454e9ce649c79c377f9a07836b0b25b4$</string>
+            <string>$TexturePacker:SmartUpdate:4851fe2282d2a6768d8190f10a86434f:a3d6ce59a6c8c2001a7997129428faa1:454e9ce649c79c377f9a07836b0b25b4$</string>
             <key>textureFileName</key>
             <string>other.png</string>
         </dict>

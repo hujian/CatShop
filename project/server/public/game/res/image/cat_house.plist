@@ -82,7 +82,7 @@
                 <key>sourceSize</key>
                 <string>{640,1136}</string>
             </dict>
-            <key>cat_house_bg_cloud.png</key>
+            <key>cat_house_bg_weather_1.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{1140,1140},{640,195}}</string>
@@ -95,7 +95,7 @@
                 <key>sourceSize</key>
                 <string>{640,195}</string>
             </dict>
-            <key>cat_house_bg_night.png</key>
+            <key>cat_house_bg_weather_2.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{1140,1337},{640,195}}</string>
@@ -108,7 +108,7 @@
                 <key>sourceSize</key>
                 <string>{640,195}</string>
             </dict>
-            <key>cat_house_bg_sunshine.png</key>
+            <key>cat_house_bg_weather_3.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{1140,1534},{640,195}}</string>
@@ -443,7 +443,7 @@
             <key>size</key>
             <string>{1912,2008}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:435c19adad7eb70a2883ce92d4823520:3245227688d88840808779280ccb4a92:a918f658d1d31352b8adf2283bb36b32$</string>
+            <string>$TexturePacker:SmartUpdate:e3aba223c0e8fe8f1ebed07e69a028d9:3245227688d88840808779280ccb4a92:a918f658d1d31352b8adf2283bb36b32$</string>
             <key>textureFileName</key>
             <string>cat_house.png</string>
         </dict>

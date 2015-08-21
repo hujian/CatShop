@@ -59,7 +59,7 @@ var CatSprite = cc.Sprite.extend({
     playEat:function() {
         this.play("eat", 2, 1 / 2);
 
-        Audio.playEffect(gameResource.global.audio_effect_cat_eat, true);
+        Audio.playAudioEffect(gameResource.global.audio_effect_cat_eat, true);
     },
 
     // 睡觉动画
