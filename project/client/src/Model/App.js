@@ -42,7 +42,14 @@ App.getNeedBackgroundMusic = function() {
 
 // 更新背景音设置
 App.setNeedBackgroundMusic = function(need) {
-    App.data.jsonData.needBackgroundMusic = need;
+    if (need != App.getNeedBackgroundMusic()) {
+        if (need) {
+            cc.audioEngine.resumeMusic();
+        } else {
+            cc.audioEngine.pauseMusic();
+        }
+        App.data.jsonData.needBackgroundMusic = need;
+    }
 };
 
 // 是否要音效
@@ -53,4 +60,13 @@ App.getNeedAudioEffect = function() {
 // 更新音效
 App.setNeedAudioEffect = function(need) {
     App.data.jsonData.needAudioEffect = need;
+
+    if (need != App.getNeedAudioEffect()) {
+        if (need) {
+            cc.audioEngine.resumeAllEffects();
+        } else {
+            cc.audioEngine.pauseAllEffects();
+        }
+        App.data.jsonData.needBackgroundMusic = need;
+    }
 };

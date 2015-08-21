@@ -21,6 +21,18 @@ var ContainerScene = GameBaseScene.extend({
         this.initUI(index);
     },
 
+    onEnter:function() {
+        this._super();
+
+        Audio.playBackgroundMusic(gameResource.global.audio_bgm_main);
+    },
+
+    onExit:function() {
+        Audio.stopBackgroundMusic(gameResource.global.audio_bgm_main);
+
+        this._super();
+    },
+
     initUI:function(index) {
         // 广告条, 为了计算下面的高度，必须放在上面
         var ad = new AdLayer();
