@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var cors = require('cors')
 //var db = require('mongoose')
 
 //var Report = require('./model/report')
@@ -21,6 +22,9 @@ if (dbConfig) {
 }
 
 var app = express();
+
+// 支持跨域访问
+app.use(cors());
 
 // 使用jade
 app.set('views', path.join(__dirname, 'views/page'));
