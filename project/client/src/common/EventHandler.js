@@ -25,7 +25,7 @@ EventHandler = cc.Class.extend({
     },
 
     empty: function () {
-        return this._handlers.length === 0;
+        return this.size() === 0;
     },
 
     push: function (handler) {
@@ -49,10 +49,18 @@ EventHandler = cc.Class.extend({
             cc.assert("Do not call refresh in the handler.");
             return;
         }
-
-        for(var i = this._handlers.length - 1; i >= 0 ; --i) {
-            if(this._handlers[i].isDeleted) {
-                this._handlers.splice(i, 1)
+        var index = 0;
+        var handlers = this._handlers;
+        while(index < handlers.length)
+        {
+            if(!handlers[index].isDeleted)
+            {
+                ++index;
+                continue;
+            }
+            else
+            {
+                handlers.splice(index, 1);
             }
         }
     },
@@ -67,6 +75,7 @@ EventHandler = cc.Class.extend({
 
     raise: function() {
         this.refresh();
+	this._raising = true;
         var handlers = this._handlers;
         for(var i = 0; i < handlers.length; ++i)
         {
@@ -75,6 +84,8 @@ EventHandler = cc.Class.extend({
                 handler.func(arguments);
             }
         }
+	
+        this._raising = false;
     },
 
     raiseLastHandler: function(){
